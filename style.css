@@ -1,0 +1,31 @@
+/* h1 heading tag */
+h1 {
+/* Put a 15-pixel margin at the bottom of the heading. */
+margin-bottom: 15px;
+/* Change the size of your font to 60 pixels high. */
+font-size: 60px;
+/* This will color the heading font white. */
+color: rgb(255, 255, 255);
+/* Align the text to the center of its enclosing element (e.g. div). */
+text-align: center;
+/* Underline the text. */
+/* The background of the heading element will now be black. */
+background-color: rgb(0, 0, 52);
+}
+    
+/* h2 heading tags */
+h2 {
+/* Put a 15-pixel margin at the top of all h2 headings. */
+margin-top: 15px;
+margin-bottom: 15px;
+font-size: 30px;
+color: rgb(1, 1, 28);
+text-align: center;
+}
+    
+/* All p tags */
+p {
+text-align: justify;
+font-size: 16px;
+font-family: 'Times New Roman', Times, serif;
+}
