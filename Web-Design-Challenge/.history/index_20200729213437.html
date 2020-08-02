@@ -1,0 +1,98 @@
+<html lang = "en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Landing Page </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav class = "navbar navbar-inverse"> 
+        <div class = "container-fluid">
+          <div class = "navbar-header"> 
+            <a class = "navbar-brand" href = "index.html"> Latitude </a>
+          </div>
+        <ul class = "nav navbar-nav navbar-right">
+            <li class = "dropdown">
+                  <a class = "dropdown-toggle" data-toggle = "dropdown" href = "#"> Plots 
+                  <span class = "caret"> </span> 
+                  </a>
+                  <ul class = "dropdown-menu">
+                    <li> <a href = "visualization1.html"> Temperature </a></li>
+                    <li> <a href = "visualization2.html"> Humidity </a></li>
+                    <li> <a href = "visualization3.html"> Wind Speed </a></li>
+                    <li> <a href = "visualization4.html"> Cloudiness </a></li>
+                  </ul>
+            </li>
+            <li class = "active"> <a href = "comparisons-page.html"> Comparisons </a></li>
+            <li class = "active"> <a href = "data-page.html"> Data </a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-lg-8 col-sm-12">
+                <h1> 
+                    Project Summary
+                </h1>
+                <p>
+                    <div class = "row"> 
+                        <img src="Latitude vs. Temperature.png" alt="...">
+                    </div>
+                    <div class = "row">
+                        <p> 
+                            The purpose of this project was to find how weather patterns changed as one gets 
+                            closer to the equator. In order to accomplish this task, I leveraged the OpenWeatherMap 
+                            API in order to pull data from over 500 cities around the world. 
+                        </p>
+                        <p> 
+                            After building the dataset, I used Matplotlib to plot the relationship between the 
+                            latitude and the following variables: temperature, cloudiness, wind speed, and humidity.
+                            This site serves to showcase my visualizations and insights, as well as the data that 
+                            was collected from the OpenWeatherMap API. 
+                        </p>
+                    </div>
+                </p>
+            </div>
+            
+            <div class = "col-lg-4 col-sm-12">
+                <h2>
+                    Visualizations
+                </h2> 
+                <table> 
+                    <tr> 
+                        <td> 
+                            <a href = "visualization1.html"> 
+                                <img src="Latitude vs. Temperature.png" alt="..." class = "img-thumbnail"> 
+                            </a> 
+                        </td>
+                        <td> 
+                            <a href = "visualization2.html"> 
+                                <img src="Latitude vs. Humidity.png" alt="..." class = "img-thumbnail">
+                            </a> 
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td> 
+                            <a href = "visualization3.html"> 
+                                <img src="Latitude vs. Wind Speed.png" alt="..." class = "img-thumbnail">
+                            </a> 
+                        </td>
+                        <td> 
+                            <a href = "visualization4.html"> 
+                                <img src="Latitude vs. Cloudiness.png" alt="..." class = "img-thumbnail">
+                            </a> 
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

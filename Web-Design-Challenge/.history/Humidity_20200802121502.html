@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    ​
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    ​
+    <title>Bootstrap Visualization Dashboard</title>
+    ​
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    ​
+</head>
+​
+
+<body>
+    <!-- Start of navbar -->
+    <div class="navigation">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="index.html">Lattitude</a>
+            <button class="navbar-toggler border" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            ​
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink"
+                            role="button" aria-haspopup="true" aria-expanded="false">Plots</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="Max_Temperature.html">Latitude vs Temperature</a>
+                        <a class="dropdown-item" href="Cloudiness.html">Latitude vs Cloudiness</a>
+                        <a class="dropdown-item" href="Humidity.html">Latitude vs Humidity</a>
+                        <a class="dropdown-item" href="Wind_Speed.html">Latitude vs Wind Speed</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="Comparisons.html">Comparison</a></li>
+                <li class="nav-item"><a class="nav-link" href="Data.html">Data</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        <div class="selected-plot">
+            <br>
+            <h1>Humidity</h1>
+            <hr>
+            <br>
+            <h6><img id="big-image" src="Images/Fig2.png" alt="Latitude vs Humidity"></h6>
+            <p>Only 1 record shows 0 Humidity occurs at high lattitude area(around 70). More records of 100 humidity
+                occur at around equator,
+                whereas more records of humidity around 80 occur at high lattitude area. But we still can't say we have
+                significant relationship between Lattitude and Humidity.
+                We don't have enough data to show southern hemisphere. This may be due to the tilt of the earth at the
+                time of the year of this data sample.</p>
+        </div>
+        <div class="visualizations">
+            <br>
+            <h1>Visualizations</h1>
+            <hr>
+            <br>
+            <div class="figures">
+                <a href="Max_Temperature.html"><img class="visual-plots" src="Images/Fig1.png"
+                        alt="Latitude vs Temperature"></a>
+                <a href="Cloudiness.html"><img class="visual-plots" src="Images/Fig3.png"
+                        alt="Latitude vs Cloudiness"></a>
+                <a href="Humidity.html"><img class="visual-plots" id="bording" src="Images/Fig2.png"
+                        alt="Latitude vs Humidity"></a>
+                <a href="Wind_Speed.html"><img class="visual-plots" src="Images/Fig4.png"
+                        alt="Latitude vs Wind Speed"></a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Created by Ermias Gaga</p>
+    </footer>
+</body>
+
+</html>

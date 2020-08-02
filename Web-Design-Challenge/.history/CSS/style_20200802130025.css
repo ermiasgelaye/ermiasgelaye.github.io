@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #839496;
+    text-align: left;
+    background-color: #eee;
+    color: #839496;
+    font-family: sans-serif;
+    font-size: 1.1em;
+
+}
+
+.navbar{
+    max-height: 50px; 
+	background-color: #ffffff;; 
+    font-size: 15px; 
+}
+
+.navigation .navbar-brand{
+	color: white; 
+	margin-left: 15px; 
+	padding: inherit; 
+	font-weight: bold; 
+	background-color: rgb(20, 150, 150);
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 27px;
+}
+
+.dropdown-item{
+    color: #30615c; 
+}
+
+.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:active{
+    background-color:#adc7c4; 
+}
+
+.nav-link:hover{
+    background-color:#adc7c4;
+}
+
+
+/* Media Queries */
+@media (max-width: 991.98px){
+.navbar-expand-lg{
+	background-color: rgb(20, 150, 150);
+}
+.navbar{
+    max-height: none; 
+    padding: inherit;
+}
+.navbar div{
+    margin: inherit; 
+    background-color: white;  
+}
+.navbar-brand{
+    padding: 10px; 
+}
+
+button{
+    margin-left: auto; 
+}
+
+button:focus {
+    outline: 1px dotted;
+}
+}
+
+.description-content {
+	margin-top: 30px;
+	margin-bottom: 60px;
+	padding: 10px 30px 5px;
+	color: black;
+	background-color: white;
+}
+
+.imageNav-content {
+	margin-top: 40px;
+	margin-bottom: 20px;
+	padding: 10px 30px 40px;
+	color: black;
+	background-color: white;
+}
+.description-header, .imageNav-header {
+	padding-top: 15px; 
+	padding-left: 4px;
+	color: rgb(20, 150, 150);
+	font-size: 26px;
+	font-weight: bold;
+	font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+img{
+	width: 100%;
+	height: 100%;
+}
+
+.description-image {
+	float: left;
+	width: 60%;
+	height: 60%;
+}
+
+p{
+display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+
+.active, .imageNav-photo:hover{
+    border-color:rgb(20, 150, 150);
+    border-style: solid; 
+}
+
+.footer{
+	background-color: #505251; 
+    border-top-style: solid; 
+    border-top-width: 4px; 
+    border-top-color: rgb(20, 150, 150);
+    color: white; 
+    min-height: 50px; 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px; 
+    text-align: center; 
+    position: fixed;
+    padding-top: 10px; 
+	width: 100%;
+	left: 0;
+	bottom: 0;
+}
+

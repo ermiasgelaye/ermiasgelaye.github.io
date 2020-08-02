@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Comparisons of all plots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/components/">
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark head-bar">
+        <a class="navbar-brand logo" href="index.html">Lattitude</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Plots</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="Max_Temperature.html">Latitude vs Temperature</a>
+                        <a class="dropdown-item" href="Cloudiness.html">Latitude vs Cloudiness</a>
+                        <a class="dropdown-item" href="Humidity.html">Latitude vs Humidity</a>
+                        <a class="dropdown-item" href="Wind_Speed.html">Latitude vs Wind Speed</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="Comparisons.html">Comparison</a></li>
+                <li class="nav-item"><a class="nav-link" href="Data.html">Data</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container compare-main">
+        <h1>Comparison: Latitude vs. X</h1>
+        <div class="row">
+            <div class="col-md-6 compare-cells">
+                <h3>vs. Max Temperature</h3>
+                <img class="compare-plots" src="Images/Fig1.png" alt="Latitude vs Temperature">
+            </div>
+            <div class="col-md-6 compare-cells">
+                <h3>vs.Cloudness</h3>
+                <img class="compare-plots" src="Images/Fig3.png" alt="Latitude vs Cloudiness">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 compare-cells">
+                <h3>vs Humidity</h3>
+                <img class="compare-plots" src="Images/Fig2.png" alt="Latitude vs Humidity">
+            </div>
+            <div class="col-md-6 compare-cells">
+                <h3>vs. Wind Speed</h3>
+                <img class="compare-plots" src="Images/Fig4.png" alt="Latitude vs Wind Speed">
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>"Created by Ermias Gaga"</p>
+    </footer>
+</body>
+
+</html>

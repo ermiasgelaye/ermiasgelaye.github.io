@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>Ermias Gaga </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="01-cv-portfolio/css/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/components/">
+    <link rel="stylesheet" href="01-cv-portfolio/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700%7CAllura" rel="stylesheet">
+
+    <!-- Stylesheets -->
+
+    <link href="common-css/bootstrap.css" rel="stylesheet">
+
+    <link href="common-css/ionicons.css" rel="stylesheet">
+
+    <link href="common-css/fluidbox.min.css" rel="stylesheet">
+
+    <link href="01-cv-portfolio/css/styles.css" rel="stylesheet">
+
+    <link href="01-cv-portfolio/css/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark head-bar">
+        <a class="navbar-brand logo" href="index.html">Lattitude</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Plots</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="mice_per_treatment.html">Latitude vs Temperature</a>
+                    <a class="dropdown-item" href="linear_regression.html">Latitude vs Cloudiness</a>
+                    <a class="dropdown-item" href="gender_dist_Pi_Chart.html">Latitude vs Humidity</a>
+                    <a class="dropdown-item" href="box_plot_whisker.html">Latitude vs Wind Speed</a>
+                </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="Comparisons.html">Comparison</a></li>
+                <li class="nav-item"><a class="nav-link" href="Data.html">Data</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="selected-plot">
+            <br>
+            <h1>Max Temperature</h1>
+            <hr>
+            <br>
+            <h6><img id="big-image" src="Images/Pan_mice_per_treat.png" alt="Latitude vs Temperature"></h6>
+            <p>The highest temperature (almost 100F) occurs at equator (latitude 0) . It's a beautiful curve to show the
+                farer from equator,
+                the lower of max tempture at the right hand side. However, there is still one thing we can't said cause
+                the curve is not symmetric.
+                We don't have enough data to show southern hemisphere. This may be due to the tilt of the earth at the
+                time of the year of this data sample.</p>
+        </div>
+        <div class="visualizations">
+            <br>
+            <h6>Visualizations</h1>
+            <hr>
+            <br>
+            <div class="figures">
+                <a href="mice_per_treatment.html"><img class="visual-plots" src="Images/Pan_mice_per_treat.png"
+                        alt="Latitude vs Temperature"></a>
+                <a href="linear_regression.html"><img class="visual-plots" src="Images/linear_regression.png"
+                        alt="Latitude vs Cloudiness"></a>
+                <a href="gender_dist_Pi_Chart.html"><img class="visual-plots" src="Images/pi_pandas.png"
+                        alt="Latitude vs Humidity"></a>
+                <a href="box_plot_whisker.html"><img class="visual-plots" src="Images/box_plot.png"
+                        alt="Latitude vs Wind Speed"></a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Created by Ermias Gaga</p>
+    </footer>
+</body>
+
+</html>

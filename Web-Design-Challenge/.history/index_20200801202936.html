@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Landing Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/components/">
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+
+    
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Changes in Latitudes, Changes in ...</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">Plots
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="temp.html">Temperature</a>
+                        </li>
+                        <li>
+                            <a href="humid.html">Humidity</a>
+                        </li>
+                        <li>
+                            <a href="cloud.html">Cloudiness</a>
+                        </li>
+                        <li>
+                            <a href="wind.html">Wind Speed</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="comparison.html">Comparison</a>
+                </li>
+                <li>
+                    <a href="data.html">Data</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="sigline">
+                <p>
+                    David W. Jones | Unversity of Texas at Austin : Data Analytics & Visualization |
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <main class="container">
+        <section class="selected-plot">
+            <br>
+            <h1>Summary: Latitude vs. X</h1>
+            <br>
+            <hr>
+            <br>
+            <section id="figure">
+                <h6><img id="plot-image" src="Images/Fig1.png" alt="Latitude vs Temperature"></h6>
+            </section>
+            <p>The purpose of this project was to analyze how weather changes as you get closer to the equator.
+                To accomplish this analysis, we first pulled data from the OpenWeatherMap API to assemble a dataset on
+                over 500 cities.</p>
+            <p>After assembling the dataset, we used Matplotlib to plot various aspects of the weather vs. lattitude.
+                Factors we looked at included: temperature, cloudiness, wind speed, and humidity.
+                This site provides the source data and visualizations created as part of the analysis,
+                as well as explanations and descriptions of any trends and correlations witnessed.</p>
+        </section>
+        <div class="visualizations">
+            <br>
+            <h1>Visualizations</h1>
+            <br>
+            <hr>
+            <br>
+            <div class="figures">
+                <a href="Max_Temperature.html"><img class="visual-plots" src="Images/Fig1.png"
+                        alt="Latitude vs Temperature"></a>
+                <a href="Cloudiness.html"><img class="visual-plots" src="Images/Fig3.png"
+                        alt="Latitude vs Cloudiness"></a>
+                <a href="Humidity.html"><img class="visual-plots" src="Images/Fig2.png"
+                        alt="Latitude vs Humidity"></a>
+                <a href="Wind_Speed.html"><img class="visual-plots" src="Images/Fig4.png"
+                        alt="Latitude vs Wind Speed"></a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Created by Ermias Gaga</p>
+    </footer>
+</body>
+
+</html>
