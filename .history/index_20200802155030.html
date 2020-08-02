@@ -287,98 +287,63 @@
 			</div><!-- row -->
 		</div><!-- container -->
 		
-<section id="publications">
-	<div class="container p-0">
-		<div class="row portfolio-row justify-content-center">
-			<div class="col-12 col-md-5">
-				<div class="text-center">
-					<a target="_blank" class="title-linkk"
-						href="https://ermiasgelaye.github.io/Web-Design-Challenge/index.html">
-						<h4>Weather Data analysis: Analyzing how weather changes as you get closer to the equator.</h4>
-					</a>
-					<p class="project-des">
-						<br>In this project, first I pulled data from the OpenWeatherMap API to assemble a dataset on over 500 cities.
-						After assembling the dataset, I used Matplotlib to plot various aspects of the weather vs. latitude. Factors I looked at
-						included: temperature, cloudiness, wind speed, and humidity. you can find the linked page, and GitHub repository to look
-						the source data, and visualizations created as part of the analysis, as well as explanations and descriptions of any
-						trends and correlations witnessed.
-						<br><br>Skills demonstrated: Python, EDA, data collection, data wrangling, data visualization
-						<br><br> Publication: GitHub
-					</p>
-					<div class="row">
-						<a target="_blank"
-							href="https://ermiasgelaye.github.io/Web-Design-Challenge/index.html">
-							<img class="portfolio-img" src="Images/Weather.png">
-
-						</a>
-
-					</div>
-
-					<div class="row">
-						<div class="col-6 text-center">
-							<a target="_blank"
-								href="https://ermiasgelaye.github.io/Web-Design-Challenge/index.html"
-								class="button">Post page</a>
-
-						</div>
-
-						<div class="col-6 text-center">
-							<a target="_blank" href="https://github.com/ermiasgelaye/python-api-challenge" class="button">Code-GitHub</a>
-
-						</div>
-						<br>
-						<br>
-					</div>
-
+<nav class="navbar navbar-expand-md bg-dark navbar-dark head-bar">
+<a class="navbar-brand logo" href="index.html">Lattitude</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Plots</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="mice_per_treatment.html">Latitude vs Temperature</a>
+					<a class="dropdown-item" href="linear_regression.html">Latitude vs Cloudiness</a>
+					<a class="dropdown-item" href="gender_dist_Pi_Chart.html">Latitude vs Humidity</a>
+					<a class="dropdown-item" href="box_plot_whisker.html">Latitude vs Wind Speed</a>
 				</div>
+		    </li>
+	    </ul>
+	</div>
+
+		
+<main class="container">
+	<section class="selected-plot">
+		<h3>Summary: Latitude vs. X</h3>
+		<br>
+		<hr>
+		<br>
+		<section id="figure">
+			<h6><img id="plot-image" src="Images/Pan_mice_per_treat.png" alt="Latitude vs Temperature"></h6>
+		</section>
+		<p>The purpose of this project was to analyze how weather changes as you get closer to the equator.
+						To accomplish this analysis, we first pulled data from the OpenWeatherMap API to assemble a dataset on
+						over 500 cities.</p>
+		<p>After assembling the dataset, we used Matplotlib to plot various aspects of the weather vs. lattitude.
+						Factors we looked at included: temperature, cloudiness, wind speed, and humidity.
+						This site provides the source data and visualizations created as part of the analysis,
+						as well as explanations and descriptions of any trends and correlations witnessed.</p>
+		</section>
+		<div class="visualizations">
+			<br>
+			<h3>Visualizations</h3>
+			<br>
+			<hr>
+			<br>
+			<div class="figures">
+				<a href="mice_per_treatment.html"><img class="visual-plots" src="Images/Pan_mice_per_treat.png" alt="Latitude vs Temperature"></a>
+				<a href="linear_regression.html"><img class="visual-plots" src="Images/linear_regression.png" alt="Latitude vs Cloudiness"></a>
+				<a href="gender_dist_Pi_Chart.html"><img class="visual-plots" src="Images/pi_pandas.png" alt="Latitude vs Humidity"></a>
+				<a href="box_plot_whisker.html"><img class="visual-plots" src="Images/box_plot.png" alt="Latitude vs Wind Speed"></a>
 			</div>
-			<div class="col-12 col-md-5">
-				<div class="text-center">
-					<a target="_blank" class="title-linkk"
-						href="https://medium.com/swlh/the-framingham-heart-study-decision-trees-83a7fb62718e">
-						<h5>The Framingham Heart Study: Decision Trees </h5>
-					</a>
-					<p class="project-des">
-						<br>In this project, I analyzed data that was used in the Framingham Heart Study, and visualized
-						the risk factors of heart disease. Then, I built a machine learning pipeline with decision trees
-						to predict the ten year risk
-						of Coronary Heart Disease.
-						<br><br>Skills demonstrated: Python, ML algorithms, EDA, data visualization
-						<br><br> Publication: The Startup
-					</p>
-					<div class="row">
-						<a target="_blank"
-							href="https://medium.com/swlh/the-framingham-heart-study-decision-trees-83a7fb62718e">
-							<img class="portfolio-img" src="img9.jpg">
-
-						</a>
-
-					</div>
-
-					<div class="row">
-						<div class="col-6 text-center">
-							<a target="_blank"
-								href="https://medium.com/swlh/the-framingham-heart-study-decision-trees-83a7fb62718e"
-								class="button">Blog Post</a>
-
-						</div>
-
-						<div class="col-6 text-center">
-							<a target="_blank"
-								href="https://github.com/Natassha/FHS/blob/master/Framingham%20Heart%20Study.ipynb"
-								class="button">Code</a>
-
-						</div>
-
-
-					</div>
-
-				</div>
-
-			</div>
-
-			
-</section>
+		</div>
+				
+	</main>
+</nav>
+		
+		</div><!-- portfolioContainer -->
+		
 	</section><!-- portfolio-section -->
 	
 	<section class="experience-section section">

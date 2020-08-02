@@ -728,7 +728,36 @@ hr {
 
 
 
-
+button:hover {
+    background-color: rgb(0, 0, 139);
+    color: white;
+}
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+<style>
+.button {
+    display: inline-block;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-color: rgb(47, 222, 219);
+    width: 100px;
+    margin: 10px 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+    padding: 0.375rem 0.75rem;
+    transition: color 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    border-radius: 0px !important;
+}
 .compare-main {
   background-color: #ffff;
   margin-top: 50px;
