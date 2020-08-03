@@ -17,8 +17,8 @@
   <body>
     <!-- Start of navbar -->
 	<div class="navigation">
-	  <nav class="navbar fixed-top navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.html">Lattitude</a>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="index.html">Pharmaceutical</a>
         <button class="navbar-toggler border" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,22 +29,16 @@
             <li class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink" role="button" aria-haspopup="true" aria-expanded="false">Plots</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="temp.html">Max Temperature</a>
-                <a class="dropdown-item" href="humidity.html">Humidity</a>
-                <a class="dropdown-item" href="cloudiness.html">Cloudiness</a>
-                <a class="dropdown-item" href="wind.html">Wind Speed</a>
+                <a class="dropdown-item" href="Pan_mice_per_treat.html">Number of Mice per Treatments</a>
+                <a class="dropdown-item" href="linear_regression.html">Regreression Plot Mouse Weight Vs. Averaje Tumor Volume</a>
+                <a class="dropdown-item" href="box_plot.html">Tumer Volume at Selected Mouse</a>
+                <a class="dropdown-item" href="pi_pandas.html">Male Vs. Female Mouse Population</a>
               </div>
             </li>
             <li class="nav-item">
-			  <a class="nav-link" href="comparison.html">Comparison</a>
+        <a class="nav-link" href="data.html">Data</a>
+        
 			</li>
-            <li class="nav-item">
-			  <a class="nav-link" href="data.html">Data</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../index.html">My Page</a>
-      </li>
-      
           </ul>
         </div>
       </nav>
@@ -52,15 +46,21 @@
     <!-- End of navbar -->
 ​
   <!-- Start of container -->
+  <br>
+  <br>
     <div class="container">
       <section class="row">
         <div class="col-lg-7 col-md-12">
           <div class="description-content">
-            <h1 class="description-header">Summary: Latitude vs. X</h1>
+            <h1 class="description-header">Summary: The Pharmaceutical Data, Analyzing Treatment Performance</h1>
             <hr>
-            <img src="Resources/assets/images/Fig1.png" alt="Latitude vs. Max Temperature" class="description-image">
-            <p>The purpose of this project was to analyze how weather changes as you get closer to the equator. To accomplish this analysis, we first pulled data from the OpenWeatherMap API to assemble a dataset on over 500 cities.</p>
-            <p>After assembling the dataset, we used Matplotlib to plot various aspects of the weather vs. latitude. Factors we looked at included: temperature, cloudiness, wind speed, and humidity. This site provides the source data and visualizations created as part of the analysis, as well as explanations and descriptions of any trends and correlations witnessed.</p>
+            <img src="Resources/assets/images/Pan_mice_per_treat.png" alt="Number of Mice per Treatments" class="description-image">
+            <p>In this project, I analyzed data the data sourced from Pymaceuticals Inc., a burgeoning pharmaceutical company based out
+            of San Diego. Pymaceuticals specialize in anti-cancer pharmaceuticals. In its most recent efforts, it began screening
+            for potential treatments for squamous cell carcinoma (SCC), a commonly occurring form of skin cancer. The data gathered
+            from 249 mice with SCC tumor growth were treated through a variety of drug regimens, and compares the performance of
+            Pymaceuticals' drug of interest, Capomulin, versus the other treatment regimens and visualized the result.</p>
+
           </div>
         </div>
         <div class="col-lg-5 col-md-12">
@@ -73,23 +73,23 @@
               <div class="container">
 			    <div class="row">
 				  <div class="col-6">
-                    <a href="temp.html">
-				      <img src="Resources/assets/images/Fig1.png" alt="Latitude vs. Max Temperature", title="Latitude vs. Max Temperature" class="imageNav-photo">
+                    <a href="Pan_mice_per_treat.html">
+				      <img src="Resources/assets/images/Pan_mice_per_treat.png" alt="Number of Mice per Treatments", title="Number of Mice per Treatments" class="imageNav-photo">
 				    </a>
 				  </div>
 				  <div class="col-6">
-                    <a href="humidity.html">
-				      <img src="Resources/assets/images/Fig2.png" alt="Latitude vs. Humidity", title="Latitude vs. Humidity" class="imageNav-photo">
+                    <a href="linear_regression.html">
+				      <img src="Resources/assets/images/linear_regression.png" alt="Regreression Plot Mouse Weight Vs. Averaje Tumor Volume", title="Regreression Plot Mouse Weight Vs. Averaje Tumor Volume" class="imageNav-photo">
 			        </a>
                     </div>
 				  <div class="col-6">
-                    <a href="cloudiness.html">
-				      <img src="Resources/assets/images/Fig3.png" alt="Latitude vs. Cloudiness", title="Latitude vs. Cloudiness", class="imageNav-photo">
+                    <a href="box_plot.html">
+				      <img src="Resources/assets/images/box_plot.png" alt="Tumer Volume at Selected Mouse", title="Tumer Volume at Selected Mouse", class="imageNav-photo">
 				    </a>
 				  </div>
 				  <div class="col-6">
-                    <a href="wind.html">
-				      <img src="Resources/assets/images/Fig4.png" alt="Latitude vs. Wind Speed", title="Latitude vs. Wind Speed", class="imageNav-photo">
+                    <a href="pi_pandas.html">
+				      <img src="Resources/assets/images/pi_pandas.png" alt="Male Vs. Female Mouse Population", title="Male Vs. Female Mouse Population", class="imageNav-photo">
 				    </a>
 				  </div>
                 </div>
