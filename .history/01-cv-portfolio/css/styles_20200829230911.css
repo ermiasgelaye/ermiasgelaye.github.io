@@ -96,11 +96,11 @@ b.max-bold{ font-weight: 700; }
 
 .margin-tb-30{ margin-top: 30px; margin-bottom: 30px; }
 
-.font-yellow{ color: #FFA600;font-weight: bold; }
+.font-yellow{ color: #2f00ff; }
 
 .font-semi-white{ color: #ddd; }
 
-.font-lite-black{ color: rgb(255, 255, 255); }
+.font-lite-black{ color: #999; }
 
 
 /* ---------------------------------
