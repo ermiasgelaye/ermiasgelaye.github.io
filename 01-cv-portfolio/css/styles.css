@@ -129,7 +129,7 @@ header .downlad-btn:hover{ -webkit-transform: translateY(-4px); transform: trans
 --------------------------------- */
 
 .intro-section{ padding-top: 200px; position: relative; background-size: cover; 
-	z-index: 1;background-image: url(https://1zrnlw1lz3wt1zcsci363i2d-wpengine.netdna-ssl.com/wp-content/uploads/2019/05/Data-Science-Blog-Header-1658x468.jpg); }
+	z-index: 1;background-image: url(https://qsystems.com.co/wp-content/uploads/2019/05/Data-Science-Blog-Header-1658x468.jpg); }
 
 .intro-section:before{ content:''; z-index: -1; position: absolute; top: 0; bottom: 0; left: 0; 
 	right: 0; background: rgba(0,0,0, .2); }
