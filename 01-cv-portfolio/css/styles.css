@@ -49,7 +49,7 @@ p{ line-height: 1.6; font-size: 1.05em; font-weight: 400; color: rgb(0, 0, 0); }
 h1{ font-size: 4em; line-height: 1; }
 h2{ font-size: 2.2em; line-height: 1.1; }
 h3{ font-size: 1.8em; }
-h4{ font-size: 1.3em; color: rgb(10, 5, 106); }
+h4{ font-size: 1.3em; color: #007bff; }
 h5{ font-size: 1em; }
 h6{ font-size: .9em; letter-spacing: 1px; }
 
@@ -198,7 +198,7 @@ header .downlad-btn:hover{ -webkit-transform: translateY(-4px); transform: trans
 7. EXPERIENCE SECTION
 --------------------------------- */
 
-.experience-section{ background: rgb(10, 5, 106) ; color: #fff; }
+.experience-section{ background:#293233 ; color: #fff; }
 
 .experience .list > li{ display: block; position: relative; margin-bottom: 10px; padding-left: 20px; }
 
@@ -230,7 +230,7 @@ header .downlad-btn:hover{ -webkit-transform: translateY(-4px); transform: trans
 	background-image: url(../../Images/slider-2-1920x600.jpg); color: #fff; }
 
 .counter-section:after{ content:''; z-index: -1; position: absolute; top: 0; bottom: 0; left: 0; 
-	right: 0; background: rgb(0, 0, 0); }
+	right: 0; background: #293233; }
 
 .counter{ position: relative; }
 	
