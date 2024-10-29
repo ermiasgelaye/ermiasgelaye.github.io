@@ -129,7 +129,7 @@ header .downlad-btn:hover{ -webkit-transform: translateY(-4px); transform: trans
 --------------------------------- */
 
 .intro-section{ padding-top: 200px; position: relative; background-size: cover; 
-	z-index: 1;background-image: url(https://media.licdn.com/dms/image/C4E16AQG3RxXdUErJMQ/profile-displaybackgroundimage-shrink_350_1400/0/1599180299184?e=1721260800&v=beta&t=haj8aDQj32Fk6doyiLca3xMYmXL6ZBTcB4eaXcXL3-o); }
+	z-index: 1;background-image: url(../../Images/1599180299184.jpeg); }
 
 .intro-section:before{ content:''; z-index: -1; position: absolute; top: 0; bottom: 0; left: 0; 
 	right: 0; background: rgba(0,0,0, .2); }
