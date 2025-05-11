@@ -359,3 +359,36 @@ footer {
   .bg-light .timeline-content {
       background: #f8f9fa;
   }
+
+    /* Timeline Bullet Point Styling */
+    .experience-bullets {
+      margin-top: 15px;
+      padding-left: 20px;
+      list-style-type: none;
+  }
+  
+  .experience-bullets li {
+      position: relative;
+      margin-bottom: 8px;
+      line-height: 1.5;
+      padding-left: 15px;
+  }
+  
+  .experience-bullets li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #007BFF;
+      font-weight: bold;
+      font-size: 1.2em;
+  }
+  
+  .timeline-content {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+  }
+
+  

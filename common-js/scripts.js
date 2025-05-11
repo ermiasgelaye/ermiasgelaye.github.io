@@ -197,3 +197,26 @@ function isExists(elem){
 	}
 	return false;
 }
+
+
+// Add this to your scripts to detect failed icon loading
+document.addEventListener('DOMContentLoaded', function() {
+	const icons = document.querySelectorAll('.fa, .fas, .fab, .far');
+	icons.forEach(icon => {
+	  if(getComputedStyle(icon).fontFamily !== 'Font Awesome') {
+		// Font Awesome failed to load
+		console.warn('Font Awesome not loaded for:', icon);
+		// Add your fallback solution here
+	  }
+	});
+  });
+
+// Detect if Font Awesome loaded successfully
+if(typeof FontAwesome === 'undefined') {
+	document.documentElement.classList.add('no-icons');
+	console.log('Font Awesome not loaded - using fallback');
+  }
+
+  
+
+  
