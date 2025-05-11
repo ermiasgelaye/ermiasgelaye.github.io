@@ -267,7 +267,7 @@ footer {
   align-items: center;  /* Center the content vertically */
   flex-direction: column;  /* Stack the content vertically */
   padding: 40px 0;  /* Add space before and after the section */
-  height: 300px;  /* Height to ensure proper centering */
+  height: 350px;  /* Height to ensure proper centering */
 }
 
 .counter .title {
