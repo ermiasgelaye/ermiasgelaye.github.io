@@ -1,7 +1,7 @@
 /* === Global Styles === */
 :root {
   --primary-color: #007BFF;
-  --secondary-color: #6C757D;
+  --secondary-color: #000000;
   --background-color: #f8f9fa;
   --text-color: #212529;
   --heading-font: 'Poppins', sans-serif;
@@ -237,11 +237,6 @@ footer {
 }
 
 
-
-
-.radial-progress {
-	color: black !important;
-}
 /* Uniform spacing between sections */
 .section {
   padding-top: 60px;
@@ -288,16 +283,26 @@ footer {
   margin: 20px 0;  /* Add space before and after each counter */
 }
 
-.progress-bar.color-1 {
-  font-size: 22px;  /* Increase the font size */
-  color: black;  /* Change the text color to black */
-  text-align: center;  /* Center the text inside the progress bar */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.radial-progress {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 24px; /* Adjust the size as needed */
 }
 
-.progress-bar.color-1 span {
-  color: black;  /* Ensure the span text inside the progress bar is black */
-  font-size: 24px;  /* Increase font size for the percentage text */
+
+.download-btn {
+  color: white;
+  background-color: #007bff;; /* assuming you're setting it */
+  text-decoration: none;
+  padding: 10px 20px;      /* optional styling */
+  border-radius: 5px;      /* optional styling */
+  display: inline-block;   /* keeps button shape */
+}
+
+.download-btn:hover,
+.download-btn:active,
+.download-btn:visited,
+.download-btn:focus {
+  color: white;
+  text-decoration: none;
 }
