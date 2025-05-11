@@ -306,3 +306,56 @@ footer {
   color: white;
   text-decoration: none;
 }
+
+    /* Timeline Styles */
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+  }
+
+  .timeline:before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #007BFF;
+  }
+
+  .timeline-item {
+      position: relative;
+      margin-bottom: 30px;
+  }
+
+  .timeline-item:before {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #007BFF;
+      border: 3px solid white;
+  }
+
+  .timeline-date {
+      display: inline-block;
+      padding: 5px 10px;
+      background: #f8f9fa;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+  }
+
+  .timeline-content {
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  
+  .bg-light .timeline-content {
+      background: #f8f9fa;
+  }
