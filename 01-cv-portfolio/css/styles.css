@@ -1,26 +1,34 @@
-/* === Global Styles === */
+/* === Global Variables === */
 :root {
   --primary-color: #007BFF;
-  --secondary-color: #000000;
-  --background-color: #f8f9fa;
+  --primary-hover: #0056b3;
+  --secondary-color: #343a40;
+  --background-color: #f9fbfc;
+  --accent-color: #6c757d;
   --text-color: #212529;
+  --light-gray: #e9ecef;
   --heading-font: 'Poppins', sans-serif;
   --body-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --border-radius: 12px;
-  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --border-radius: 16px;
+  --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* === Base Styles === */
 body {
   margin: 0;
   font-family: var(--body-font);
   background-color: var(--background-color);
   color: var(--text-color);
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.75;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading-font);
+  font-weight: 600;
+  line-height: 1.3;
   margin-top: 0;
+  color: var(--secondary-color);
 }
 
 a {
@@ -30,7 +38,7 @@ a {
 }
 
 a:hover {
-  color: #0056b3;
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
@@ -53,17 +61,24 @@ header {
   margin-right: 0.5rem;
 }
 
+/* === Buttons === */
+.download-btn,
 .downlad-btn {
   background-color: var(--primary-color);
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 0.75rem 1.5rem;
   border-radius: var(--border-radius);
   display: inline-block;
-  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
 }
 
+.download-btn:hover,
 .downlad-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
 }
 
 /* === Intro Section === */
@@ -81,28 +96,50 @@ header {
   margin-bottom: 1rem;
 }
 
+.social-icons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.social-icons li {
+  margin: 0 10px;
+}
+
 .social-icons a {
-  font-size: 1.2rem;
-  margin: 0 0.5rem;
-  color: var(--secondary-color);
+  text-decoration: none;
+  font-size: 30px;
+  color: black;
+  transition: color 0.3s ease;
 }
 
 .social-icons a:hover {
   color: var(--primary-color);
 }
 
-/* === Section Headers === */
-.section .heading h3 {
-  font-size: 1.8rem;
-  color: var(--primary-color);
+/* === Section Layout === */
+.section {
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
-.section .heading h6 {
-  font-size: 1rem;
-  color: var(--secondary-color);
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-/* === Skills & Progress Bars === */
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--accent-color);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* === Skills === */
 .progress-wrap {
   margin-bottom: 1.5rem;
 }
@@ -113,7 +150,7 @@ header {
 }
 
 .progress {
-  background-color: #e9ecef;
+  background-color: var(--light-gray);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -121,13 +158,13 @@ header {
 .progress-bar {
   background-color: var(--primary-color);
   height: 1rem;
-  transition: width 0.6s ease;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   color: white;
   font-size: 0.75rem;
   padding-right: 5px;
+  transition: width 0.6s ease;
 }
 
 /* === Project Cards === */
@@ -136,30 +173,28 @@ header {
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 123, 255, 0.1);
 }
 
 .project-tech .badge {
-  background-color: var(--secondary-color);
+  background-color: var(--accent-color);
   color: white;
-  padding: 0.3rem 0.6rem;
-  margin: 0.2rem;
-  border-radius: 5px;
-}
-
-.card-footer .btn {
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
   margin: 0.2rem;
 }
 
-/* === Work & Education Sections === */
+/* === Experience & Education === */
 .experience, .education {
   margin-bottom: 2rem;
   background: white;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
 }
@@ -174,21 +209,108 @@ header {
   list-style: disc;
 }
 
+/* === Timeline === */
+.timeline {
+  position: relative;
+  padding-left: 50px;
+}
+
+.timeline:before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--primary-color);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.timeline-item:before {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  border: 3px solid white;
+}
+
+.timeline-content {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+  margin-bottom: 20px;
+}
+
+.timeline-date {
+  display: inline-block;
+  padding: 5px 10px;
+  background: var(--light-gray);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.experience-bullets {
+  list-style-type: none;
+  padding-left: 20px;
+  margin-top: 15px;
+}
+
+.experience-bullets li {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 8px;
+}
+
+.experience-bullets li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 /* === Counter Section === */
 .counter-section {
-  background-color: #e9ecef;
-  padding: 2rem 1rem;
+  background-color: var(--light-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 350px;
+  padding: 40px 0;
   text-align: center;
 }
 
 .counter .title {
-  font-size: 2.5rem;
+  font-size: 60px;
   color: var(--primary-color);
+  font-weight: bold;
 }
 
 .counter .desc {
-  font-size: 1rem;
-  color: var(--secondary-color);
+  font-size: 24px;
+  color: var(--accent-color);
+}
+
+.counter {
+  margin: 20px 0;
+}
+
+.radial-progress {
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 /* === Footer === */
@@ -202,193 +324,29 @@ footer {
 
 /* === Responsive === */
 @media (max-width: 768px) {
-  .project-card {
-    margin-bottom: 2rem;
+  body {
+    font-size: 15px;
   }
 
-  .downlad-btn {
-    display: block;
+  .intro-section {
+    padding: 2rem 1rem;
+  }
+
+  .project-card {
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
+
+  .download-btn {
     width: 100%;
     text-align: center;
   }
 
+  .section-title {
+    font-size: 1.5rem;
+  }
+
   .experience, .education {
-    padding: 1rem 0.5rem;
+    padding: 1rem;
   }
 }
-.social-icons {
-  list-style: none; /* Remove default list styling */
-  padding: 0;
-  margin: 0;
-  display: flex; /* Use flexbox for horizontal layout */
-}
-
-.social-icons li {
-  margin-right: 10px; /* Space between the icons */
-}
-
-.social-icons a {
-  text-decoration: none; /* Remove underline from links */
-}
-
-.social-icons i {
-  font-size: 30px; /* Medium icon size */
-  color: black; /* Default black color for icons */
-}
-
-
-/* Uniform spacing between sections */
-.section {
-  padding-top: 60px;
-  padding-bottom: 60px;
-}
-
-/* Optional: adjust title and paragraph spacing */
-.section-title {
-  margin-bottom: 30px;
-}
-
-.section-subtitle {
-  margin-bottom: 20px;
-  color: #666;
-  font-size: 1.1rem;
-}
-
-.email-link {
-  color: #007bff;  /* You can change the color here */
-  text-decoration: none; /* Removes underline if you don't want it */
-}
-
-
-
-.counter-section {
-  display: flex;
-  justify-content: center;  /* Center the entire section horizontally */
-  align-items: center;  /* Center the content vertically */
-  flex-direction: column;  /* Stack the content vertically */
-  padding: 40px 0;  /* Add space before and after the section */
-  height: 350px;  /* Height to ensure proper centering */
-}
-
-.counter .title {
-  font-size: 60px;  /* Increased font size for the counter values */
-}
-
-.counter .desc {
-  font-size: 24px;  /* Increased font size for the descriptions */
-}
-
-/* Ensure individual counters are properly centered */
-.counter {
-  margin: 20px 0;  /* Add space before and after each counter */
-}
-
-.radial-progress {
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-  font-size: 24px; /* Adjust the size as needed */
-}
-
-
-.download-btn {
-  color: white;
-  background-color: #007bff;; /* assuming you're setting it */
-  text-decoration: none;
-  padding: 10px 20px;      /* optional styling */
-  border-radius: 5px;      /* optional styling */
-  display: inline-block;   /* keeps button shape */
-}
-
-.download-btn:hover,
-.download-btn:active,
-.download-btn:visited,
-.download-btn:focus {
-  color: white;
-  text-decoration: none;
-}
-
-    /* Timeline Styles */
-    .timeline {
-      position: relative;
-      padding-left: 50px;
-  }
-
-  .timeline:before {
-      content: '';
-      position: absolute;
-      left: 20px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: #007BFF;
-  }
-
-  .timeline-item {
-      position: relative;
-      margin-bottom: 30px;
-  }
-
-  .timeline-item:before {
-      content: '';
-      position: absolute;
-      left: -40px;
-      top: 5px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #007BFF;
-      border: 3px solid white;
-  }
-
-  .timeline-date {
-      display: inline-block;
-      padding: 5px 10px;
-      background: #f8f9fa;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      margin-bottom: 10px;
-  }
-
-  .timeline-content {
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-  }
-  
-  .bg-light .timeline-content {
-      background: #f8f9fa;
-  }
-
-    /* Timeline Bullet Point Styling */
-    .experience-bullets {
-      margin-top: 15px;
-      padding-left: 20px;
-      list-style-type: none;
-  }
-  
-  .experience-bullets li {
-      position: relative;
-      margin-bottom: 8px;
-      line-height: 1.5;
-      padding-left: 15px;
-  }
-  
-  .experience-bullets li:before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #007BFF;
-      font-weight: bold;
-      font-size: 1.2em;
-  }
-  
-  .timeline-content {
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      margin-bottom: 20px;
-  }
-
-  
