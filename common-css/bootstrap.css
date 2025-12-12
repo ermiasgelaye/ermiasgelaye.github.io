@@ -333,7 +333,7 @@ html {
 
 html {
   -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: black;
 }
 
 body {
@@ -341,7 +341,7 @@ body {
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #292b2c;
+  color: black;
   background-color: #fff;
 }
 
@@ -357,6 +357,8 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  font-size: 16px;
+  color: #000;
 }
 
 abbr[title],
@@ -6081,7 +6083,7 @@ button.close {
 }
 
 .bg-primary {
-  background-color: #0275d8 !important;
+  background-color: #007bff!important;
 }
 
 a.bg-primary:focus, a.bg-primary:hover {
