@@ -367,8 +367,9 @@ header {
 
 .card-subtitle {
   font-size: 16px;
-  color: #007bff;
-  margin-bottom: 1rem;
+  color: #007bff;  
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.4;
 }
@@ -599,13 +600,13 @@ header {
   font-size: 3rem;
   color: var(--primary-color);
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .counter .desc {
-  font-size: 1.125rem;
-  color: var(--secondary-color);
-  font-weight: 600;
+
+  color: black;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -988,7 +989,7 @@ footer .copyright {
 }
 
 .skill-level {
-    font-size: 16p;
+    font-size: 16px;
     color: var(--primary-color);
     font-weight: 500;
     margin-top: 0.125rem;
