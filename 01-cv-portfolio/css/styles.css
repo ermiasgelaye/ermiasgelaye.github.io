@@ -140,7 +140,7 @@ header {
 /* === Intro Section === */
 .intro-section {
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: 3rem 1rem;
 }
 
 .profile-img img {
@@ -366,7 +366,7 @@ header {
 }
 
 .card-subtitle {
-  font-size: 1rem;
+  font-size: 16px;
   color: #007bff;
   margin-bottom: 1rem;
   font-weight: 500;
@@ -560,6 +560,10 @@ header {
   margin-top: 1rem;
   padding-left: 0;
   list-style: none;
+  font-size: 16px;
+  color: #000000;
+
+
 }
 
 .experience-bullets li {
@@ -567,7 +571,8 @@ header {
   margin-bottom: 0.75rem;
   line-height: 1.5;
   padding-left: 1.5rem;
-  color: #555;
+  font-size: 16px;
+  color: #000000;
 }
 
 .experience-bullets li:before {
@@ -576,7 +581,7 @@ header {
   left: 0;
   color: var(--primary-color);
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 16px;
 }
 
 /* === Counter Section === */
@@ -1071,7 +1076,7 @@ footer .copyright {
     }
     
     .skill-details p {
-        font-size: 0.8rem;
+        font-size: 16px;
         min-height: 35px;
     }
 }
