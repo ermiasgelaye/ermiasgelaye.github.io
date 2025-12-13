@@ -1,1 +1,6 @@
-theme: jekyll-theme-cayman
+# _config.yml
+title: "Ermias Gelaye Gaga | Data Scientist"
+description: "Data Science Portfolio with AI Chatbot"
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-seo-tag

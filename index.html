@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="01-cv-portfolio/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="01-cv-portfolio/css/style.css">
+	<link rel="stylesheet" href="01-cv-portfolio/css/styles.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -698,7 +698,113 @@
 			</div><!-- row-->
 		</div><!-- container-->
 	</section><!-- counter-section-->
-	
+<!-- Add this after the counter section but before the footer -->
+
+<!-- Contact Form Section -->
+<section id="contact" class="section contact-section">
+    <div class="container">
+        <div class="heading">
+            <h3><b>Contact Me</b></h3>
+            <h6 class="font-lite-black"><b>LET'S CONNECT</b></h6>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="contact-form-wrapper">
+                    <form id="contactForm" class="contact-form">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="form-group">
+                                    <label for="name">Full Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <label for="subject">Subject *</label>
+                            <input type="text" class="form-control" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <label for="message">Message *</label>
+                            <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                <span>Send Message</span>
+                                <div class="spinner-border spinner-border-sm d-none" role="status"></div>
+                            </button>
+                        </div>
+                        
+                        <div id="formMessage" class="alert mt-4 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI Chatbot Widget -->
+<div class="chatbot-wrapper">
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="ion-chatbox-working"></i>
+        <span class="notification-badge d-none">1</span>
+    </button>
+    
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h5>🤖 Data Science Assistant</h5>
+            <button class="close-chatbot" id="closeChatbot">&times;</button>
+        </div>
+        
+        <div class="chatbot-body" id="chatbotBody">
+            <div class="chat-message bot-message">
+                <div class="message-content">
+                    Hello! I'm your AI assistant. I can answer questions about:
+                    <ul class="chat-topics">
+                        <li>📊 Data Science & Machine Learning</li>
+                        <li>🔬 Ermias' projects & experience</li>
+                        <li>🐍 Python, R, SQL, and other skills</li>
+                        <li>🎓 Education & career advice</li>
+                    </ul>
+                    <p>What would you like to know?</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chatbot-footer">
+            <div class="quick-questions">
+                <button class="quick-question" data-question="Tell me about Ermias' background">Background</button>
+                <button class="quick-question" data-question="What are Ermias' technical skills?">Skills</button>
+                <button class="quick-question" data-question="Show me recent projects">Projects</button>
+                <button class="quick-question" data-question="How to contact Ermias?">Contact</button>
+            </div>
+            
+            <div class="chat-input-group">
+                <input type="text" class="chat-input" id="chatInput" 
+                       placeholder="Ask about data science or the portfolio..." 
+                       autocomplete="off">
+                <button class="chat-send" id="chatSend">
+                    <i class="ion-paper-airplane"></i>
+                </button>
+            </div>
+            
+            <div class="chatbot-disclaimer">
+                <small>AI responses are generated based on portfolio content. For detailed inquiries, please use the contact form.</small>
+            </div>
+        </div>
+    </div>
+</div>	
 	<footer>
 		<p class="copyright">
 			Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made by Ermias
@@ -773,6 +879,331 @@ document.addEventListener('DOMContentLoaded', function() {
     
     linearBars.forEach(bar => linearObserver.observe(bar));
 });
+// Contact Form Handler
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        const originalText = submitBtn.querySelector('span').textContent;
+        submitBtn.querySelector('span').textContent = 'Sending...';
+        submitBtn.disabled = true;
+        submitBtn.querySelector('.spinner-border').classList.remove('d-none');
+        
+        // Get form data
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value,
+            timestamp: new Date().toISOString()
+        };
+        
+        try {
+            // Note: In production, you would send this to your backend
+            // For now, we'll simulate a successful submission
+            await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
+            
+            // Show success message
+            formMessage.textContent = 'Thank you! Your message has been sent successfully. I\'ll get back to you soon.';
+            formMessage.className = 'alert alert-success mt-4';
+            formMessage.classList.remove('d-none');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Send to Formspree (uncomment and replace with your Formspree endpoint)
+            /*
+            const response = await fetch('https://formspree.io/f/your-form-id', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            if (response.ok) {
+                formMessage.textContent = 'Thank you! Your message has been sent successfully.';
+                formMessage.className = 'alert alert-success mt-4';
+                contactForm.reset();
+            } else {
+                throw new Error('Failed to send message');
+            }
+            */
+            
+        } catch (error) {
+            // Show error message
+            formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or email me directly at ermiasgelaye@gmail.com';
+            formMessage.className = 'alert alert-danger mt-4';
+            formMessage.classList.remove('d-none');
+            console.error('Form submission error:', error);
+        } finally {
+            // Reset button state
+            submitBtn.querySelector('span').textContent = originalText;
+            submitBtn.disabled = false;
+            submitBtn.querySelector('.spinner-border').classList.add('d-none');
+            
+            // Hide message after 10 seconds
+            setTimeout(() => {
+                formMessage.classList.add('d-none');
+            }, 10000);
+        }
+    });
+
+    // Form validation
+    const inputs = contactForm.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (!this.checkValidity()) {
+                this.classList.add('is-invalid');
+                this.classList.remove('is-valid');
+            } else {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+            }
+        });
+        
+        input.addEventListener('input', function() {
+            if (this.checkValidity()) {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+            }
+        });
+    });
+});
+
+// AI Chatbot Implementation
+class DataScienceChatbot {
+    constructor() {
+        this.knowledgeBase = {
+            // About Ermias
+            'background': "Ermias has over 10 years of experience in data analysis and research. He holds a Master's in Data Science from Eastern University and a Master's in Cognitive Science from the University of Trento. He's currently working as a Senior Analyst while completing advanced data science projects.",
+            
+            'skills': "Ermias has expertise in: Python (97%), R (90%), Java (90%), SQL (97%). Data science skills include: Data Wrangling (93%), Visualization (95%), Quantitative Methods (90%), Advanced Data Mining (90%), Data Modeling (83%), and Exploratory Data Analysis (88%).",
+            
+            'projects': "Featured projects include: 1) Google Health Search Trends Analysis (Python, SQL, D3.js), 2) Global Weather Analysis (Python, APIs), 3) Pharmaceutical Data Analysis (Python, Statistics), 4) Mental Health Risk Indicators (Machine Learning, Tableau). All projects are on GitHub.",
+            
+            'experience': "Work Experience: Senior Analyst (2021-Present): Data analysis, AI tool implementation, dashboard development. Research Associate (2018-2021): Data research, customer acquisition, KPI dashboards. Cyber Media Analyst (2011-2015): Sentiment analysis, social media monitoring, trend reporting.",
+            
+            'education': "Education: MS Data Science (Eastern University), Data Analytics Certificate (University of Toronto), MS Cognitive Science (University of Trento), BA Psychology (Hawassa University).",
+            
+            'contact': "You can contact Ermias via: Email: ermiasgelaye@gmail.com, Phone: 437-228-0708, LinkedIn: linkedin.com/in/egaga, GitHub: github.com/ermiasgelaye. Or use the contact form on this website.",
+            
+            // Data Science Topics
+            'data science': "Data Science combines statistics, programming, and domain expertise to extract insights from data. Key areas include: machine learning, data mining, visualization, and predictive analytics.",
+            
+            'machine learning': "Machine Learning is a subset of AI where algorithms learn patterns from data. Types: Supervised (classification, regression), Unsupervised (clustering), and Reinforcement Learning.",
+            
+            'python': "Python is the most popular language for data science. Key libraries: Pandas (data manipulation), NumPy (numerical computing), Scikit-learn (ML), TensorFlow/PyTorch (deep learning).",
+            
+            'sql': "SQL (Structured Query Language) is essential for database management. Used for querying, updating, and managing relational databases. Key concepts: JOINs, subqueries, indexing, optimization.",
+            
+            'visualization': "Data visualization converts complex data into visual formats. Tools: Matplotlib, Seaborn, Plotly (Python), ggplot2 (R), Tableau, Power BI. Best practices: choose appropriate charts, use color effectively.",
+            
+            'statistics': "Statistics is fundamental to data science. Key concepts: hypothesis testing, regression analysis, probability distributions, Bayesian statistics, and experimental design.",
+            
+            // Portfolio specific
+            'github': "Ermias' GitHub: github.com/ermiasgelaye - contains 30+ projects with 950+ commits. Includes data analysis, machine learning, and visualization projects.",
+            
+            'photography': "Ermias also has a photography portfolio showcasing travel and landscape photography. Check it out: ermiasgelaye.github.io/Photography/",
+            
+            'certifications': "Certifications: Data Analytics & Visualization (University of Toronto), and various online courses in machine learning and data science.",
+            
+            'tools': "Tools used: Python (Pandas, NumPy, Scikit-learn), R (tidyverse, ggplot2), SQL (PostgreSQL, MySQL), Visualization (Tableau, D3.js, Plotly), Cloud (AWS, Render)."
+        };
+        
+        this.commonQuestions = {
+            'hi': 'Hello! I\'m your Data Science assistant. How can I help you today?',
+            'hello': 'Hello! Feel free to ask about data science topics or Ermias\' portfolio.',
+            'thanks': 'You\'re welcome! Let me know if you have more questions.',
+            'help': 'I can help you learn about data science topics or Ermias\' background, skills, projects, and experience. Just ask!'
+        };
+        
+        this.initializeChatbot();
+    }
+    
+    initializeChatbot() {
+        const toggleBtn = document.getElementById('chatbotToggle');
+        const closeBtn = document.getElementById('closeChatbot');
+        const container = document.getElementById('chatbotContainer');
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+        const chatBody = document.getElementById('chatbotBody');
+        const quickQuestions = document.querySelectorAll('.quick-question');
+        
+        // Toggle chatbot
+        toggleBtn.addEventListener('click', () => {
+            container.classList.toggle('active');
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            container.classList.remove('active');
+        });
+        
+        // Send message on button click
+        chatSend.addEventListener('click', () => this.sendMessage());
+        
+        // Send message on Enter key
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.sendMessage();
+            }
+        });
+        
+        // Quick questions
+        quickQuestions.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const question = btn.getAttribute('data-question');
+                this.addUserMessage(question);
+                this.processQuestion(question);
+                chatInput.value = '';
+            });
+        });
+        
+        // Store references
+        this.chatInput = chatInput;
+        this.chatBody = chatBody;
+    }
+    
+    sendMessage() {
+        const message = this.chatInput.value.trim();
+        if (message) {
+            this.addUserMessage(message);
+            this.processQuestion(message);
+            this.chatInput.value = '';
+        }
+    }
+    
+    addUserMessage(text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chat-message user-message';
+        messageDiv.innerHTML = `<div class="message-content">${this.escapeHtml(text)}</div>`;
+        this.chatBody.appendChild(messageDiv);
+        this.scrollToBottom();
+    }
+    
+    addBotMessage(text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chat-message bot-message';
+        messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+        this.chatBody.appendChild(messageDiv);
+        this.scrollToBottom();
+    }
+    
+    showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator bot-message';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = `
+            <div class="message-content">
+                <span></span><span></span><span></span>
+            </div>
+        `;
+        this.chatBody.appendChild(typingDiv);
+        this.scrollToBottom();
+        return typingDiv;
+    }
+    
+    removeTypingIndicator() {
+        const typing = document.getElementById('typingIndicator');
+        if (typing) typing.remove();
+    }
+    
+    processQuestion(question) {
+        const lowerQuestion = question.toLowerCase();
+        
+        // Show typing indicator
+        this.showTypingIndicator();
+        
+        // Simulate thinking delay
+        setTimeout(() => {
+            this.removeTypingIndicator();
+            
+            // Check for common greetings
+            if (this.commonQuestions[lowerQuestion]) {
+                this.addBotMessage(this.commonQuestions[lowerQuestion]);
+                return;
+            }
+            
+            // Check knowledge base
+            let response = null;
+            for (const [key, value] of Object.entries(this.knowledgeBase)) {
+                if (lowerQuestion.includes(key)) {
+                    response = value;
+                    break;
+                }
+            }
+            
+            // Check for specific patterns
+            if (lowerQuestion.includes('project') || lowerQuestion.includes('github')) {
+                response = this.knowledgeBase['projects'] + "<br><br>" + this.knowledgeBase['github'];
+            } else if (lowerQuestion.includes('skill') || lowerQuestion.includes('technical')) {
+                response = this.knowledgeBase['skills'];
+            } else if (lowerQuestion.includes('work') || lowerQuestion.includes('experience') || lowerQuestion.includes('job')) {
+                response = this.knowledgeBase['experience'];
+            } else if (lowerQuestion.includes('education') || lowerQuestion.includes('degree') || lowerQuestion.includes('study')) {
+                response = this.knowledgeBase['education'];
+            } else if (lowerQuestion.includes('contact') || lowerQuestion.includes('email') || lowerQuestion.includes('phone')) {
+                response = this.knowledgeBase['contact'];
+            } else if (lowerQuestion.includes('who') && lowerQuestion.includes('you')) {
+                response = "I'm an AI assistant trained on Ermias' portfolio content. I can answer questions about data science and his professional background.";
+            } else if (lowerQuestion.includes('what') && lowerQuestion.includes('can') && lowerQuestion.includes('do')) {
+                response = "I can help you learn about data science topics (machine learning, Python, statistics, etc.) and tell you about Ermias' background, skills, projects, and experience.";
+            }
+            
+            if (response) {
+                this.addBotMessage(response);
+            } else {
+                // Default response
+                this.addBotMessage(`I'm not sure about "${question}". I can best answer questions about:<br><br>
+                    • Data science topics (machine learning, Python, SQL, etc.)<br>
+                    • Ermias' background and experience<br>
+                    • The projects featured in this portfolio<br>
+                    • How to contact Ermias<br><br>
+                    Try asking about specific skills or projects!`);
+            }
+        }, 800 + Math.random() * 800); // Random delay for natural feel
+    }
+    
+    scrollToBottom() {
+        this.chatBody.scrollTop = this.chatBody.scrollHeight;
+    }
+    
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+}
+
+// Initialize chatbot when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const chatbot = new DataScienceChatbot();
+    
+    // Add smooth scroll for contact form links
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Auto-open chatbot on page load after 10 seconds
+    setTimeout(() => {
+        const notificationBadge = document.querySelector('.notification-badge');
+        if (!document.querySelector('.chatbot-container.active')) {
+            notificationBadge.classList.remove('d-none');
+        }
+    }, 10000);
+});
 </script>
+
 </body>
 </html>
