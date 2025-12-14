@@ -141,6 +141,7 @@ header {
 .intro-section {
   text-align: center;
   padding: 3rem 1rem;
+
 }
 
 .profile-img img {
@@ -1608,15 +1609,15 @@ footer .copyright {
 /* ===== ENHANCEMENTS ===== */
 
 /* Dark Mode */
+/* Dark Mode */
 body.dark-mode {
     --background-color: #121212;
-    --text-color: #ffffff;
-    --secondary-color: #bbbbbb;
+    --text-color: #f0f0f0;  /* Increased brightness for better readability */
+    --secondary-color: #cccccc;  /* Brighter for better contrast */
     background-color: var(--background-color);
     color: var(--text-color);
     transition: all 0.3s ease;
 }
-
 body.dark-mode header {
     background-color: #1e1e1e;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -2071,3 +2072,238 @@ html {
     outline-offset: 3px !important;
     box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.2) !important;
 }
+
+/* ===== DARK MODE READABILITY FIXES ===== */
+body.dark-mode {
+    /* Improve text color contrast */
+    --text-color: #f0f0f0;
+    --secondary-color: #cccccc;
+}
+
+/* Fix counter section text */
+body.dark-mode .counter .title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .counter .desc {
+    color: #e0e0e0 !important;
+}
+
+/* Fix project card text */
+body.dark-mode .card-title,
+body.dark-mode .card-subtitle,
+body.dark-mode .project-description,
+body.dark-mode .project-features li,
+body.dark-mode .experience-bullets li,
+body.dark-mode .skill-details p {
+    color: #e8e8e8 !important;
+}
+
+/* Fix timeline text */
+body.dark-mode .timeline-content h4,
+body.dark-mode .timeline-content p {
+    color: #f0f0f0 !important;
+}
+
+/* Fix timeline date */
+body.dark-mode .timeline-date {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #444;
+}
+
+/* Fix contact form labels and text */
+body.dark-mode .contact-form label,
+body.dark-mode .contact-form .form-control,
+body.dark-mode .contact-form .form-control::placeholder {
+    color: #e8e8e8 !important;
+}
+
+body.dark-mode .contact-form .form-control {
+    background-color: #2a2a2a !important;
+    border-color: #555 !important;
+}
+
+/* Fix about section text */
+body.dark-mode .about-section p {
+    color: #e8e8e8 !important;
+}
+
+body.dark-mode .highlight-link {
+    color: #4da6ff !important;
+    font-weight: 600;
+}
+
+/* Fix personal interests section */
+body.dark-mode .personal-interests {
+    background-color: #2a2a2a !important;
+    border-left-color: #4da6ff !important;
+}
+
+body.dark-mode .personal-interests h4,
+body.dark-mode .personal-interests p {
+    color: #f0f0f0 !important;
+}
+
+/* Fix headings in dark mode */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #ffffff !important;
+}
+
+/* Fix section headings specifically */
+body.dark-mode .section .heading h3 {
+    color: #4da6ff !important;
+}
+
+body.dark-mode .section .heading h6 {
+    color: #cccccc !important;
+}
+
+/* Fix circular progress text */
+body.dark-mode .circular-progress-card .percentage {
+    color: #ffffff !important;
+}
+
+body.dark-mode .circular-progress-card .skill-label {
+    color: #e0e0e0 !important;
+}
+
+/* Fix linear progress skill text */
+body.dark-mode .linear-progress-skill .skill-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .linear-progress-skill .skill-percentage {
+    color: #4da6ff !important;
+}
+
+body.dark-mode .linear-progress-skill .skill-level {
+    color: #cccccc !important;
+}
+
+body.dark-mode .linear-progress-skill .skill-description {
+    color: #d8d8d8 !important;
+}
+
+/* Fix education section text */
+body.dark-mode .education-section .timeline-content h4,
+body.dark-mode .education-section .timeline-content .card-subtitle,
+body.dark-mode .education-section .timeline-content p {
+    color: #f0f0f0 !important;
+}
+
+/* Fix chatbot text */
+body.dark-mode .chatbot-container .bot-message .message-content {
+    color: #f0f0f0 !important;
+    background-color: #2a2a2a !important;
+}
+
+body.dark-mode .chatbot-container .quick-question {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border-color: #555 !important;
+}
+
+/* Fix QR code background */
+body.dark-mode .qr-code {
+    background-color: #2a2a2a !important;
+}
+
+/* Fix social icons */
+body.dark-mode .social-icons a {
+    background-color: #2a2a2a !important;
+}
+
+body.dark-mode .social-icons i {
+    color: #ffffff !important;
+}
+
+/* Fix email link in header */
+body.dark-mode .email-link {
+    color: #4da6ff !important;
+    font-weight: 600;
+}
+
+/* Fix contact info cards */
+body.dark-mode .contact-info-card {
+    background-color: #2a2a2a !important;
+}
+
+body.dark-mode .contact-info-card h5 {
+    color: #ffffff !important;
+}
+
+body.dark-mode .contact-info-card p,
+body.dark-mode .contact-info-card a {
+    color: #e0e0e0 !important;
+}
+
+/* Fix badges in project tech */
+body.dark-mode .project-tech .badge {
+    background-color: #0056b3 !important;
+    color: #ffffff !important;
+}
+
+/* Fix footer text */
+body.dark-mode footer .copyright {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .footer-social-link {
+    color: #e0e0e0 !important;
+}
+
+/* Ensure all links in dark mode have sufficient contrast */
+body.dark-mode a:not(.btn):not(.social-link):not(.email-link) {
+    color: #4da6ff !important;
+}
+
+/* Fix progress bars in dark mode */
+body.dark-mode .progress {
+    background-color: #2a2a2a !important;
+}
+
+body.dark-mode .progress-bar {
+    background-color: #4da6ff !important;
+}
+
+/* Fix card backgrounds */
+body.dark-mode .project-card,
+body.dark-mode .circular-progress-card,
+body.dark-mode .linear-progress-skill {
+    background-color: #1e1e1e !important;
+    border-color: #444 !important;
+}
+
+/* Fix card borders on hover */
+body.dark-mode .project-card:hover {
+    border-color: #4da6ff !important;
+}
+
+/* Fix the glass effect in dark mode */
+body.dark-mode .glass-effect {
+    background: rgba(30, 30, 30, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Fix the contact form wrapper */
+body.dark-mode .contact-form-wrapper {
+    background: rgba(30, 30, 30, 0.98) !important;
+}
+
+/* Fix button contrast in dark mode */
+body.dark-mode .btn-outline-primary {
+    color: #4da6ff !important;
+    border-color: #4da6ff !important;
+}
+
+body.dark-mode .btn-outline-primary:hover {
+    background-color: #4da6ff !important;
+    color: #ffffff !important;
+}
+

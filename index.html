@@ -92,44 +92,20 @@
 		}
 
 		/* Gradient Text */
-		.gradient-text {
-			background: linear-gradient(45deg, black, black, black,black);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			background-clip: text;
-			background-size: 300% 300%;
-			animation: gradient 3s ease infinite;
-		}
-
-		@keyframes gradient {
-			0%, 100% { background-position: 0% 50%; }
-			50% { background-position: 100% 50%; }
-		}
-
-		/* Animated Gradient Border */
-		.animated-border {
-			position: relative;
-			background: white;
-			border-radius: var(--border-radius);
-			z-index: 1;
-		}
-
-		.animated-border::before {
-			content: '';
-			position: absolute;
-			top: -2px;
-			left: -2px;
-			right: -2px;
-			bottom: -2px;
-			background: #fffdfd38;
-			border-radius: calc(var(--border-radius) + 2px);
-			z-index: -1;
-           
-    
-			animation: gradient 3s ease infinite;
-			background-size: 300% 300%;
-		}
-
+	   .gradient-text {
+		background: linear-gradient(45deg, #007BFF, #0056b3, #007BFF, #0056b3);
+		-webkit-background-clip: text;
+    	-webkit-text-fill-color: transparent;
+    	background-clip: text;
+    	background-size: 300% 300%;
+    	animation: gradient 3s ease infinite;
+	}
+	/* Dark mode override for better visibility */
+	   body.dark-mode .gradient-text {
+		background: linear-gradient(45deg, #4da6ff, #1a73e8, #4da6ff, #1a73e8);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
 		/* Typewriter Effect */
 		.typewriter {
 			overflow: hidden;
@@ -243,7 +219,7 @@
 			<div class="row">
 				<div class="col-md-1 col-lg-2"></div>
 				<div class="col-md-10 col-lg-8">
-					<div class="intro animated-border" data-aos="fade-up" data-aos-delay="100">
+					<div class="intro" data-aos="fade-up" data-aos-delay="100"></div>
 						<div class="profile-img">
 							<img src="Images/ermias.jpg" alt="Ermias Gelaye Gaga" class="modern-card">
 							<div class="profile-glow"></div>
@@ -582,7 +558,7 @@
 	</section>
 	
 	<!-- Projects Section -->
-	<section id="projects" class="section projects-section" data-aos="fade-up" data-aos-delay="200">
+	<section class="section projects-section" data-aos="fade-up" data-aos-delay="200">
 		<div class="container">
 			<div class="heading">
 				<h3><b>Featured Projects</b></h3>
@@ -784,7 +760,7 @@
 		</div>
 	</section><!-- experience-section -->
 <!-- Education Section with Vertical Timeline -->
-	<section class="education-section section bg-light">
+	<section class="education-section section"></section>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4">
@@ -872,7 +848,7 @@
 	</section><!-- counter-section-->
 
 	<!-- Enhanced Contact Form Section -->
-	<section id="contact" class="section contact-section" data-aos="fade-up">
+	
 		<div class="container">
 			<div class="heading">
 				<h3><b>Get In Touch</b></h3>
