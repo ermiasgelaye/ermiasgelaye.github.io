@@ -1,156 +1,467 @@
+/* Responsive Design Enhancements */
 
+/* Large Desktop: 1200px+ */
+@media only screen and (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+  
+  /* Enhanced Grid for Large Screens */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
 
-/* Screens Resolution : 992px
--------------------------------------------------------------------------- */
+/* Desktop: 992px - 1199px */
 @media only screen and (max-width: 1200px) {
-	/* ---------------------------------
-	9. COUNTER SECTION
-	--------------------------------- */
-
-	.counter-section{ text-align: center; padding: 50px 0 20px; }
-
-	.counter{ display: inline-block; }
-	
-	.counter .desc{ text-align: left; }
+  .chatbot-container {
+    width: 380px;
+  }
+  
+  .circular-progress-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .project-card .card-img-wrapper {
+    height: 280px;
+  }
 }
 
-/* Screens Resolution : 992px
--------------------------------------------------------------------------- */
+/* Tablet: 768px - 991px */
 @media only screen and (max-width: 992px) {
-	
-	/* ---------------------------------
-	4. INTRO SECTION
-	--------------------------------- */
-
-	.intro-section{ padding-top: 250px; }
-	
+  :root {
+    --section-spacing: 50px;
+    --heading-spacing: 25px;
+  }
+  
+  .chatbot-container {
+    width: 350px;
+    height: 550px;
+  }
+  
+  /* Stack timeline */
+  .timeline {
+    padding-left: 30px;
+  }
+  
+  .timeline:before {
+    left: 10px;
+  }
+  
+  .timeline-item:before {
+    left: -25px;
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Adjust project cards */
+  .project-card .card-img-wrapper {
+    height: 250px;
+  }
+  
+  .circular-progress-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+  
+  /* Stack contact info */
+  .contact-info-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Improve dark mode contrast on mobile */
+  body.dark-mode {
+    --text-color: #f0f0f0;
+  }
 }
 
-/* Screens Resolution : 767px
--------------------------------------------------------------------------- */
+/* Mobile Landscape: 576px - 767px */
 @media only screen and (max-width: 767px) {
-	
-	/* ---------------------------------
-	1. PRIMARY STYLES
-	--------------------------------- */
-
-	p{ line-height: 1.4; }
-
-	h1{ font-size: 3em; }
-	h2{ font-size: 2em; }
-	h3{ font-size: 1.8em; }
-
-
-	
-	/* ---------------------------------
-	2. COMMONS FOR PAGE DESIGN
-	--------------------------------- */
-
-	.section{ padding: 50px 0 0px; }
-
-	.section .heading{ margin-bottom: 30px; }
-
-	
-	/* ---------------------------------
-	4. INTRO SECTION
-	--------------------------------- */
-
-	.intro-section{ padding-top: 50px; }
-
-
-	/* ---------------------------------
-	5. PORFOLIO SECTION
-	--------------------------------- */
-
-	.portfolio-section{ padding-bottom: 0; }
-	
-	.portfolio-section .portfolioFilter{ margin: 0px 0 10px; }
-	
-	.portfolio-section .portfolioContainer{ margin-left: 0; margin-right: 0; }
-
-	.portfolio-section .p-item{ width: 50%; padding: 0 15px 0px; }
-
-	.portfolio-section .p-item{ max-width: 400px; }
-
-	
-	/* ---------------------------------
-	8. EDUCATION SECTION
-	--------------------------------- */
-	
-	.education-wrapper:after,
-	.education-wrapper .education:after{ display: none; }
-
+  :root {
+    --section-spacing: 40px;
+    --heading-spacing: 20px;
+  }
+  
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  
+  .chatbot-container {
+    width: calc(100vw - 40px);
+    right: 20px;
+    bottom: 70px;
+  }
+  
+  .chatbot-toggle {
+    width: 60px;
+    height: 60px;
+    font-size: 1.25rem;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  /* Stack all sections */
+  .row > div {
+    margin-bottom: 2rem;
+  }
+  
+  .project-card .card-img-wrapper {
+    height: 220px;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .card-footer {
+    padding: 1rem;
+    flex-direction: column;
+  }
+  
+  .card-footer .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Improve dark mode readability */
+  body.dark-mode {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  
+  body.dark-mode .project-card,
+  body.dark-mode .circular-progress-card {
+    background: #1a1a1a;
+    border: 1px solid #444;
+  }
+  
+  /* Enhanced mobile navigation */
+  header .heading-wrapper {
+    padding: 1rem 0;
+  }
+  
+  .intro-section {
+    padding-top: 120px;
+  }
 }
 
-/* Screens Resolution : 575px
--------------------------------------------------------------------------- */
+/* Mobile Portrait: 480px - 575px */
 @media only screen and (max-width: 575px) {
-	
-	/* ---------------------------------
-	1. PRIMARY STYLES
-	--------------------------------- */
-
-	body{ font-size: 14px;  }
-	
-
-	/* ---------------------------------
-	5. PORFOLIO SECTION
-	--------------------------------- */
-	
-	.portfolio-section .p-item{ width: 100%; }
-	
+  .chatbot-container {
+    height: 65vh;
+    bottom: 60px;
+  }
+  
+  .quick-questions {
+    grid-template-columns: 1fr;
+  }
+  
+  .circular-progress-wrapper {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .percentage {
+    font-size: 1.25rem;
+  }
+  
+  .skill-label {
+    font-size: 0.875rem;
+  }
+  
+  /* Improve touch targets */
+  .btn, .quick-question, .social-link {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Enhanced dark mode for small screens */
+  body.dark-mode {
+    --text-color: #f5f5f5;
+  }
+  
+  body.dark-mode .section {
+    padding: 2rem 0;
+  }
+  
+  body.dark-mode .project-features li,
+  body.dark-mode .experience-bullets li {
+    font-size: 15px;
+    line-height: 1.6;
+  }
 }
 
-/* Screens Resolution : 479px
--------------------------------------------------------------------------- */
+/* Small Mobile: 360px - 479px */
 @media only screen and (max-width: 479px) {
-
-
+  .chatbot-container {
+    width: calc(100vw - 30px);
+    right: 15px;
+    height: 60vh;
+  }
+  
+  .chatbot-header {
+    padding: 1rem;
+  }
+  
+  .chatbot-body {
+    padding: 1rem;
+  }
+  
+  .chat-input-group {
+    flex-direction: column;
+  }
+  
+  .chat-send {
+    width: 100%;
+    height: 44px;
+    border-radius: 8px;
+  }
+  
+  /* Typography adjustments */
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  
+  /* Adjust spacing */
+  .section {
+    padding: 30px 0;
+  }
+  
+  .intro-section {
+    padding: 80px 0 40px;
+  }
+  
+  /* Improve form inputs */
+  .contact-form .form-control {
+    padding: 0.875rem;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  /* Enhanced contrast for very small screens */
+  body.dark-mode {
+    background-color: #0a0a0a;
+  }
+  
+  body.dark-mode .project-card {
+    background: #151515;
+  }
 }
 
-/* Screens Resolution : 359px
--------------------------------------------------------------------------- */
+/* Extra Small Mobile: up to 359px */
 @media only screen and (max-width: 359px) {
-	
-	/* ---------------------------------
-	3. HEADER
-	--------------------------------- */
-
-	header .heading-wrapper{  padding: 30px 20px 20px; }
-
-	header .info .icon{ font-size: 25px; }
-
-	header .info .right-area{ margin-left: 35px; }
-
+  .chatbot-container {
+    width: calc(100vw - 20px);
+    right: 10px;
+  }
+  
+  .chatbot-toggle {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+  
+  /* Adjust font sizes further */
+  body {
+    font-size: 15px;
+  }
+  
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.375rem; }
+  h3 { font-size: 1.125rem; }
+  
+  /* Compact layout */
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Enhanced dark mode for extra small */
+  body.dark-mode {
+    font-size: 15px;
+  }
+  
+  body.dark-mode .btn {
+    font-size: 14px;
+    padding: 0.75rem 1rem;
+  }
+  
+  body.dark-mode .project-features li,
+  body.dark-mode .experience-bullets li {
+    padding-left: 1.25rem;
+    font-size: 14px;
+  }
 }
 
-/* Screens Resolution : 290px
--------------------------------------------------------------------------- */
-@media only screen and (max-width: 290px) {
-
-	
+/* Height-based adjustments */
+@media only screen and (max-height: 700px) {
+  .chatbot-container {
+    height: 55vh;
+  }
+  
+  .chatbot-body {
+    max-height: 300px;
+  }
 }
 
-/* Screens Resolution : 290px
--------------------------------------------------------------------------- */
-@media only screen and (max-width: 260px) {
-	
-	/* ---------------------------------
-	3. HEADER
-	--------------------------------- */
+@media only screen and (max-height: 500px) {
+  .chatbot-container {
+    height: 45vh;
+    bottom: 50px;
+  }
+}
 
-	header .heading-wrapper{  padding: 10px 15px 0px; }
+/* Print Styles */
+@media print {
+  .chatbot-wrapper,
+  .theme-toggle,
+  .back-to-top,
+  .animated-background {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .project-card {
+    break-inside: avoid;
+    border: 1px solid #ddd !important;
+  }
+  
+  a {
+    color: #0000ee !important;
+  }
+}
 
-	header .info .icon{ font-size: 15px; }
+/* Dark Mode Print */
+@media print and (prefers-color-scheme: dark) {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .project-card {
+    background: white !important;
+    color: black !important;
+  }
+}
 
-	header .info .right-area{ margin-left: 20px; }
-	
-	/* ---------------------------------
-	4. INTRO SECTION
-	--------------------------------- */
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  body.dark-mode {
+    --text-color: #ffffff;
+    --background-color: #000000;
+    --surface-color: #1a1a1a;
+  }
+  
+  .project-card {
+    border: 2px solid #ffffff !important;
+  }
+  
+  .btn {
+    border: 2px solid currentColor !important;
+  }
+}
 
-	.intro .profile-img{ width: 80%; height: auto; top: 0; margin-bottom: 10px; }
-	
-	.intro{ padding: 20px 10px 0; margin-right: -15px; margin-left: -15px; }
-	
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-container.active {
+    animation: none;
+  }
+  
+  .typing-indicator span,
+  .counter-animated::before,
+  .floating-shape {
+    animation: none !important;
+  }
+  
+  .project-card-3d:hover {
+    transform: none;
+  }
+}
+
+/* Orientation Specific */
+@media screen and (orientation: landscape) and (max-width: 992px) {
+  .chatbot-container {
+    width: 50vw;
+    height: 70vh;
+  }
+  
+  .intro-section {
+    padding-top: 100px;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .project-card:hover {
+    transform: none;
+  }
+  
+  .quick-question:hover {
+    transform: none;
+  }
+  
+  .social-link:hover {
+    transform: none;
+  }
+  
+  /* Increase touch target size */
+  .btn, a, button {
+    min-height: 44px;
+  }
+  
+  /* Prevent hover states from sticking */
+  .project-card:active,
+  .quick-question:active,
+  .social-link:active {
+    opacity: 0.8;
+  }
+}
+
+/* Dark mode system preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --surface-color: #1e1e1e;
+  }
+}
+
+/* Light mode system preference */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --background-color: #f8f9fa;
+    --text-color: #212529;
+    --surface-color: #ffffff;
+  }
+}
+
+/* Accessibility: Focus Visible */
+@media (prefers-reduced-motion: no-preference) {
+  :focus-visible {
+    outline: 3px solid var(--primary-color) !important;
+    outline-offset: 2px !important;
+    border-radius: 4px;
+  }
+}
+
+/* Performance optimizations for low-end devices */
+@media (max-width: 767px) and (prefers-reduced-data: reduce) {
+  .animated-background,
+  .floating-shape,
+  .parallax-bg {
+    display: none;
+  }
+  
+  .project-card-3d {
+    transform-style: flat;
+  }
 }
