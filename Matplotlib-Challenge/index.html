@@ -594,26 +594,21 @@
         
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="index.html">
-                <i class="fas fa-home mr-1"></i>Home
-              </a>
-            </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="visualizationsDropdown" data-toggle="dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="visualizationsDropdown" data-toggle="dropdown">
                 <i class="fas fa-chart-line mr-1"></i>Visualizations
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#Pan_mice_per_treat">
+                <a class="dropdown-item" href="#" data-viz="Pan_mice_per_treat">
                   <i class="fas fa-mouse mr-2"></i>Treatment Distribution
                 </a>
-                <a class="dropdown-item" href="#linear_regression">
+                <a class="dropdown-item" href="#" data-viz="linear_regression">
                   <i class="fas fa-chart-line mr-2"></i>Regression Analysis
                 </a>
-                <a class="dropdown-item" href="#box_plot">
+                <a class="dropdown-item" href="#" data-viz="box_plot">
                   <i class="fas fa-chart-bar mr-2"></i>Tumor Volume Analysis
                 </a>
-                <a class="dropdown-item" href="#pi_pandas">
+                <a class="dropdown-item" href="#" data-viz="pi_pandas">
                   <i class="fas fa-venus-mars mr-2"></i>Gender Distribution
                 </a>
               </div>
@@ -897,6 +892,11 @@
             behavior: 'smooth',
             block: 'start'
           });
+          
+          // Update dropdown text to show active visualization
+          const dropdownToggle = document.querySelector('#visualizationsDropdown');
+          const activeVizName = data.title.split(':')[0]; // Get first part of title
+          dropdownToggle.innerHTML = `<i class="fas fa-chart-line mr-1"></i>${activeVizName}`;
         }
 
         // Add click handlers to thumbnails
@@ -913,6 +913,20 @@
               updateVisualization(vizKey);
             });
           }
+        });
+
+        // Add click handlers to dropdown items
+        document.querySelectorAll('.dropdown-item[data-viz]').forEach(item => {
+          item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const vizKey = this.getAttribute('data-viz');
+            updateVisualization(vizKey);
+            
+            // Close the dropdown on mobile
+            if (window.innerWidth < 992) {
+              $('#visualizationsDropdown').dropdown('toggle');
+            }
+          });
         });
 
         // Chatbot functionality
