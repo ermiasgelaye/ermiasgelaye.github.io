@@ -63,7 +63,7 @@
 		/* Back to Top */
 		.back-to-top {
 			position: fixed;
-			bottom: 30px;
+			bottom: 0px;
 			right: 30px;
 			width: 50px;
 			height: 50px;
@@ -1198,36 +1198,413 @@
 			// Enhanced Chatbot - Improved
 			class EnhancedChatbot {
 				constructor() {
-					this.knowledgeBase = {
-                        'background': "Ermias has over 10 years of experience in data analysis and research. He holds a Master's in Data Science from Eastern University and a Master's in Cognitive Science from the University of Trento. He's currently working as a Senior Analyst while completing advanced data science projects.",
-                        'skills': "Ermias has expertise in: Python (97%), R (90%), Java (90%), SQL (97%). Data science skills include: Data Wrangling (93%), Visualization (95%), Quantitative Methods (90%), Advanced Data Mining (90%), Data Modeling (83%), and Exploratory Data Analysis (88%).",
-                        'projects': "Featured projects include: 1) Google Health Search Trends Analysis (Python, SQL, D3.js), 2) Global Weather Analysis (Python, APIs), 3) Pharmaceutical Data Analysis (Python, Statistics), 4) Mental Health Risk Indicators (Machine Learning, Tableau). All projects are on GitHub.",
-                        'experience': "Work Experience: Senior Analyst (2021-Present): Data analysis, AI tool implementation, dashboard development. Research Associate (2018-2021): Data research, customer acquisition, KPI dashboards. Cyber Media Analyst (2011-2015): Sentiment analysis, social media monitoring, trend reporting.",
-                        'education': "Education: MS Data Science (Eastern University), Data Analytics Certificate (University of Toronto), MS Cognitive Science (University of Trento), BA Psychology (Hawassa University).",
-                        'contact': "You can contact Ermias via: Email: ermiasgelaye@gmail.com, Phone: 437-228-0708, LinkedIn: linkedin.com/in/egaga, GitHub: github.com/ermiasgelaye. Or use the contact form on this website.",
-            
-                        // Data Science Topics
-                        'data science': "Data Science combines statistics, programming, and domain expertise to extract insights from data. Key areas include: machine learning, data mining, visualization, and predictive analytics.",
-            
-                        'machine learning': "Machine Learning is a subset of AI where algorithms learn patterns from data. Types: Supervised (classification, regression), Unsupervised (clustering), and Reinforcement Learning.",
-            
-                        'python': "Python is the most popular language for data science. Key libraries: Pandas (data manipulation), NumPy (numerical computing), Scikit-learn (ML), TensorFlow/PyTorch (deep learning).",
-            
-                        'sql': "SQL (Structured Query Language) is essential for database management. Used for querying, updating, and managing relational databases. Key concepts: JOINs, subqueries, indexing, optimization.",
-            
-                        'visualization': "Data visualization converts complex data into visual formats. Tools: Matplotlib, Seaborn, Plotly (Python), ggplot2 (R), Tableau, Power BI. Best practices: choose appropriate charts, use color effectively.",
-            
-                        'statistics': "Statistics is fundamental to data science. Key concepts: hypothesis testing, regression analysis, probability distributions, Bayesian statistics, and experimental design.",
-            
-                        // Portfolio specific
-                        'github': "Ermias' GitHub: github.com/ermiasgelaye - contains 30+ projects with 950+ commits. Includes data analysis, machine learning, and visualization projects.",
-            
-                        'photography': "Ermias also has a photography portfolio showcasing travel and landscape photography. Check it out: ermiasgelaye.github.io/Photography/",
-            
-                        'certifications': "Certifications: Data Analytics & Visualization (University of Toronto), and various online courses in machine learning and data science.",
-            
-                        'tools': "Tools used: Python (Pandas, NumPy, Scikit-learn), R (tidyverse, ggplot2), SQL (PostgreSQL, MySQL), Visualization (Tableau, D3.js, Plotly), Cloud (AWS, Render)."
-					};
+                this.knowledgeBase = {
+                    // Personal Information
+                    'background': `Ermias Gelaye Gaga is a Data Scientist and Research Analyst with over 10 years of experience. He holds:
+                    • M.S. Data Science from Eastern University
+                    • Data Analytics Certificate from University of Toronto
+                    • M.S. Cognitive Science from University of Trento
+                    • B.A. Psychology from Hawassa University
+                    
+                    He specializes in Python, Machine Learning, Data Visualization, and Statistical Analysis.`,
+                    
+                    'skills': `Core Technical Skills:
+                    • Programming: Python (97%), R (90%), SQL (97%), Java (90%)
+                    • Data Science: ML (90%), Visualization (95%), Statistics (93%), Data Wrangling (93%)
+                    • Tools: Pandas, NumPy, Scikit-learn, TensorFlow, Tableau, D3.js
+                    • Cloud: AWS, Azure, Docker, Git, Spark
+                    
+                    Advanced Expertise in quantitative methods, predictive modeling, and big data analytics.`,
+                    
+                    'experience': `Professional Experience:
+                    • Senior Analyst (2021-Present): AI tool implementation, dashboard development, strategic reporting
+                    • Research Associate (2018-2021): Data research, customer acquisition, KPI analysis
+                    • Cyber Media Analyst (2011-2015): Sentiment analysis, social media monitoring, trend reporting
+                    
+                    10+ years in data-driven decision making and analytics.`,
+                    
+                    'education': `Academic Background:
+                    • M.S. Data Science - Eastern University (2024-2025)
+                    • Data Analytics Certificate - University of Toronto (2019-2020)
+                    • M.S. Cognitive Science - University of Trento (2015-2017)
+                    • B.A. Psychology - Hawassa University (2008-2011)
+                    
+                    Continuous learner with focus on practical applications of data science.`,
+                    
+                    'contact': `Contact Information:
+                    • Email: ermiasgelaye@gmail.com
+                    • Phone: +1 (437) 228-0708
+                    • Location: Toronto, ON, Canada
+                    • LinkedIn: linkedin.com/in/egaga
+                    • GitHub: github.com/ermiasgelaye
+                    
+                    Best contact method: Email for detailed inquiries, LinkedIn for networking.`,
+                    
+                    // Data Science Concepts
+                    'machine learning': `Machine Learning is a subset of AI where algorithms learn patterns from data to make predictions or decisions without explicit programming.
+                    
+                    Types:
+                    1. Supervised Learning: Labeled data (Classification, Regression)
+                    2. Unsupervised Learning: Unlabeled data (Clustering, Dimensionality Reduction)
+                    3. Reinforcement Learning: Learn through rewards/punishments
+                    
+                    Key Algorithms: Linear Regression, Decision Trees, SVM, Neural Networks, Random Forest`,
+                    
+                    'deep learning': `Deep Learning uses neural networks with multiple layers to learn complex patterns.
+                    
+                    Applications:
+                    • Computer Vision (Image Recognition)
+                    • Natural Language Processing (Chatbots, Translation)
+                    • Speech Recognition
+                    • Autonomous Vehicles
+                    
+                    Frameworks: TensorFlow, PyTorch, Keras`,
+                    
+                    'data visualization': `Data Visualization transforms data into visual formats for better understanding.
+                    
+                    Tools & Libraries:
+                    • Python: Matplotlib, Seaborn, Plotly, Bokeh
+                    • R: ggplot2, Shiny, plotly
+                    • BI Tools: Tableau, Power BI, Looker
+                    • Web: D3.js, Chart.js, Highcharts
+                    
+                    Best Practices: Choose appropriate chart types, use color effectively, ensure accessibility.`,
+                    
+                    'python data science': `Python for Data Science - Essential Libraries:
+                    
+                    1. Pandas: Data manipulation and analysis
+                    2. NumPy: Numerical computing
+                    3. Matplotlib/Seaborn: Data visualization
+                    4. Scikit-learn: Machine learning algorithms
+                    5. TensorFlow/PyTorch: Deep learning
+                    6. Statsmodels: Statistical modeling
+                    7. NLTK/spaCy: Natural language processing
+                    
+                    Python is the most popular language in data science due to its rich ecosystem.`,
+                    
+                    'sql': `SQL (Structured Query Language) is essential for database management.
+                    
+                    Key Concepts:
+                    • SELECT, FROM, WHERE: Basic queries
+                    • JOINs: Combine tables (INNER, LEFT, RIGHT, FULL)
+                    • GROUP BY, HAVING: Aggregation
+                    • Subqueries: Nested queries
+                    • Window Functions: Advanced analytics
+                    • Indexing: Performance optimization
+                    
+                    Used with: PostgreSQL, MySQL, SQL Server, SQLite`,
+                    
+                    'statistics': `Statistics for Data Science:
+                    
+                    Foundational Concepts:
+                    1. Descriptive Statistics: Mean, Median, Mode, Variance, Standard Deviation
+                    2. Inferential Statistics: Hypothesis Testing, Confidence Intervals
+                    3. Probability Distributions: Normal, Binomial, Poisson
+                    4. Regression Analysis: Linear, Logistic, Multiple
+                    5. A/B Testing: Experimental design and analysis
+                    
+                    Essential for making data-driven decisions.`,
+                    
+                    // Projects
+                    'projects': `Featured Projects:
+                    
+                    1. Google Health Search Trends (Python, SQL, D3.js)
+                       - Interactive dashboard comparing search trends with CDC data
+                       - 15% efficiency improvement in pattern identification
+                    
+                    2. Global Weather Analysis (Python, APIs, Visualization)
+                       - Analysis of 500+ cities worldwide
+                       - Latitude-weather correlation studies
+                    
+                    3. Pharmaceutical Data Analysis (Python, Statistics)
+                       - Drug regimen comparison for SCC tumors
+                       - Statistical hypothesis testing
+                    
+                    4. Mental Health Risk Indicators (ML, Tableau, Flask)
+                       - Population-level suicide risk analysis
+                       - 100,000+ records from WHO and World Bank
+                    
+                    All projects available on GitHub: github.com/ermiasgelaye`,
+                    
+                    'machine learning projects': `Machine Learning Projects:
+                    
+                    1. Mental Health Predictor (Supervised Learning)
+                       - Regression and tree-based models
+                       - Risk indicator importance analysis
+                       - Interactive Tableau dashboards
+                    
+                    2. Health Search Trend Analysis (Time Series, NLP)
+                       - Pattern recognition in search data
+                       - Correlation with actual health data
+                       - Predictive modeling of trends
+                    
+                    3. Pharmaceutical Efficacy Study (Statistical ML)
+                       - Treatment comparison using ML algorithms
+                       - Feature importance for drug effectiveness
+                       - Model validation techniques`,
+                    
+                    // Career & Industry
+                    'career path': `Data Science Career Path:
+                    
+                    Entry Level (0-2 years):
+                    • Data Analyst
+                    • Business Intelligence Analyst
+                    • Junior Data Scientist
+                    
+                    Mid Level (2-5 years):
+                    • Data Scientist
+                    • Machine Learning Engineer
+                    • Analytics Manager
+                    
+                    Senior Level (5+ years):
+                    • Senior Data Scientist
+                    • Lead ML Engineer
+                    • Director of Data Science
+                    • Chief Data Officer
+                    
+                    Skills Progression: Statistics → Programming → ML → Big Data → Leadership`,
+                    
+                    'interview questions': `Common Data Science Interview Questions:
+                    
+                    Technical:
+                    1. Explain bias-variance tradeoff
+                    2. Difference between supervised and unsupervised learning
+                    3. How to handle missing data?
+                    4. Explain regularization techniques
+                    5. What is cross-validation?
+                    
+                    Practical:
+                    1. Walk through a recent project
+                    2. How would you approach [business problem]?
+                    3. Explain your model selection process
+                    4. How do you validate model performance?
+                    
+                    Behavioral:
+                    1. Describe a challenging project
+                    2. How do you stay current with technologies?
+                    3. Experience with team collaboration`,
+                    
+                    'industry trends': `2024 Data Science Trends:
+                    
+                    1. Generative AI: ChatGPT, GPT-4, DALL-E applications
+                    2. MLOps: Machine learning operations and deployment
+                    3. AutoML: Automated machine learning platforms
+                    4. Explainable AI: Model interpretability and transparency
+                    5. Edge AI: ML on edge devices (IoT)
+                    6. Ethical AI: Fairness, accountability, transparency
+                    7. Data Mesh: Distributed data architecture
+                    8. Real-time Analytics: Streaming data processing`,
+                    
+                    // Tools & Technologies
+                    'tools': `Essential Data Science Tools:
+                    
+                    Programming:
+                    • Python: pandas, numpy, scikit-learn
+                    • R: tidyverse, ggplot2
+                    • SQL: PostgreSQL, MySQL
+                    
+                    Visualization:
+                    • Tableau, Power BI
+                    • D3.js, Plotly, Matplotlib
+                    
+                    Big Data:
+                    • Apache Spark, Hadoop
+                    • AWS (S3, EC2, Redshift)
+                    • Google Cloud Platform
+                    
+                    Development:
+                    • Git, Docker, Kubernetes
+                    • Jupyter, VS Code, PyCharm`,
+                    
+                    // Methodologies
+                    'methodology': `Data Science Methodology:
+                    
+                    1. Problem Definition: Understand business requirements
+                    2. Data Collection: Gather relevant data sources
+                    3. Data Preparation: Cleaning, transformation, feature engineering
+                    4. Exploratory Analysis: Understand patterns and relationships
+                    5. Modeling: Select and train machine learning models
+                    6. Evaluation: Validate model performance
+                    7. Deployment: Implement in production
+                    8. Monitoring: Track performance and maintain
+                    
+                    Iterative process with continuous improvement.`,
+                    
+                    // Quick Responses
+                    'hello': 'Hello! 👋 I\'m your Data Science assistant. Ask me about Ermias\' background, skills, projects, or any data science topics!',
+                    'hi': 'Hi there! How can I help you with data science or Ermias\' portfolio today?',
+                    'help': 'I can help with:\n• Ermias\' background and experience\n• Data science concepts and techniques\n• Project details and technologies\n• Career advice and industry trends\n• Technical skills and tools\n\nWhat would you like to know?',
+                    'thanks': 'You\'re welcome! Feel free to ask more questions about data science or the portfolio.',
+                    'bye': 'Goodbye! Feel free to return if you have more questions about data science or the portfolio.',
+                    
+                    // Common Questions
+                    'what can you do': 'I can explain data science concepts, discuss Ermias\' projects and skills, provide career advice, explain technical topics, and help you navigate the portfolio. What would you like to know?',
+                    'who are you': 'I\'m an AI assistant for Ermias\' data science portfolio. I can answer questions about data science topics, his professional experience, projects, and technical skills.',
+                    'how to learn data science': `Learning Data Science Path:
+                    
+                    1. Foundation: Statistics, Python, SQL
+                    2. Core Skills: Data visualization, ML basics, EDA
+                    3. Advanced Topics: Deep learning, big data, deployment
+                    4. Specialization: Choose a domain (NLP, CV, etc.)
+                    5. Projects: Build portfolio with real-world applications
+                    
+                    Recommended Resources: Coursera, Kaggle, Fast.ai, books, and practical projects.`,
+                    
+                    'salary': `Data Science Salaries (Canada):
+                    
+                    • Entry Level: $70,000 - $90,000
+                    • Mid Level: $90,000 - $130,000
+                    • Senior Level: $130,000 - $180,000
+                    • Lead/Manager: $150,000 - $250,000+
+                    
+                    Factors: Location, Industry, Experience, Education, Specialization`,
+                    
+                    'portfolio tips': `Building a Data Science Portfolio:
+                    
+                    1. Showcase Diverse Projects: ML, visualization, analysis
+                    2. Document Process: Problem → Approach → Solution → Results
+                    3. Code Quality: Clean, commented, reproducible code
+                    4. Visual Appeal: Professional presentation
+                    5. Business Impact: Quantify results and value
+                    6. Technical Depth: Show advanced skills
+                    7. Communication: Clear explanations for non-technical audience`,
+                    
+                    // Technical Details
+                    'pandas': `Pandas is Python's primary data manipulation library.
+                    
+                    Key Features:
+                    • DataFrames for tabular data
+                    • Data cleaning and preparation
+                    • Merging and joining datasets
+                    • Time series functionality
+                    • GroupBy operations
+                    • Missing data handling
+                    
+                    Essential for any data science workflow in Python.`,
+                    
+                    'numpy': `NumPy is the fundamental package for scientific computing in Python.
+                    
+                    Key Features:
+                    • N-dimensional arrays
+                    • Mathematical functions
+                    • Linear algebra operations
+                    • Random number generation
+                    • Broadcasting capabilities
+                    
+                    Foundation for pandas, scikit-learn, and other data science libraries.`,
+                    
+                    'scikit-learn': `Scikit-learn is Python's main machine learning library.
+                    
+                    Features:
+                    • Classification algorithms
+                    • Regression models
+                    • Clustering methods
+                    • Dimensionality reduction
+                    • Model selection tools
+                    • Preprocessing utilities
+                    
+                    Well-documented and widely used in industry.`,
+                    
+                    'tensorflow': `TensorFlow is Google's open-source deep learning framework.
+                    
+                    Applications:
+                    • Neural networks
+                    • Computer vision
+                    • Natural language processing
+                    • Reinforcement learning
+                    • Production deployment
+                    
+                    Used for both research and production applications.`,
+                    
+                    'tableau': `Tableau is a leading data visualization tool.
+                    
+                    Features:
+                    • Drag-and-drop interface
+                    • Interactive dashboards
+                    • Real-time data connection
+                    • Advanced calculations
+                    • Mobile compatibility
+                    • Collaboration features
+                    
+                    Widely used in business intelligence and analytics.`,
+                    
+                    // Industry Applications
+                    'healthcare data science': `Data Science in Healthcare:
+                    
+                    Applications:
+                    1. Predictive Analytics: Disease outbreak prediction
+                    2. Medical Imaging: AI-assisted diagnosis
+                    3. Drug Discovery: ML for pharmaceutical research
+                    4. Patient Monitoring: Wearable data analysis
+                    5. Operational Efficiency: Hospital resource optimization
+                    
+                    Ermias' projects: Health search trends analysis, mental health risk indicators`,
+                    
+                    'finance data science': `Data Science in Finance:
+                    
+                    Applications:
+                    1. Algorithmic Trading: Predictive models for markets
+                    2. Risk Management: Credit scoring and fraud detection
+                    3. Customer Analytics: Personalization and churn prediction
+                    4. Regulatory Compliance: Anomaly detection
+                    5. Portfolio Optimization: ML for investment strategies`,
+                    
+                    'retail data science': `Data Science in Retail:
+                    
+                    Applications:
+                    1. Recommendation Systems: Product suggestions
+                    2. Demand Forecasting: Inventory optimization
+                    3. Price Optimization: Dynamic pricing models
+                    4. Customer Segmentation: Targeted marketing
+                    5. Supply Chain Optimization: Logistics and delivery`,
+                    
+                    // Advanced Topics
+                    'nlp': `Natural Language Processing (NLP):
+                    
+                    Applications:
+                    • Sentiment analysis
+                    • Text classification
+                    • Named entity recognition
+                    • Machine translation
+                    • Chatbots and virtual assistants
+                    • Text summarization
+                    
+                    Libraries: NLTK, spaCy, Transformers, BERT, GPT models`,
+                    
+                    'computer vision': `Computer Vision:
+                    
+                    Applications:
+                    • Image classification
+                    • Object detection
+                    • Facial recognition
+                    • Medical imaging
+                    • Autonomous vehicles
+                    • Quality inspection
+                    
+                    Libraries: OpenCV, TensorFlow, PyTorch, YOLO, ResNet`,
+                    
+                    'time series': `Time Series Analysis:
+                    
+                    Applications:
+                    • Stock price prediction
+                    • Weather forecasting
+                    • Sales forecasting
+                    • Energy consumption
+                    • Web traffic analysis
+                    
+                    Techniques: ARIMA, Prophet, LSTM networks, moving averages`,
+                    
+                    'recommendation systems': `Recommendation Systems:
+                    
+                    Types:
+                    1. Collaborative Filtering: User-item interactions
+                    2. Content-Based: Item features and attributes
+                    3. Hybrid: Combination of multiple approaches
+                    
+                    Used by: Netflix, Amazon, Spotify, YouTube
+                    
+                    Algorithms: Matrix factorization, neural networks, similarity measures`
+                };
                     this.commonQuestions = {
                         'hi': 'Hello! I\'m your Data Science assistant. How can I help you today?',
                         'hello': 'Hello! Feel free to ask about data science topics or Ermias\' portfolio.',

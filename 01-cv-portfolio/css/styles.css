@@ -1219,8 +1219,8 @@ footer .copyright {
 /* === AI Chatbot Styles === */
 .chatbot-wrapper {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 70px;
+    right: 22px;
     z-index: 1000;
 }
 
@@ -2009,7 +2009,7 @@ html {
         width: 60px;
         height: 60px;
         font-size: 1.3rem;
-        bottom: 20px;
+        bottom: 60px;
         right: 20px;
     }
     
