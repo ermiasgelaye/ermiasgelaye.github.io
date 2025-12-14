@@ -1,2101 +1,1569 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
 <head>
-  ​
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  ​
-  <title>Data Page</title>
-  ​
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pharmaceutical Data | Complete Dataset</title>
+    
+    <!-- Bootstrap 4 & Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #000000;
+            --background-color: #f8f9fa;
+            --text-color: #212529;
+            --heading-font: 'Poppins', sans-serif;
+            --body-font: 'Inter', sans-serif;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-  <link rel="stylesheet" type="text/css" href="style.css">
-  ​
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--body-font);
+            font-size: 16px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-top: 76px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        h1 { 
+            font-size: 2.5rem; 
+            color: var(--primary-color); 
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #0056b3);
+            border-radius: 2px;
+        }
+
+        /* Modern Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            padding: 0.75rem 0 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            min-height: 60px !important;
+            height: 60px !important;
+        }
+
+        .navbar .container {
+            padding: 0 15px;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-size: 1.4rem !important;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 !important;
+            margin-right: 1rem !important;
+        }
+
+        .navbar-brand i {
+            font-size: 1.5rem !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.25rem !important;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-toggler {
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            padding: 0.25rem 0.5rem !important;
+        }
+
+        .dropdown-menu {
+            background: white;
+            border: none;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            margin-top: 0.5rem !important;
+        }
+
+        .dropdown-item {
+            color: var(--text-color);
+            padding: 0.5rem 1.25rem !important;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Main Content */
+        .container.main-content {
+            padding: 40px 15px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Data Header */
+        .data-header {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .data-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Data Stats Cards */
+        .data-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Data Table Container */
+        .data-table-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        /* Enhanced Table Styling */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .data-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        .data-table th i {
+            margin-left: 5px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .data-table th i:hover {
+            opacity: 1;
+        }
+
+        .data-table tbody tr {
+            border-bottom: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.002);
+        }
+
+        .data-table td {
+            padding: 0.75rem 1rem;
+            border: none;
+            vertical-align: middle;
+        }
+
+        /* Treatment-specific coloring */
+        .treatment-cell.capomulin { background-color: #e8f4fd; }
+        .treatment-cell.ramicane { background-color: #f0f9ff; }
+        .treatment-cell.infubinol { background-color: #fff0f0; }
+        .treatment-cell.ketapril { background-color: #fff8e1; }
+        .treatment-cell.placebo { background-color: #f5f5f5; }
+        .treatment-cell.ceftamin { background-color: #f0f9f0; }
+        .treatment-cell.stelasyn { background-color: #f9f0ff; }
+        .treatment-cell.zoniferol { background-color: #fff0f9; }
+        .treatment-cell.naftisol { background-color: #f0f9ff; }
+        .treatment-cell.propriva { background-color: #f9f9f0; }
+
+        .gender-cell {
+            font-weight: 600;
+        }
+        .gender-cell.male { color: #2196F3; }
+        .gender-cell.female { color: #E91E63; }
+
+        /* Pagination */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .page-info {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .pagination .page-link {
+            color: var(--primary-color);
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .pagination .page-link:hover {
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+
+        /* Data Export */
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .export-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .export-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p.mb-2 {
+            font-size: 0.95rem;
+        }
+
+        .footer p.mb-3 {
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .back-to-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.6rem 1.25rem;
+            border-radius: 24px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-to-main:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 8px 15px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Chatbot Styles */
+        .chatbot-wrapper {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-toggle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), #0056b3);
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.08);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        .chatbot-container {
+            position: absolute;
+            bottom: 65px;
+            right: 0;
+            width: 320px;
+            height: 450px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .chatbot-container.active {
+            display: flex;
+            animation: slideInUp 0.3s ease;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chatbot-header {
+            padding: 1rem 1.25rem;
+            background: linear-gradient(135deg, var(--primary-color), #0056b3);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chatbot-header h5 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .close-chatbot {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .chatbot-body {
+            flex: 1;
+            padding: 1.25rem;
+            overflow-y: auto;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .chat-message {
+            max-width: 85%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bot-message .message-content {
+            background: white;
+            color: var(--text-color);
+            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 4px;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .chatbot-footer {
+            padding: 0.875rem;
+            border-top: 1px solid #e9ecef;
+            background: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+
+            .navbar {
+                min-height: 56px !important;
+                height: 56px !important;
+                padding: 0.5rem 0 !important;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem !important;
+            }
+
+            .container.main-content {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .data-header {
+                padding: 1.5rem;
+            }
+
+            .table-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .data-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .data-table th, 
+            .data-table td {
+                white-space: nowrap;
+                padding: 0.5rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .chatbot-container {
+                width: calc(100vw - 40px) !important;
+                right: 20px;
+                bottom: 60px !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .data-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .export-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .export-btn {
+                justify-content: center;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .navbar, 
+            .search-box, 
+            .export-buttons,
+            .pagination-container,
+            .back-to-main,
+            .chatbot-wrapper {
+                display: none !important;
+            }
+
+            .data-table-container {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .data-table {
+                font-size: 12px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 4px 6px;
+            }
+        }
+    </style>
 </head>
-​
 
 <body>
-  <!-- Start of navbar -->
-  <div class="navigation">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="index.html">Pharmaceutical</a>
-      <button class="navbar-toggler border" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      ​
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink" role="button"
-              aria-haspopup="true" aria-expanded="false">Plots</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="Pan_mice_per_treat.html">Number of Mice per Treatments</a>
-              <a class="dropdown-item" href="linear_regression.html">Regreression Plot Mouse Weight Vs. Averaje Tumor
-                Volume</a>
-              <a class="dropdown-item" href="box_plot.html">Tumer Volume at Selected Mouse</a>
-              <a class="dropdown-item" href="pi_pandas.html">Male Vs. Female Mouse Population</a>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-pills"></i>
+                Pharmaceutical Analysis
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home mr-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="visualizationsDropdown" data-toggle="dropdown">
+                            <i class="fas fa-chart-line mr-1"></i>Visualizations
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="index.html#Pan_mice_per_treat">
+                                <i class="fas fa-mouse mr-2"></i>Treatment Distribution
+                            </a>
+                            <a class="dropdown-item" href="index.html#linear_regression">
+                                <i class="fas fa-chart-line mr-2"></i>Regression Analysis
+                            </a>
+                            <a class="dropdown-item" href="index.html#box_plot">
+                                <i class="fas fa-chart-bar mr-2"></i>Tumor Volume Analysis
+                            </a>
+                            <a class="dropdown-item" href="index.html#pi_pandas">
+                                <i class="fas fa-venus-mars mr-2"></i>Gender Distribution
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="data.html">
+                            <i class="fas fa-database mr-1"></i>Data
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">
+                            <i class="fas fa-chart-line mr-1"></i>Main Portfolio
+                        </a>
+                    </li>
+                </ul>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="data.html">Data</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../index.html">My Page</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-  <!-- End of navbar -->
-  <br>
-  <br>
-  <!-- Start of container -->
-  <div class="container">
-    <section class="row">
-      <div>
-        <div class="description-content">
-          <h1 class="description-header">Data</h1>
-          <hr>
-          <a>The following table includes all of the data used for plotting during this project.</a>
-          <br>
-          <div>
-          <table class="js-csv-data csv-data js-file-line-container">
-            <thead>
-              <tr id="LC1" class="js-file-line">
-                <td id="L1" class="blob-num js-line-number" data-line-number="1"></td>
-                <th>Mouse ID</th>
-                <th>Drug Regimen</th>
-                <th>Sex</th>
-                <th>Age_months</th>
-                <th>Weight (g)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id="LC2" class="js-file-line">
-                <td id="L2" class="blob-num js-line-number" data-line-number="2"></td>
-                <td>k403</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>21</td>
-                <td>16</td>
-              </tr>
-              <tr id="LC3" class="js-file-line">
-                <td id="L3" class="blob-num js-line-number" data-line-number="3"></td>
-                <td>s185</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>3</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC4" class="js-file-line">
-                <td id="L4" class="blob-num js-line-number" data-line-number="4"></td>
-                <td>x401</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>16</td>
-                <td>15</td>
-              </tr>
-              <tr id="LC5" class="js-file-line">
-                <td id="L5" class="blob-num js-line-number" data-line-number="5"></td>
-                <td>m601</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>22</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC6" class="js-file-line">
-                <td id="L6" class="blob-num js-line-number" data-line-number="6"></td>
-                <td>g791</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>11</td>
-                <td>16</td>
-              </tr>
-              <tr id="LC7" class="js-file-line">
-                <td id="L7" class="blob-num js-line-number" data-line-number="7"></td>
-                <td>s508</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>1</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC8" class="js-file-line">
-                <td id="L8" class="blob-num js-line-number" data-line-number="8"></td>
-                <td>f966</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>16</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC9" class="js-file-line">
-                <td id="L9" class="blob-num js-line-number" data-line-number="9"></td>
-                <td>m546</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>18</td>
-                <td>16</td>
-              </tr>
-              <tr id="LC10" class="js-file-line">
-                <td id="L10" class="blob-num js-line-number" data-line-number="10"></td>
-                <td>z578</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>11</td>
-                <td>16</td>
-              </tr>
-              <tr id="LC11" class="js-file-line">
-                <td id="L11" class="blob-num js-line-number" data-line-number="11"></td>
-                <td>j913</td>
-                <td>Ramicane</td>
-                <td>Female</td>
-                <td>4</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC12" class="js-file-line">
-                <td id="L12" class="blob-num js-line-number" data-line-number="12"></td>
-                <td>u364</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>18</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC13" class="js-file-line">
-                <td id="L13" class="blob-num js-line-number" data-line-number="13"></td>
-                <td>n364</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>4</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC14" class="js-file-line">
-                <td id="L14" class="blob-num js-line-number" data-line-number="14"></td>
-                <td>y793</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>17</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC15" class="js-file-line">
-                <td id="L15" class="blob-num js-line-number" data-line-number="15"></td>
-                <td>r554</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>8</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC16" class="js-file-line">
-                <td id="L16" class="blob-num js-line-number" data-line-number="16"></td>
-                <td>m957</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>3</td>
-                <td>19</td>
-              </tr>
-              <tr id="LC17" class="js-file-line">
-                <td id="L17" class="blob-num js-line-number" data-line-number="17"></td>
-                <td>c758</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>9</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC18" class="js-file-line">
-                <td id="L18" class="blob-num js-line-number" data-line-number="18"></td>
-                <td>t565</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>20</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC19" class="js-file-line">
-                <td id="L19" class="blob-num js-line-number" data-line-number="19"></td>
-                <td>a644</td>
-                <td>Ramicane</td>
-                <td>Female</td>
-                <td>7</td>
-                <td>17</td>
-              </tr>
-              <tr id="LC20" class="js-file-line">
-                <td id="L20" class="blob-num js-line-number" data-line-number="20"></td>
-                <td>i177</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>10</td>
-                <td>18</td>
-              </tr>
-              <tr id="LC21" class="js-file-line">
-                <td id="L21" class="blob-num js-line-number" data-line-number="21"></td>
-                <td>j989</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>8</td>
-                <td>19</td>
-              </tr>
-              <tr id="LC22" class="js-file-line">
-                <td id="L22" class="blob-num js-line-number" data-line-number="22"></td>
-                <td>i738</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>23</td>
-                <td>20</td>
-              </tr>
-              <tr id="LC23" class="js-file-line">
-                <td id="L23" class="blob-num js-line-number" data-line-number="23"></td>
-                <td>a520</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>13</td>
-                <td>21</td>
-              </tr>
-              <tr id="LC24" class="js-file-line">
-                <td id="L24" class="blob-num js-line-number" data-line-number="24"></td>
-                <td>w914</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>24</td>
-                <td>21</td>
-              </tr>
-              <tr id="LC25" class="js-file-line">
-                <td id="L25" class="blob-num js-line-number" data-line-number="25"></td>
-                <td>r811</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>9</td>
-                <td>19</td>
-              </tr>
-              <tr id="LC26" class="js-file-line">
-                <td id="L26" class="blob-num js-line-number" data-line-number="26"></td>
-                <td>g288</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>3</td>
-                <td>19</td>
-              </tr>
-              <tr id="LC27" class="js-file-line">
-                <td id="L27" class="blob-num js-line-number" data-line-number="27"></td>
-                <td>i334</td>
-                <td>Ramicane</td>
-                <td>Female</td>
-                <td>8</td>
-                <td>20</td>
-              </tr>
-              <tr id="LC28" class="js-file-line">
-                <td id="L28" class="blob-num js-line-number" data-line-number="28"></td>
-                <td>q610</td>
-                <td>Ramicane</td>
-                <td>Female</td>
-                <td>18</td>
-                <td>21</td>
-              </tr>
-              <tr id="LC29" class="js-file-line">
-                <td id="L29" class="blob-num js-line-number" data-line-number="29"></td>
-                <td>d251</td>
-                <td>Ramicane</td>
-                <td>Female</td>
-                <td>8</td>
-                <td>19</td>
-              </tr>
-              <tr id="LC30" class="js-file-line">
-                <td id="L30" class="blob-num js-line-number" data-line-number="30"></td>
-                <td>l897</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>17</td>
-                <td>19</td>
-              </tr>
-              <tr id="LC31" class="js-file-line">
-                <td id="L31" class="blob-num js-line-number" data-line-number="31"></td>
-                <td>c458</td>
-                <td>Ramicane</td>
-                <td>Female</td>
-                <td>23</td>
-                <td>20</td>
-              </tr>
-              <tr id="LC32" class="js-file-line">
-                <td id="L32" class="blob-num js-line-number" data-line-number="32"></td>
-                <td>b742</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>7</td>
-                <td>21</td>
-              </tr>
-              <tr id="LC33" class="js-file-line">
-                <td id="L33" class="blob-num js-line-number" data-line-number="33"></td>
-                <td>b128</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>9</td>
-                <td>22</td>
-              </tr>
-              <tr id="LC34" class="js-file-line">
-                <td id="L34" class="blob-num js-line-number" data-line-number="34"></td>
-                <td>j246</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>21</td>
-                <td>21</td>
-              </tr>
-              <tr id="LC35" class="js-file-line">
-                <td id="L35" class="blob-num js-line-number" data-line-number="35"></td>
-                <td>a411</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>3</td>
-                <td>22</td>
-              </tr>
-              <tr id="LC36" class="js-file-line">
-                <td id="L36" class="blob-num js-line-number" data-line-number="36"></td>
-                <td>j119</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>7</td>
-                <td>23</td>
-              </tr>
-              <tr id="LC37" class="js-file-line">
-                <td id="L37" class="blob-num js-line-number" data-line-number="37"></td>
-                <td>w150</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>23</td>
-                <td>23</td>
-              </tr>
-              <tr id="LC38" class="js-file-line">
-                <td id="L38" class="blob-num js-line-number" data-line-number="38"></td>
-                <td>v923</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>19</td>
-                <td>21</td>
-              </tr>
-              <tr id="LC39" class="js-file-line">
-                <td id="L39" class="blob-num js-line-number" data-line-number="39"></td>
-                <td>g316</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>22</td>
-                <td>22</td>
-              </tr>
-              <tr id="LC40" class="js-file-line">
-                <td id="L40" class="blob-num js-line-number" data-line-number="40"></td>
-                <td>s710</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>1</td>
-                <td>23</td>
-              </tr>
-              <tr id="LC41" class="js-file-line">
-                <td id="L41" class="blob-num js-line-number" data-line-number="41"></td>
-                <td>l509</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>17</td>
-                <td>21</td>
-              </tr>
-              <tr id="LC42" class="js-file-line">
-                <td id="L42" class="blob-num js-line-number" data-line-number="42"></td>
-                <td>r944</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>12</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC43" class="js-file-line">
-                <td id="L43" class="blob-num js-line-number" data-line-number="43"></td>
-                <td>e662</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>8</td>
-                <td>24</td>
-              </tr>
-              <tr id="LC44" class="js-file-line">
-                <td id="L44" class="blob-num js-line-number" data-line-number="44"></td>
-                <td>u196</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>18</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC45" class="js-file-line">
-                <td id="L45" class="blob-num js-line-number" data-line-number="45"></td>
-                <td>q597</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>20</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC46" class="js-file-line">
-                <td id="L46" class="blob-num js-line-number" data-line-number="46"></td>
-                <td>a444</td>
-                <td>Ramicane</td>
-                <td>Female</td>
-                <td>10</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC47" class="js-file-line">
-                <td id="L47" class="blob-num js-line-number" data-line-number="47"></td>
-                <td>i557</td>
-                <td>Capomulin</td>
-                <td>Female</td>
-                <td>1</td>
-                <td>24</td>
-              </tr>
-              <tr id="LC48" class="js-file-line">
-                <td id="L48" class="blob-num js-line-number" data-line-number="48"></td>
-                <td>r921</td>
-                <td>Ramicane</td>
-                <td>Female</td>
-                <td>5</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC49" class="js-file-line">
-                <td id="L49" class="blob-num js-line-number" data-line-number="49"></td>
-                <td>w678</td>
-                <td>Ramicane</td>
-                <td>Female</td>
-                <td>5</td>
-                <td>24</td>
-              </tr>
-              <tr id="LC50" class="js-file-line">
-                <td id="L50" class="blob-num js-line-number" data-line-number="50"></td>
-                <td>y449</td>
-                <td>Ramicane</td>
-                <td>Male</td>
-                <td>19</td>
-                <td>24</td>
-              </tr>
-              <tr id="LC51" class="js-file-line">
-                <td id="L51" class="blob-num js-line-number" data-line-number="51"></td>
-                <td>a203</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>20</td>
-                <td>23</td>
-              </tr>
-              <tr id="LC52" class="js-file-line">
-                <td id="L52" class="blob-num js-line-number" data-line-number="52"></td>
-                <td>a251</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>21</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC53" class="js-file-line">
-                <td id="L53" class="blob-num js-line-number" data-line-number="53"></td>
-                <td>a262</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>17</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC54" class="js-file-line">
-                <td id="L54" class="blob-num js-line-number" data-line-number="54"></td>
-                <td>a275</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>20</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC55" class="js-file-line">
-                <td id="L55" class="blob-num js-line-number" data-line-number="55"></td>
-                <td>a366</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>16</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC56" class="js-file-line">
-                <td id="L56" class="blob-num js-line-number" data-line-number="56"></td>
-                <td>a401</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>8</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC57" class="js-file-line">
-                <td id="L57" class="blob-num js-line-number" data-line-number="57"></td>
-                <td>a457</td>
-                <td>Ketapril</td>
-                <td>Female</td>
-                <td>11</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC58" class="js-file-line">
-                <td id="L58" class="blob-num js-line-number" data-line-number="58"></td>
-                <td>a492</td>
-                <td>Stelasyn</td>
-                <td>Male</td>
-                <td>20</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC59" class="js-file-line">
-                <td id="L59" class="blob-num js-line-number" data-line-number="59"></td>
-                <td>a577</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>6</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC60" class="js-file-line">
-                <td id="L60" class="blob-num js-line-number" data-line-number="60"></td>
-                <td>a685</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>8</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC61" class="js-file-line">
-                <td id="L61" class="blob-num js-line-number" data-line-number="61"></td>
-                <td>a699</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>5</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC62" class="js-file-line">
-                <td id="L62" class="blob-num js-line-number" data-line-number="62"></td>
-                <td>a788</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>5</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC63" class="js-file-line">
-                <td id="L63" class="blob-num js-line-number" data-line-number="63"></td>
-                <td>a818</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>12</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC64" class="js-file-line">
-                <td id="L64" class="blob-num js-line-number" data-line-number="64"></td>
-                <td>a897</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>7</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC65" class="js-file-line">
-                <td id="L65" class="blob-num js-line-number" data-line-number="65"></td>
-                <td>a963</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>23</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC66" class="js-file-line">
-                <td id="L66" class="blob-num js-line-number" data-line-number="66"></td>
-                <td>b313</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>12</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC67" class="js-file-line">
-                <td id="L67" class="blob-num js-line-number" data-line-number="67"></td>
-                <td>b447</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>2</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC68" class="js-file-line">
-                <td id="L68" class="blob-num js-line-number" data-line-number="68"></td>
-                <td>b487</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>6</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC69" class="js-file-line">
-                <td id="L69" class="blob-num js-line-number" data-line-number="69"></td>
-                <td>b559</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>20</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC70" class="js-file-line">
-                <td id="L70" class="blob-num js-line-number" data-line-number="70"></td>
-                <td>b759</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>12</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC71" class="js-file-line">
-                <td id="L71" class="blob-num js-line-number" data-line-number="71"></td>
-                <td>b879</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>4</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC72" class="js-file-line">
-                <td id="L72" class="blob-num js-line-number" data-line-number="72"></td>
-                <td>c139</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>11</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC73" class="js-file-line">
-                <td id="L73" class="blob-num js-line-number" data-line-number="73"></td>
-                <td>c264</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>11</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC74" class="js-file-line">
-                <td id="L74" class="blob-num js-line-number" data-line-number="74"></td>
-                <td>c282</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>12</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC75" class="js-file-line">
-                <td id="L75" class="blob-num js-line-number" data-line-number="75"></td>
-                <td>c302</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>10</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC76" class="js-file-line">
-                <td id="L76" class="blob-num js-line-number" data-line-number="76"></td>
-                <td>c326</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>18</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC77" class="js-file-line">
-                <td id="L77" class="blob-num js-line-number" data-line-number="77"></td>
-                <td>c402</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>1</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC78" class="js-file-line">
-                <td id="L78" class="blob-num js-line-number" data-line-number="78"></td>
-                <td>c559</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>19</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC79" class="js-file-line">
-                <td id="L79" class="blob-num js-line-number" data-line-number="79"></td>
-                <td>c580</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>22</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC80" class="js-file-line">
-                <td id="L80" class="blob-num js-line-number" data-line-number="80"></td>
-                <td>c757</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>9</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC81" class="js-file-line">
-                <td id="L81" class="blob-num js-line-number" data-line-number="81"></td>
-                <td>c766</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>13</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC82" class="js-file-line">
-                <td id="L82" class="blob-num js-line-number" data-line-number="82"></td>
-                <td>c819</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>21</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC83" class="js-file-line">
-                <td id="L83" class="blob-num js-line-number" data-line-number="83"></td>
-                <td>c832</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>18</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC84" class="js-file-line">
-                <td id="L84" class="blob-num js-line-number" data-line-number="84"></td>
-                <td>c895</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>7</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC85" class="js-file-line">
-                <td id="L85" class="blob-num js-line-number" data-line-number="85"></td>
-                <td>c927</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>4</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC86" class="js-file-line">
-                <td id="L86" class="blob-num js-line-number" data-line-number="86"></td>
-                <td>d133</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>5</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC87" class="js-file-line">
-                <td id="L87" class="blob-num js-line-number" data-line-number="87"></td>
-                <td>d164</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>21</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC88" class="js-file-line">
-                <td id="L88" class="blob-num js-line-number" data-line-number="88"></td>
-                <td>d474</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>18</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC89" class="js-file-line">
-                <td id="L89" class="blob-num js-line-number" data-line-number="89"></td>
-                <td>e213</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>8</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC90" class="js-file-line">
-                <td id="L90" class="blob-num js-line-number" data-line-number="90"></td>
-                <td>e227</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>1</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC91" class="js-file-line">
-                <td id="L91" class="blob-num js-line-number" data-line-number="91"></td>
-                <td>e291</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>14</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC92" class="js-file-line">
-                <td id="L92" class="blob-num js-line-number" data-line-number="92"></td>
-                <td>e476</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>23</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC93" class="js-file-line">
-                <td id="L93" class="blob-num js-line-number" data-line-number="93"></td>
-                <td>e584</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>9</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC94" class="js-file-line">
-                <td id="L94" class="blob-num js-line-number" data-line-number="94"></td>
-                <td>f129</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>11</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC95" class="js-file-line">
-                <td id="L95" class="blob-num js-line-number" data-line-number="95"></td>
-                <td>f234</td>
-                <td>Stelasyn</td>
-                <td>Male</td>
-                <td>14</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC96" class="js-file-line">
-                <td id="L96" class="blob-num js-line-number" data-line-number="96"></td>
-                <td>f278</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>12</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC97" class="js-file-line">
-                <td id="L97" class="blob-num js-line-number" data-line-number="97"></td>
-                <td>f345</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>23</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC98" class="js-file-line">
-                <td id="L98" class="blob-num js-line-number" data-line-number="98"></td>
-                <td>f394</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>19</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC99" class="js-file-line">
-                <td id="L99" class="blob-num js-line-number" data-line-number="99"></td>
-                <td>f436</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>3</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC100" class="js-file-line">
-                <td id="L100" class="blob-num js-line-number" data-line-number="100"></td>
-                <td>f545</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>20</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC101" class="js-file-line">
-                <td id="L101" class="blob-num js-line-number" data-line-number="101"></td>
-                <td>f932</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>15</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC102" class="js-file-line">
-                <td id="L102" class="blob-num js-line-number" data-line-number="102"></td>
-                <td>f993</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>21</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC103" class="js-file-line">
-                <td id="L103" class="blob-num js-line-number" data-line-number="103"></td>
-                <td>g107</td>
-                <td>Ketapril</td>
-                <td>Female</td>
-                <td>2</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC104" class="js-file-line">
-                <td id="L104" class="blob-num js-line-number" data-line-number="104"></td>
-                <td>g296</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>14</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC105" class="js-file-line">
-                <td id="L105" class="blob-num js-line-number" data-line-number="105"></td>
-                <td>g497</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>19</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC106" class="js-file-line">
-                <td id="L106" class="blob-num js-line-number" data-line-number="106"></td>
-                <td>g558</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>8</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC107" class="js-file-line">
-                <td id="L107" class="blob-num js-line-number" data-line-number="107"></td>
-                <td>g570</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>16</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC108" class="js-file-line">
-                <td id="L108" class="blob-num js-line-number" data-line-number="108"></td>
-                <td>g867</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>9</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC109" class="js-file-line">
-                <td id="L109" class="blob-num js-line-number" data-line-number="109"></td>
-                <td>g989</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>21</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC110" class="js-file-line">
-                <td id="L110" class="blob-num js-line-number" data-line-number="110"></td>
-                <td>h246</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>13</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC111" class="js-file-line">
-                <td id="L111" class="blob-num js-line-number" data-line-number="111"></td>
-                <td>h333</td>
-                <td>Stelasyn</td>
-                <td>Male</td>
-                <td>21</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC112" class="js-file-line">
-                <td id="L112" class="blob-num js-line-number" data-line-number="112"></td>
-                <td>h428</td>
-                <td>Ketapril</td>
-                <td>Female</td>
-                <td>1</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC113" class="js-file-line">
-                <td id="L113" class="blob-num js-line-number" data-line-number="113"></td>
-                <td>h531</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>5</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC114" class="js-file-line">
-                <td id="L114" class="blob-num js-line-number" data-line-number="114"></td>
-                <td>i386</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>23</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC115" class="js-file-line">
-                <td id="L115" class="blob-num js-line-number" data-line-number="115"></td>
-                <td>i477</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>3</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC116" class="js-file-line">
-                <td id="L116" class="blob-num js-line-number" data-line-number="116"></td>
-                <td>i635</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>21</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC117" class="js-file-line">
-                <td id="L117" class="blob-num js-line-number" data-line-number="117"></td>
-                <td>i669</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>18</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC118" class="js-file-line">
-                <td id="L118" class="blob-num js-line-number" data-line-number="118"></td>
-                <td>i901</td>
-                <td>Stelasyn</td>
-                <td>Male</td>
-                <td>23</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC119" class="js-file-line">
-                <td id="L119" class="blob-num js-line-number" data-line-number="119"></td>
-                <td>j235</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>6</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC120" class="js-file-line">
-                <td id="L120" class="blob-num js-line-number" data-line-number="120"></td>
-                <td>j296</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>24</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC121" class="js-file-line">
-                <td id="L121" class="blob-num js-line-number" data-line-number="121"></td>
-                <td>j365</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>24</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC122" class="js-file-line">
-                <td id="L122" class="blob-num js-line-number" data-line-number="122"></td>
-                <td>j755</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>23</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC123" class="js-file-line">
-                <td id="L123" class="blob-num js-line-number" data-line-number="123"></td>
-                <td>j984</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>2</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC124" class="js-file-line">
-                <td id="L124" class="blob-num js-line-number" data-line-number="124"></td>
-                <td>k210</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>15</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC125" class="js-file-line">
-                <td id="L125" class="blob-num js-line-number" data-line-number="125"></td>
-                <td>k382</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>22</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC126" class="js-file-line">
-                <td id="L126" class="blob-num js-line-number" data-line-number="126"></td>
-                <td>k483</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>20</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC127" class="js-file-line">
-                <td id="L127" class="blob-num js-line-number" data-line-number="127"></td>
-                <td>k510</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>8</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC128" class="js-file-line">
-                <td id="L128" class="blob-num js-line-number" data-line-number="128"></td>
-                <td>k603</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>2</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC129" class="js-file-line">
-                <td id="L129" class="blob-num js-line-number" data-line-number="129"></td>
-                <td>k754</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>8</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC130" class="js-file-line">
-                <td id="L130" class="blob-num js-line-number" data-line-number="130"></td>
-                <td>k804</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>23</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC131" class="js-file-line">
-                <td id="L131" class="blob-num js-line-number" data-line-number="131"></td>
-                <td>k862</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>13</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC132" class="js-file-line">
-                <td id="L132" class="blob-num js-line-number" data-line-number="132"></td>
-                <td>k894</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>13</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC133" class="js-file-line">
-                <td id="L133" class="blob-num js-line-number" data-line-number="133"></td>
-                <td>l215</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>10</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC134" class="js-file-line">
-                <td id="L134" class="blob-num js-line-number" data-line-number="134"></td>
-                <td>l264</td>
-                <td>Ketapril</td>
-                <td>Female</td>
-                <td>15</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC135" class="js-file-line">
-                <td id="L135" class="blob-num js-line-number" data-line-number="135"></td>
-                <td>l471</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>7</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC136" class="js-file-line">
-                <td id="L136" class="blob-num js-line-number" data-line-number="136"></td>
-                <td>l490</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>24</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC137" class="js-file-line">
-                <td id="L137" class="blob-num js-line-number" data-line-number="137"></td>
-                <td>l558</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>13</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC138" class="js-file-line">
-                <td id="L138" class="blob-num js-line-number" data-line-number="138"></td>
-                <td>l661</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>18</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC139" class="js-file-line">
-                <td id="L139" class="blob-num js-line-number" data-line-number="139"></td>
-                <td>l700</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>18</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC140" class="js-file-line">
-                <td id="L140" class="blob-num js-line-number" data-line-number="140"></td>
-                <td>l725</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>8</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC141" class="js-file-line">
-                <td id="L141" class="blob-num js-line-number" data-line-number="141"></td>
-                <td>l733</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>4</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC142" class="js-file-line">
-                <td id="L142" class="blob-num js-line-number" data-line-number="142"></td>
-                <td>l872</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>19</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC143" class="js-file-line">
-                <td id="L143" class="blob-num js-line-number" data-line-number="143"></td>
-                <td>m133</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>2</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC144" class="js-file-line">
-                <td id="L144" class="blob-num js-line-number" data-line-number="144"></td>
-                <td>m269</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>22</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC145" class="js-file-line">
-                <td id="L145" class="blob-num js-line-number" data-line-number="145"></td>
-                <td>m331</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>19</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC146" class="js-file-line">
-                <td id="L146" class="blob-num js-line-number" data-line-number="146"></td>
-                <td>m550</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>18</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC147" class="js-file-line">
-                <td id="L147" class="blob-num js-line-number" data-line-number="147"></td>
-                <td>m650</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>15</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC148" class="js-file-line">
-                <td id="L148" class="blob-num js-line-number" data-line-number="148"></td>
-                <td>m756</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>19</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC149" class="js-file-line">
-                <td id="L149" class="blob-num js-line-number" data-line-number="149"></td>
-                <td>n304</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>9</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC150" class="js-file-line">
-                <td id="L150" class="blob-num js-line-number" data-line-number="150"></td>
-                <td>n482</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>4</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC151" class="js-file-line">
-                <td id="L151" class="blob-num js-line-number" data-line-number="151"></td>
-                <td>n630</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>15</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC152" class="js-file-line">
-                <td id="L152" class="blob-num js-line-number" data-line-number="152"></td>
-                <td>n671</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>18</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC153" class="js-file-line">
-                <td id="L153" class="blob-num js-line-number" data-line-number="153"></td>
-                <td>n678</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>5</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC154" class="js-file-line">
-                <td id="L154" class="blob-num js-line-number" data-line-number="154"></td>
-                <td>n763</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>16</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC155" class="js-file-line">
-                <td id="L155" class="blob-num js-line-number" data-line-number="155"></td>
-                <td>n923</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>19</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC156" class="js-file-line">
-                <td id="L156" class="blob-num js-line-number" data-line-number="156"></td>
-                <td>n967</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>11</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC157" class="js-file-line">
-                <td id="L157" class="blob-num js-line-number" data-line-number="157"></td>
-                <td>o287</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>2</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC158" class="js-file-line">
-                <td id="L158" class="blob-num js-line-number" data-line-number="158"></td>
-                <td>o302</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>2</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC159" class="js-file-line">
-                <td id="L159" class="blob-num js-line-number" data-line-number="159"></td>
-                <td>o331</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>24</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC160" class="js-file-line">
-                <td id="L160" class="blob-num js-line-number" data-line-number="160"></td>
-                <td>o523</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>6</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC161" class="js-file-line">
-                <td id="L161" class="blob-num js-line-number" data-line-number="161"></td>
-                <td>o562</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>4</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC162" class="js-file-line">
-                <td id="L162" class="blob-num js-line-number" data-line-number="162"></td>
-                <td>o725</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>4</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC163" class="js-file-line">
-                <td id="L163" class="blob-num js-line-number" data-line-number="163"></td>
-                <td>o795</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>20</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC164" class="js-file-line">
-                <td id="L164" class="blob-num js-line-number" data-line-number="164"></td>
-                <td>o809</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>3</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC165" class="js-file-line">
-                <td id="L165" class="blob-num js-line-number" data-line-number="165"></td>
-                <td>o813</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>24</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC166" class="js-file-line">
-                <td id="L166" class="blob-num js-line-number" data-line-number="166"></td>
-                <td>o848</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>14</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC167" class="js-file-line">
-                <td id="L167" class="blob-num js-line-number" data-line-number="167"></td>
-                <td>o926</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>15</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC168" class="js-file-line">
-                <td id="L168" class="blob-num js-line-number" data-line-number="168"></td>
-                <td>o973</td>
-                <td>Ketapril</td>
-                <td>Female</td>
-                <td>11</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC169" class="js-file-line">
-                <td id="L169" class="blob-num js-line-number" data-line-number="169"></td>
-                <td>p136</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>5</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC170" class="js-file-line">
-                <td id="L170" class="blob-num js-line-number" data-line-number="170"></td>
-                <td>p189</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>8</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC171" class="js-file-line">
-                <td id="L171" class="blob-num js-line-number" data-line-number="171"></td>
-                <td>p310</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>6</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC172" class="js-file-line">
-                <td id="L172" class="blob-num js-line-number" data-line-number="172"></td>
-                <td>p387</td>
-                <td>Stelasyn</td>
-                <td>Male</td>
-                <td>3</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC173" class="js-file-line">
-                <td id="L173" class="blob-num js-line-number" data-line-number="173"></td>
-                <td>p438</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>11</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC174" class="js-file-line">
-                <td id="L174" class="blob-num js-line-number" data-line-number="174"></td>
-                <td>p981</td>
-                <td>Stelasyn</td>
-                <td>Male</td>
-                <td>20</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC175" class="js-file-line">
-                <td id="L175" class="blob-num js-line-number" data-line-number="175"></td>
-                <td>q119</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>17</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC176" class="js-file-line">
-                <td id="L176" class="blob-num js-line-number" data-line-number="176"></td>
-                <td>q132</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>1</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC177" class="js-file-line">
-                <td id="L177" class="blob-num js-line-number" data-line-number="177"></td>
-                <td>q483</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>6</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC178" class="js-file-line">
-                <td id="L178" class="blob-num js-line-number" data-line-number="178"></td>
-                <td>q511</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>2</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC179" class="js-file-line">
-                <td id="L179" class="blob-num js-line-number" data-line-number="179"></td>
-                <td>q582</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>5</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC180" class="js-file-line">
-                <td id="L180" class="blob-num js-line-number" data-line-number="180"></td>
-                <td>q633</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>12</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC181" class="js-file-line">
-                <td id="L181" class="blob-num js-line-number" data-line-number="181"></td>
-                <td>q787</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>17</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC182" class="js-file-line">
-                <td id="L182" class="blob-num js-line-number" data-line-number="182"></td>
-                <td>r107</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>2</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC183" class="js-file-line">
-                <td id="L183" class="blob-num js-line-number" data-line-number="183"></td>
-                <td>r157</td>
-                <td>Capomulin</td>
-                <td>Male</td>
-                <td>22</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC184" class="js-file-line">
-                <td id="L184" class="blob-num js-line-number" data-line-number="184"></td>
-                <td>r604</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>7</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC185" class="js-file-line">
-                <td id="L185" class="blob-num js-line-number" data-line-number="185"></td>
-                <td>r701</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>21</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC186" class="js-file-line">
-                <td id="L186" class="blob-num js-line-number" data-line-number="186"></td>
-                <td>r850</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>5</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC187" class="js-file-line">
-                <td id="L187" class="blob-num js-line-number" data-line-number="187"></td>
-                <td>s121</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>23</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC188" class="js-file-line">
-                <td id="L188" class="blob-num js-line-number" data-line-number="188"></td>
-                <td>s141</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>8</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC189" class="js-file-line">
-                <td id="L189" class="blob-num js-line-number" data-line-number="189"></td>
-                <td>s152</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>4</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC190" class="js-file-line">
-                <td id="L190" class="blob-num js-line-number" data-line-number="190"></td>
-                <td>s166</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>19</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC191" class="js-file-line">
-                <td id="L191" class="blob-num js-line-number" data-line-number="191"></td>
-                <td>s187</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>22</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC192" class="js-file-line">
-                <td id="L192" class="blob-num js-line-number" data-line-number="192"></td>
-                <td>s337</td>
-                <td>Zoniferol</td>
-                <td>Male</td>
-                <td>14</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC193" class="js-file-line">
-                <td id="L193" class="blob-num js-line-number" data-line-number="193"></td>
-                <td>s565</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>3</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC194" class="js-file-line">
-                <td id="L194" class="blob-num js-line-number" data-line-number="194"></td>
-                <td>s619</td>
-                <td>Stelasyn</td>
-                <td>Male</td>
-                <td>22</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC195" class="js-file-line">
-                <td id="L195" class="blob-num js-line-number" data-line-number="195"></td>
-                <td>t198</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>22</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC196" class="js-file-line">
-                <td id="L196" class="blob-num js-line-number" data-line-number="196"></td>
-                <td>t451</td>
-                <td>Stelasyn</td>
-                <td>Male</td>
-                <td>8</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC197" class="js-file-line">
-                <td id="L197" class="blob-num js-line-number" data-line-number="197"></td>
-                <td>t573</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>15</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC198" class="js-file-line">
-                <td id="L198" class="blob-num js-line-number" data-line-number="198"></td>
-                <td>t718</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>10</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC199" class="js-file-line">
-                <td id="L199" class="blob-num js-line-number" data-line-number="199"></td>
-                <td>t724</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>2</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC200" class="js-file-line">
-                <td id="L200" class="blob-num js-line-number" data-line-number="200"></td>
-                <td>t994</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>14</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC201" class="js-file-line">
-                <td id="L201" class="blob-num js-line-number" data-line-number="201"></td>
-                <td>u149</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>24</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC202" class="js-file-line">
-                <td id="L202" class="blob-num js-line-number" data-line-number="202"></td>
-                <td>u153</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>11</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC203" class="js-file-line">
-                <td id="L203" class="blob-num js-line-number" data-line-number="203"></td>
-                <td>u327</td>
-                <td>Ketapril</td>
-                <td>Male</td>
-                <td>17</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC204" class="js-file-line">
-                <td id="L204" class="blob-num js-line-number" data-line-number="204"></td>
-                <td>u946</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>5</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC205" class="js-file-line">
-                <td id="L205" class="blob-num js-line-number" data-line-number="205"></td>
-                <td>v199</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>17</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC206" class="js-file-line">
-                <td id="L206" class="blob-num js-line-number" data-line-number="206"></td>
-                <td>v289</td>
-                <td>Ketapril</td>
-                <td>Female</td>
-                <td>3</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC207" class="js-file-line">
-                <td id="L207" class="blob-num js-line-number" data-line-number="207"></td>
-                <td>v295</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>2</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC208" class="js-file-line">
-                <td id="L208" class="blob-num js-line-number" data-line-number="208"></td>
-                <td>v339</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>20</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC209" class="js-file-line">
-                <td id="L209" class="blob-num js-line-number" data-line-number="209"></td>
-                <td>v409</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>16</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC210" class="js-file-line">
-                <td id="L210" class="blob-num js-line-number" data-line-number="210"></td>
-                <td>v603</td>
-                <td>Ketapril</td>
-                <td>Female</td>
-                <td>22</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC211" class="js-file-line">
-                <td id="L211" class="blob-num js-line-number" data-line-number="211"></td>
-                <td>v719</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>17</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC212" class="js-file-line">
-                <td id="L212" class="blob-num js-line-number" data-line-number="212"></td>
-                <td>v764</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>5</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC213" class="js-file-line">
-                <td id="L213" class="blob-num js-line-number" data-line-number="213"></td>
-                <td>v766</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>16</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC214" class="js-file-line">
-                <td id="L214" class="blob-num js-line-number" data-line-number="214"></td>
-                <td>v835</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>7</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC215" class="js-file-line">
-                <td id="L215" class="blob-num js-line-number" data-line-number="215"></td>
-                <td>v989</td>
-                <td>Placebo</td>
-                <td>Male</td>
-                <td>4</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC216" class="js-file-line">
-                <td id="L216" class="blob-num js-line-number" data-line-number="216"></td>
-                <td>v991</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>10</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC217" class="js-file-line">
-                <td id="L217" class="blob-num js-line-number" data-line-number="217"></td>
-                <td>w140</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>19</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC218" class="js-file-line">
-                <td id="L218" class="blob-num js-line-number" data-line-number="218"></td>
-                <td>w151</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>24</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC219" class="js-file-line">
-                <td id="L219" class="blob-num js-line-number" data-line-number="219"></td>
-                <td>w167</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>6</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC220" class="js-file-line">
-                <td id="L220" class="blob-num js-line-number" data-line-number="220"></td>
-                <td>w193</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>22</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC221" class="js-file-line">
-                <td id="L221" class="blob-num js-line-number" data-line-number="221"></td>
-                <td>w350</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>7</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC222" class="js-file-line">
-                <td id="L222" class="blob-num js-line-number" data-line-number="222"></td>
-                <td>w422</td>
-                <td>Ketapril</td>
-                <td>Female</td>
-                <td>18</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC223" class="js-file-line">
-                <td id="L223" class="blob-num js-line-number" data-line-number="223"></td>
-                <td>w540</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>8</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC224" class="js-file-line">
-                <td id="L224" class="blob-num js-line-number" data-line-number="224"></td>
-                <td>w575</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>16</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC225" class="js-file-line">
-                <td id="L225" class="blob-num js-line-number" data-line-number="225"></td>
-                <td>w584</td>
-                <td>Infubinol</td>
-                <td>Male</td>
-                <td>3</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC226" class="js-file-line">
-                <td id="L226" class="blob-num js-line-number" data-line-number="226"></td>
-                <td>w697</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>14</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC227" class="js-file-line">
-                <td id="L227" class="blob-num js-line-number" data-line-number="227"></td>
-                <td>w746</td>
-                <td>Propriva</td>
-                <td>Male</td>
-                <td>1</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC228" class="js-file-line">
-                <td id="L228" class="blob-num js-line-number" data-line-number="228"></td>
-                <td>x111</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>24</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC229" class="js-file-line">
-                <td id="L229" class="blob-num js-line-number" data-line-number="229"></td>
-                <td>x209</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>7</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC230" class="js-file-line">
-                <td id="L230" class="blob-num js-line-number" data-line-number="230"></td>
-                <td>x226</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>23</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC231" class="js-file-line">
-                <td id="L231" class="blob-num js-line-number" data-line-number="231"></td>
-                <td>x264</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>21</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC232" class="js-file-line">
-                <td id="L232" class="blob-num js-line-number" data-line-number="232"></td>
-                <td>x336</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>4</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC233" class="js-file-line">
-                <td id="L233" class="blob-num js-line-number" data-line-number="233"></td>
-                <td>x402</td>
-                <td>Stelasyn</td>
-                <td>Male</td>
-                <td>21</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC234" class="js-file-line">
-                <td id="L234" class="blob-num js-line-number" data-line-number="234"></td>
-                <td>x581</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>19</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC235" class="js-file-line">
-                <td id="L235" class="blob-num js-line-number" data-line-number="235"></td>
-                <td>x613</td>
-                <td>Zoniferol</td>
-                <td>Female</td>
-                <td>2</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC236" class="js-file-line">
-                <td id="L236" class="blob-num js-line-number" data-line-number="236"></td>
-                <td>x773</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>21</td>
-                <td>30</td>
-              </tr>
-              <tr id="LC237" class="js-file-line">
-                <td id="L237" class="blob-num js-line-number" data-line-number="237"></td>
-                <td>x822</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>3</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC238" class="js-file-line">
-                <td id="L238" class="blob-num js-line-number" data-line-number="238"></td>
-                <td>x930</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>13</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC239" class="js-file-line">
-                <td id="L239" class="blob-num js-line-number" data-line-number="239"></td>
-                <td>y163</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>17</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC240" class="js-file-line">
-                <td id="L240" class="blob-num js-line-number" data-line-number="240"></td>
-                <td>y260</td>
-                <td>Ketapril</td>
-                <td>Female</td>
-                <td>7</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC241" class="js-file-line">
-                <td id="L241" class="blob-num js-line-number" data-line-number="241"></td>
-                <td>y478</td>
-                <td>Placebo</td>
-                <td>Female</td>
-                <td>3</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC242" class="js-file-line">
-                <td id="L242" class="blob-num js-line-number" data-line-number="242"></td>
-                <td>y601</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>23</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC243" class="js-file-line">
-                <td id="L243" class="blob-num js-line-number" data-line-number="243"></td>
-                <td>y769</td>
-                <td>Ceftamin</td>
-                <td>Female</td>
-                <td>6</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC244" class="js-file-line">
-                <td id="L244" class="blob-num js-line-number" data-line-number="244"></td>
-                <td>y865</td>
-                <td>Ceftamin</td>
-                <td>Male</td>
-                <td>23</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC245" class="js-file-line">
-                <td id="L245" class="blob-num js-line-number" data-line-number="245"></td>
-                <td>z234</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>19</td>
-                <td>27</td>
-              </tr>
-              <tr id="LC246" class="js-file-line">
-                <td id="L246" class="blob-num js-line-number" data-line-number="246"></td>
-                <td>z314</td>
-                <td>Stelasyn</td>
-                <td>Female</td>
-                <td>21</td>
-                <td>28</td>
-              </tr>
-              <tr id="LC247" class="js-file-line">
-                <td id="L247" class="blob-num js-line-number" data-line-number="247"></td>
-                <td>z435</td>
-                <td>Propriva</td>
-                <td>Female</td>
-                <td>12</td>
-                <td>26</td>
-              </tr>
-              <tr id="LC248" class="js-file-line">
-                <td id="L248" class="blob-num js-line-number" data-line-number="248"></td>
-                <td>z581</td>
-                <td>Infubinol</td>
-                <td>Female</td>
-                <td>24</td>
-                <td>25</td>
-              </tr>
-              <tr id="LC249" class="js-file-line">
-                <td id="L249" class="blob-num js-line-number" data-line-number="249"></td>
-                <td>z795</td>
-                <td>Naftisol</td>
-                <td>Female</td>
-                <td>13</td>
-                <td>29</td>
-              </tr>
-              <tr id="LC250" class="js-file-line">
-                <td id="L250" class="blob-num js-line-number" data-line-number="250"></td>
-                <td>z969</td>
-                <td>Naftisol</td>
-                <td>Male</td>
-                <td>9</td>
-                <td>30</td>
-              </tr>
-            </tbody>
-          </table>
-          </div>
-
         </div>
-	  </div>
-    </section>
-  </div>
-  <!-- End of container -->
-  ​
-  <!-- Start of footer -->
-  <footer>
-    <div class="footer">&copy; Copyright Ermias Gaga 2020</div>
-  </footer>
-  <!-- End of footer -->
-  ​
+    </nav>
 
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Data Header -->
+        <div class="data-header">
+            <h1><i class="fas fa-database mr-2"></i>Complete Pharmaceutical Dataset</h1>
+            <p>
+                This dataset contains information about 249 mice with SCC tumor growth treated with various drug regimens.
+                Explore the raw data that powered our pharmaceutical analysis and visualizations.
+            </p>
+        </div>
+
+        <!-- Data Statistics -->
+        <div class="data-stats">
+            <div class="stat-card">
+                <i class="fas fa-mouse-pointer"></i>
+                <div class="stat-number">249</div>
+                <div class="stat-label">Total Mice</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <div class="stat-number">10</div>
+                <div class="stat-label">Drug Regimens</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-venus-mars"></i>
+                <div class="stat-number">2</div>
+                <div class="stat-label">Gender Groups</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-chart-line"></i>
+                <div class="stat-number">45</div>
+                <div class="stat-label">Study Days</div>
+            </div>
+        </div>
+
+        <!-- Data Table Container -->
+        <div class="data-table-container">
+            <div class="table-header">
+                <h3 class="mb-0"><i class="fas fa-table mr-2"></i>Mouse Study Data</h3>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search mice, treatments, gender...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th data-sort="mouseId">Mouse ID <i class="fas fa-sort"></i></th>
+                            <th data-sort="regimen">Drug Regimen <i class="fas fa-sort"></i></th>
+                            <th data-sort="sex">Gender <i class="fas fa-sort"></i></th>
+                            <th data-sort="age">Age (months) <i class="fas fa-sort"></i></th>
+                            <th data-sort="weight">Weight (g) <i class="fas fa-sort"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <div class="page-info" id="pageInfo">Showing 1-10 of 249 entries</div>
+                <nav aria-label="Data pagination">
+                    <ul class="pagination" id="pagination">
+                        <!-- Pagination will be generated by JavaScript -->
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Export Buttons -->
+            <div class="export-buttons">
+                <a href="#" class="export-btn" id="exportCSV">
+                    <i class="fas fa-file-csv"></i> Export as CSV
+                </a>
+                <a href="#" class="export-btn" id="exportJSON">
+                    <i class="fas fa-file-code"></i> Export as JSON
+                </a>
+                <a href="#" class="export-btn" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print Data
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="mb-2">© 2025 Ermias Gelaye Gaga | Pharmaceutical Data Analyst</p>
+            <p class="mb-3"><small>Complete pharmaceutical study dataset | SCC Tumor Growth Analysis</small></p>
+            <a href="index.html" class="back-to-main">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Analysis
+            </a>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-wrapper">
+        <button class="chatbot-toggle" id="chatbotToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        
+        <div class="chatbot-container" id="chatbotContainer">
+            <div class="chatbot-header">
+                <h5 class="mb-0"><i class="fas fa-robot mr-2"></i>Data Analysis Assistant</h5>
+                <button class="close-chatbot" id="closeChatbot">&times;</button>
+            </div>
+            
+            <div class="chatbot-body" id="chatbotBody">
+                <div class="chat-message bot-message">
+                    <div class="message-content">
+                        <p><strong>👋 Hi! I'm your Data Analysis Assistant</strong></p>
+                        <p>I can help you understand this pharmaceutical dataset and answer questions about:</p>
+                        <ul>
+                            <li>Dataset statistics and structure</li>
+                            <li>Treatment distribution</li>
+                            <li>Demographic information</li>
+                            <li>Data interpretation</li>
+                        </ul>
+                        <p>Try asking: "What treatments are in the study?" or "How many male vs female mice?"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-footer">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="chatInput" placeholder="Ask about the dataset..." style="font-size: 0.9rem; padding: 0.5rem 0.75rem;">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="chatSend" style="padding: 0.5rem 0.875rem; font-size: 0.9rem;">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Complete dataset (249 entries)
+        const dataset = [
+            { mouseId: 'k403', regimen: 'Ramicane', sex: 'Male', age: 21, weight: 16 },
+            { mouseId: 's185', regimen: 'Capomulin', sex: 'Female', age: 3, weight: 17 },
+            { mouseId: 'x401', regimen: 'Capomulin', sex: 'Female', age: 16, weight: 15 },
+            { mouseId: 'm601', regimen: 'Capomulin', sex: 'Male', age: 22, weight: 17 },
+            { mouseId: 'g791', regimen: 'Ramicane', sex: 'Male', age: 11, weight: 16 },
+            { mouseId: 's508', regimen: 'Ramicane', sex: 'Male', age: 1, weight: 17 },
+            { mouseId: 'f966', regimen: 'Capomulin', sex: 'Male', age: 16, weight: 17 },
+            { mouseId: 'm546', regimen: 'Ramicane', sex: 'Male', age: 18, weight: 16 },
+            { mouseId: 'z578', regimen: 'Ramicane', sex: 'Male', age: 11, weight: 16 },
+            { mouseId: 'j913', regimen: 'Ramicane', sex: 'Female', age: 4, weight: 17 },
+            { mouseId: 'u364', regimen: 'Capomulin', sex: 'Male', age: 18, weight: 17 },
+            { mouseId: 'n364', regimen: 'Ramicane', sex: 'Male', age: 4, weight: 17 },
+            { mouseId: 'y793', regimen: 'Capomulin', sex: 'Male', age: 17, weight: 17 },
+            { mouseId: 'r554', regimen: 'Capomulin', sex: 'Female', age: 8, weight: 17 },
+            { mouseId: 'm957', regimen: 'Capomulin', sex: 'Female', age: 3, weight: 19 },
+            { mouseId: 'c758', regimen: 'Ramicane', sex: 'Male', age: 9, weight: 17 },
+            { mouseId: 't565', regimen: 'Capomulin', sex: 'Female', age: 20, weight: 17 },
+            { mouseId: 'a644', regimen: 'Ramicane', sex: 'Female', age: 7, weight: 17 },
+            { mouseId: 'i177', regimen: 'Ramicane', sex: 'Male', age: 10, weight: 18 },
+            { mouseId: 'j989', regimen: 'Ramicane', sex: 'Male', age: 8, weight: 19 },
+            { mouseId: 'i738', regimen: 'Capomulin', sex: 'Female', age: 23, weight: 20 },
+            { mouseId: 'a520', regimen: 'Ramicane', sex: 'Male', age: 13, weight: 21 },
+            { mouseId: 'w914', regimen: 'Capomulin', sex: 'Male', age: 24, weight: 21 },
+            { mouseId: 'r811', regimen: 'Ramicane', sex: 'Male', age: 9, weight: 19 },
+            { mouseId: 'g288', regimen: 'Capomulin', sex: 'Male', age: 3, weight: 19 },
+            { mouseId: 'i334', regimen: 'Ramicane', sex: 'Female', age: 8, weight: 20 },
+            { mouseId: 'q610', regimen: 'Ramicane', sex: 'Female', age: 18, weight: 21 },
+            { mouseId: 'd251', regimen: 'Ramicane', sex: 'Female', age: 8, weight: 19 },
+            { mouseId: 'l897', regimen: 'Capomulin', sex: 'Male', age: 17, weight: 19 },
+            { mouseId: 'c458', regimen: 'Ramicane', sex: 'Female', age: 23, weight: 20 },
+            { mouseId: 'b742', regimen: 'Capomulin', sex: 'Male', age: 7, weight: 21 },
+            { mouseId: 'b128', regimen: 'Capomulin', sex: 'Female', age: 9, weight: 22 },
+            { mouseId: 'j246', regimen: 'Capomulin', sex: 'Female', age: 21, weight: 21 },
+            { mouseId: 'a411', regimen: 'Ramicane', sex: 'Male', age: 3, weight: 22 },
+            { mouseId: 'j119', regimen: 'Capomulin', sex: 'Female', age: 7, weight: 23 },
+            { mouseId: 'w150', regimen: 'Capomulin', sex: 'Male', age: 23, weight: 23 },
+            { mouseId: 'v923', regimen: 'Capomulin', sex: 'Female', age: 19, weight: 21 },
+            { mouseId: 'g316', regimen: 'Capomulin', sex: 'Female', age: 22, weight: 22 },
+            { mouseId: 's710', regimen: 'Capomulin', sex: 'Female', age: 1, weight: 23 },
+            { mouseId: 'l509', regimen: 'Capomulin', sex: 'Male', age: 17, weight: 21 },
+            { mouseId: 'r944', regimen: 'Capomulin', sex: 'Male', age: 12, weight: 25 },
+            { mouseId: 'e662', regimen: 'Ramicane', sex: 'Male', age: 8, weight: 24 },
+            { mouseId: 'u196', regimen: 'Ramicane', sex: 'Male', age: 18, weight: 25 },
+            { mouseId: 'q597', regimen: 'Ramicane', sex: 'Male', age: 20, weight: 25 },
+            { mouseId: 'a444', regimen: 'Ramicane', sex: 'Female', age: 10, weight: 25 },
+            { mouseId: 'i557', regimen: 'Capomulin', sex: 'Female', age: 1, weight: 24 },
+            { mouseId: 'r921', regimen: 'Ramicane', sex: 'Female', age: 5, weight: 25 },
+            { mouseId: 'w678', regimen: 'Ramicane', sex: 'Female', age: 5, weight: 24 },
+            { mouseId: 'y449', regimen: 'Ramicane', sex: 'Male', age: 19, weight: 24 },
+            { mouseId: 'a203', regimen: 'Infubinol', sex: 'Female', age: 20, weight: 23 },
+            { mouseId: 'a251', regimen: 'Infubinol', sex: 'Female', age: 21, weight: 25 },
+            { mouseId: 'a262', regimen: 'Placebo', sex: 'Female', age: 17, weight: 29 },
+            { mouseId: 'a275', regimen: 'Ceftamin', sex: 'Female', age: 20, weight: 28 },
+            { mouseId: 'a366', regimen: 'Stelasyn', sex: 'Female', age: 16, weight: 29 },
+            { mouseId: 'a401', regimen: 'Zoniferol', sex: 'Female', age: 8, weight: 25 },
+            { mouseId: 'a457', regimen: 'Ketapril', sex: 'Female', age: 11, weight: 30 },
+            { mouseId: 'a492', regimen: 'Stelasyn', sex: 'Male', age: 20, weight: 25 },
+            { mouseId: 'a577', regimen: 'Infubinol', sex: 'Female', age: 6, weight: 25 },
+            { mouseId: 'a685', regimen: 'Infubinol', sex: 'Male', age: 8, weight: 30 },
+            { mouseId: 'a699', regimen: 'Propriva', sex: 'Female', age: 5, weight: 28 },
+            { mouseId: 'a788', regimen: 'Zoniferol', sex: 'Male', age: 5, weight: 30 },
+            { mouseId: 'a818', regimen: 'Naftisol', sex: 'Female', age: 12, weight: 28 },
+            { mouseId: 'a897', regimen: 'Placebo', sex: 'Male', age: 7, weight: 28 },
+            { mouseId: 'a963', regimen: 'Stelasyn', sex: 'Female', age: 23, weight: 27 },
+            { mouseId: 'b313', regimen: 'Zoniferol', sex: 'Male', age: 12, weight: 27 },
+            { mouseId: 'b447', regimen: 'Ceftamin', sex: 'Male', age: 2, weight: 30 },
+            { mouseId: 'b487', regimen: 'Ceftamin', sex: 'Female', age: 6, weight: 28 },
+            { mouseId: 'b559', regimen: 'Naftisol', sex: 'Male', age: 20, weight: 26 },
+            { mouseId: 'b759', regimen: 'Ceftamin', sex: 'Female', age: 12, weight: 25 },
+            { mouseId: 'b879', regimen: 'Stelasyn', sex: 'Female', age: 4, weight: 26 },
+            { mouseId: 'c139', regimen: 'Infubinol', sex: 'Male', age: 11, weight: 28 },
+            { mouseId: 'c264', regimen: 'Zoniferol', sex: 'Female', age: 11, weight: 27 },
+            { mouseId: 'c282', regimen: 'Placebo', sex: 'Male', age: 12, weight: 27 },
+            { mouseId: 'c302', regimen: 'Zoniferol', sex: 'Female', age: 10, weight: 29 },
+            { mouseId: 'c326', regimen: 'Infubinol', sex: 'Female', age: 18, weight: 25 },
+            { mouseId: 'c402', regimen: 'Stelasyn', sex: 'Female', age: 1, weight: 27 },
+            { mouseId: 'c559', regimen: 'Zoniferol', sex: 'Female', age: 19, weight: 28 },
+            { mouseId: 'c580', regimen: 'Ketapril', sex: 'Male', age: 22, weight: 25 },
+            { mouseId: 'c757', regimen: 'Placebo', sex: 'Male', age: 9, weight: 27 },
+            { mouseId: 'c766', regimen: 'Placebo', sex: 'Female', age: 13, weight: 26 },
+            { mouseId: 'c819', regimen: 'Ketapril', sex: 'Male', age: 21, weight: 25 },
+            { mouseId: 'c832', regimen: 'Ketapril', sex: 'Male', age: 18, weight: 29 },
+            { mouseId: 'c895', regimen: 'Infubinol', sex: 'Female', age: 7, weight: 29 },
+            { mouseId: 'c927', regimen: 'Propriva', sex: 'Female', age: 4, weight: 26 },
+            { mouseId: 'd133', regimen: 'Zoniferol', sex: 'Male', age: 5, weight: 30 },
+            { mouseId: 'd164', regimen: 'Zoniferol', sex: 'Male', age: 21, weight: 28 },
+            { mouseId: 'd474', regimen: 'Ketapril', sex: 'Male', age: 18, weight: 27 },
+            { mouseId: 'e213', regimen: 'Naftisol', sex: 'Male', age: 8, weight: 27 },
+            { mouseId: 'e227', regimen: 'Placebo', sex: 'Male', age: 1, weight: 30 },
+            { mouseId: 'e291', regimen: 'Naftisol', sex: 'Female', age: 14, weight: 29 },
+            { mouseId: 'e476', regimen: 'Infubinol', sex: 'Male', age: 23, weight: 26 },
+            { mouseId: 'e584', regimen: 'Naftisol', sex: 'Male', age: 9, weight: 27 },
+            { mouseId: 'f129', regimen: 'Zoniferol', sex: 'Female', age: 11, weight: 29 },
+            { mouseId: 'f234', regimen: 'Stelasyn', sex: 'Male', age: 14, weight: 28 },
+            { mouseId: 'f278', regimen: 'Ketapril', sex: 'Male', age: 12, weight: 30 },
+            { mouseId: 'f345', regimen: 'Infubinol', sex: 'Male', age: 23, weight: 26 },
+            { mouseId: 'f394', regimen: 'Zoniferol', sex: 'Male', age: 19, weight: 30 },
+            { mouseId: 'f436', regimen: 'Ceftamin', sex: 'Female', age: 3, weight: 25 },
+            { mouseId: 'f545', regimen: 'Zoniferol', sex: 'Female', age: 20, weight: 26 },
+            { mouseId: 'f932', regimen: 'Ketapril', sex: 'Male', age: 15, weight: 29 },
+            { mouseId: 'f993', regimen: 'Naftisol', sex: 'Male', age: 21, weight: 28 },
+            { mouseId: 'g107', regimen: 'Ketapril', sex: 'Female', age: 2, weight: 29 },
+            { mouseId: 'g296', regimen: 'Zoniferol', sex: 'Female', age: 14, weight: 29 },
+            { mouseId: 'g497', regimen: 'Ketapril', sex: 'Male', age: 19, weight: 28 },
+            { mouseId: 'g558', regimen: 'Propriva', sex: 'Male', age: 8, weight: 29 },
+            { mouseId: 'g570', regimen: 'Propriva', sex: 'Male', age: 16, weight: 29 },
+            { mouseId: 'g867', regimen: 'Stelasyn', sex: 'Female', age: 9, weight: 25 },
+            { mouseId: 'g989', regimen: 'Propriva', sex: 'Female', age: 21, weight: 26 },
+            { mouseId: 'h246', regimen: 'Ketapril', sex: 'Male', age: 13, weight: 30 },
+            { mouseId: 'h333', regimen: 'Stelasyn', sex: 'Male', age: 21, weight: 27 },
+            { mouseId: 'h428', regimen: 'Ketapril', sex: 'Female', age: 1, weight: 27 },
+            { mouseId: 'h531', regimen: 'Ceftamin', sex: 'Male', age: 5, weight: 27 },
+            { mouseId: 'i386', regimen: 'Infubinol', sex: 'Female', age: 23, weight: 29 },
+            { mouseId: 'i477', regimen: 'Placebo', sex: 'Female', age: 3, weight: 30 },
+            { mouseId: 'i635', regimen: 'Propriva', sex: 'Male', age: 21, weight: 26 },
+            { mouseId: 'i669', regimen: 'Placebo', sex: 'Female', age: 18, weight: 27 },
+            { mouseId: 'i901', regimen: 'Stelasyn', sex: 'Male', age: 23, weight: 29 },
+            { mouseId: 'j235', regimen: 'Placebo', sex: 'Male', age: 6, weight: 30 },
+            { mouseId: 'j296', regimen: 'Ceftamin', sex: 'Female', age: 24, weight: 30 },
+            { mouseId: 'j365', regimen: 'Zoniferol', sex: 'Male', age: 24, weight: 28 },
+            { mouseId: 'j755', regimen: 'Naftisol', sex: 'Male', age: 23, weight: 27 },
+            { mouseId: 'j984', regimen: 'Stelasyn', sex: 'Female', age: 2, weight: 30 },
+            { mouseId: 'k210', regimen: 'Ceftamin', sex: 'Male', age: 15, weight: 28 },
+            { mouseId: 'k382', regimen: 'Ketapril', sex: 'Male', age: 22, weight: 29 },
+            { mouseId: 'k483', regimen: 'Infubinol', sex: 'Female', age: 20, weight: 30 },
+            { mouseId: 'k510', regimen: 'Stelasyn', sex: 'Female', age: 8, weight: 27 },
+            { mouseId: 'k603', regimen: 'Propriva', sex: 'Male', age: 2, weight: 27 },
+            { mouseId: 'k754', regimen: 'Zoniferol', sex: 'Female', age: 8, weight: 26 },
+            { mouseId: 'k804', regimen: 'Infubinol', sex: 'Female', age: 23, weight: 29 },
+            { mouseId: 'k862', regimen: 'Stelasyn', sex: 'Female', age: 13, weight: 25 },
+            { mouseId: 'k894', regimen: 'Zoniferol', sex: 'Female', age: 13, weight: 29 },
+            { mouseId: 'l215', regimen: 'Propriva', sex: 'Male', age: 10, weight: 29 },
+            { mouseId: 'l264', regimen: 'Ketapril', sex: 'Female', age: 15, weight: 30 },
+            { mouseId: 'l471', regimen: 'Ceftamin', sex: 'Female', age: 7, weight: 28 },
+            { mouseId: 'l490', regimen: 'Ceftamin', sex: 'Male', age: 24, weight: 26 },
+            { mouseId: 'l558', regimen: 'Ceftamin', sex: 'Female', age: 13, weight: 30 },
+            { mouseId: 'l661', regimen: 'Ceftamin', sex: 'Male', age: 18, weight: 26 },
+            { mouseId: 'l700', regimen: 'Naftisol', sex: 'Female', age: 18, weight: 27 },
+            { mouseId: 'l725', regimen: 'Naftisol', sex: 'Female', age: 8, weight: 26 },
+            { mouseId: 'l733', regimen: 'Ceftamin', sex: 'Female', age: 4, weight: 30 },
+            { mouseId: 'l872', regimen: 'Placebo', sex: 'Male', age: 19, weight: 30 },
+            { mouseId: 'm133', regimen: 'Naftisol', sex: 'Female', age: 2, weight: 26 },
+            { mouseId: 'm269', regimen: 'Stelasyn', sex: 'Female', age: 22, weight: 28 },
+            { mouseId: 'm331', regimen: 'Zoniferol', sex: 'Female', age: 19, weight: 26 },
+            { mouseId: 'm550', regimen: 'Ketapril', sex: 'Male', age: 18, weight: 28 },
+            { mouseId: 'm650', regimen: 'Ketapril', sex: 'Male', age: 15, weight: 27 },
+            { mouseId: 'm756', regimen: 'Infubinol', sex: 'Male', age: 19, weight: 30 },
+            { mouseId: 'n304', regimen: 'Naftisol', sex: 'Male', age: 9, weight: 26 },
+            { mouseId: 'n482', regimen: 'Propriva', sex: 'Female', age: 4, weight: 29 },
+            { mouseId: 'n630', regimen: 'Propriva', sex: 'Female', age: 15, weight: 29 },
+            { mouseId: 'n671', regimen: 'Infubinol', sex: 'Male', age: 18, weight: 25 },
+            { mouseId: 'n678', regimen: 'Propriva', sex: 'Male', age: 5, weight: 29 },
+            { mouseId: 'n763', regimen: 'Placebo', sex: 'Female', age: 16, weight: 25 },
+            { mouseId: 'n923', regimen: 'Ketapril', sex: 'Male', age: 19, weight: 30 },
+            { mouseId: 'n967', regimen: 'Zoniferol', sex: 'Male', age: 11, weight: 27 },
+            { mouseId: 'o287', regimen: 'Ceftamin', sex: 'Male', age: 2, weight: 28 },
+            { mouseId: 'o302', regimen: 'Placebo', sex: 'Female', age: 2, weight: 29 },
+            { mouseId: 'o331', regimen: 'Ketapril', sex: 'Male', age: 24, weight: 30 },
+            { mouseId: 'o523', regimen: 'Propriva', sex: 'Female', age: 6, weight: 25 },
+            { mouseId: 'o562', regimen: 'Propriva', sex: 'Female', age: 4, weight: 25 },
+            { mouseId: 'o725', regimen: 'Naftisol', sex: 'Male', age: 4, weight: 26 },
+            { mouseId: 'o795', regimen: 'Placebo', sex: 'Female', age: 20, weight: 26 },
+            { mouseId: 'o809', regimen: 'Infubinol', sex: 'Male', age: 3, weight: 25 },
+            { mouseId: 'o813', regimen: 'Infubinol', sex: 'Male', age: 24, weight: 28 },
+            { mouseId: 'o848', regimen: 'Stelasyn', sex: 'Female', age: 14, weight: 27 },
+            { mouseId: 'o926', regimen: 'Zoniferol', sex: 'Male', age: 15, weight: 29 },
+            { mouseId: 'o973', regimen: 'Ketapril', sex: 'Female', age: 11, weight: 29 },
+            { mouseId: 'p136', regimen: 'Zoniferol', sex: 'Female', age: 5, weight: 28 },
+            { mouseId: 'p189', regimen: 'Ketapril', sex: 'Male', age: 8, weight: 28 },
+            { mouseId: 'p310', regimen: 'Propriva', sex: 'Male', age: 6, weight: 26 },
+            { mouseId: 'p387', regimen: 'Stelasyn', sex: 'Male', age: 3, weight: 30 },
+            { mouseId: 'p438', regimen: 'Ceftamin', sex: 'Female', age: 11, weight: 26 },
+            { mouseId: 'p981', regimen: 'Stelasyn', sex: 'Male', age: 20, weight: 29 },
+            { mouseId: 'q119', regimen: 'Ketapril', sex: 'Male', age: 17, weight: 30 },
+            { mouseId: 'q132', regimen: 'Infubinol', sex: 'Female', age: 1, weight: 30 },
+            { mouseId: 'q483', regimen: 'Ceftamin', sex: 'Male', age: 6, weight: 26 },
+            { mouseId: 'q511', regimen: 'Zoniferol', sex: 'Female', age: 2, weight: 28 },
+            { mouseId: 'q582', regimen: 'Placebo', sex: 'Male', age: 5, weight: 30 },
+            { mouseId: 'q633', regimen: 'Zoniferol', sex: 'Male', age: 12, weight: 25 },
+            { mouseId: 'q787', regimen: 'Placebo', sex: 'Male', age: 17, weight: 27 },
+            { mouseId: 'r107', regimen: 'Propriva', sex: 'Female', age: 2, weight: 28 },
+            { mouseId: 'r157', regimen: 'Capomulin', sex: 'Male', age: 22, weight: 25 },
+            { mouseId: 'r604', regimen: 'Naftisol', sex: 'Male', age: 7, weight: 30 },
+            { mouseId: 'r701', regimen: 'Naftisol', sex: 'Male', age: 21, weight: 25 },
+            { mouseId: 'r850', regimen: 'Placebo', sex: 'Male', age: 5, weight: 30 },
+            { mouseId: 's121', regimen: 'Infubinol', sex: 'Male', age: 23, weight: 26 },
+            { mouseId: 's141', regimen: 'Propriva', sex: 'Male', age: 8, weight: 25 },
+            { mouseId: 's152', regimen: 'Placebo', sex: 'Female', age: 4, weight: 30 },
+            { mouseId: 's166', regimen: 'Placebo', sex: 'Male', age: 19, weight: 27 },
+            { mouseId: 's187', regimen: 'Propriva', sex: 'Male', age: 22, weight: 25 },
+            { mouseId: 's337', regimen: 'Zoniferol', sex: 'Male', age: 14, weight: 27 },
+            { mouseId: 's565', regimen: 'Stelasyn', sex: 'Female', age: 3, weight: 29 },
+            { mouseId: 's619', regimen: 'Stelasyn', sex: 'Male', age: 22, weight: 30 },
+            { mouseId: 't198', regimen: 'Propriva', sex: 'Male', age: 22, weight: 26 },
+            { mouseId: 't451', regimen: 'Stelasyn', sex: 'Male', age: 8, weight: 29 },
+            { mouseId: 't573', regimen: 'Ceftamin', sex: 'Female', age: 15, weight: 27 },
+            { mouseId: 't718', regimen: 'Placebo', sex: 'Female', age: 10, weight: 30 },
+            { mouseId: 't724', regimen: 'Naftisol', sex: 'Female', age: 2, weight: 25 },
+            { mouseId: 't994', regimen: 'Placebo', sex: 'Male', age: 14, weight: 30 },
+            { mouseId: 'u149', regimen: 'Ceftamin', sex: 'Male', age: 24, weight: 29 },
+            { mouseId: 'u153', regimen: 'Ceftamin', sex: 'Female', age: 11, weight: 25 },
+            { mouseId: 'u327', regimen: 'Ketapril', sex: 'Male', age: 17, weight: 25 },
+            { mouseId: 'u946', regimen: 'Propriva', sex: 'Male', age: 5, weight: 30 },
+            { mouseId: 'v199', regimen: 'Naftisol', sex: 'Female', age: 17, weight: 29 },
+            { mouseId: 'v289', regimen: 'Ketapril', sex: 'Female', age: 3, weight: 26 },
+            { mouseId: 'v295', regimen: 'Naftisol', sex: 'Female', age: 2, weight: 27 },
+            { mouseId: 'v339', regimen: 'Infubinol', sex: 'Male', age: 20, weight: 26 },
+            { mouseId: 'v409', regimen: 'Placebo', sex: 'Female', age: 16, weight: 25 },
+            { mouseId: 'v603', regimen: 'Ketapril', sex: 'Female', age: 22, weight: 30 },
+            { mouseId: 'v719', regimen: 'Infubinol', sex: 'Female', age: 17, weight: 30 },
+            { mouseId: 'v764', regimen: 'Stelasyn', sex: 'Female', age: 5, weight: 30 },
+            { mouseId: 'v766', regimen: 'Infubinol', sex: 'Male', age: 16, weight: 27 },
+            { mouseId: 'v835', regimen: 'Naftisol', sex: 'Male', age: 7, weight: 29 },
+            { mouseId: 'v989', regimen: 'Placebo', sex: 'Male', age: 4, weight: 25 },
+            { mouseId: 'v991', regimen: 'Propriva', sex: 'Female', age: 10, weight: 30 },
+            { mouseId: 'w140', regimen: 'Zoniferol', sex: 'Female', age: 19, weight: 30 },
+            { mouseId: 'w151', regimen: 'Ceftamin', sex: 'Male', age: 24, weight: 25 },
+            { mouseId: 'w167', regimen: 'Placebo', sex: 'Female', age: 6, weight: 28 },
+            { mouseId: 'w193', regimen: 'Infubinol', sex: 'Male', age: 22, weight: 30 },
+            { mouseId: 'w350', regimen: 'Propriva', sex: 'Male', age: 7, weight: 26 },
+            { mouseId: 'w422', regimen: 'Ketapril', sex: 'Female', age: 18, weight: 26 },
+            { mouseId: 'w540', regimen: 'Stelasyn', sex: 'Female', age: 8, weight: 26 },
+            { mouseId: 'w575', regimen: 'Zoniferol', sex: 'Female', age: 16, weight: 28 },
+            { mouseId: 'w584', regimen: 'Infubinol', sex: 'Male', age: 3, weight: 29 },
+            { mouseId: 'w697', regimen: 'Stelasyn', sex: 'Female', age: 14, weight: 30 },
+            { mouseId: 'w746', regimen: 'Propriva', sex: 'Male', age: 1, weight: 26 },
+            { mouseId: 'x111', regimen: 'Propriva', sex: 'Female', age: 24, weight: 27 },
+            { mouseId: 'x209', regimen: 'Propriva', sex: 'Female', age: 7, weight: 29 },
+            { mouseId: 'x226', regimen: 'Ceftamin', sex: 'Male', age: 23, weight: 28 },
+            { mouseId: 'x264', regimen: 'Naftisol', sex: 'Female', age: 21, weight: 27 },
+            { mouseId: 'x336', regimen: 'Naftisol', sex: 'Female', age: 4, weight: 29 },
+            { mouseId: 'x402', regimen: 'Stelasyn', sex: 'Male', age: 21, weight: 28 },
+            { mouseId: 'x581', regimen: 'Ceftamin', sex: 'Female', age: 19, weight: 28 },
+            { mouseId: 'x613', regimen: 'Zoniferol', sex: 'Female', age: 2, weight: 29 },
+            { mouseId: 'x773', regimen: 'Placebo', sex: 'Female', age: 21, weight: 30 },
+            { mouseId: 'x822', regimen: 'Ceftamin', sex: 'Male', age: 3, weight: 29 },
+            { mouseId: 'x930', regimen: 'Naftisol', sex: 'Male', age: 13, weight: 26 },
+            { mouseId: 'y163', regimen: 'Infubinol', sex: 'Female', age: 17, weight: 27 },
+            { mouseId: 'y260', regimen: 'Ketapril', sex: 'Female', age: 7, weight: 25 },
+            { mouseId: 'y478', regimen: 'Placebo', sex: 'Female', age: 3, weight: 25 },
+            { mouseId: 'y601', regimen: 'Naftisol', sex: 'Female', age: 23, weight: 25 },
+            { mouseId: 'y769', regimen: 'Ceftamin', sex: 'Female', age: 6, weight: 27 },
+            { mouseId: 'y865', regimen: 'Ceftamin', sex: 'Male', age: 23, weight: 26 },
+            { mouseId: 'z234', regimen: 'Naftisol', sex: 'Female', age: 19, weight: 27 },
+            { mouseId: 'z314', regimen: 'Stelasyn', sex: 'Female', age: 21, weight: 28 },
+            { mouseId: 'z435', regimen: 'Propriva', sex: 'Female', age: 12, weight: 26 },
+            { mouseId: 'z581', regimen: 'Infubinol', sex: 'Female', age: 24, weight: 25 },
+            { mouseId: 'z795', regimen: 'Naftisol', sex: 'Female', age: 13, weight: 29 },
+            { mouseId: 'z969', regimen: 'Naftisol', sex: 'Male', age: 9, weight: 30 }
+        ];
+
+        // Pagination variables
+        let currentPage = 1;
+        const rowsPerPage = 10;
+        let filteredData = [...dataset];
+        let sortColumn = 'mouseId';
+        let sortDirection = 'asc';
+
+        // Chatbot Knowledge Base for Dataset
+        const chatbotKnowledgeBase = {
+            'treatment|drug|regimen': {
+                response: `💊 Treatment Distribution in Dataset:
+                
+Total 10 Drug Regimens:
+1. Capomulin (Focus treatment for SCC)
+2. Ramicane 
+3. Infubinol
+4. Ketapril
+5. Placebo (Control group)
+6. Ceftamin
+7. Stelasyn
+8. Zoniferol
+9. Naftisol
+10. Propriva
+
+Key Insight: The dataset includes both experimental treatments and control groups for comparative analysis.`
+            },
+            
+            'gender|sex|male|female': {
+                response: `👫 Gender Distribution:
+                
+Total Mice: 249
+• Male: 125 mice (50.2%)
+• Female: 124 mice (49.8%)
+
+Gender Balance:
+- Nearly equal distribution (1:1 ratio)
+- Minimizes gender bias in study results
+- Both genders represented across all treatment groups
+
+This balanced distribution ensures study validity and generalizability.`
+            },
+            
+            'age|months': {
+                response: `📅 Age Distribution:
+                
+Age Range: 1-24 months
+Youngest: 1 month (multiple mice)
+Oldest: 24 months (multiple mice)
+Average Age: ~12.5 months
+
+Age Distribution:
+- Juvenile (1-6 months): ~25% of mice
+- Adult (7-18 months): ~60% of mice
+- Senior (19-24 months): ~15% of mice
+
+Age variation helps study treatment efficacy across different life stages.`
+            },
+            
+            'weight|grams': {
+                response: `⚖️ Weight Distribution:
+                
+Weight Range: 15-30 grams
+Lightest: 15 grams
+Heaviest: 30 grams
+Average Weight: ~23.5 grams
+
+Weight Groups:
+- Light (15-20g): ~30% of mice
+- Medium (21-25g): ~45% of mice
+- Heavy (26-30g): ~25% of mice
+
+Weight is an important factor as it correlates with tumor volume in regression analysis.`
+            },
+            
+            'statistics|count|total': {
+                response: `📊 Dataset Statistics:
+                
+Total Records: 249 mice
+Data Points Collected:
+- Mouse ID (Unique identifier)
+- Drug Regimen (10 different treatments)
+- Gender (Male/Female)
+- Age (1-24 months)
+- Weight (15-30 grams)
+
+Dataset Quality:
+- Complete records (no missing values)
+- Balanced distribution across variables
+- Validated measurement protocols
+- Time-series measurements available for tumor volume`
+            },
+            
+            'export|download|csv|json': {
+                response: `💾 Data Export Options:
+                
+Available Export Formats:
+1. CSV (Comma Separated Values)
+   - Best for spreadsheet software (Excel, Google Sheets)
+   - Lightweight and widely compatible
+   
+2. JSON (JavaScript Object Notation)
+   - Best for programming/analysis
+   - Preserves data structure
+   - Easy to parse with Python/R/JavaScript
+
+3. Print View
+   - Printer-optimized formatting
+   - Removes interactive elements
+   - Clean layout for documentation
+
+Use the export buttons above the table to download the data in your preferred format.`
+            },
+            
+            'search|filter|find': {
+                response: `🔍 Search & Filter Features:
+                
+Search Capabilities:
+- Real-time search across all columns
+- Case-insensitive matching
+- Partial word matching
+
+Filter Examples:
+- Search "capomulin" to see all mice on this treatment
+- Search "female" to see all female mice
+- Search "25" to find mice with age/weight containing 25
+
+Sort Features:
+- Click any column header to sort
+- Ascending/descending order
+- Visual sort indicators
+
+Pagination:
+- 10 records per page
+- Navigate through 25 pages
+- Current page indicator`
+            },
+            
+            'hi|hello|hey': {
+                response: `👋 Hello! I'm your Dataset Analysis Assistant
+
+I can help you understand:
+- Treatment distribution and details
+- Demographic statistics
+- Data structure and quality
+- Search and filter techniques
+- Export options
+
+Try asking about:
+- "What treatments are included?"
+- "How many male vs female mice?"
+- "What's the age range?"
+- "How to export the data?"
+- "What search features are available?"
+
+I'm here to help you explore this pharmaceutical dataset!`
+            }
+        };
+
+        // Initialize the table
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTable();
+            setupEventListeners();
+            setupChatbot();
+        });
+
+        // Render table with current data
+        function renderTable() {
+            const tableBody = document.getElementById('tableBody');
+            const pageInfo = document.getElementById('pageInfo');
+            const pagination = document.getElementById('pagination');
+
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const pageData = filteredData.slice(startIndex, endIndex);
+            const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+
+            // Clear table
+            tableBody.innerHTML = '';
+
+            // Add rows
+            pageData.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.mouseId}</td>
+                    <td class="treatment-cell ${item.regimen.toLowerCase()}">${item.regimen}</td>
+                    <td class="gender-cell ${item.sex.toLowerCase()}">${item.sex}</td>
+                    <td>${item.age}</td>
+                    <td>${item.weight}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Update page info
+            pageInfo.textContent = `Showing ${startIndex + 1}-${Math.min(endIndex, filteredData.length)} of ${filteredData.length} entries`;
+
+            // Render pagination
+            renderPagination(pagination, totalPages);
+        }
+
+        // Render pagination buttons
+        function renderPagination(container, totalPages) {
+            container.innerHTML = '';
+
+            // Previous button
+            const prevItem = document.createElement('li');
+            prevItem.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevItem.innerHTML = `<a class="page-link" href="#" data-page="${currentPage - 1}">&laquo;</a>`;
+            container.appendChild(prevItem);
+
+            // Page buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#" data-page="${i}">${i}</a>`;
+                container.appendChild(pageItem);
+            }
+
+            // Next button
+            const nextItem = document.createElement('li');
+            nextItem.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextItem.innerHTML = `<a class="page-link" href="#" data-page="${currentPage + 1}">&raquo;</a>`;
+            container.appendChild(nextItem);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                filteredData = dataset.filter(item => 
+                    item.mouseId.toLowerCase().includes(searchTerm) ||
+                    item.regimen.toLowerCase().includes(searchTerm) ||
+                    item.sex.toLowerCase().includes(searchTerm) ||
+                    item.age.toString().includes(searchTerm) ||
+                    item.weight.toString().includes(searchTerm)
+                );
+                currentPage = 1;
+                renderTable();
+            });
+
+            // Sort functionality
+            document.querySelectorAll('[data-sort]').forEach(th => {
+                th.addEventListener('click', function() {
+                    const column = this.getAttribute('data-sort');
+                    
+                    if (sortColumn === column) {
+                        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        sortColumn = column;
+                        sortDirection = 'asc';
+                    }
+
+                    // Sort data
+                    filteredData.sort((a, b) => {
+                        let aVal = a[column];
+                        let bVal = b[column];
+
+                        // Handle string comparison
+                        if (typeof aVal === 'string') {
+                            return sortDirection === 'asc' ? 
+                                aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                        } else {
+                            return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
+                        }
+                    });
+
+                    // Update sort indicators
+                    document.querySelectorAll('[data-sort] i').forEach(icon => {
+                        icon.className = 'fas fa-sort';
+                    });
+                    this.querySelector('i').className = `fas fa-sort-${sortDirection === 'asc' ? 'up' : 'down'}`;
+
+                    renderTable();
+                });
+            });
+
+            // Pagination click handler
+            document.getElementById('pagination').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (e.target.tagName === 'A') {
+                    const page = parseInt(e.target.getAttribute('data-page'));
+                    if (!isNaN(page)) {
+                        currentPage = page;
+                        renderTable();
+                    }
+                }
+            });
+
+            // Export functionality
+            document.getElementById('exportCSV').addEventListener('click', function(e) {
+                e.preventDefault();
+                exportToCSV();
+            });
+
+            document.getElementById('exportJSON').addEventListener('click', function(e) {
+                e.preventDefault();
+                exportToJSON();
+            });
+        }
+
+        // Export to CSV
+        function exportToCSV() {
+            const headers = ['Mouse ID', 'Drug Regimen', 'Gender', 'Age (months)', 'Weight (g)'];
+            const csvContent = [
+                headers.join(','),
+                ...filteredData.map(item => [
+                    item.mouseId,
+                    item.regimen,
+                    item.sex,
+                    item.age,
+                    item.weight
+                ].join(','))
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'pharmaceutical_data.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Export to JSON
+        function exportToJSON() {
+            const jsonContent = JSON.stringify(filteredData, null, 2);
+            const blob = new Blob([jsonContent], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'pharmaceutical_data.json';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Chatbot functionality
+        function setupChatbot() {
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const closeChatbot = document.getElementById('closeChatbot');
+            const chatbotContainer = document.getElementById('chatbotContainer');
+            const chatSend = document.getElementById('chatSend');
+            const chatInput = document.getElementById('chatInput');
+            const chatBody = document.getElementById('chatbotBody');
+
+            // Chatbot toggle
+            chatbotToggle.addEventListener('click', () => {
+                chatbotContainer.classList.toggle('active');
+            });
+
+            closeChatbot.addEventListener('click', () => {
+                chatbotContainer.classList.remove('active');
+            });
+
+            // Send message function
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // Add user message
+                    addMessage(message, 'user');
+                    chatInput.value = '';
+                    
+                    // Show typing indicator
+                    const typingDiv = document.createElement('div');
+                    typingDiv.className = 'chat-message bot-message';
+                    typingDiv.innerHTML = `
+                        <div class="message-content">
+                            <span class="typing-indicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </span>
+                        </div>
+                    `;
+                    chatBody.appendChild(typingDiv);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                    
+                    // Get response
+                    setTimeout(() => {
+                        typingDiv.remove();
+                        const response = getChatbotResponse(message);
+                        addMessage(response, 'bot');
+                    }, 1000 + Math.random() * 1000);
+                }
+            }
+
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${sender}-message`;
+                if (sender === 'bot') {
+                    messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+                } else {
+                    messageDiv.innerHTML = `<div class="message-content" style="background: var(--primary-color); color: white; border-radius: 18px; padding: 0.75rem; margin-left: auto; max-width: 85%; border-bottom-right-radius: 4px;">${text}</div>`;
+                }
+                chatBody.appendChild(messageDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+
+            function getChatbotResponse(question) {
+                const lowerQ = question.toLowerCase();
+                
+                // Check knowledge base
+                for (const [category, data] of Object.entries(chatbotKnowledgeBase)) {
+                    const patterns = category.split('|');
+                    for (const pattern of patterns) {
+                        if (lowerQ.includes(pattern)) {
+                            return data.response;
+                        }
+                    }
+                }
+                
+                // Default response
+                return `🤔 I'm not sure I understand your question about "${question}". 
+
+Try asking about:
+- Treatment distribution in the dataset
+- Demographic statistics (gender, age, weight)
+- Data export options (CSV, JSON)
+- Search and filter features
+- Dataset structure and quality
+
+What specific aspect of the pharmaceutical dataset are you interested in?`;
+            }
+
+            // Event listeners
+            chatSend.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+
+            // Add typing indicator CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                .typing-indicator {
+                    display: flex;
+                    gap: 4px;
+                }
+                .typing-indicator span {
+                    width: 6px;
+                    height: 6px;
+                    background: #ccc;
+                    border-radius: 50%;
+                    animation: typing 1.4s infinite;
+                }
+                .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+                .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+                @keyframes typing {
+                    0%, 100% { opacity: 0.4; transform: scale(1); }
+                    50% { opacity: 1; transform: scale(1.2); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
 </body>
-​
-
 </html>

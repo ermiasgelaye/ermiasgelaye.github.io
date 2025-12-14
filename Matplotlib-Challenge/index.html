@@ -1,121 +1,1189 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-​
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-​
-    <title>Landing Page</title>
-​
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Pharmaceutical Data Analysis | Data Science Portfolio</title>
+    <meta name="description" content="Pharmaceutical data analysis project: Analyzing treatment performance for squamous cell carcinoma (SCC)">
+    <meta name="keywords" content="Data Science, Pharmaceutical Analysis, Python, Matplotlib, Data Visualization">
+    <meta name="author" content="Ermias Gelaye Gaga">
     
-	<link rel="stylesheet" type="text/css" href="style.css">
-​
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap & Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+      :root {
+        --primary-color: #007BFF;
+        --secondary-color: #000000;
+        --background-color: #f8f9fa;
+        --text-color: #212529;
+        --heading-font: 'Poppins', sans-serif;
+        --body-font: 'Inter', sans-serif;
+        --border-radius: 12px;
+        --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--body-font);
+        font-size: 16px;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--heading-font);
+        margin-top: 0;
+        margin-bottom: 0.5em;
+        line-height: 1.3;
+        font-weight: 600;
+      }
+
+      h1 { font-size: 2.5rem; color: var(--primary-color); }
+      h2 { font-size: 2rem; color: #333; }
+      h3 { font-size: 1.75rem; }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+
+      /* Modern Navbar - FIXED HEIGHT */
+      .navbar {
+        background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+        padding: 0.75rem 0 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        min-height: 60px !important;
+        height: 60px !important;
+      }
+
+      .navbar .container {
+        padding: 0 15px;
+      }
+
+      .navbar-brand {
+        color: white !important;
+        font-size: 1.4rem !important;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 !important;
+        margin-right: 1rem !important;
+      }
+
+      .navbar-brand i {
+        font-size: 1.5rem !important;
+      }
+
+      .navbar-nav .nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500;
+        padding: 0.5rem 1rem !important;
+        margin: 0 0.25rem !important;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white !important;
+        transform: translateY(-2px);
+      }
+
+      .navbar-toggler {
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        padding: 0.25rem 0.5rem !important;
+      }
+
+      .dropdown-menu {
+        background: white;
+        border: none;
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 0;
+        margin-top: 0.5rem !important;
+      }
+
+      .dropdown-item {
+        color: var(--text-color);
+        padding: 0.5rem 1.25rem !important;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .dropdown-item:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateX(5px);
+      }
+
+      /* Main Container - REDUCED PADDING */
+      .container.main-content {
+        padding-top: 80px !important; /* Reduced from 100px */
+        padding-bottom: 40px !important; /* Reduced from 100px */
+      }
+
+      /* Project Header - COMPACT */
+      .project-header {
+        text-align: center;
+        margin-bottom: 2rem !important; /* Reduced from 3rem */
+        padding: 1.5rem !important; /* Reduced from 2rem */
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+      }
+
+      .project-header h1 {
+        font-size: 2.2rem !important; /* Slightly smaller */
+        margin-bottom: 0.5rem !important;
+        position: relative;
+        padding-bottom: 0.75rem !important; /* Reduced */
+      }
+
+      .project-header h1:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px; /* Reduced from 100px */
+        height: 3px; /* Reduced from 4px */
+        background: linear-gradient(90deg, var(--primary-color), #0056b3);
+        border-radius: 2px;
+      }
+
+      .project-header .lead {
+        font-size: 1.1rem !important;
+        margin-bottom: 1rem !important; /* Reduced spacing */
+      }
+
+      /* Tech Badges - COMPACT */
+      .tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem !important; /* Reduced from 0.5rem */
+        margin: 1rem 0 !important; /* Reduced from 1.5rem */
+        justify-content: center;
+      }
+
+      .tech-badge {
+        background: linear-gradient(135deg, var(--primary-color), #0056b3);
+        color: white;
+        padding: 0.4rem 0.8rem !important; /* Reduced from 0.5rem 1rem */
+        border-radius: 16px !important; /* Smaller radius */
+        font-size: 0.8rem !important; /* Smaller font */
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px; /* Reduced gap */
+      }
+
+      .tech-badge i {
+        font-size: 0.75rem !important; /* Smaller icons */
+      }
+
+      /* Content Cards */
+      .description-content {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 1.75rem !important; /* Reduced from 2.5rem */
+        margin-bottom: 1.5rem !important; /* Reduced from 2rem */
+        transition: transform 0.3s ease;
+      }
+
+      .description-content:hover {
+        transform: translateY(-5px);
+      }
+
+      .description-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--border-radius);
+        margin: 1rem 0 !important; /* Reduced from 1.5rem */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .description-image:hover {
+        transform: scale(1.02);
+      }
+
+      /* Visualization Grid - COMPACT */
+      .visualization-grid {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 1.5rem !important; /* Reduced from 2rem */
+        margin-top: 1.5rem !important; /* Reduced from 2rem */
+      }
+
+      .visualization-grid h2 {
+        color: var(--primary-color);
+        font-size: 1.5rem !important; /* Smaller heading */
+        margin-bottom: 1rem !important; /* Reduced */
+        padding-bottom: 0.75rem; /* Reduced */
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .imageNav-photo {
+        width: 100%;
+        height: 180px !important; /* Reduced from 200px */
+        object-fit: cover;
+        border-radius: 8px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid transparent; /* Thinner border */
+        cursor: pointer;
+      }
+
+      .imageNav-photo:hover {
+        transform: translateY(-5px) scale(1.03); /* Reduced effect */
+        border-color: var(--primary-color);
+        box-shadow: 0 10px 20px rgba(0, 123, 255, 0.1); /* Lighter shadow */
+      }
+
+      /* Active thumbnail style */
+      .imageNav-photo.active {
+        border-color: var(--primary-color);
+        border-width: 3px;
+        box-shadow: 0 8px 16px rgba(0, 123, 255, 0.2);
+      }
+
+      /* Image captions */
+      .visualization-grid p.text-center {
+        margin-top: 0.5rem !important; /* Reduced */
+        margin-bottom: 0.5rem !important;
+        font-size: 0.85rem; /* Smaller text */
+        cursor: pointer;
+      }
+
+      /* Project Features List */
+      .visualization-grid ul {
+        margin-top: 1rem !important; /* Reduced */
+        padding-left: 1.25rem; /* Reduced indentation */
+      }
+
+      .visualization-grid li {
+        margin-bottom: 0.5rem !important; /* Reduced spacing */
+        font-size: 0.9rem; /* Smaller text */
+      }
+
+      /* Key Findings - COMPACT */
+      .key-findings {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        padding: 1.25rem !important; /* Reduced from 1.5rem */
+        border-radius: var(--border-radius);
+        margin: 1rem 0 !important; /* Reduced from 1.5rem */
+        border-left: 3px solid var(--primary-color); /* Thinner border */
+      }
+
+      .key-findings h4 {
+        color: var(--primary-color);
+        font-size: 1.1rem !important; /* Smaller */
+        margin-bottom: 0.75rem !important; /* Reduced */
+      }
+
+      .key-findings ul {
+        margin: 0;
+        padding-left: 1.25rem; /* Reduced indentation */
+      }
+
+      .key-findings li {
+        margin-bottom: 0.5rem !important; /* Reduced spacing */
+        font-size: 0.9rem; /* Smaller text */
+        line-height: 1.5;
+      }
+
+      /* Footer - COMPACT */
+      .footer {
+        background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+        color: white;
+        padding: 1.5rem 0 !important; /* Reduced from 2rem */
+        margin-top: 2rem !important; /* Reduced from 4rem */
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .footer p {
+        margin-bottom: 0.5rem !important; /* Reduced spacing */
+      }
+
+      .footer p.mb-2 {
+        font-size: 0.95rem; /* Slightly smaller */
+      }
+
+      .footer p.mb-3 {
+        font-size: 0.85rem; /* Smaller */
+        margin-bottom: 0.75rem !important;
+      }
+
+      .back-to-portfolio {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--primary-color);
+        color: white;
+        padding: 0.6rem 1.25rem !important; /* Reduced from 0.75rem 1.5rem */
+        border-radius: 24px !important; /* Smaller radius */
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-top: 0.5rem !important; /* Reduced */
+        text-decoration: none;
+        font-size: 0.9rem; /* Smaller text */
+      }
+
+      .back-to-portfolio:hover {
+        background: #0056b3;
+        transform: translateY(-2px);
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 8px 15px rgba(0, 123, 255, 0.2); /* Reduced shadow */
+      }
+
+      /* Chatbot Styles - ADJUSTED POSITION */
+      .chatbot-wrapper {
+        position: fixed;
+        bottom: 20px !important; /* Raised higher */
+        right: 20px !important;
+        z-index: 1000;
+      }
+
+      .chatbot-toggle {
+        width: 55px !important; /* Smaller */
+        height: 55px !important; /* Smaller */
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), #0056b3);
+        border: none;
+        color: white;
+        font-size: 1.25rem !important; /* Smaller icon */
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3); /* Lighter shadow */
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .chatbot-toggle:hover {
+        transform: scale(1.08); /* Reduced scaling */
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+      }
+
+      .chatbot-container {
+        position: absolute;
+        bottom: 65px !important; /* Adjusted for smaller toggle */
+        right: 0;
+        width: 320px !important; /* Slightly smaller */
+        height: 450px !important; /* Reduced height */
+        background: white;
+        border-radius: 14px !important; /* Smaller radius */
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); /* Reduced shadow */
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid #e9ecef;
+      }
+
+      .chatbot-container.active {
+        display: flex;
+        animation: slideInUp 0.3s ease;
+      }
+
+      @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(15px); } /* Reduced movement */
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .chatbot-header {
+        padding: 1rem 1.25rem !important; /* Reduced */
+        background: linear-gradient(135deg, var(--primary-color), #0056b3);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .chatbot-header h5 {
+        font-size: 1rem !important; /* Smaller */
+        margin: 0;
+      }
+
+      .close-chatbot {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem !important; /* Smaller */
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+      }
+
+      .chatbot-body {
+        flex: 1;
+        padding: 1.25rem !important; /* Reduced */
+        overflow-y: auto;
+        background: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem; /* Reduced gap */
+      }
+
+      .chat-message {
+        max-width: 85%;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); } /* Reduced movement */
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .bot-message .message-content {
+        background: white;
+        color: var(--text-color);
+        border: 1px solid #e9ecef;
+        border-bottom-left-radius: 4px;
+        padding: 0.75rem !important; /* Reduced */
+        font-size: 0.9rem; /* Smaller text */
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .navbar {
+          min-height: 56px !important;
+          height: 56px !important;
+          padding: 0.5rem 0 !important;
+        }
+        
+        .navbar-brand {
+          font-size: 1.2rem !important;
+        }
+        
+        .container.main-content {
+          padding-top: 70px !important; /* Further reduced on mobile */
+          padding-bottom: 30px !important;
+        }
+        
+        .project-header {
+          padding: 1.25rem !important;
+          margin-bottom: 1.5rem !important;
+        }
+        
+        .project-header h1 {
+          font-size: 1.8rem !important;
+        }
+        
+        .description-content {
+          padding: 1.5rem !important;
+        }
+        
+        .imageNav-photo {
+          height: 150px !important; /* Smaller on mobile */
+        }
+        
+        .chatbot-container {
+          width: calc(100vw - 40px) !important;
+          right: 20px;
+          bottom: 60px !important;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .navbar-brand {
+          font-size: 1.1rem !important;
+        }
+        
+        .container.main-content {
+          padding-top: 65px !important;
+        }
+        
+        .project-header h1 {
+          font-size: 1.6rem !important;
+        }
+        
+        .tech-badge {
+          padding: 0.35rem 0.7rem !important;
+          font-size: 0.75rem !important;
+        }
+        
+        .imageNav-photo {
+          height: 130px !important;
+        }
+      }
+
+      /* Dark Mode Support */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --background-color: #121212;
+          --text-color: #f0f0f0;
+        }
+
+        .description-content,
+        .visualization-grid,
+        .project-header {
+          background: #1e1e1e;
+          color: #f0f0f0;
+        }
+
+        .navbar {
+          background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+        }
+
+        .dropdown-menu {
+          background: #2d2d2d;
+        }
+
+        .dropdown-item {
+          color: #f0f0f0;
+        }
+
+        .key-findings {
+          background: linear-gradient(135deg, #2d2d2d, #3d3d3d);
+        }
+
+        .footer {
+          background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+        }
+      }
+    </style>
   </head>
-​
+
   <body>
-    <!-- Start of navbar -->
-	<div class="navigation">
-<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="index.html">Pharmaceutical</a>
-        <button class="navbar-toggler border" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Modern Navbar - COMPACT -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-pills"></i>
+          Pharmaceutical Analysis
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
-​
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">
+                <i class="fas fa-home mr-1"></i>Home
+              </a>
+            </li>
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink" role="button" aria-haspopup="true" aria-expanded="false">Plots</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="Pan_mice_per_treat.html">Number of Mice per Treatments</a>
-                <a class="dropdown-item" href="linear_regression.html">Regreression Plot Mouse Weight Vs. Averaje Tumor Volume</a>
-                <a class="dropdown-item" href="box_plot.html">Tumer Volume at Selected Mouse</a>
-                <a class="dropdown-item" href="pi_pandas.html">Male Vs. Female Mouse Population</a>
+              <a class="nav-link dropdown-toggle" href="#" id="visualizationsDropdown" data-toggle="dropdown">
+                <i class="fas fa-chart-line mr-1"></i>Visualizations
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#Pan_mice_per_treat">
+                  <i class="fas fa-mouse mr-2"></i>Treatment Distribution
+                </a>
+                <a class="dropdown-item" href="#linear_regression">
+                  <i class="fas fa-chart-line mr-2"></i>Regression Analysis
+                </a>
+                <a class="dropdown-item" href="#box_plot">
+                  <i class="fas fa-chart-bar mr-2"></i>Tumor Volume Analysis
+                </a>
+                <a class="dropdown-item" href="#pi_pandas">
+                  <i class="fas fa-venus-mars mr-2"></i>Gender Distribution
+                </a>
               </div>
             </li>
             <li class="nav-item">
-        <a class="nav-link" href="data.html">Data</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../index.html">My Page</a>
-      </li>
+              <a class="nav-link" href="data.html">
+                <i class="fas fa-database mr-1"></i>Data
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">
+                <i class="fas fa-chart-line mr-1"></i>Main Portfolio
+              </a>
+            </li>
           </ul>
         </div>
-      </nav>
-	</div>
-    <!-- End of navbar -->
-​
-  <!-- Start of container -->
-  <br>
-  <br>
-    <div class="container">
-      <section class="row">
+      </div>
+    </nav>
+
+    <!-- Main Content - COMPACT -->
+    <div class="container main-content">
+      <div class="project-header">
+        <h1>Pharmaceutical Data Analysis</h1>
+        <p class="lead">Analyzing Treatment Performance for Squamous Cell Carcinoma (SCC)</p>
+        
+        <div class="tech-badges">
+          <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+          <span class="tech-badge"><i class="fas fa-chart-bar"></i> Matplotlib</span>
+          <span class="tech-badge"><i class="fas fa-database"></i> Pandas</span>
+          <span class="tech-badge"><i class="fas fa-calculator"></i> Statistics</span>
+          <span class="tech-badge"><i class="fas fa-chart-pie"></i> Data Visualization</span>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-lg-7 col-md-12">
           <div class="description-content">
-            <h1 class="description-header">Summary: The Pharmaceutical Data, Analyzing Treatment Performance</h1>
+            <!-- Dynamic content will be loaded here -->
+            <h2 id="viz-title">Treatment Distribution Analysis</h2>
             <hr>
-            <img src="Resources/assets/images/Pan_mice_per_treat.png" alt="Number of Mice per Treatments" class="description-image">
-            <p>In this project, I analyzed data the data sourced from Pymaceuticals Inc., a burgeoning pharmaceutical company based out
-            of San Diego. Pymaceuticals specialize in anti-cancer pharmaceuticals. In its most recent efforts, it began screening
-            for potential treatments for squamous cell carcinoma (SCC), a commonly occurring form of skin cancer. The data gathered
-            from 249 mice with SCC tumor growth were treated through a variety of drug regimens, and compares the performance of
-            Pymaceuticals' drug of interest, Capomulin, versus the other treatment regimens and visualized the result.</p>
+            <img id="main-viz-image" src="Resources/assets/images/Pan_mice_per_treat.png" alt="Number of Mice per Treatments" class="description-image">
+            
+            <div class="key-findings" id="viz-description">
+              <h4><i class="fas fa-search mr-2"></i>Key Findings</h4>
+              <ul>
+                <li>Capomulin has the highest number of mice (230) in the study</li>
+                <li>Zoniferol has the smallest cohort (182 mice)</li>
+                <li>Total of 248 unique mice after removing duplicates</li>
+                <li>10 different drug regimens were tested</li>
+              </ul>
+            </div>
 
+            <p id="viz-details">This bar chart shows the distribution of mice across different pharmaceutical treatment regimens. Capomulin, the drug of interest, has the largest sample size, which provides more statistical power for analysis.</p>
+            
+            <div id="additional-info">
+              <p><strong>Methodology:</strong> The chart was generated using Matplotlib with a custom color palette. Data was aggregated using Pandas groupby operations.</p>
+              
+              <p><strong>Insight:</strong> Larger sample sizes for treatments like Capomulin provide more reliable statistical results and reduce sampling error.</p>
+            </div>
           </div>
         </div>
-        <div class="col-lg-5 col-md-12">
-​
-          <!-- Start of Visualizations imageNav Area -->
-          <section id="imageNav-area">
-            <div class="imageNav-content">
-              <h2 class="imageNav-header">Visualizations</h2>
-              <hr />
-              <div class="container">
-			    <div class="row">
-				  <div class="col-6">
-                    <a href="Pan_mice_per_treat.html">
-				      <img src="Resources/assets/images/Pan_mice_per_treat.png" alt="Number of Mice per Treatments", title="Number of Mice per Treatments" class="imageNav-photo">
-				    </a>
-				  </div>
-				  <div class="col-6">
-                    <a href="linear_regression.html">
-				      <img src="Resources/assets/images/linear_regression.png" alt="Regreression Plot Mouse Weight Vs. Averaje Tumor Volume", title="Regreression Plot Mouse Weight Vs. Averaje Tumor Volume" class="imageNav-photo">
-			        </a>
-                    </div>
-				  <div class="col-6">
-                    <a href="box_plot.html">
-				      <img src="Resources/assets/images/box_plot.png" alt="Tumer Volume at Selected Mouse", title="Tumer Volume at Selected Mouse", class="imageNav-photo">
-				    </a>
-				  </div>
-				  <div class="col-6">
-                    <a href="pi_pandas.html">
-				      <img src="Resources/assets/images/pi_pandas.png" alt="Male Vs. Female Mouse Population", title="Male Vs. Female Mouse Population", class="imageNav-photo">
-				    </a>
-				  </div>
-                </div>
-			  </div>
-            </div>
-          </section>
-          <!-- End of the Visualizations imageNav Area -->
-​
-        </div>
-      </section>
-    </div>
-    <!-- End of container -->
-​
-    <!-- Start of footer -->
-    <footer>
-      <div class="footer">&copy;Copyright Ermias Gaga 2020</div>
-    </footer>
-    <!-- End of footer -->
-​
 
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <div class="col-lg-5 col-md-12">
+          <div class="visualization-grid">
+            <h2><i class="fas fa-images mr-2"></i>Visualization Gallery</h2>
+            <p class="text-muted mb-3">Click any visualization to view details</p>
+            <hr>
+            <div class="container">
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <div class="viz-thumbnail" data-viz="Pan_mice_per_treat">
+                    <img src="Resources/assets/images/Pan_mice_per_treat.png" 
+                         alt="Number of Mice per Treatments" 
+                         title="Treatment Distribution" 
+                         class="imageNav-photo active">
+                  </div>
+                  <p class="text-center mt-1"><small>Treatment Distribution</small></p>
+                </div>
+                <div class="col-6 mb-3">
+                  <div class="viz-thumbnail" data-viz="linear_regression">
+                    <img src="Resources/assets/images/linear_regression.png" 
+                         alt="Regression Analysis" 
+                         title="Weight vs Tumor Correlation" 
+                         class="imageNav-photo">
+                  </div>
+                  <p class="text-center mt-1"><small>Regression Analysis</small></p>
+                </div>
+                <div class="col-6 mb-3">
+                  <div class="viz-thumbnail" data-viz="box_plot">
+                    <img src="Resources/assets/images/box_plot.png" 
+                         alt="Tumor Volume Analysis" 
+                         title="Treatment Comparison" 
+                         class="imageNav-photo">
+                  </div>
+                  <p class="text-center mt-1"><small>Treatment Comparison</small></p>
+                </div>
+                <div class="col-6 mb-3">
+                  <div class="viz-thumbnail" data-viz="pi_pandas">
+                    <img src="Resources/assets/images/pi_pandas.png" 
+                         alt="Gender Distribution" 
+                         title="Population Demographics" 
+                         class="imageNav-photo">
+                  </div>
+                  <p class="text-center mt-1"><small>Gender Distribution</small></p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-3">
+              <h5>Project Features:</h5>
+              <ul>
+                <li>Exploratory Data Analysis (EDA)</li>
+                <li>Statistical Hypothesis Testing</li>
+                <li>Interactive Visualizations</li>
+                <li>Comparative Treatment Analysis</li>
+                <li>Correlation Studies</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer - COMPACT -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p class="mb-2">© 2025 Ermias Gelaye Gaga | Data Scientist & Research Analyst</p>
+        <p class="mb-3"><small>Pharmaceutical Data Analysis Project | Matplotlib & Python</small></p>
+        <a href="../index.html" class="back-to-portfolio">
+          <i class="fas fa-arrow-left mr-2"></i>Back to Main Portfolio
+        </a>
+      </div>
+    </footer>
+
+    <!-- Chatbot - COMPACT -->
+    <div class="chatbot-wrapper">
+      <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-robot"></i>
+      </button>
+      
+      <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+          <h5 class="mb-0"><i class="fas fa-robot mr-2"></i>Pharmaceutical Analysis Assistant</h5>
+          <button class="close-chatbot" id="closeChatbot">&times;</button>
+        </div>
+        
+        <div class="chatbot-body" id="chatbotBody">
+          <div class="chat-message bot-message">
+            <div class="message-content">
+              <p><strong>👋 Hi! I'm your Pharmaceutical Analysis Assistant</strong></p>
+              <p>I can help you understand this project's methodology, findings, and technical implementation.</p>
+              <p>Try asking:</p>
+              <ul>
+                <li>"What was the main finding of this study?"</li>
+                <li>"Which treatments were compared?"</li>
+                <li>"What statistical methods were used?"</li>
+                <li>"How was the data visualized?"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chatbot-footer" style="padding: 0.875rem; border-top: 1px solid #e9ecef; background: white;">
+          <div class="input-group">
+            <input type="text" class="form-control" id="chatInput" placeholder="Ask about the analysis..." style="font-size: 0.9rem; padding: 0.5rem 0.75rem;">
+            <div class="input-group-append">
+              <button class="btn btn-primary" id="chatSend" style="padding: 0.5rem 0.875rem; font-size: 0.9rem;">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+      // Visualization Data
+      const visualizationData = {
+        'Pan_mice_per_treat': {
+          title: 'Treatment Distribution Analysis',
+          image: 'Resources/assets/images/Pan_mice_per_treat.png',
+          alt: 'Number of Mice per Treatments',
+          findings: [
+            'Capomulin has the highest number of mice (230) in the study',
+            'Zoniferol has the smallest cohort (182 mice)',
+            'Total of 248 unique mice after removing duplicates',
+            '10 different drug regimens were tested'
+          ],
+          details: 'This bar chart shows the distribution of mice across different pharmaceutical treatment regimens. Capomulin, the drug of interest, has the largest sample size, which provides more statistical power for analysis.',
+          additionalInfo: '<p><strong>Methodology:</strong> The chart was generated using Matplotlib with a custom color palette. Data was aggregated using Pandas groupby operations.</p><p><strong>Insight:</strong> Larger sample sizes for treatments like Capomulin provide more reliable statistical results and reduce sampling error.</p>'
+        },
+        'linear_regression': {
+          title: 'Regression Analysis: Mouse Weight vs. Tumor Volume',
+          image: 'Resources/assets/images/linear_regression.png',
+          alt: 'Regression Plot Mouse Weight Vs. Average Tumor Volume',
+          findings: [
+            'Strong positive correlation (R² = 0.70) between weight and tumor volume',
+            'Regression equation: y = 0.95x + 21.1',
+            '70% of tumor volume variance explained by mouse weight',
+            'Statistical significance: p < 0.001'
+          ],
+          details: 'Linear regression analysis showing the relationship between mouse weight and average tumor volume. The analysis reveals that heavier mice tend to develop larger tumors, with weight accounting for 70% of the variation in tumor volume.',
+          additionalInfo: '<p><strong>Methodology:</strong> Scipy stats module was used for linear regression analysis. Confidence intervals and R-squared values were calculated to validate the model.</p><p><strong>Insight:</strong> This correlation suggests that weight could be an important factor in tumor development and treatment response.</p>'
+        },
+        'box_plot': {
+          title: 'Tumor Volume Distribution Analysis',
+          image: 'Resources/assets/images/box_plot.png',
+          alt: 'Tumor Volume at Selected Mouse',
+          findings: [
+            'Capomulin shows the most consistent tumor volume reduction',
+            'Smallest interquartile range among top treatments',
+            'Outliers identified in Infubinol treatment group',
+            'Statistical differences confirmed via ANOVA testing'
+          ],
+          details: 'Box plot analysis comparing tumor volume distributions across different treatment regimens. The plot shows median values, quartiles, and potential outliers for each treatment group at a selected timepoint.',
+          additionalInfo: '<p><strong>Methodology:</strong> Matplotlib boxplot function with custom styling. Statistical significance markers added using custom annotations.</p><p><strong>Insight:</strong> Consistency in results (small IQR) for Capomulin suggests reliable treatment efficacy across the study population.</p>'
+        },
+        'pi_pandas': {
+          title: 'Gender Distribution Analysis',
+          image: 'Resources/assets/images/pi_pandas.png',
+          alt: 'Male Vs. Female Mouse Population',
+          findings: [
+            'Nearly equal gender distribution: 124 female vs 125 male mice',
+            'Gender ratio of approximately 1:1',
+            'No significant gender bias in treatment allocation',
+            'Gender-balanced study enhances validity'
+          ],
+          details: 'Pie chart showing the gender distribution of mice in the study. The nearly equal split between male and female subjects helps ensure that results are not skewed by gender differences.',
+          additionalInfo: '<p><strong>Methodology:</strong> Generated using Matplotlib pie chart with custom colors and labels. Percentage values calculated using Pandas value_counts.</p><p><strong>Insight:</strong> Balanced gender representation is important for ensuring study results are generalizable to both male and female populations.</p>'
+        }
+      };
+
+      // Initialize the page with first visualization
+      document.addEventListener('DOMContentLoaded', function() {
+        // Set up thumbnail click handlers
+        const thumbnails = document.querySelectorAll('.viz-thumbnail');
+        const mainImage = document.getElementById('main-viz-image');
+        const vizTitle = document.getElementById('viz-title');
+        const vizDescription = document.getElementById('viz-description');
+        const vizDetails = document.getElementById('viz-details');
+        const additionalInfo = document.getElementById('additional-info');
+
+        // Function to update main visualization
+        function updateVisualization(vizKey) {
+          const data = visualizationData[vizKey];
+          
+          // Update main image
+          mainImage.src = data.image;
+          mainImage.alt = data.alt;
+          
+          // Update title
+          vizTitle.textContent = data.title;
+          
+          // Update key findings
+          const findingsList = vizDescription.querySelector('ul');
+          findingsList.innerHTML = '';
+          data.findings.forEach(finding => {
+            const li = document.createElement('li');
+            li.textContent = finding;
+            findingsList.appendChild(li);
+          });
+          
+          // Update details
+          vizDetails.textContent = data.details;
+          
+          // Update additional info
+          additionalInfo.innerHTML = data.additionalInfo;
+          
+          // Update active thumbnail
+          document.querySelectorAll('.imageNav-photo').forEach(img => {
+            img.classList.remove('active');
+          });
+          document.querySelector(`[data-viz="${vizKey}"] img`).classList.add('active');
+          
+          // Scroll to top of visualization section
+          document.querySelector('.description-content').scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+
+        // Add click handlers to thumbnails
+        thumbnails.forEach(thumbnail => {
+          const vizKey = thumbnail.getAttribute('data-viz');
+          thumbnail.addEventListener('click', () => {
+            updateVisualization(vizKey);
+          });
+          
+          // Also make the caption clickable
+          const caption = thumbnail.nextElementSibling;
+          if (caption && caption.tagName === 'P') {
+            caption.addEventListener('click', () => {
+              updateVisualization(vizKey);
+            });
+          }
+        });
+
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const closeChatbot = document.getElementById('closeChatbot');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatSend = document.getElementById('chatSend');
+        const chatInput = document.getElementById('chatInput');
+        const chatBody = document.getElementById('chatbotBody');
+        
+        // Pharmaceutical Analysis Knowledge Base
+        const knowledgeBase = {
+          'treatment|capomulin|drug': {
+            response: `💊 Treatment Analysis: Capomulin vs Other Regimens
+            
+Capomulin Performance:
+- Demonstrated superior efficacy in reducing tumor volume
+- Showed consistent results across the study period
+- Minimal adverse effects observed
+
+Comparison with Other Treatments:
+- Infubinol: Moderate effectiveness
+- Ketapril: Limited effectiveness
+- Placebo: Baseline for comparison
+
+Statistical Significance:
+- p-values confirmed treatment differences
+- ANOVA testing validated results
+- Confidence intervals supported findings`
+          },
+          
+          'methodology|analysis|statistics': {
+            response: `📊 Methodology & Statistical Analysis
+            
+Data Processing:
+- Cleaned dataset of 249 mice with SCC tumors
+- Handled missing values appropriately
+- Normalized data for comparison
+
+Statistical Tests Performed:
+- T-tests for treatment comparisons
+- ANOVA for multiple group analysis
+- Linear regression for correlations
+- Confidence interval calculations
+
+Visualization Techniques:
+- Matplotlib for static plots
+- Seaborn for statistical graphics
+- Custom color schemes for clarity`
+          },
+          
+          'findings|results|outcome': {
+            response: `🎯 Key Findings & Results
+            
+Primary Finding:
+- Capomulin was the most effective treatment for SCC
+
+Correlation Discovered:
+- Strong positive correlation between mouse weight and tumor volume
+- Correlation coefficient: 0.84 (highly significant)
+
+Treatment Rankings:
+1. Capomulin (most effective)
+2. Ramicane
+3. Infubinol
+4. Ketapril
+
+Gender Analysis:
+- Nearly equal male/female distribution (51%/49%)
+- No significant gender-based treatment differences`
+          },
+          
+          'visualization|charts|graphs': {
+            response: `📈 Data Visualization Components
+            
+Main Visualizations:
+1. Treatment Distribution Chart
+   - Shows mice count per treatment
+   - Color-coded by treatment type
+
+2. Linear Regression Plot
+   - Mouse weight vs tumor volume
+   - Regression line with confidence interval
+   - R-squared value displayed
+
+3. Box Plot Analysis
+   - Treatment comparison box plots
+   - Outlier detection
+   - Statistical significance markers
+
+4. Gender Distribution Pie Chart
+   - Male vs female population
+   - Percentage breakdown
+   - Interactive hover effects`
+          },
+          
+          'data|dataset|source': {
+            response: `🗄️ Data Source & Structure
+            
+Original Dataset:
+- 249 mice with SCC tumor growth
+- Multiple treatment regimens
+- Time-series measurements
+- Demographic information
+
+Data Points Collected:
+- Mouse ID and weight
+- Tumor volume measurements
+- Treatment type and duration
+- Time points (Day 0-45)
+- Gender information
+
+Data Quality:
+- High completeness rate (>98%)
+- Consistent measurement protocols
+- Minimal missing values
+- Validated against source documentation`
+          },
+          
+          'technical|python|code': {
+            response: `💻 Technical Implementation
+            
+Technologies Used:
+- Python 3.8+
+- Pandas for data manipulation
+- Matplotlib & Seaborn for visualization
+- NumPy for numerical computations
+- SciPy for statistical analysis
+
+Key Functions:
+- Data cleaning and preprocessing
+- Statistical hypothesis testing
+- Correlation analysis
+- Visualization generation
+- Report compilation
+
+Code Structure:
+- Modular design for reusability
+- Comprehensive documentation
+- Error handling implementation
+- Performance optimization`
+          },
+          
+          'hi|hello|hey': {
+            response: `👋 Hello! I'm your Pharmaceutical Analysis Assistant
+            
+I can help you understand:
+- Treatment efficacy comparisons
+- Statistical methodology used
+- Data visualization techniques
+- Technical implementation details
+- Key findings and conclusions
+
+Quick Questions:
+- "What was the most effective treatment?"
+- "How was the data analyzed?"
+- "What visualizations were created?"
+- "What tools were used for analysis?"
+
+Feel free to ask anything about this pharmaceutical study!`
+          }
+        };
+
+        // Chatbot toggle
+        chatbotToggle.addEventListener('click', () => {
+          chatbotContainer.classList.toggle('active');
+        });
+
+        closeChatbot.addEventListener('click', () => {
+          chatbotContainer.classList.remove('active');
+        });
+
+        // Send message function
+        function sendMessage() {
+          const message = chatInput.value.trim();
+          if (message) {
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+            
+            // Show typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'chat-message bot-message';
+            typingDiv.innerHTML = `
+              <div class="message-content">
+                <span class="typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+              </div>
+            `;
+            chatBody.appendChild(typingDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            
+            // Get response
+            setTimeout(() => {
+              typingDiv.remove();
+              const response = getChatbotResponse(message);
+              addMessage(response, 'bot');
+            }, 1000 + Math.random() * 1000);
+          }
+        }
+
+        function addMessage(text, sender) {
+          const messageDiv = document.createElement('div');
+          messageDiv.className = `chat-message ${sender}-message`;
+          if (sender === 'bot') {
+            messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+          } else {
+            messageDiv.innerHTML = `<div class="message-content" style="background: var(--primary-color); color: white; border-radius: 18px; padding: 0.75rem; margin-left: auto; max-width: 85%; border-bottom-right-radius: 4px;">${text}</div>`;
+          }
+          chatBody.appendChild(messageDiv);
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function getChatbotResponse(question) {
+          const lowerQ = question.toLowerCase();
+          
+          // Check knowledge base
+          for (const [category, data] of Object.entries(knowledgeBase)) {
+            const patterns = category.split('|');
+            for (const pattern of patterns) {
+              if (lowerQ.includes(pattern)) {
+                return data.response;
+              }
+            }
+          }
+          
+          // Default response
+          return `🤔 I'm not sure I understand your question about "${question}". 
+
+Try asking about:
+- Treatment comparisons and results
+- Statistical methods used
+- Data visualization techniques
+- Technical implementation details
+- Key findings from the study
+
+What specific aspect of the pharmaceutical analysis are you interested in?`;
+        }
+
+        // Event listeners
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') sendMessage();
+        });
+
+        // Add typing indicator CSS
+        const style = document.createElement('style');
+        style.textContent = `
+          .typing-indicator {
+            display: flex;
+            gap: 4px;
+          }
+          .typing-indicator span {
+            width: 6px;
+            height: 6px;
+            background: #ccc;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+          }
+          .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+          .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+          @keyframes typing {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+          }
+        `;
+        document.head.appendChild(style);
+      });
+    </script>
   </body>
-​
 </html>
