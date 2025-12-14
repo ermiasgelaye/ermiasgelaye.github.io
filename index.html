@@ -5,6 +5,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
+    <meta name="description" content="Data Science Portfolio with AI Chatbot | Python | Machine Learning | Data Visualization">
+    <meta name="keywords" content="Data Science, Machine Learning, Python, Portfolio, AI, Data Analyst">
+	<meta name="author" content="Ermias Gelaye Gaga">
 	<link rel="stylesheet" href="01-cv-portfolio/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="01-cv-portfolio/css/styles.css">
@@ -13,19 +16,193 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<!-- Font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700%7CAllura" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<!-- Stylesheets -->
 	<link href="common-css/bootstrap.css" rel="stylesheet">
 	<link href="common-css/ionicons.css" rel="stylesheet">
 	<link href="common-css/fluidbox.min.css" rel="stylesheet">
 	<link href="01-cv-portfolio/css/styles.css" rel="stylesheet">
 	<link href="01-cv-portfolio/css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="01-cv-portfolio/css/reset.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<link href="common-css/ionicons.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+	<link rel="stylesheet" href="01-cv-portfolio/css/styles.css">
+	<link rel="stylesheet" href="01-cv-portfolio/css/responsive.css">
     <!-- In your <head> -->
    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
- 
+   <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+	<style>
+		/* ===== ENHANCEMENTS ===== */
 
+		@keyframes spin {
+			to { transform: rotate(360deg); }
+		}
+
+		/* Theme Toggle */
+		.theme-toggle {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			z-index: 1000;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background: var(--primary-color);
+			color: white;
+			border: none;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.2rem;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+			transition: all 0.3s ease;
+		}
+
+		.theme-toggle:hover {
+			transform: scale(1.1);
+			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+		}
+
+		/* Back to Top */
+		.back-to-top {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			width: 50px;
+			height: 50px;
+			background: var(--primary-color);
+			color: white;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-decoration: none;
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s ease;
+			z-index: 999;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		}
+
+		.back-to-top.visible {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.back-to-top:hover {
+			transform: translateY(-5px);
+			background: #0056b3;
+		}
+
+		/* Gradient Text */
+		.gradient-text {
+			background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			background-size: 300% 300%;
+			animation: gradient 3s ease infinite;
+		}
+
+		@keyframes gradient {
+			0%, 100% { background-position: 0% 50%; }
+			50% { background-position: 100% 50%; }
+		}
+
+		/* Animated Gradient Border */
+		.animated-border {
+			position: relative;
+			background: white;
+			border-radius: var(--border-radius);
+			z-index: 1;
+		}
+
+		.animated-border::before {
+			content: '';
+			position: absolute;
+			top: -2px;
+			left: -2px;
+			right: -2px;
+			bottom: -2px;
+			background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+			border-radius: calc(var(--border-radius) + 2px);
+			z-index: -1;
+			animation: gradient 3s ease infinite;
+			background-size: 300% 300%;
+		}
+
+		/* Typewriter Effect */
+		.typewriter {
+			overflow: hidden;
+			border-right: .15em solid var(--primary-color);
+			white-space: nowrap;
+			margin: 0 auto;
+			animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+		}
+
+		@keyframes typing {
+			from { width: 0 }
+			to { width: 100% }
+		}
+
+		@keyframes blink-caret {
+			from, to { border-color: transparent }
+			50% { border-color: var(--primary-color) }
+		}
+
+		/* Particle Background */
+		#particles-js {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			pointer-events: none;
+		}
+
+		/* Modern Card Hover Effects */
+		.modern-card {
+			transform-style: preserve-3d;
+			transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.modern-card:hover {
+			transform: translateY(-10px) rotateX(5deg);
+		}
+
+		/* Glass Morphism */
+		.glass-effect {
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		}
+
+		body.dark-mode .glass-effect {
+			background: rgba(0, 0, 0, 0.2);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+		}
+	</style>
 </head>
 <body>
+
+
+	<!-- Theme Toggle -->
+	<button class="theme-toggle" id="themeToggle">
+		<i class="fas fa-moon"></i>
+	</button>
+
+	<!-- Back to Top -->
+	<a href="#" class="back-to-top" id="backToTop">
+		<i class="fas fa-arrow-up"></i>
+	</a>
+
+	<!-- Particle Background -->
+	<div id="particles-js"></div>
+
 	<header>
 		<div class="container">
 			<div class="heading-wrapper">
@@ -1203,6 +1380,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 10000);
 });
+
 </script>
 
 </body>

@@ -1178,11 +1178,11 @@ footer .copyright {
 }
 
 .contact-form .form-control:invalid:not(:focus):not(:placeholder-shown) {
-    border-color: #dc3545;
+    border-color: #007bff;
 }
 
 .contact-form .form-control:valid:not(:focus):not(:placeholder-shown) {
-    border-color: #28a745;
+    border-color: #000000;
 }
 
 .contact-form textarea.form-control {
@@ -1198,16 +1198,16 @@ footer .copyright {
 
 /* Form validation states */
 .contact-form .is-invalid {
-    border-color: #dc3545 !important;
+    border-color: #007bff !important;
 }
 
 .contact-form .is-valid {
-    border-color: #28a745 !important;
+    border-color: #000000 !important;
 }
 
 .contact-form .invalid-feedback {
     display: none;
-    color: #dc3545;
+    color: #007bff;
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
@@ -1250,7 +1250,7 @@ footer .copyright {
     position: absolute;
     top: -5px;
     right: -5px;
-    background: #ff4757;
+    background: #007bff;
     color: white;
     width: 20px;
     height: 20px;
@@ -1604,4 +1604,470 @@ footer .copyright {
     0%, 100% { transform: translateX(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
     20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+/* ===== ENHANCEMENTS ===== */
+
+/* Dark Mode */
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --secondary-color: #bbbbbb;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode header {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .contact-form-wrapper,
+body.dark-mode .project-card,
+body.dark-mode .circular-progress-card,
+body.dark-mode .linear-progress-skill,
+body.dark-mode .timeline-content,
+body.dark-mode .personal-interests {
+    background-color: #1e1e1e;
+    border-color: #333;
+    color: #ffffff;
+}
+
+body.dark-mode .contact-form-wrapper {
+    background: rgba(30, 30, 30, 0.95);
+}
+
+body.dark-mode .progress {
+    background-color: #333;
+}
+
+body.dark-mode .counter-section {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode footer {
+    background-color: #0a0a0a;
+}
+
+body.dark-mode .section .heading h6 {
+    color: #bbbbbb;
+}
+
+body.dark-mode .card-subtitle {
+    color: #4da6ff;
+}
+
+body.dark-mode .project-description,
+body.dark-mode .experience-bullets li,
+body.dark-mode .skill-description,
+body.dark-mode .skill-details p {
+    color: #cccccc;
+}
+
+/* Profile Image Enhancement */
+.profile-img {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.profile-img .modern-card {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-mode .profile-img .modern-card {
+    border-color: #333;
+}
+
+.profile-img:hover .modern-card {
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: 0 20px 50px rgba(0, 123, 255, 0.3);
+}
+
+.profile-glow {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle at center, rgba(0, 123, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.profile-img:hover .profile-glow {
+    opacity: 1;
+}
+
+/* Enhanced Social Icons */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 2rem;
+}
+
+.social-link {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .social-link {
+    background: #2d2d2d;
+    color: white;
+}
+
+.social-link:hover {
+    transform: translateY(-8px) scale(1.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: white;
+}
+
+.social-link:nth-child(1):hover { background: linear-gradient(45deg, #0077B5, #00A0DC); }
+.social-link:nth-child(2):hover { background: linear-gradient(45deg, #333, #666); }
+.social-link:nth-child(3):hover { background: linear-gradient(45deg, #E4405F, #FD1D1D); }
+.social-link:nth-child(4):hover { background: linear-gradient(45deg, #1DA1F2, #1DA1F2); }
+.social-link:nth-child(5):hover { background: linear-gradient(45deg, #00ab6c, #00ab6c); }
+
+/* Contact Info Cards */
+.contact-info-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 4px solid var(--primary-color);
+    height: 100%;
+}
+
+body.dark-mode .contact-info-card {
+    background: #1e1e1e;
+    border-color: var(--primary-color);
+}
+
+.contact-info-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.contact-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.contact-info-card:hover .contact-icon {
+    transform: rotate(15deg) scale(1.1);
+}
+
+/* QR Code Enhancement */
+.qr-code {
+    display: inline-block;
+    padding: 10px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .qr-code {
+    background: #2d2d2d;
+}
+
+.qr-code:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.2);
+}
+
+/* Enhanced Download Button */
+.download-btn {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.7s;
+}
+
+.download-btn:hover::before {
+    left: 100%;
+}
+
+.download-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 123, 255, 0.4);
+    text-decoration: none;
+    color: white;
+}
+
+/* Footer Social Links */
+.footer-social {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.footer-social-link {
+    color: white;
+    font-size: 1.3rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.footer-social-link:hover {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.2);
+    color: white;
+    text-decoration: none;
+}
+
+/* Modern Card Effects */
+.modern-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    will-change: transform, box-shadow;
+}
+
+.project-card.modern-card:hover {
+    transform: translateY(-15px) perspective(1000px) rotateX(2deg) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Circular Progress Bar Enhancements */
+.circular-progress-card.modern-card:hover {
+    transform: translateY(-10px) scale(1.02) !important;
+}
+
+.circular-progress-card.modern-card:hover .circular-fill {
+    filter: drop-shadow(0 0 8px rgba(0, 123, 255, 0.5));
+}
+
+/* Glass Morphism Effects */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .glass-effect {
+    background: rgba(30, 30, 30, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Chatbot Enhancements */
+.chatbot-container.glass-effect {
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+}
+
+.chatbot-toggle.modern-card {
+    width: 70px;
+    height: 70px;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+}
+
+.chatbot-toggle.modern-card:hover {
+    transform: scale(1.15) rotate(15deg) !important;
+    box-shadow: 0 15px 35px rgba(0, 123, 255, 0.4);
+}
+
+/* Quick Questions Enhancement */
+.quick-question.modern-card {
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.quick-question.modern-card:hover {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Enhanced Tooltips */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 1000;
+    margin-bottom: 8px;
+}
+
+/* Animated Background Pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05)0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .profile-img .modern-card {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .social-icons {
+        gap: 12px;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .footer-social {
+        justify-content: center;
+        margin-top: 1.5rem;
+        gap: 15px;
+    }
+    
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .back-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .chatbot-toggle.modern-card {
+        width: 60px;
+        height: 60px;
+        font-size: 1.3rem;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .chatbot-container {
+        width: 95vw;
+        right: 2.5vw;
+    }
+}
+
+/* Print Optimizations */
+@media print {
+    .theme-toggle,
+    .back-to-top,
+    .chatbot-wrapper,
+    .social-icons,
+    .download-btn,
+    .glass-effect,
+    .modern-card {
+        display: none !important;
+    }
+    
+    .profile-img img {
+        border: 2px solid #000 !important;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .modern-card,
+    .modern-card:hover {
+        transform: none !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #0056b3;
+        --text-color: #000000;
+    }
+    
+    .modern-card {
+        border: 3px solid #000 !important;
+    }
+}
+
+/* Accessibility Focus Styles */
+:focus-visible {
+    outline: 3px solid var(--primary-color) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.2) !important;
 }
