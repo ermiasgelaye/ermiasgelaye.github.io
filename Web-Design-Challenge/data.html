@@ -330,76 +330,6 @@
             display: none;
         }
 
-        /* Temperature coloring - now on column 9 */
-        .data-table td:nth-child(9).hot { 
-            background-color: #ffebee; 
-            font-weight: 600;
-            color: #d32f2f;
-        }
-        .data-table td:nth-child(9).warm { 
-            background-color: #fff3e0; 
-            color: #ef6c00;
-        }
-        .data-table td:nth-child(9).cool { 
-            background-color: #e3f2fd; 
-            color: #1976d2;
-        }
-        .data-table td:nth-child(9).cold { 
-            background-color: #e8eaf6; 
-            color: #3949ab;
-        }
-
-        /* Humidity coloring - now on column 7 */
-        .data-table td:nth-child(7).high { 
-            background-color: #e8f5e9; 
-            color: #2e7d32;
-        }
-        .data-table td:nth-child(7).medium { 
-            background-color: #fffde7; 
-            color: #f9a825;
-        }
-        .data-table td:nth-child(7).low { 
-            background-color: #fff3e0; 
-            color: #ef6c00;
-        }
-
-        /* Cloudiness coloring - now on column 4 */
-        .data-table td:nth-child(4).clear { 
-            background-color: #e3f2fd; 
-            color: #1976d2;
-        }
-        .data-table td:nth-child(4).partly { 
-            background-color: #e8eaf6; 
-            color: #5c6bc0;
-        }
-        .data-table td:nth-child(4).cloudy { 
-            background-color: #f3e5f5; 
-            color: #8e24aa;
-        }
-
-        /* Country cell - now on column 5 */
-        .data-table td:nth-child(5).country-cell {
-            font-weight: 600;
-            color: #333;
-        }
-
-        /* City cell - now on column 3 */
-        .data-table td:nth-child(3) {
-            font-weight: 500;
-        }
-
-        /* Wind cell - now on column 10 */
-        .data-table td:nth-child(10) {
-            font-style: italic;
-        }
-
-        /* Latitude/Longitude cells - now on columns 8 and 9 */
-        .data-table td:nth-child(8),
-        .data-table td:nth-child(9) {
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-        }
-
         /* Pagination */
         .pagination-container {
             display: flex;
@@ -837,9 +767,9 @@
                 display: table-cell !important; /* Show all columns in print */
             }
             
-            .data-table td:nth-child(9),
-            .data-table td:nth-child(7),
-            .data-table td:nth-child(4) {
+            .temp-cell,
+            .humidity-cell,
+            .cloud-cell {
                 background-color: transparent !important;
                 color: black !important;
             }
@@ -1004,7 +934,7 @@
         <div class="data-header">
             <h1><i class="fas fa-database mr-2"></i>Complete Weather Dataset</h1>
             <p>
-                This dataset contains weather information from 546 cities worldwide collected during May-June 2018.
+                This dataset contains weather information from 651 cities across 116 countries worldwide, collected during May-June 2018.
                 Explore the raw data that powered our latitude analysis and visualizations.
             </p>
         </div>
@@ -1012,24 +942,24 @@
         <!-- Data Statistics -->
         <div class="data-stats">
             <div class="stat-card">
+                <i class="fas fa-database"></i>
+                <div class="stat-number" id="totalRecords">651</div>
+                <div class="stat-label">Total Records</div>
+            </div>
+            <div class="stat-card">
                 <i class="fas fa-city"></i>
-                <div class="stat-number" id="totalCities">546</div>
-                <div class="stat-label">Total Cities</div>
+                <div class="stat-number" id="totalCities">547</div>
+                <div class="stat-label">Cities</div>
             </div>
             <div class="stat-card">
                 <i class="fas fa-globe-americas"></i>
-                <div class="stat-number" id="totalCountries">73</div>
+                <div class="stat-number" id="totalCountries">116</div>
                 <div class="stat-label">Countries</div>
             </div>
             <div class="stat-card">
                 <i class="fas fa-calendar-alt"></i>
-                <div class="stat-number">May-June</div>
+                <div class="stat-number">May-June 2018</div>
                 <div class="stat-label">Collection Period</div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-chart-line"></i>
-                <div class="stat-number">8</div>
-                <div class="stat-label">Weather Metrics</div>
             </div>
         </div>
 
@@ -1044,8 +974,8 @@
             </div>
 
             <div class="table-responsive">
-              <table class="data-table" id="dataTable">
-                    <thead>
+                <table class="data-table" id="dataTable">
+              <thead>
                         <tr>
                             <!-- First two columns hidden but kept for data structure -->
                             <th>Index</th>
@@ -1060,10 +990,11 @@
                             <th data-sort="temp">Max Temp (°F) <i class="fas fa-sort"></i></th>
                             <th data-sort="wind">Wind Speed (mph) <i class="fas fa-sort"></i></th>
                         </tr>
-                </thead>
-                <tbody id="tableBody">
+              </thead>
+              <tbody id="tableBody">
                         <!-- Your existing data rows - KEEP THEM AS IS! -->
                         <!-- The first two columns (index and ID) will be automatically hidden -->
+                        <!-- Date column (column 6) will be formatted from Unix timestamp -->
                 <tr>
                   <th>0</th>
                   <td>0</td>
@@ -9529,13 +9460,14 @@
                 </tr>
   <!-- Add all your 546 rows here with the same format -->
   <!-- Make sure to add the CSS classes for coloring -->
-  </tbody>
+  <!-- Add all your 651 rows here - keep the original structure -->
+                    </tbody>
                 </table>
             </div>
 
             <!-- Pagination -->
             <div class="pagination-container">
-                <div class="page-info" id="pageInfo">Showing 1-10 of 546 entries</div>
+                <div class="page-info" id="pageInfo">Showing 1-10 of 651 entries</div>
                 <nav aria-label="Data pagination">
                     <ul class="pagination" id="pagination">
                         <!-- Pagination will be generated by JavaScript -->
@@ -9562,7 +9494,9 @@
             <h3><i class="fas fa-info-circle mr-2"></i>Dataset Information</h3>
             <p>This weather dataset was collected as part of a global climate analysis project examining the relationship between geographic latitude and various weather metrics:</p>
             <ul>
-                <li><strong>Global Coverage:</strong> Data from 546 cities across 73 countries worldwide</li>
+                <li><strong>Total Records:</strong> 651 weather observations</li>
+                <li><strong>Cities:</strong> 547 unique cities worldwide</li>
+                <li><strong>Countries:</strong> 116 different countries represented</li>
                 <li><strong>Time Period:</strong> Collected during May-June 2018 (Northern Hemisphere summer)</li>
                 <li><strong>Weather Metrics:</strong> Maximum temperature, humidity, cloud cover, and wind speed</li>
                 <li><strong>Geographic Data:</strong> Precise latitude and longitude coordinates for each city</li>
@@ -9577,7 +9511,6 @@
     <footer class="footer">
         <div class="footer-content">
             <p class="mb-2">© 2025 Ermias Gelaye Gaga | Weather Data Analyst</p>
-            <p class="mb-3"><small>Global Weather Analysis Project | Latitude vs. Weather Metrics</small></p>
             <a href="index.html" class="back-to-latitude">
                 <i class="fas fa-arrow-left mr-2"></i>Back to Latitude Home
             </a>
@@ -9719,14 +9652,14 @@ Note: Wind speeds are measured in miles per hour (mph).`
             'country|countries|nation': {
                 response: `🌐 Global Coverage:
                 
-Total Countries: 73 different countries
+Total Countries: 116 different countries
 
 Countries with Most Cities:
-1. United States (US): ~50 cities
-2. Australia (AU): ~25 cities
-3. Russia (RU): ~20 cities
-4. Canada (CA): ~15 cities
-5. Brazil (BR): ~12 cities
+1. United States (US): ~60 cities
+2. Australia (AU): ~30 cities
+3. Russia (RU): ~25 cities
+4. Canada (CA): ~20 cities
+5. Brazil (BR): ~15 cities
 
 Geographic Distribution:
 - North America: ~25% of cities
@@ -9736,34 +9669,51 @@ Geographic Distribution:
 - South America: ~10% of cities
 - Oceania: ~10% of cities
 
-This provides balanced global representation for latitude analysis.`
+This provides comprehensive global representation for latitude analysis.`
             },
             
             'dataset|statistics|records|total': {
                 response: `📊 Dataset Overview:
                 
-Total Records: 546 cities worldwide
-Data Collected: May-June 2018 (45 days)
+Total Records: 651 weather observations
+Total Cities: 547 unique cities
+Total Countries: 116 different countries
+Data Collected: May-June 2018
 
-Visible Data Points Per City:
-1. City Name (Column 3)
-2. Cloudiness % (Column 4)
-3. Country Code (Column 5)
-4. Date (Unix timestamp, Column 6)
-5. Humidity % (Column 7)
-6. Latitude (Column 8)
-7. Longitude (Column 9)
-8. Max Temperature °F (Column 10)
-9. Wind Speed mph (Column 11)
-
-Hidden but Included in Exports:
-- Index (Column 1)
-- City ID (Column 2)
+Data Points Per Record:
+1. Index (hidden)
+2. City ID (hidden)
+3. City Name
+4. Cloudiness Percentage (%)
+5. Country Code
+6. Date (Unix timestamp, displayed as readable date)
+7. Humidity Percentage (%)
+8. Latitude (decimal degrees)
+9. Longitude (decimal degrees)
+10. Maximum Temperature (°F)
+11. Wind Speed (mph)
 
 Data Quality:
 - Complete records (no missing values)
-- Balanced global distribution
-- Validated through OpenWeatherMap API`
+- Comprehensive global distribution
+- Validated through OpenWeatherMap API
+- Collected during consistent time period`
+            },
+            
+            'date|time|timestamp|when': {
+                response: `📅 Date Information:
+                
+Collection Period: May-June 2018
+Date Format: Unix timestamps converted to human-readable dates
+
+Date Display:
+- In table view: Formatted as "Jun 12, 2018"
+- In exports: Original Unix timestamps preserved
+- In search: Searchable by both numeric timestamp and readable date
+
+Date Range: All data collected within a 45-day period during Northern Hemisphere summer.
+
+Note: Dates are displayed in readable format but stored as Unix timestamps for accurate sorting and filtering.`
             },
             
             'export|download|csv|json|print': {
@@ -9773,19 +9723,22 @@ Available Formats:
 1. CSV (Comma Separated Values)
    - Best for Excel, Google Sheets, Python/R
    - Includes ALL columns (even hidden ones)
+   - Preserves original Unix timestamps
    - Lightweight, widely compatible
    
 2. JSON (JavaScript Object Notation)
    - Structured format for programming
    - Includes ALL data fields
+   - Preserves original Unix timestamps
    - Easy to parse with JavaScript/Python
 
 3. Print View
    - Printer-friendly formatting
    - Shows ALL columns (including index and ID)
+   - Dates displayed in readable format
    - Clean layout for reports/docs
 
-Note: Exports include all 11 columns, even though index and ID are hidden in the table view.`
+Note: Exports include all 11 columns, even though index and ID are hidden in the table view. Dates are exported as Unix timestamps.`
             },
             
             'search|filter|find|lookup': {
@@ -9795,11 +9748,13 @@ Search Functions:
 - Real-time search across ALL columns (including hidden ones)
 - Case-insensitive matching
 - Partial word matching (e.g., "new" finds "New York")
+- Date search: Search by readable date or timestamp
 
 Filter Examples:
 - Search "brazil" to see all Brazilian cities
 - Search "89.60" to find Jacareacanga's temperature
 - Search "0" to find cities with 0% cloudiness
+- Search "jun" to find June dates
 
 Sort Features:
 - Click any column header to sort (except index/ID)
@@ -9807,7 +9762,7 @@ Sort Features:
 - Visual sort indicators (arrows)
 
 Pagination:
-- 10 records per page (55 total pages)
+- 10 records per page (66 total pages for 651 records)
 - Navigate with numbered buttons
 - Shows current range of records
 
@@ -9823,7 +9778,7 @@ Displayed Columns (9 visible):
 1. City (Column 3)
 2. Cloudiness % (Column 4)
 3. Country (Column 5)
-4. Date (Column 6)
+4. Date (Column 6) - Formatted from Unix timestamp
 5. Humidity % (Column 7)
 6. Latitude (Column 8)
 7. Longitude (Column 9)
@@ -9851,18 +9806,52 @@ I can help you understand:
 - Geographic coverage and country data
 - Dataset structure and column information
 - How to export and analyze the data
+- Date formatting and searching
 
 Try asking about:
 - "What columns are hidden from view?"
 - "What's the hottest city in the dataset?"
 - "How humid are tropical cities?"
 - "Which countries have the most data points?"
+- "How are dates formatted in the table?"
 - "What's included in CSV exports?"
 - "How to search across all columns?"
 
 I'm here to help you explore this global weather dataset!`
             }
         };
+
+        // Utility function to format Unix timestamp to readable date
+        function formatUnixTimestamp(timestamp) {
+            if (!timestamp) return 'N/A';
+            
+            // Convert Unix timestamp (seconds) to milliseconds
+            const date = new Date(timestamp * 1000);
+            
+            // Format as "Jun 12, 2018"
+            const options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Utility function to parse date for sorting
+        function parseDateForSorting(dateStr) {
+            // If it's already a Unix timestamp (all digits)
+            if (/^\d+$/.test(dateStr)) {
+                return parseInt(dateStr);
+            }
+            
+            // If it's already formatted date, convert back to timestamp
+            try {
+                const date = new Date(dateStr);
+                return date.getTime() / 1000; // Convert to Unix timestamp
+            } catch (e) {
+                return 0;
+            }
+        }
 
         // Pagination variables
         let currentPage = 1;
@@ -9879,7 +9868,7 @@ I'm here to help you explore this global weather dataset!`
             'city': 2,       // Column 3 (visible)
             'cloudiness': 3, // Column 4 (visible)
             'country': 4,    // Column 5 (visible)
-            'date': 5,       // Column 6 (visible)
+            'date': 5,       // Column 6 (visible) - Unix timestamp
             'humidity': 6,   // Column 7 (visible)
             'lat': 7,        // Column 8 (visible)
             'lng': 8,        // Column 9 (visible)
@@ -9903,64 +9892,100 @@ I'm here to help you explore this global weather dataset!`
             allRows = Array.from(tableBody.querySelectorAll('tr'));
             filteredRows = [...allRows];
             
+            // Update initial statistics with correct numbers
+            updateInitialStatistics();
+            
             // Enhance rows with data attributes for sorting and coloring
             allRows.forEach((row, index) => {
                 const cells = row.querySelectorAll('td, th');
                 
-                // Add data attributes for all columns (including hidden ones)
+                // Get the date value (Unix timestamp)
+                const dateValue = cells[5].textContent;
+                const unixTimestamp = parseInt(dateValue);
+                
+                // Format the date for display
+                const formattedDate = formatUnixTimestamp(unixTimestamp);
+                
+                // Store both original timestamp and formatted date
                 row.dataset.index = cells[0].textContent;
                 row.dataset.id = cells[1].textContent;
                 row.dataset.city = cells[2].textContent.toLowerCase();
                 row.dataset.cloudiness = parseInt(cells[3].textContent);
                 row.dataset.country = cells[4].textContent.toLowerCase();
-                row.dataset.date = cells[5].textContent;
+                row.dataset.date = unixTimestamp; // Store as number for sorting
+                row.dataset.dateDisplay = formattedDate; // Store formatted for display
                 row.dataset.humidity = parseInt(cells[6].textContent);
                 row.dataset.lat = parseFloat(cells[7].textContent);
                 row.dataset.lng = parseFloat(cells[8].textContent);
                 row.dataset.temp = parseFloat(cells[9].textContent);
                 row.dataset.wind = parseFloat(cells[10].textContent);
                 
+                // Update the date cell with formatted date
+                const dateCell = cells[5];
+                dateCell.textContent = formattedDate;
+                dateCell.className = 'date-cell';
+                
                 // Add temperature coloring to column 10 (index 9)
                 const tempCell = cells[9];
                 const temp = parseFloat(tempCell.textContent);
+                tempCell.className = 'temp-cell ';
                 if (temp >= 80) {
-                    tempCell.className = 'hot';
+                    tempCell.className += 'hot';
                 } else if (temp >= 60) {
-                    tempCell.className = 'warm';
+                    tempCell.className += 'warm';
                 } else if (temp >= 40) {
-                    tempCell.className = 'cool';
+                    tempCell.className += 'cool';
                 } else {
-                    tempCell.className = 'cold';
+                    tempCell.className += 'cold';
                 }
                 
                 // Add humidity coloring to column 7 (index 6)
                 const humidityCell = cells[6];
                 const humidity = parseInt(humidityCell.textContent);
+                humidityCell.className = 'humidity-cell ';
                 if (humidity >= 80) {
-                    humidityCell.className = 'high';
+                    humidityCell.className += 'high';
                 } else if (humidity >= 50) {
-                    humidityCell.className = 'medium';
+                    humidityCell.className += 'medium';
                 } else {
-                    humidityCell.className = 'low';
+                    humidityCell.className += 'low';
                 }
                 
                 // Add cloudiness coloring to column 4 (index 3)
                 const cloudCell = cells[3];
                 const cloudiness = parseInt(cloudCell.textContent);
+                cloudCell.className = 'cloud-cell ';
                 if (cloudiness <= 20) {
-                    cloudCell.className = 'clear';
+                    cloudCell.className += 'clear';
                 } else if (cloudiness <= 60) {
-                    cloudCell.className = 'partly';
+                    cloudCell.className += 'partly';
                 } else {
-                    cloudCell.className = 'cloudy';
+                    cloudCell.className += 'cloudy';
                 }
                 
                 // Add country cell class to column 5 (index 4)
                 cells[4].className = 'country-cell';
+                
+                // Add city cell class to column 3 (index 2)
+                cells[2].className = 'city-cell';
+                
+                // Add wind cell class to column 11 (index 10)
+                cells[10].className = 'wind-cell';
+                
+                // Add coordinate cell classes
+                cells[7].className = 'coord-cell';
+                cells[8].className = 'coord-cell';
             });
             
             // Render initial view
             renderTable();
+        }
+
+        // Update initial statistics with your correct numbers
+        function updateInitialStatistics() {
+            document.getElementById('totalRecords').textContent = '651';
+            document.getElementById('totalCities').textContent = '547';
+            document.getElementById('totalCountries').textContent = '116';
         }
 
         // Render table with current data
@@ -9992,19 +10017,23 @@ I'm here to help you explore this global weather dataset!`
             renderPagination(pagination, totalPages);
         }
 
-        // Update statistics
+        // Update statistics based on filtered data
         function updateStatistics() {
-            // Count unique countries from visible rows
+            // Count unique cities and countries from filtered rows
+            const cities = new Set();
             const countries = new Set();
+            
             filteredRows.forEach(row => {
-                const countryCell = row.cells[4]; // Column 5
-                if (countryCell) {
-                    countries.add(countryCell.textContent.trim());
-                }
+                const city = row.dataset.city;
+                const country = row.dataset.country;
+                
+                if (city) cities.add(city);
+                if (country) countries.add(country);
             });
             
+            document.getElementById('totalRecords').textContent = filteredRows.length;
+            document.getElementById('totalCities').textContent = cities.size;
             document.getElementById('totalCountries').textContent = countries.size;
-            document.getElementById('totalCities').textContent = filteredRows.length;
         }
 
         // Render pagination buttons
@@ -10050,12 +10079,9 @@ I'm here to help you explore this global weather dataset!`
                 if (sortColumn === 'temp' || sortColumn === 'humidity' || 
                     sortColumn === 'cloudiness' || sortColumn === 'wind' ||
                     sortColumn === 'lat' || sortColumn === 'lng' ||
-                    sortColumn === 'index' || sortColumn === 'id') {
-                    aVal = parseFloat(aVal);
-                    bVal = parseFloat(bVal);
-                    return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
-                } else if (sortColumn === 'date') {
-                    // Date is already numeric (Unix timestamp)
+                    sortColumn === 'index' || sortColumn === 'id' ||
+                    sortColumn === 'date') { // Date is numeric (Unix timestamp)
+                    
                     aVal = parseFloat(aVal);
                     bVal = parseFloat(bVal);
                     return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
@@ -10080,8 +10106,23 @@ I'm here to help you explore this global weather dataset!`
                 } else {
                     filteredRows = allRows.filter(row => {
                         // Check all data attributes (including hidden columns)
-                        return Object.values(row.dataset).some(value => 
-                            value.toString().toLowerCase().includes(searchTerm)
+                        const searchableData = [
+                            row.dataset.index,
+                            row.dataset.id,
+                            row.dataset.city,
+                            row.dataset.cloudiness,
+                            row.dataset.country,
+                            row.dataset.date, // Original timestamp
+                            row.dataset.dateDisplay, // Formatted date
+                            row.dataset.humidity,
+                            row.dataset.lat,
+                            row.dataset.lng,
+                            row.dataset.temp,
+                            row.dataset.wind
+                        ];
+                        
+                        return searchableData.some(value => 
+                            value && value.toString().toLowerCase().includes(searchTerm)
                         );
                     });
                 }
@@ -10141,7 +10182,7 @@ I'm here to help you explore this global weather dataset!`
             });
         }
 
-        // Export to CSV - includes ALL 11 columns
+        // Export to CSV - includes ALL 11 columns with original Unix timestamps
         function exportToCSV() {
             const headers = ['Index', 'City_ID', 'City', 'Cloudiness', 'Country', 'Date', 'Humidity', 'Lat', 'Lng', 'Max_Temp', 'Wind_Speed'];
             
@@ -10152,7 +10193,7 @@ I'm here to help you explore this global weather dataset!`
                     `"${row.dataset.city}"`,
                     row.dataset.cloudiness,
                     row.dataset.country.toUpperCase(),
-                    row.dataset.date,
+                    row.dataset.date, // Export original Unix timestamp
                     row.dataset.humidity,
                     row.dataset.lat,
                     row.dataset.lng,
@@ -10173,7 +10214,7 @@ I'm here to help you explore this global weather dataset!`
             document.body.removeChild(link);
         }
 
-        // Export to JSON - includes ALL 11 columns
+        // Export to JSON - includes ALL 11 columns with original Unix timestamps
         function exportToJSON() {
             const jsonData = filteredRows.map(row => {
                 return {
@@ -10182,7 +10223,8 @@ I'm here to help you explore this global weather dataset!`
                     city: row.dataset.city,
                     cloudiness: parseInt(row.dataset.cloudiness),
                     country: row.dataset.country.toUpperCase(),
-                    date: parseInt(row.dataset.date),
+                    date: parseInt(row.dataset.date), // Export original Unix timestamp
+                    date_display: row.dataset.dateDisplay, // Also include formatted date
                     humidity: parseInt(row.dataset.humidity),
                     lat: parseFloat(row.dataset.lat),
                     lng: parseFloat(row.dataset.lng),
@@ -10280,31 +10322,35 @@ I'm here to help you explore this global weather dataset!`
                 // Calculate dynamic statistics from current filtered data
                 if (lowerQ.includes('average') || lowerQ.includes('mean')) {
                     if (lowerQ.includes('temp') || lowerQ.includes('temperature')) {
-                        const temps = filteredRows.map(row => parseFloat(row.dataset.temp));
-                        const avgTemp = temps.reduce((sum, temp) => sum + temp, 0) / temps.length;
-                        const minTemp = Math.min(...temps);
-                        const maxTemp = Math.max(...temps);
-                        
-                        return `📊 Current Filter Statistics - Temperature:
-                        
+                        const temps = filteredRows.map(row => parseFloat(row.dataset.temp)).filter(t => !isNaN(t));
+                        if (temps.length > 0) {
+                            const avgTemp = temps.reduce((sum, temp) => sum + temp, 0) / temps.length;
+                            const minTemp = Math.min(...temps);
+                            const maxTemp = Math.max(...temps);
+                            
+                            return `📊 Current Filter Statistics - Temperature:
+                            
 Average Maximum Temperature: ${avgTemp.toFixed(1)}°F
 Temperature Range: ${minTemp.toFixed(1)}°F to ${maxTemp.toFixed(1)}°F
 Cities in Filter: ${filteredRows.length}
 
 Based on your current search/filter criteria.`;
+                        }
                     } else if (lowerQ.includes('humid')) {
-                        const humidities = filteredRows.map(row => parseInt(row.dataset.humidity));
-                        const avgHumidity = humidities.reduce((sum, hum) => sum + hum, 0) / humidities.length;
-                        const minHumidity = Math.min(...humidities);
-                        const maxHumidity = Math.max(...humidities);
-                        
-                        return `📊 Current Filter Statistics - Humidity:
-                        
+                        const humidities = filteredRows.map(row => parseInt(row.dataset.humidity)).filter(h => !isNaN(h));
+                        if (humidities.length > 0) {
+                            const avgHumidity = humidities.reduce((sum, hum) => sum + hum, 0) / humidities.length;
+                            const minHumidity = Math.min(...humidities);
+                            const maxHumidity = Math.max(...humidities);
+                            
+                            return `📊 Current Filter Statistics - Humidity:
+                            
 Average Humidity: ${avgHumidity.toFixed(1)}%
 Humidity Range: ${minHumidity}% to ${maxHumidity}%
 Cities in Filter: ${filteredRows.length}
 
 Based on your current search/filter criteria.`;
+                        }
                     }
                 }
                 
@@ -10315,9 +10361,9 @@ Try asking about:
 - Temperature extremes (hottest/coldest cities)
 - Humidity and cloud cover patterns
 - Wind speed statistics
-- Geographic distribution of data
-- Dataset structure and column information
-- Export options and hidden columns
+- Geographic distribution of data (116 countries!)
+- Dataset structure and export options
+- Date formatting (Unix timestamps to readable dates)
 - Average weather metrics
 
 What specific aspect of the global weather dataset interests you?`;
