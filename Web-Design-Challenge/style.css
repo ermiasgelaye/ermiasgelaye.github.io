@@ -1,142 +1,381 @@
-  
+/* Main Styles for Pharmaceutical Analysis Project */
+:root {
+    --primary-color: #007BFF;
+    --secondary-color: #0066cc;
+    --accent-color: #28a745;
+    --text-color: #333;
+    --light-bg: #f8f9fa;
+    --dark-bg: #343a40;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 body {
-  background-color: #eee;
-  color: #839496;
-  font-family: sans-serif;
-  font-size: 1.1em;
-  margin: 0;
-}
-.navbar{
-    max-height: 50px; 
-	background-color: #ffffff; 
-    font-size: 15px; 
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 76px; /* Account for fixed navbar */
 }
 
-.navigation .navbar-brand{
-	color: white; 
-	margin-left: 10px; 
-	padding: inherit; 
-	font-weight: bold; 
-	background-color: rgb(20, 150, 150);
-	font-family: Georgia, Times, "Times New Roman", serif;
+/* Data Page Specific Styles */
+.data-container {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
 }
 
-.dropdown-item{
-    color: #839496;
+.data-header {
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
-.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:active{
-    background-color:#adc7c4; 
+.data-header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin: 0;
 }
 
-.nav-link:hover{
-    background-color:#adc7c4;
+.data-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
 }
 
-
-/* Media Queries */
-@media (max-width: 991.98px){
-.navbar-expand-lg{
-	background-color: rgb(20, 150, 150);
-}
-.navbar{
-    max-height: none; 
-    padding: inherit;
-}
-.navbar div{
-    margin: inherit; 
-    background-color: white;  
-}
-.navbar-brand{
-    padding: 10px; 
+.data-table-container {
+    overflow-x: auto;
+    margin: 2rem 0;
 }
 
-button{
-    margin-left: auto; 
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
 }
 
-button:focus {
-    outline: 1px dotted;
-}
-}
-
-.description-content {
-	margin-top: 30px;
-	margin-bottom: 60px;
-	padding: 10px 30px 5px;
-	color: black;
-	background-color: white;
+.data-table th {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
 }
 
-.imageNav-content {
-	margin-top: 40px;
-	margin-bottom: 20px;
-	padding: 10px 30px 40px;
-	color: black;
-	background-color: white;
-}
-.description-header, .imageNav-header {
-	padding-top: 15px; 
-	padding-left: 4px;
-	color: rgb(20, 150, 150);
-	font-size: 26px;
-	font-weight: bold;
-	font-family: Georgia, Times, "Times New Roman", serif;
+.data-table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid #e9ecef;
 }
 
-img{
-	width: 100%;
-	height: 100%;
+.data-table tr:nth-child(even) {
+    background-color: #f8f9fa;
 }
 
-.description-image {
-	float: left;
-	width: 60%;
-	height: 60%;
+.data-table tr:hover {
+    background-color: #e3f2fd;
+    transition: background-color 0.2s ease;
 }
 
-p {
-  font-family:sans-serif;
-  color: #839496;;
-  display: block;
-  font-size: 0.9em;
-
+.data-stats {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-top: 2rem;
 }
 
-p {
+.data-stats h3 {
+    color: var(--primary-color);
     margin-top: 0;
-    margin-bottom: 1rem;
 }
 
-
-p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
-
-.active, .imageNav-photo:hover{
-    border-color:rgb(20, 150, 150);
-    border-style: solid; 
+.stat-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
 }
 
-.footer{
-	background-color: #505251; 
-    border-top-style: solid; 
-    border-top-width: 4px; 
-    border-top-color: rgb(20, 150, 150);
-    color: white; 
-    min-height: 50px; 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px; 
-    text-align: center; 
-    position: fixed;
-    padding-top: 10px; 
-	width: 100%;
-	left: 0;
-	bottom: 0;
+.stat-card:hover {
+    transform: translateY(-2px);
 }
 
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Visualization Pages */
+.viz-container {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.viz-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.viz-header h1 {
+    color: var(--primary-color);
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.viz-description {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.viz-image-container {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+}
+
+.viz-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.viz-image:hover {
+    transform: scale(1.01);
+}
+
+.viz-analysis {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-top: 2rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.viz-analysis h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.methodology-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.methodology-card h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.methodology-card ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.methodology-card li {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+/* Navigation for visualization pages */
+.viz-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.nav-btn i {
+    font-size: 0.9rem;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #f0f0f0;
+        --light-bg: #1a1a1a;
+    }
+    
+    body {
+        background-color: #121212;
+    }
+    
+    .data-container,
+    .viz-container,
+    .methodology-card,
+    .stat-card {
+        background: #2d2d2d;
+        color: #f0f0f0;
+    }
+    
+    .data-table th {
+        background: linear-gradient(135deg, #1a5fb4, #1c71d8);
+    }
+    
+    .data-table tr:nth-child(even) {
+        background-color: #3d3d3d;
+    }
+    
+    .data-table tr:hover {
+        background-color: #4a4a4a;
+    }
+    
+    .data-stats,
+    .viz-analysis {
+        background: linear-gradient(135deg, #2d2d2d, #3d3d3d);
+    }
+    
+    .viz-image-container {
+        background: #2d2d2d;
+    }
+    
+    .stat-value {
+        color: #4da6ff;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+        font-size: 15px;
+    }
+    
+    .data-container,
+    .viz-container {
+        padding: 1.25rem;
+        margin: 1rem;
+    }
+    
+    .data-header h1,
+    .viz-header h1 {
+        font-size: 2rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .methodology-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .viz-navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .data-table {
+        font-size: 0.85rem;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .footer,
+    .viz-navigation,
+    .chatbot-wrapper {
+        display: none !important;
+    }
+    
+    body {
+        padding-top: 0;
+        background: white !important;
+        color: black !important;
+    }
+    
+    .data-container,
+    .viz-container {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        margin: 0 !important;
+        padding: 1rem !important;
+    }
+    
+    .viz-image {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+}

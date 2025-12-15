@@ -1,119 +1,1168 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-​
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-​
-    <title>Landing Page</title>
-​
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Weather Analysis | Latitude vs. Climate</title>
     
-	<link rel="stylesheet" type="text/css" href="style.css">
-​
+    <!-- Bootstrap & Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+     <!-- Custom Styles -->
+     <!-- Custom Styles -->
+    <style>
+      :root {
+        --primary-color: #007BFF;
+        --secondary-color: #000000;
+        --background-color: #f8f9fa;
+        --text-color: #212529;
+        --heading-font: 'Poppins', sans-serif;
+        --body-font: 'Inter', sans-serif;
+        --border-radius: 12px;
+        --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--body-font);
+        font-size: 16px;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--heading-font);
+        margin-top: 0;
+        margin-bottom: 0.5em;
+        line-height: 1.3;
+        font-weight: 600;
+      }
+
+      h1 { font-size: 2.5rem; color: var(--primary-color); }
+      h2 { font-size: 2rem; color: #333; }
+      h3 { font-size: 1.75rem; }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+
+      /* Modern Navbar - FIXED HEIGHT */
+      .navbar {
+        background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+        padding: 0.75rem 0 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        min-height: 60px !important;
+        height: 60px !important;
+      }
+
+      .navbar .container {
+        padding: 0 15px;
+      }
+
+      .navbar-brand {
+        color: white !important;
+        font-size: 1.4rem !important;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 !important;
+        margin-right: 1rem !important;
+      }
+
+      .navbar-brand i {
+        font-size: 1.5rem !important;
+      }
+
+      .navbar-nav .nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500;
+        padding: 0.5rem 1rem !important;
+        margin: 0 0.25rem !important;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white !important;
+        transform: translateY(-2px);
+      }
+
+      .navbar-toggler {
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        padding: 0.25rem 0.5rem !important;
+      }
+
+      .dropdown-menu {
+        background: white;
+        border: none;
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 0;
+        margin-top: 0.5rem !important;
+      }
+
+      .dropdown-item {
+        color: var(--text-color);
+        padding: 0.5rem 1.25rem !important;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .dropdown-item:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateX(5px);
+      }
+
+      /* Main Container - REDUCED PADDING */
+      .container.main-content {
+        padding-top: 80px !important; /* Reduced from 100px */
+        padding-bottom: 40px !important; /* Reduced from 100px */
+      }
+
+      /* Project Header - COMPACT */
+      .project-header {
+        text-align: center;
+        margin-bottom: 2rem !important; /* Reduced from 3rem */
+        padding: 1.5rem !important; /* Reduced from 2rem */
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+      }
+
+      .project-header h1 {
+        font-size: 2.2rem !important; /* Slightly smaller */
+        margin-bottom: 0.5rem !important;
+        position: relative;
+        padding-bottom: 0.75rem !important; /* Reduced */
+      }
+
+      .project-header h1:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px; /* Reduced from 100px */
+        height: 3px; /* Reduced from 4px */
+        background: linear-gradient(90deg, var(--primary-color), #0056b3);
+        border-radius: 2px;
+      }
+
+      .project-header .lead {
+        font-size: 1.1rem !important;
+        margin-bottom: 1rem !important; /* Reduced spacing */
+      }
+
+      /* Tech Badges - COMPACT */
+      .tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem !important; /* Reduced from 0.5rem */
+        margin: 1rem 0 !important; /* Reduced from 1.5rem */
+        justify-content: center;
+      }
+
+      .tech-badge {
+        background: linear-gradient(135deg, var(--primary-color), #0056b3);
+        color: white;
+        padding: 0.4rem 0.8rem !important; /* Reduced from 0.5rem 1rem */
+        border-radius: 16px !important; /* Smaller radius */
+        font-size: 0.8rem !important; /* Smaller font */
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px; /* Reduced gap */
+      }
+
+      .tech-badge i {
+        font-size: 0.75rem !important; /* Smaller icons */
+      }
+
+      /* Content Cards */
+      .description-content {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 1.75rem !important; /* Reduced from 2.5rem */
+        margin-bottom: 1.5rem !important; /* Reduced from 2rem */
+        transition: transform 0.3s ease;
+      }
+
+      .description-content:hover {
+        transform: translateY(-5px);
+      }
+
+      .description-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--border-radius);
+        margin: 1rem 0 !important; /* Reduced from 1.5rem */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .description-image:hover {
+        transform: scale(1.02);
+      }
+
+      /* Visualization Grid - COMPACT */
+      .visualization-grid {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 1.5rem !important; /* Reduced from 2rem */
+        margin-top: 1.5rem !important; /* Reduced from 2rem */
+      }
+
+      .visualization-grid h2 {
+        color: var(--primary-color);
+        font-size: 1.5rem !important; /* Smaller heading */
+        margin-bottom: 1rem !important; /* Reduced */
+        padding-bottom: 0.75rem; /* Reduced */
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .imageNav-photo {
+        width: 100%;
+        height: 180px !important; /* Reduced from 200px */
+        object-fit: cover;
+        border-radius: 8px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid transparent; /* Thinner border */
+        cursor: pointer;
+      }
+
+      .imageNav-photo:hover {
+        transform: translateY(-5px) scale(1.03); /* Reduced effect */
+        border-color: var(--primary-color);
+        box-shadow: 0 10px 20px rgba(0, 123, 255, 0.1); /* Lighter shadow */
+      }
+
+      /* Active thumbnail style */
+      .imageNav-photo.active {
+        border-color: var(--primary-color);
+        border-width: 3px;
+        box-shadow: 0 8px 16px rgba(0, 123, 255, 0.2);
+      }
+
+      /* Image captions */
+      .visualization-grid p.text-center {
+        margin-top: 0.5rem !important; /* Reduced */
+        margin-bottom: 0.5rem !important;
+        font-size: 0.85rem; /* Smaller text */
+        cursor: pointer;
+      }
+
+      /* Project Features List */
+      .visualization-grid ul {
+        margin-top: 1rem !important; /* Reduced */
+        padding-left: 1.25rem; /* Reduced indentation */
+      }
+
+      .visualization-grid li {
+        margin-bottom: 0.5rem !important; /* Reduced spacing */
+        font-size: 0.9rem; /* Smaller text */
+      }
+
+      /* Key Findings - COMPACT */
+      .key-findings {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        padding: 1.25rem !important; /* Reduced from 1.5rem */
+        border-radius: var(--border-radius);
+        margin: 1rem 0 !important; /* Reduced from 1.5rem */
+        border-left: 3px solid var(--primary-color); /* Thinner border */
+      }
+
+      .key-findings h4 {
+        color: var(--primary-color);
+        font-size: 1.1rem !important; /* Smaller */
+        margin-bottom: 0.75rem !important; /* Reduced */
+      }
+
+      .key-findings ul {
+        margin: 0;
+        padding-left: 1.25rem; /* Reduced indentation */
+      }
+
+      .key-findings li {
+        margin-bottom: 0.5rem !important; /* Reduced spacing */
+        font-size: 0.9rem; /* Smaller text */
+        line-height: 1.5;
+      }
+
+      /* Footer - COMPACT */
+      .footer {
+        background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+        color: white;
+        padding: 1.5rem 0 !important; /* Reduced from 2rem */
+        margin-top: 2rem !important; /* Reduced from 4rem */
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .footer p {
+        margin-bottom: 0.5rem !important; /* Reduced spacing */
+      }
+
+      .footer p.mb-2 {
+        font-size: 0.95rem; /* Slightly smaller */
+      }
+
+      .footer p.mb-3 {
+        font-size: 0.85rem; /* Smaller */
+        margin-bottom: 0.75rem !important;
+      }
+
+      .back-to-portfolio {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--primary-color);
+        color: white;
+        padding: 0.6rem 1.25rem !important; /* Reduced from 0.75rem 1.5rem */
+        border-radius: 24px !important; /* Smaller radius */
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-top: 0.5rem !important; /* Reduced */
+        text-decoration: none;
+        font-size: 0.9rem; /* Smaller text */
+      }
+
+      .back-to-portfolio:hover {
+        background: #0056b3;
+        transform: translateY(-2px);
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 8px 15px rgba(0, 123, 255, 0.2); /* Reduced shadow */
+      }
+
+      /* Chatbot Styles - ADJUSTED POSITION */
+      .chatbot-wrapper {
+        position: fixed;
+        bottom: 20px !important; /* Raised higher */
+        right: 20px !important;
+        z-index: 1000;
+      }
+
+      .chatbot-toggle {
+        width: 55px !important; /* Smaller */
+        height: 55px !important; /* Smaller */
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), #0056b3);
+        border: none;
+        color: white;
+        font-size: 1.25rem !important; /* Smaller icon */
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3); /* Lighter shadow */
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .chatbot-toggle:hover {
+        transform: scale(1.08); /* Reduced scaling */
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+      }
+
+      .chatbot-container {
+        position: absolute;
+        bottom: 65px !important; /* Adjusted for smaller toggle */
+        right: 0;
+        width: 320px !important; /* Slightly smaller */
+        height: 450px !important; /* Reduced height */
+        background: white;
+        border-radius: 14px !important; /* Smaller radius */
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); /* Reduced shadow */
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid #e9ecef;
+      }
+
+      .chatbot-container.active {
+        display: flex;
+        animation: slideInUp 0.3s ease;
+      }
+
+      @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(15px); } /* Reduced movement */
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .chatbot-header {
+        padding: 1rem 1.25rem !important; /* Reduced */
+        background: linear-gradient(135deg, var(--primary-color), #0056b3);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .chatbot-header h5 {
+        font-size: 1rem !important; /* Smaller */
+        margin: 0;
+      }
+
+      .close-chatbot {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem !important; /* Smaller */
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+      }
+
+      .chatbot-body {
+        flex: 1;
+        padding: 1.25rem !important; /* Reduced */
+        overflow-y: auto;
+        background: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem; /* Reduced gap */
+      }
+
+      .chat-message {
+        max-width: 85%;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); } /* Reduced movement */
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .bot-message .message-content {
+        background: white;
+        color: var(--text-color);
+        border: 1px solid #e9ecef;
+        border-bottom-left-radius: 4px;
+        padding: 0.75rem !important; /* Reduced */
+        font-size: 0.9rem; /* Smaller text */
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .navbar {
+          min-height: 56px !important;
+          height: 56px !important;
+          padding: 0.5rem 0 !important;
+        }
+        
+        .navbar-brand {
+          font-size: 1.2rem !important;
+        }
+        
+        .container.main-content {
+          padding-top: 70px !important; /* Further reduced on mobile */
+          padding-bottom: 30px !important;
+        }
+        
+        .project-header {
+          padding: 1.25rem !important;
+          margin-bottom: 1.5rem !important;
+        }
+        
+        .project-header h1 {
+          font-size: 1.8rem !important;
+        }
+        
+        .description-content {
+          padding: 1.5rem !important;
+        }
+        
+        .imageNav-photo {
+          height: 150px !important; /* Smaller on mobile */
+        }
+        
+        .chatbot-container {
+          width: calc(100vw - 40px) !important;
+          right: 20px;
+          bottom: 60px !important;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .navbar-brand {
+          font-size: 1.1rem !important;
+        }
+        
+        .container.main-content {
+          padding-top: 65px !important;
+        }
+        
+        .project-header h1 {
+          font-size: 1.6rem !important;
+        }
+        
+        .tech-badge {
+          padding: 0.35rem 0.7rem !important;
+          font-size: 0.75rem !important;
+        }
+        
+        .imageNav-photo {
+          height: 130px !important;
+        }
+      }
+
+      /* Dark Mode Support */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --background-color: #121212;
+          --text-color: #f0f0f0;
+        }
+
+        .description-content,
+        .visualization-grid,
+        .project-header {
+          background: #1e1e1e;
+          color: #f0f0f0;
+        }
+
+        .navbar {
+          background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+        }
+
+        .dropdown-menu {
+          background: #2d2d2d;
+        }
+
+        .dropdown-item {
+          color: #f0f0f0;
+        }
+
+        .key-findings {
+          background: linear-gradient(135deg, #2d2d2d, #3d3d3d);
+        }
+
+        .footer {
+          background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+        }
+      }
+    </style>
   </head>
-​
+
   <body>
-    <!-- Start of navbar -->
-	<div class="navigation">
-	  <nav class="navbar fixed-top navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.html">Lattitude</a>
-        <button class="navbar-toggler border" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-globe-americas"></i>
+          Latitude Analysis
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
-​
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink" role="button" aria-haspopup="true" aria-expanded="false">Plots</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="temp.html">Max Temperature</a>
-                <a class="dropdown-item" href="humidity.html">Humidity</a>
-                <a class="dropdown-item" href="cloudiness.html">Cloudiness</a>
-                <a class="dropdown-item" href="wind.html">Wind Speed</a>
+              <a class="nav-link dropdown-toggle active" href="#" id="visualizationsDropdown" data-toggle="dropdown">
+                <i class="fas fa-chart-line mr-1"></i>Visualizations
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" data-viz="temp">
+                  <i class="fas fa-thermometer-half mr-2"></i>Max Temperature
+                </a>
+                <a class="dropdown-item" href="#" data-viz="humidity">
+                  <i class="fas fa-tint mr-2"></i>Humidity
+                </a>
+                <a class="dropdown-item" href="#" data-viz="cloudiness">
+                  <i class="fas fa-cloud mr-2"></i>Cloudiness
+                </a>
+                <a class="dropdown-item" href="#" data-viz="wind">
+                  <i class="fas fa-wind mr-2"></i>Wind Speed
+                </a>
               </div>
             </li>
             <li class="nav-item">
-			  <a class="nav-link" href="comparison.html">Comparison</a>
-			</li>
+              <a class="nav-link" href="comparison.html">
+                <i class="fas fa-balance-scale mr-1"></i>Comparison
+              </a>
+            </li>
             <li class="nav-item">
-			  <a class="nav-link" href="data.html">Data</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../index.html">My Page</a>
-      </li>
-      
+              <a class="nav-link" href="data.html">
+                <i class="fas fa-database mr-1"></i>Data
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">
+                <i class="fas fa-chart-line mr-1"></i>My Portfolio
+              </a>
+            </li>
           </ul>
         </div>
-      </nav>
-	</div>
-    <!-- End of navbar -->
-​
-  <!-- Start of container -->
-    <div class="container">
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+      <!-- Project Header -->
+      <div class="project-header">
+        <h1>Weather Analysis Project</h1>
+        <p class="lead">Analyzing Climate Patterns Across Global Latitudes</p>
+        
+        <div class="tech-badges">
+          <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+          <span class="tech-badge"><i class="fas fa-chart-line"></i> Matplotlib</span>
+          <span class="tech-badge"><i class="fas fa-database"></i> Pandas</span>
+          <span class="tech-badge"><i class="fas fa-cloud-sun"></i> OpenWeatherMap</span>
+          <span class="tech-badge"><i class="fas fa-map-marked-alt"></i> Geographic Analysis</span>
+          <span class="tech-badge"><i class="fas fa-chart-bar"></i> Data Visualization</span>
+        </div>
+      </div>
+
       <section class="row">
         <div class="col-lg-7 col-md-12">
           <div class="description-content">
-            <h1 class="description-header">Summary: Latitude vs. X</h1>
+            <h2 class="description-header" id="viz-title">Latitude vs. Max Temperature</h2>
             <hr>
-            <img src="Resources/assets/images/Fig1.png" alt="Latitude vs. Max Temperature" class="description-image">
-            <p>The purpose of this project was to analyze how weather changes as you get closer to the equator. To accomplish this analysis, we first pulled data from the OpenWeatherMap API to assemble a dataset on over 500 cities.</p>
-            <p>After assembling the dataset, we used Matplotlib to plot various aspects of the weather vs. latitude. Factors we looked at included: temperature, cloudiness, wind speed, and humidity. This site provides the source data and visualizations created as part of the analysis, as well as explanations and descriptions of any trends and correlations witnessed.</p>
+            <img src="Resources/assets/images/Fig1.png" alt="Latitude vs. Max Temperature" class="description-image" id="main-viz-image">
+            
+            <div class="key-findings" id="viz-description">
+              <h4><i class="fas fa-search mr-2"></i>Key Findings</h4>
+              <ul>
+                <li>Temperatures increase as cities approach the equator (0° latitude)</li>
+                <li>Strong negative correlation between latitude and temperature in northern hemisphere</li>
+                <li>Temperature distribution is more symmetric around the equator</li>
+                <li>Southern hemisphere shows less temperature variation</li>
+              </ul>
+            </div>
+
+            <p id="viz-details">This scatter plot shows the relationship between latitude and maximum temperature. As expected, cities closer to the equator (0° latitude) experience higher temperatures, while temperatures decrease as we move toward the poles.</p>
+            
+            <div id="additional-info">
+              <p><strong>Methodology:</strong> Data was collected from OpenWeatherMap API for over 500 cities worldwide. Matplotlib was used for visualization with custom styling.</p>
+              
+              <p><strong>Insight:</strong> The clear temperature-latitude relationship demonstrates the fundamental impact of geographic location on climate patterns.</p>
+            </div>
           </div>
         </div>
+
         <div class="col-lg-5 col-md-12">
-​
-          <!-- Start of Visualizations imageNav Area -->
-          <section id="imageNav-area">
-            <div class="imageNav-content">
-              <h2 class="imageNav-header">Visualizations</h2>
-              <hr />
-              <div class="container">
-			    <div class="row">
-				  <div class="col-6">
-                    <a href="temp.html">
-				      <img src="Resources/assets/images/Fig1.png" alt="Latitude vs. Max Temperature", title="Latitude vs. Max Temperature" class="imageNav-photo">
-				    </a>
-				  </div>
-				  <div class="col-6">
-                    <a href="humidity.html">
-				      <img src="Resources/assets/images/Fig2.png" alt="Latitude vs. Humidity", title="Latitude vs. Humidity" class="imageNav-photo">
-			        </a>
-                    </div>
-				  <div class="col-6">
-                    <a href="cloudiness.html">
-				      <img src="Resources/assets/images/Fig3.png" alt="Latitude vs. Cloudiness", title="Latitude vs. Cloudiness", class="imageNav-photo">
-				    </a>
-				  </div>
-				  <div class="col-6">
-                    <a href="wind.html">
-				      <img src="Resources/assets/images/Fig4.png" alt="Latitude vs. Wind Speed", title="Latitude vs. Wind Speed", class="imageNav-photo">
-				    </a>
-				  </div>
+          <!-- Visualization Gallery -->
+          <div class="visualization-grid">
+            <h2><i class="fas fa-images mr-2"></i>Visualization Gallery</h2>
+            <p class="text-muted mb-3">Click any visualization to view details</p>
+            <hr>
+            <div class="container">
+              <div class="row">
+                <div class="col-6 mb-4">
+                  <div class="viz-thumbnail" data-viz="temp">
+                    <img src="Resources/assets/images/Fig1.png" 
+                         alt="Latitude vs. Max Temperature" 
+                         title="Latitude vs. Max Temperature" 
+                         class="imageNav-photo active">
+                    <p class="text-center mt-2"><small>Max Temperature</small></p>
+                  </div>
                 </div>
-			  </div>
+                <div class="col-6 mb-4">
+                  <div class="viz-thumbnail" data-viz="humidity">
+                    <img src="Resources/assets/images/Fig2.png" 
+                         alt="Latitude vs. Humidity" 
+                         title="Latitude vs. Humidity" 
+                         class="imageNav-photo">
+                    <p class="text-center mt-2"><small>Humidity</small></p>
+                  </div>
+                </div>
+                <div class="col-6 mb-4">
+                  <div class="viz-thumbnail" data-viz="cloudiness">
+                    <img src="Resources/assets/images/Fig3.png" 
+                         alt="Latitude vs. Cloudiness" 
+                         title="Latitude vs. Cloudiness" 
+                         class="imageNav-photo">
+                    <p class="text-center mt-2"><small>Cloudiness</small></p>
+                  </div>
+                </div>
+                <div class="col-6 mb-4">
+                  <div class="viz-thumbnail" data-viz="wind">
+                    <img src="Resources/assets/images/Fig4.png" 
+                         alt="Latitude vs. Wind Speed" 
+                         title="Latitude vs. Wind Speed" 
+                         class="imageNav-photo">
+                    <p class="text-center mt-2"><small>Wind Speed</small></p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </section>
-          <!-- End of the Visualizations imageNav Area -->
-​
+            
+            <div class="mt-4">
+              <h5>Project Features:</h5>
+              <ul>
+                <li>Real-time weather data collection via API</li>
+                <li>Geographic correlation analysis</li>
+                <li>Interactive data visualizations</li>
+                <li>Statistical correlation calculations</li>
+                <li>Global climate pattern identification</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
     </div>
-    <!-- End of container -->
-​
-    <!-- Start of footer -->
-    <footer>
-      <div class="footer">&copy;Copyright Ermias Gaga 2020</div>
-    </footer>
-    <!-- End of footer -->
-​
 
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p class="mb-2">© 2025 Ermias Gelaye Gaga | Data Visualization Analyst</p>
+        <p class="mb-3"><small>Weather Analysis Project | OpenWeatherMap API & Matplotlib</small></p>
+        <a href="../index.html" class="back-to-portfolio">
+          <i class="fas fa-arrow-left mr-2"></i>Back to Main Portfolio
+        </a>
+      </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-wrapper">
+      <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-robot"></i>
+      </button>
+      
+      <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+          <h5 class="mb-0"><i class="fas fa-robot mr-2"></i>Weather Analysis Assistant</h5>
+          <button class="close-chatbot" id="closeChatbot">&times;</button>
+        </div>
+        
+        <div class="chatbot-body" id="chatbotBody">
+          <div class="chat-message bot-message">
+            <div class="message-content">
+              <p><strong>👋 Hi! I'm your Weather Analysis Assistant</strong></p>
+              <p>I can help you understand this climate analysis project and answer questions about:</p>
+              <ul>
+                <li>Weather patterns and correlations</li>
+                <li>Data collection methodology</li>
+                <li>Visualization interpretations</li>
+                <li>Geographic climate patterns</li>
+              </ul>
+              <p>Try asking: "How does latitude affect temperature?" or "What weather factors were analyzed?"</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chatbot-footer" style="padding: 0.875rem; border-top: 1px solid #e9ecef; background: white;">
+          <div class="input-group">
+            <input type="text" class="form-control" id="chatInput" placeholder="Ask about weather analysis..." style="font-size: 0.9rem; padding: 0.5rem 0.75rem;">
+            <div class="input-group-append">
+              <button class="btn btn-primary" id="chatSend" style="background: var(--primary-color); border-color: var(--primary-color); padding: 0.5rem 0.875rem; font-size: 0.9rem;">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+      // Visualization Data
+      const visualizationData = {
+        'temp': {
+          title: 'Latitude vs. Max Temperature',
+          image: 'Resources/assets/images/Fig1.png',
+          alt: 'Latitude vs. Max Temperature',
+          findings: [
+            'Temperatures increase as cities approach the equator (0° latitude)',
+            'Strong negative correlation between latitude and temperature in northern hemisphere',
+            'Temperature distribution is more symmetric around the equator',
+            'Southern hemisphere shows less temperature variation'
+          ],
+          details: 'This scatter plot shows the relationship between latitude and maximum temperature. As expected, cities closer to the equator (0° latitude) experience higher temperatures, while temperatures decrease as we move toward the poles.',
+          additionalInfo: '<p><strong>Methodology:</strong> Data was collected from OpenWeatherMap API for over 500 cities worldwide. Matplotlib was used for visualization with custom styling.</p><p><strong>Insight:</strong> The clear temperature-latitude relationship demonstrates the fundamental impact of geographic location on climate patterns.</p>'
+        },
+        'humidity': {
+          title: 'Latitude vs. Humidity',
+          image: 'Resources/assets/images/Fig2.png',
+          alt: 'Latitude vs. Humidity',
+          findings: [
+            'Humidity distribution is more uniform across latitudes',
+            'No strong linear correlation between latitude and humidity',
+            'Tropical regions near equator show consistently high humidity',
+            'Desert regions at similar latitudes show low humidity exceptions'
+          ],
+          details: 'This scatter plot examines the relationship between latitude and humidity levels. Unlike temperature, humidity shows less direct correlation with latitude, indicating other factors like proximity to water bodies and local geography play significant roles.',
+          additionalInfo: '<p><strong>Methodology:</strong> Humidity data collected at same time as temperature measurements. Statistical analysis shows weaker correlation coefficients.</p><p><strong>Insight:</strong> Humidity is influenced more by local geographic features than latitude alone.</p>'
+        },
+        'cloudiness': {
+          title: 'Latitude vs. Cloudiness',
+          image: 'Resources/assets/images/Fig3.png',
+          alt: 'Latitude vs. Cloudiness',
+          findings: [
+            'Cloud cover shows high variability at all latitudes',
+            'No clear latitudinal pattern in cloudiness distribution',
+            'Some clustering at 0%, 20%, 40%, 75%, and 100% cloud cover',
+            'Measurement rounding may explain clustering patterns'
+          ],
+          details: 'This scatter plot displays cloud cover percentage relative to latitude. The data shows high variability with no clear latitudinal trend, suggesting cloud formation depends more on local weather systems and geographic features than latitude.',
+          additionalInfo: '<p><strong>Methodology:</strong> Cloud cover percentage estimated visually during data collection. Measurements rounded to nearest 20% in many cases.</p><p><strong>Insight:</strong> Cloud patterns are complex and influenced by multiple atmospheric factors beyond simple latitude.</p>'
+        },
+        'wind': {
+          title: 'Latitude vs. Wind Speed',
+          image: 'Resources/assets/images/Fig4.png',
+          alt: 'Latitude vs. Wind Speed',
+          findings: [
+            'Most cities experience wind speeds below 15 mph',
+            'Higher wind speeds more common at extreme latitudes',
+            'Equatorial regions generally experience lower wind speeds',
+            'Some outliers show very high wind speeds (>30 mph)'
+          ],
+          details: 'This scatter plot illustrates wind speed patterns across different latitudes. While most locations experience moderate wind speeds, higher latitudes tend to show more variability with occasional high-wind outliers, likely due to polar jet stream influences.',
+          additionalInfo: '<p><strong>Methodology:</strong> Wind speed measured in miles per hour at time of data collection. Statistical outliers identified using interquartile range method.</p><p><strong>Insight:</strong> Wind patterns show complex relationships with latitude influenced by global atmospheric circulation patterns.</p>'
+        }
+      };
+
+      // Initialize the page
+      document.addEventListener('DOMContentLoaded', function() {
+        // Set up thumbnail click handlers
+        const thumbnails = document.querySelectorAll('.viz-thumbnail');
+        const mainImage = document.getElementById('main-viz-image');
+        const vizTitle = document.getElementById('viz-title');
+        const vizDescription = document.getElementById('viz-description');
+        const vizDetails = document.getElementById('viz-details');
+        const additionalInfo = document.getElementById('additional-info');
+
+        // Function to update main visualization
+        function updateVisualization(vizKey) {
+          const data = visualizationData[vizKey];
+          
+          // Update main image
+          mainImage.src = data.image;
+          mainImage.alt = data.alt;
+          
+          // Update title
+          vizTitle.textContent = data.title;
+          
+          // Update key findings
+          const findingsList = vizDescription.querySelector('ul');
+          findingsList.innerHTML = '';
+          data.findings.forEach(finding => {
+            const li = document.createElement('li');
+            li.textContent = finding;
+            findingsList.appendChild(li);
+          });
+          
+          // Update details
+          vizDetails.textContent = data.details;
+          
+          // Update additional info
+          additionalInfo.innerHTML = data.additionalInfo;
+          
+          // Update active thumbnail
+          document.querySelectorAll('.imageNav-photo').forEach(img => {
+            img.classList.remove('active');
+          });
+          document.querySelector(`[data-viz="${vizKey}"] img`).classList.add('active');
+          
+          // Update dropdown text
+          const dropdownToggle = document.querySelector('#visualizationsDropdown');
+          dropdownToggle.innerHTML = `<i class="fas fa-chart-line mr-1"></i>${data.title.split(':')[0]}`;
+        }
+
+        // Add click handlers to thumbnails
+        thumbnails.forEach(thumbnail => {
+          const vizKey = thumbnail.getAttribute('data-viz');
+          thumbnail.addEventListener('click', () => {
+            updateVisualization(vizKey);
+          });
+        });
+
+        // Add click handlers to dropdown items
+        document.querySelectorAll('.dropdown-item[data-viz]').forEach(item => {
+          item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const vizKey = this.getAttribute('data-viz');
+            updateVisualization(vizKey);
+            
+            // Close dropdown on mobile
+            if (window.innerWidth < 992) {
+              $('#visualizationsDropdown').dropdown('toggle');
+            }
+          });
+        });
+
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const closeChatbot = document.getElementById('closeChatbot');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatSend = document.getElementById('chatSend');
+        const chatInput = document.getElementById('chatInput');
+        const chatBody = document.getElementById('chatbotBody');
+        
+        // Weather Analysis Knowledge Base
+        const knowledgeBase = {
+          'temperature|temp|heat': {
+            response: `🌡️ Temperature Analysis:
+            
+Key Findings:
+- Strong correlation between latitude and temperature
+- Equatorial regions (0° latitude) are warmest
+- Temperature decreases toward poles
+- Northern hemisphere shows more extreme variation
+
+Data Collection:
+- Over 500 cities worldwide
+- Maximum daily temperatures
+- Real-time measurements
+- Geographic distribution`
+          },
+          
+          'humidity|moisture': {
+            response: `💧 Humidity Analysis:
+            
+Key Findings:
+- Less direct correlation with latitude
+- Tropical regions consistently humid
+- Desert regions show low humidity
+- Local geography heavily influences humidity
+
+Interesting Patterns:
+- Coastal cities generally more humid
+- Continental interiors often drier
+- Monsoon regions show seasonal variation
+- Urban heat islands affect local humidity`
+          },
+          
+          'cloud|cloudiness|cloud cover': {
+            response: `☁️ Cloudiness Analysis:
+            
+Key Findings:
+- High variability across all latitudes
+- No clear latitudinal pattern
+- Clustering at specific percentages (0%, 20%, 40%, etc.)
+- Complex atmospheric influences
+
+Measurement Notes:
+- Visual estimation method
+- Percentage cloud cover
+- Time-of-day variations
+- Seasonal patterns not captured`
+          },
+          
+          'wind|wind speed|breeze': {
+            response: `💨 Wind Speed Analysis:
+            
+Key Findings:
+- Most cities: 0-15 mph winds
+- Higher variability at extreme latitudes
+- Equatorial regions generally calmer
+- Occasional high-wind outliers
+
+Geographic Patterns:
+- Coastal areas often windier
+- Mountain regions create local wind patterns
+- Polar jet stream affects high-latitude winds
+- Trade winds influence tropical regions`
+          },
+          
+          'methodology|data|collection': {
+            response: `📊 Project Methodology:
+            
+Data Source:
+- OpenWeatherMap API
+- Over 500 cities globally
+- Random geographic distribution
+- Simultaneous measurements
+
+Analysis Techniques:
+- Python data processing
+- Pandas for data manipulation
+- Matplotlib for visualization
+- Statistical correlation analysis
+
+Visualization:
+- Custom color schemes
+- Consistent scaling
+- Clear labeling
+- Professional formatting`
+          },
+          
+          'correlation|relationship|pattern': {
+            response: `📈 Key Correlations:
+            
+Strongest Relationships:
+1. Latitude vs Temperature (Strong)
+   - Clear negative correlation in north
+   - Symmetric around equator
+   
+2. Latitude vs Wind Speed (Moderate)
+   - Higher variability at extremes
+   - Calmer equatorial regions
+   
+Weaker Relationships:
+3. Latitude vs Humidity (Weak)
+   - Local factors dominate
+   
+4. Latitude vs Cloudiness (Very Weak)
+   - Complex atmospheric dynamics`
+          },
+          
+          'hi|hello|hey': {
+            response: `👋 Hello! I'm your Weather Analysis Assistant
+            
+I can help you understand:
+- Temperature patterns across latitudes
+- Humidity and cloud cover analysis
+- Wind speed distributions
+- Data collection methodology
+- Visualization interpretations
+
+Quick Questions:
+- "How does latitude affect weather?"
+- "What correlations were found?"
+- "How was the data collected?"
+- "What visualization techniques were used?"
+
+Ask me anything about this climate analysis project!`
+          }
+        };
+
+        // Chatbot toggle
+        chatbotToggle.addEventListener('click', () => {
+          chatbotContainer.classList.toggle('active');
+        });
+
+        closeChatbot.addEventListener('click', () => {
+          chatbotContainer.classList.remove('active');
+        });
+
+        // Send message function
+        function sendMessage() {
+          const message = chatInput.value.trim();
+          if (message) {
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+            
+            // Show typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'chat-message bot-message';
+            typingDiv.innerHTML = `
+              <div class="message-content">
+                <span class="typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+              </div>
+            `;
+            chatBody.appendChild(typingDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            
+            // Get response
+            setTimeout(() => {
+              typingDiv.remove();
+              const response = getChatbotResponse(message);
+              addMessage(response, 'bot');
+            }, 1000 + Math.random() * 1000);
+          }
+        }
+
+        function addMessage(text, sender) {
+          const messageDiv = document.createElement('div');
+          messageDiv.className = `chat-message ${sender}-message`;
+          if (sender === 'bot') {
+            messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+          } else {
+            messageDiv.innerHTML = `<div class="message-content" style="background: var(--primary-color); color: white; border-radius: 18px; padding: 0.75rem; margin-left: auto; max-width: 85%; border-bottom-right-radius: 4px;">${text}</div>`;
+          }
+          chatBody.appendChild(messageDiv);
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function getChatbotResponse(question) {
+          const lowerQ = question.toLowerCase();
+          
+          // Check knowledge base
+          for (const [category, data] of Object.entries(knowledgeBase)) {
+            const patterns = category.split('|');
+            for (const pattern of patterns) {
+              if (lowerQ.includes(pattern)) {
+                return data.response;
+              }
+            }
+          }
+          
+          // Default response
+          return `🤔 I'm not sure I understand your question about "${question}". 
+
+Try asking about:
+- Temperature patterns across latitudes
+- Humidity and cloud cover analysis
+- Wind speed distributions
+- Data collection methodology
+- Statistical correlations found
+
+What aspect of the weather analysis interests you most?`;
+        }
+
+        // Event listeners
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') sendMessage();
+        });
+
+        // Add typing indicator CSS
+        const style = document.createElement('style');
+        style.textContent = `
+          .typing-indicator {
+            display: flex;
+            gap: 4px;
+          }
+          .typing-indicator span {
+            width: 6px;
+            height: 6px;
+            background: #ccc;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+          }
+          .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+          .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+          @keyframes typing {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+          }
+        `;
+        document.head.appendChild(style);
+      });
+    </script>
   </body>
-​
 </html>
