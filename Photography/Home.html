@@ -67,6 +67,7 @@
             line-height: 1.7;
             overflow-x: hidden;
             transition: var(--transition);
+            scroll-behavior: smooth;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -170,6 +171,10 @@
             transition: var(--transition);
         }
 
+        body.dark-mode .navbar {
+            background: var(--surface-color);
+        }
+
         .navbar-brand {
             display: flex;
             align-items: center;
@@ -204,6 +209,10 @@
             transition: var(--transition);
             position: relative;
             padding: 0.5rem 0 !important;
+        }
+
+        body.dark-mode .nav-link {
+            color: var(--accent-color) !important;
         }
 
         .nav-link:hover {
@@ -997,6 +1006,446 @@
             background: var(--accent-color);
         }
 
+        /* ========== ENHANCED INTERACTIVE ELEMENTS ========== */
+        
+        /* Breadcrumb Navigation */
+        .breadcrumb-nav {
+            position: sticky;
+            top: 80px;
+            z-index: 997;
+            background: var(--surface-color);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .breadcrumb-list {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-item a:hover {
+            background: var(--background-color);
+        }
+
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+            color: var(--text-color);
+            opacity: 0.5;
+        }
+
+        .breadcrumb-current {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Interactive Controls */
+        .interactive-controls {
+            position: fixed;
+            left: 20px;
+            top: 120px;
+            z-index: 998;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            width: 220px;
+            transition: var(--transition);
+        }
+
+        .interactive-controls.collapsed {
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .interactive-controls.collapsed .control-content {
+            display: none;
+        }
+
+        .control-toggle {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            border: 2px solid var(--surface-color);
+        }
+
+        .control-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .control-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .control-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            display: block;
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            flex: 1;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+
+        .view-btn:hover,
+        .view-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Sort Controls */
+        .sort-select {
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Progress Indicator */
+        .progress-indicator {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Image Actions */
+        .image-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .gallery-item:hover .image-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .action-btn.favorite.active {
+            background: #ff4757;
+            color: white;
+        }
+
+        /* Quick Navigation */
+        .quick-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 998;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            display: none;
+        }
+
+        .quick-nav-item {
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin: 0.5rem 0;
+            border-radius: 50%;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .quick-nav-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            opacity: 0.5;
+        }
+
+        /* Favorite Counter */
+        .favorite-counter {
+            position: fixed;
+            bottom: 200px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            z-index: 999;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .favorite-counter:hover {
+            transform: scale(1.1);
+        }
+
+        .counter-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Enhanced Lightbox */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+        }
+
+        .lightbox-info {
+            background: var(--surface-color);
+            color: var(--text-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-btn:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* List View */
+        .list-view .gallery-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .list-view .gallery-item {
+            display: flex;
+            height: 200px;
+            aspect-ratio: unset;
+        }
+
+        .list-view .gallery-item img {
+            width: 300px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .list-view .gallery-overlay {
+            position: relative;
+            flex: 1;
+            transform: none;
+            opacity: 1;
+            background: none;
+            padding: 1rem;
+            color: var(--text-color);
+        }
+
+        .list-view .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero-title {
@@ -1065,6 +1514,46 @@
             .hero-image-container:hover {
                 transform: translateY(-5px);
             }
+            
+            /* Enhanced Elements Mobile */
+            .interactive-controls {
+                display: none;
+            }
+            
+            .quick-nav {
+                display: block;
+                right: 15px;
+            }
+            
+            .breadcrumb-nav {
+                display: block;
+            }
+            
+            .favorite-counter {
+                bottom: 180px;
+                right: 15px;
+            }
+            
+            .list-view .gallery-item {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .list-view .gallery-item img {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .quick-nav {
+                display: block;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -1102,6 +1591,94 @@
             </div>
         </div>
     </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-nav">
+        <div class="container">
+            <ul class="breadcrumb-list" id="breadcrumbList">
+                <li class="breadcrumb-item">
+                    <a href="#home">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Interactive Controls -->
+    <div class="interactive-controls" id="interactiveControls">
+        <div class="control-toggle" id="controlToggle">
+            <i class="fas fa-sliders-h"></i>
+        </div>
+        <div class="control-content">
+            <div class="control-item">
+                <div class="control-label">View Mode</div>
+                <div class="view-toggle">
+                    <button class="view-btn active" id="gridViewBtn" title="Grid View">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="view-btn" id="listViewBtn" title="List View">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="control-item">
+                <div class="control-label">Sort By</div>
+                <select class="sort-select" id="sortSelect">
+                    <option value="default">Default Order</option>
+                    <option value="title">Title A-Z</option>
+                    <option value="category">Category</option>
+                    <option value="favorites">Most Favorited</option>
+                    <option value="random">Random</option>
+                </select>
+            </div>
+            
+            <div class="control-item">
+                <div class="control-label">Items Per Page</div>
+                <input type="range" id="itemsPerPage" min="12" max="60" step="12" value="40" 
+                       class="form-range">
+                <div class="progress-indicator">
+                    <div class="progress-bar" id="itemsProgress"></div>
+                </div>
+            </div>
+            
+            <div class="control-item">
+                <div class="control-label">Scroll Progress</div>
+                <div class="progress-indicator">
+                    <div class="progress-bar" id="scrollProgress"></div>
+                </div>
+                <div class="text-center small mt-1" id="scrollPercentage">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Navigation -->
+    <div class="quick-nav" id="quickNav">
+        <a href="#home" class="quick-nav-item" title="Home">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="#gallery" class="quick-nav-item" title="Gallery">
+            <i class="fas fa-images"></i>
+        </a>
+        <a href="#categories" class="quick-nav-item" title="Categories">
+            <i class="fas fa-th-large"></i>
+        </a>
+        <a href="#journey" class="quick-nav-item" title="Journey">
+            <i class="fas fa-road"></i>
+        </a>
+        <a href="#about" class="quick-nav-item" title="About">
+            <i class="fas fa-user"></i>
+        </a>
+        <a href="#contact" class="quick-nav-item" title="Contact">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
+
+    <!-- Favorite Counter -->
+    <button class="favorite-counter" id="favoriteCounter" title="View Favorites">
+        <i class="fas fa-heart"></i>
+        <span class="counter-badge" id="favoriteCount">0</span>
+    </button>
 
     <!-- Hero Section with Background 1 - FIXED CONTRAST -->
     <section id="home" class="hero-section">
@@ -1148,6 +1725,15 @@
             </div>
         </div>
     </section>
+
+    <!-- Search Bar -->
+    <div class="container">
+        <div class="search-container" data-aos="fade-up">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="photoSearch" 
+                   placeholder="Search photos by title, location, or tags...">
+        </div>
+    </div>
 
     <!-- Category Navigation -->
     <section id="categories" class="container py-4">
@@ -2249,24 +2835,30 @@
 { src: 'images/wildlife/wildlife45.jpg', category: 'wildlife', title: 'Snapping Turtle Crossing Road', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['snapping turtle', 'common snapping turtle', 'road crossing', 'reptile', 'large turtle', 'wildlife'] },
 { src: 'images/wildlife/wildlife46.jpeg', category: 'wildlife', title: 'Painted Lady Butterfly on Pink Flowers', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['painted lady', 'butterfly', 'pink flowers', 'pollinator', 'garden', 'summer'] }
 ];
-        // Category information
+ // Category information
         const categoryInfo = {
-            'nature': { name: 'Nature', icon: 'leaf', count: 34, description: 'Natural wonders and flora' },
-            'landscape': { name: 'Landscape', icon: 'mountain', count: 29, description: 'Scenic views and horizons' },
-            'travel': { name: 'Travel', icon: 'globe-americas', count: 18, description: 'Journeys and destinations' },
-            'urban': { name: 'Urban', icon: 'city', count: 70, description: 'Cityscapes and architecture' },
-            'water': { name: 'Water', icon: 'water', count: 66, description: 'Oceans, lakes, and rivers' },
-            'wildlife': { name: 'Wildlife', icon: 'paw', count: 19, description: 'Animals in their habitat' }
+            'nature': { name: 'Nature', icon: 'leaf', count: 121, description: 'Natural wonders and flora' },
+            'landscape': { name: 'Landscape', icon: 'mountain', count: 116, description: 'Scenic views and horizons' },
+            'travel': { name: 'Travel', icon: 'globe-americas', count: 83, description: 'Journeys and destinations' },
+            'urban': { name: 'Urban', icon: 'city', count: 145, description: 'Cityscapes and architecture' },
+            'water': { name: 'Water', icon: 'water', count: 211, description: 'Oceans, lakes, and rivers' },
+            'wildlife': { name: 'Wildlife', icon: 'paw', count: 46, description: 'Animals in their habitat' }
         };
 
-        // Gallery Management
-        class PhotoGallery {
+        // Enhanced Gallery with State Persistence
+        class EnhancedPhotoGallery {
             constructor() {
                 this.currentCategory = 'all';
                 this.imagesPerPage = 40;
                 this.currentPage = 1;
                 this.filteredImages = [];
                 this.isLoading = false;
+                this.favorites = new Set();
+                this.viewMode = 'grid'; // 'grid' or 'list'
+                this.sortMethod = 'default';
+                this.searchTerm = '';
+                this.currentLightboxIndex = -1;
+                this.recentlyViewed = [];
                 
                 this.galleryElement = document.getElementById('photoGallery');
                 this.loadMoreBtn = document.getElementById('loadMore');
@@ -2277,7 +2869,82 @@
                 this.totalCountElement = document.getElementById('totalCount');
                 this.currentCategoryElement = document.getElementById('currentCategory');
                 
+                this.loadState();
                 this.init();
+            }
+            
+            loadState() {
+                // Load from localStorage
+                try {
+                    const savedState = JSON.parse(localStorage.getItem('photoGalleryState'));
+                    if (savedState) {
+                        this.currentCategory = savedState.currentCategory || 'all';
+                        this.currentPage = savedState.currentPage || 1;
+                        this.favorites = new Set(savedState.favorites || []);
+                        this.viewMode = savedState.viewMode || 'grid';
+                        this.sortMethod = savedState.sortMethod || 'default';
+                        this.recentlyViewed = savedState.recentlyViewed || [];
+                        
+                        // Restore UI state
+                        this.restoreUIState();
+                    }
+                } catch (e) {
+                    console.log('No saved state found');
+                }
+            }
+            
+            saveState() {
+                const state = {
+                    currentCategory: this.currentCategory,
+                    currentPage: this.currentPage,
+                    favorites: Array.from(this.favorites),
+                    viewMode: this.viewMode,
+                    sortMethod: this.sortMethod,
+                    recentlyViewed: this.recentlyViewed.slice(-10),
+                    scrollPosition: window.pageYOffset,
+                    timestamp: Date.now()
+                };
+                
+                localStorage.setItem('photoGalleryState', JSON.stringify(state));
+            }
+            
+            restoreUIState() {
+                // Restore category button active state
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    if (btn.dataset.category === this.currentCategory) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                
+                // Update view mode
+                this.setViewMode(this.viewMode);
+                
+                // Update sort select
+                const sortSelect = document.getElementById('sortSelect');
+                if (sortSelect) sortSelect.value = this.sortMethod;
+                
+                // Update items per page slider
+                const itemsSlider = document.getElementById('itemsPerPage');
+                if (itemsSlider) {
+                    itemsSlider.value = this.imagesPerPage;
+                    const itemsProgress = document.getElementById('itemsProgress');
+                    if (itemsProgress) {
+                        itemsProgress.style.width = `${(this.imagesPerPage / 60) * 100}%`;
+                    }
+                }
+                
+                // Update favorite counter
+                this.updateFavoriteCounter();
+                
+                // Restore scroll position if needed
+                setTimeout(() => {
+                    const savedScroll = localStorage.getItem('scrollPosition');
+                    if (savedScroll && performance.navigation.type === 1) {
+                        window.scrollTo(0, parseInt(savedScroll));
+                    }
+                }, 100);
             }
             
             init() {
@@ -2285,7 +2952,9 @@
                 setTimeout(() => {
                     this.setupEventListeners();
                     this.hideLoading();
-                    this.filterByCategory('all');
+                    this.filterByCategory(this.currentCategory);
+                    this.updateBreadcrumb();
+                    this.updateScrollProgress();
                 }, 500);
             }
             
@@ -2299,11 +2968,121 @@
                         // Update active state
                         this.categoryButtons.forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
+                        
+                        this.updateBreadcrumb();
+                        this.saveState();
                     });
                 });
                 
                 // Load more button
                 this.loadMoreBtn.addEventListener('click', () => this.loadMore());
+                
+                // View mode toggle
+                const gridViewBtn = document.getElementById('gridViewBtn');
+                const listViewBtn = document.getElementById('listViewBtn');
+                
+                if (gridViewBtn && listViewBtn) {
+                    gridViewBtn.addEventListener('click', () => {
+                        this.setViewMode('grid');
+                        this.saveState();
+                    });
+                    
+                    listViewBtn.addEventListener('click', () => {
+                        this.setViewMode('list');
+                        this.saveState();
+                    });
+                }
+                
+                // Sort control
+                const sortSelect = document.getElementById('sortSelect');
+                if (sortSelect) {
+                    sortSelect.addEventListener('change', () => {
+                        this.sortMethod = sortSelect.value;
+                        this.renderGallery();
+                        this.saveState();
+                    });
+                }
+                
+                // Items per page slider
+                const itemsSlider = document.getElementById('itemsPerPage');
+                if (itemsSlider) {
+                    itemsSlider.addEventListener('input', () => {
+                        this.imagesPerPage = parseInt(itemsSlider.value);
+                        const itemsProgress = document.getElementById('itemsProgress');
+                        if (itemsProgress) {
+                            itemsProgress.style.width = `${(itemsSlider.value / 60) * 100}%`;
+                        }
+                        this.renderGallery();
+                        this.saveState();
+                    });
+                }
+                
+                // Search functionality
+                const searchInput = document.getElementById('photoSearch');
+                if (searchInput) {
+                    let searchTimeout;
+                    searchInput.addEventListener('input', () => {
+                        clearTimeout(searchTimeout);
+                        searchTimeout = setTimeout(() => {
+                            this.searchImages(searchInput.value);
+                        }, 300);
+                    });
+                }
+                
+                // Favorite counter
+                const favoriteCounter = document.getElementById('favoriteCounter');
+                if (favoriteCounter) {
+                    favoriteCounter.addEventListener('click', () => {
+                        if (this.favorites.size === 0) return;
+                        
+                        // Show only favorites
+                        this.filteredImages = allImages.filter(img => 
+                            this.favorites.has(img.src)
+                        );
+                        this.currentCategory = 'favorites';
+                        this.renderGallery();
+                        
+                        // Scroll to gallery
+                        document.querySelector('#gallery').scrollIntoView({ behavior: 'smooth' });
+                        
+                        // Update UI
+                        this.updateBreadcrumb();
+                    });
+                }
+                
+                // Control panel toggle
+                const controlToggle = document.getElementById('controlToggle');
+                if (controlToggle) {
+                    controlToggle.addEventListener('click', () => {
+                        const controls = document.getElementById('interactiveControls');
+                        controls.classList.toggle('collapsed');
+                        const icon = controlToggle.querySelector('i');
+                        icon.className = controls.classList.contains('collapsed') 
+                            ? 'fas fa-chevron-right' 
+                            : 'fas fa-sliders-h';
+                    });
+                }
+            }
+            
+            setViewMode(mode) {
+                this.viewMode = mode;
+                this.galleryElement.parentElement.parentElement.className = 
+                    `gallery-section ${mode === 'list' ? 'list-view' : ''}`;
+                
+                const gridBtn = document.getElementById('gridViewBtn');
+                const listBtn = document.getElementById('listViewBtn');
+                
+                if (gridBtn && listBtn) {
+                    if (mode === 'grid') {
+                        gridBtn.classList.add('active');
+                        listBtn.classList.remove('active');
+                    } else {
+                        gridBtn.classList.remove('active');
+                        listBtn.classList.add('active');
+                    }
+                }
+                
+                this.renderGallery();
             }
             
             filterByCategory(category) {
@@ -2316,14 +3095,75 @@
                     this.filteredImages = allImages.filter(img => img.category === category);
                 }
                 
+                // Apply search filter if active
+                if (this.searchTerm) {
+                    this.filteredImages = this.filteredImages.filter(img => 
+                        img.title.toLowerCase().includes(this.searchTerm) ||
+                        img.location.toLowerCase().includes(this.searchTerm) ||
+                        img.tags.some(tag => tag.toLowerCase().includes(this.searchTerm))
+                    );
+                }
+                
+                // Apply sorting
+                this.filteredImages = this.sortImages(this.filteredImages);
+                
                 this.renderGallery();
                 this.updateStats();
+            }
+            
+            sortImages(images) {
+                const sorted = [...images];
+                
+                switch (this.sortMethod) {
+                    case 'title':
+                        sorted.sort((a, b) => a.title.localeCompare(b.title));
+                        break;
+                    case 'category':
+                        sorted.sort((a, b) => a.category.localeCompare(b.category));
+                        break;
+                    case 'favorites':
+                        sorted.sort((a, b) => {
+                            const aFav = this.favorites.has(a.src) ? 1 : 0;
+                            const bFav = this.favorites.has(b.src) ? 1 : 0;
+                            return bFav - aFav;
+                        });
+                        break;
+                    case 'random':
+                        sorted.sort(() => Math.random() - 0.5);
+                        break;
+                }
+                
+                return sorted;
+            }
+            
+            searchImages(term) {
+                this.searchTerm = term.toLowerCase();
+                this.currentPage = 1;
+                
+                if (term === '') {
+                    this.filterByCategory(this.currentCategory);
+                } else {
+                    this.filteredImages = allImages.filter(img => 
+                        (this.currentCategory === 'all' || img.category === this.currentCategory) &&
+                        (img.title.toLowerCase().includes(term) ||
+                         img.location.toLowerCase().includes(term) ||
+                         img.tags.some(tag => tag.toLowerCase().includes(term)))
+                    );
+                    
+                    // Apply sorting
+                    this.filteredImages = this.sortImages(this.filteredImages);
+                    
+                    this.renderGallery();
+                    this.updateStats();
+                }
             }
             
             updateStats() {
                 const total = this.filteredImages.length;
                 const shown = Math.min(total, this.currentPage * this.imagesPerPage);
-                const categoryName = this.currentCategory === 'all' ? 'All Categories' : categoryInfo[this.currentCategory].name;
+                let categoryName = this.currentCategory === 'all' ? 'All Categories' : 
+                                 this.currentCategory === 'favorites' ? 'Favorites' :
+                                 categoryInfo[this.currentCategory]?.name || this.currentCategory;
                 
                 this.currentCountElement.textContent = shown;
                 this.totalCountElement.textContent = total;
@@ -2335,10 +3175,10 @@
                 
                 if (this.filteredImages.length === 0) {
                     this.galleryElement.innerHTML = `
-                        <div class="no-images" data-aos="fade-up">
-                            <i class="fas fa-image fa-3x mb-3"></i>
-                            <h4>No photos found</h4>
-                            <p>Try selecting a different category</p>
+                        <div class="no-images text-center py-5" data-aos="fade-up">
+                            <i class="fas fa-image fa-3x mb-3" style="color: var(--text-color); opacity: 0.5;"></i>
+                            <h4 style="color: var(--text-color);">No photos found</h4>
+                            <p style="color: var(--text-color);">Try selecting a different category or search term</p>
                         </div>
                     `;
                     this.loadMoreBtn.style.display = 'none';
@@ -2362,15 +3202,26 @@
                 // Reinitialize AOS for new elements
                 AOS.refresh();
                 this.updateStats();
+                this.updateFavoriteCounter();
             }
             
             createGalleryItem(image, index) {
+                if (this.viewMode === 'list') {
+                    return this.createListGalleryItem(image, index);
+                }
+                return this.createGridGalleryItem(image, index);
+            }
+            
+            createGridGalleryItem(image, index) {
                 const categoryData = categoryInfo[image.category] || { name: image.category, icon: 'image' };
+                const isFavorite = this.favorites.has(image.src);
                 
                 const div = document.createElement('div');
                 div.className = 'gallery-item';
                 div.setAttribute('data-aos', 'fade-up');
                 div.setAttribute('data-aos-delay', (index % 6) * 100);
+                div.dataset.src = image.src;
+                div.dataset.index = index;
                 
                 div.innerHTML = `
                     <img src="${image.src}" alt="${image.title}" 
@@ -2379,7 +3230,8 @@
                         <h6 class="mb-2">${image.title}</h6>
                         <p class="small mb-2">${image.location}</p>
                         <div class="d-flex flex-wrap">
-                            ${image.tags.map(tag => `<span class="badge bg-primary me-1 mb-1">${tag}</span>`).join('')}
+                            ${image.tags.slice(0, 3).map(tag => `<span class="badge bg-primary me-1 mb-1">${tag}</span>`).join('')}
+                            ${image.tags.length > 3 ? `<span class="badge bg-secondary me-1 mb-1">+${image.tags.length - 3}</span>` : ''}
                         </div>
                         <div class="mt-2">
                             <span class="badge bg-secondary">
@@ -2387,64 +3239,391 @@
                             </span>
                         </div>
                     </div>
-                `;
-                
-                // Add click handler for lightbox
-                div.addEventListener('click', () => {
-                    this.showLightbox(image);
-                });
-                
-                return div;
-            }
-            
-            showLightbox(image) {
-                const categoryData = categoryInfo[image.category] || { name: image.category, icon: 'image' };
-                
-                const lightbox = document.createElement('div');
-                lightbox.className = 'lightbox-modal';
-                lightbox.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0,0,0,0.9);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 2000;
-                    padding: 2rem;
-                `;
-                
-                lightbox.innerHTML = `
-                    <div class="lightbox-content" style="max-width: 90%; max-height: 90%; position: relative;">
-                        <img src="${image.src}" alt="${image.title}" 
-                             style="max-width: 100%; max-height: 100%; object-fit: contain;"
-                             onerror="this.src='https://via.placeholder.com/800x600/1a1a1a/ffffff?text=Image+Not+Available'">
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 1rem;">
-                            <h6>${image.title}</h6>
-                            <p class="mb-1">${image.location}</p>
-                            <p class="small mb-0">Category: ${categoryData.name}</p>
-                        </div>
-                        <button class="close-lightbox" style="position: absolute; top: 10px; right: 10px; background: var(--primary-color); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer;">
-                            ×
+                    <div class="image-actions">
+                        <button class="action-btn favorite ${isFavorite ? 'active' : ''}" 
+                                data-action="favorite" data-src="${image.src}" 
+                                title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="action-btn" data-action="info" data-src="${image.src}" title="View details">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                        <button class="action-btn" data-action="share" data-src="${image.src}" title="Share">
+                            <i class="fas fa-share-alt"></i>
                         </button>
                     </div>
                 `;
                 
-                document.body.appendChild(lightbox);
-                
-                // Close lightbox
-                const closeBtn = lightbox.querySelector('.close-lightbox');
-                closeBtn.addEventListener('click', () => {
-                    document.body.removeChild(lightbox);
-                });
-                
-                lightbox.addEventListener('click', (e) => {
-                    if (e.target === lightbox) {
-                        document.body.removeChild(lightbox);
+                // Add click handler for lightbox
+                div.addEventListener('click', (e) => {
+                    if (!e.target.closest('.image-actions')) {
+                        this.showLightbox(image, index);
                     }
                 });
+                
+                // Add event listeners for action buttons
+                this.addActionListeners(div, image);
+                
+                return div;
+            }
+            
+            createListGalleryItem(image, index) {
+                const categoryData = categoryInfo[image.category] || { name: image.category, icon: 'image' };
+                const isFavorite = this.favorites.has(image.src);
+                
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.setAttribute('data-aos', 'fade-up');
+                div.setAttribute('data-aos-delay', (index % 3) * 100);
+                div.dataset.src = image.src;
+                div.dataset.index = index;
+                
+                div.innerHTML = `
+                    <img src="${image.src}" alt="${image.title}" 
+                         onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/ffffff?text=Image+Not+Available'">
+                    <div class="gallery-overlay">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h6 class="mb-1">${image.title}</h6>
+                                <p class="small mb-2">
+                                    <i class="fas fa-map-marker-alt me-1"></i>${image.location}
+                                </p>
+                            </div>
+                            <div class="image-actions" style="position: relative; opacity: 1; top: 0; right: 0;">
+                                <button class="action-btn favorite ${isFavorite ? 'active' : ''}" 
+                                        data-action="favorite" data-src="${image.src}">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex flex-wrap mb-3">
+                            ${image.tags.slice(0, 3).map(tag => 
+                                `<span class="badge bg-primary me-1 mb-1">${tag}</span>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-secondary me-2">
+                                    <i class="fas fa-${categoryData.icon} me-1"></i>${categoryData.name}
+                                </span>
+                                <span class="small">
+                                    <i class="fas fa-camera me-1"></i>${image.photographer || 'Ermias Gaga'}
+                                </span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" data-action="info" data-src="${image.src}">
+                                <i class="fas fa-info-circle me-1"></i>Details
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                div.addEventListener('click', (e) => {
+                    if (!e.target.closest('.image-actions') && !e.target.closest('[data-action="info"]')) {
+                        this.showLightbox(image, index);
+                    }
+                });
+                
+                this.addActionListeners(div, image);
+                return div;
+            }
+            
+            addActionListeners(element, image) {
+                element.querySelectorAll('[data-action]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const action = btn.dataset.action;
+                        const src = btn.dataset.src;
+                        
+                        switch (action) {
+                            case 'favorite':
+                                this.toggleFavorite(src, btn);
+                                break;
+                            case 'info':
+                                this.showImageInfo(image);
+                                break;
+                            case 'share':
+                                this.shareImage(image);
+                                break;
+                        }
+                    });
+                });
+            }
+            
+            toggleFavorite(imageSrc, button) {
+                if (this.favorites.has(imageSrc)) {
+                    this.favorites.delete(imageSrc);
+                    button.classList.remove('active');
+                } else {
+                    this.favorites.add(imageSrc);
+                    button.classList.add('active');
+                }
+                
+                this.updateFavoriteCounter();
+                this.saveState();
+            }
+            
+            updateFavoriteCounter() {
+                const counter = document.getElementById('favoriteCount');
+                const favoriteCounter = document.getElementById('favoriteCounter');
+                
+                if (counter) {
+                    const total = this.favorites.size;
+                    counter.textContent = total;
+                    
+                    // Show/hide counter
+                    if (favoriteCounter) {
+                        if (total > 0) {
+                            favoriteCounter.style.display = 'flex';
+                        } else {
+                            favoriteCounter.style.display = 'none';
+                        }
+                    }
+                }
+            }
+            
+            showLightbox(image, index) {
+                this.currentLightboxIndex = index;
+                this.addToRecentlyViewed(image);
+                
+                const modal = document.createElement('div');
+                modal.className = 'lightbox-modal';
+                
+                // Find previous and next images
+                const prevIndex = index > 0 ? index - 1 : this.filteredImages.length - 1;
+                const nextIndex = index < this.filteredImages.length - 1 ? index + 1 : 0;
+                const prevImage = this.filteredImages[prevIndex];
+                const nextImage = this.filteredImages[nextIndex];
+                
+                modal.innerHTML = `
+                    <div class="lightbox-content">
+                        <div class="lightbox-nav">
+                            <button class="lightbox-btn prev-btn" title="Previous">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="lightbox-btn next-btn" title="Next">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        
+                        <img src="${image.src}" alt="${image.title}" class="lightbox-image"
+                             onerror="this.src='https://via.placeholder.com/800x600/1a1a1a/ffffff?text=Image+Not+Available'">
+                        
+                        <div class="lightbox-info">
+                            <h5 class="mb-3">${image.title}</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <strong><i class="fas fa-map-marker-alt me-2"></i>Location:</strong>
+                                    <p class="mb-0">${image.location}</p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <strong><i class="fas fa-tags me-2"></i>Category:</strong>
+                                    <p class="mb-0">
+                                        <span class="badge bg-primary">
+                                            ${categoryInfo[image.category]?.name || image.category}
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <strong><i class="fas fa-camera me-2"></i>Photographer:</strong>
+                                    <p class="mb-0">${image.photographer || 'Ermias Gaga'}</p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <strong><i class="fas fa-hashtag me-2"></i>Tags:</strong>
+                                    <p class="mb-0">
+                                        ${image.tags.map(tag => `<span class="badge bg-secondary me-1">${tag}</span>`).join('')}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-between">
+                                <button class="btn btn-sm btn-outline-primary download-btn" data-src="${image.src}">
+                                    <i class="fas fa-download me-1"></i>Download
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary share-btn" data-src="${image.src}">
+                                    <i class="fas fa-share-alt me-1"></i>Share
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger favorite-btn ${this.favorites.has(image.src) ? 'active' : ''}" 
+                                        data-src="${image.src}">
+                                    <i class="fas fa-heart me-1"></i>
+                                    ${this.favorites.has(image.src) ? 'Remove Favorite' : 'Add Favorite'}
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button class="close-lightbox">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                document.body.style.overflow = 'hidden';
+                
+                // Event listeners for lightbox
+                const closeBtn = modal.querySelector('.close-lightbox');
+                const prevBtn = modal.querySelector('.prev-btn');
+                const nextBtn = modal.querySelector('.next-btn');
+                const downloadBtn = modal.querySelector('.download-btn');
+                const shareBtn = modal.querySelector('.share-btn');
+                const favoriteBtn = modal.querySelector('.favorite-btn');
+                
+                closeBtn.addEventListener('click', () => this.closeLightbox(modal));
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) this.closeLightbox(modal);
+                });
+                
+                prevBtn.addEventListener('click', () => {
+                    this.closeLightbox(modal);
+                    setTimeout(() => this.showLightbox(prevImage, prevIndex), 100);
+                });
+                
+                nextBtn.addEventListener('click', () => {
+                    this.closeLightbox(modal);
+                    setTimeout(() => this.showLightbox(nextImage, nextIndex), 100);
+                });
+                
+                downloadBtn.addEventListener('click', () => this.downloadImage(image));
+                shareBtn.addEventListener('click', () => this.shareImage(image));
+                favoriteBtn.addEventListener('click', () => {
+                    this.toggleFavorite(image.src, favoriteBtn);
+                    favoriteBtn.innerHTML = this.favorites.has(image.src) 
+                        ? '<i class="fas fa-heart me-1"></i>Remove Favorite'
+                        : '<i class="fas fa-heart me-1"></i>Add Favorite';
+                    favoriteBtn.classList.toggle('active');
+                });
+                
+                // Keyboard navigation
+                const handleKeydown = (e) => {
+                    switch(e.key) {
+                        case 'Escape':
+                            this.closeLightbox(modal);
+                            break;
+                        case 'ArrowLeft':
+                            this.closeLightbox(modal);
+                            setTimeout(() => this.showLightbox(prevImage, prevIndex), 100);
+                            break;
+                        case 'ArrowRight':
+                            this.closeLightbox(modal);
+                            setTimeout(() => this.showLightbox(nextImage, nextIndex), 100);
+                            break;
+                    }
+                };
+                
+                document.addEventListener('keydown', handleKeydown);
+                modal._keydownHandler = handleKeydown;
+            }
+            
+            closeLightbox(modal) {
+                if (modal._keydownHandler) {
+                    document.removeEventListener('keydown', modal._keydownHandler);
+                }
+                document.body.removeChild(modal);
+                document.body.style.overflow = 'auto';
+            }
+            
+            showImageInfo(image) {
+                alert(`Image Details:\n\nTitle: ${image.title}\nLocation: ${image.location}\nCategory: ${categoryInfo[image.category]?.name || image.category}\nPhotographer: ${image.photographer || 'Ermias Gaga'}\nTags: ${image.tags.join(', ')}`);
+            }
+            
+            downloadImage(image) {
+                const link = document.createElement('a');
+                link.href = image.src;
+                link.download = `${image.title.replace(/\s+/g, '_')}.jpg`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            
+            shareImage(image) {
+                const url = window.location.href.split('#')[0];
+                const text = `Check out this amazing photo by Ermias Gaga: ${image.title}`;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: image.title,
+                        text: text,
+                        url: url
+                    });
+                } else {
+                    navigator.clipboard.writeText(`${text}\n${url}`)
+                        .then(() => {
+                            alert('Link copied to clipboard!');
+                        })
+                        .catch(() => {
+                            prompt('Copy this link:', url);
+                        });
+                }
+            }
+            
+            addToRecentlyViewed(image) {
+                this.recentlyViewed = this.recentlyViewed.filter(img => img.src !== image.src);
+                this.recentlyViewed.unshift(image);
+                if (this.recentlyViewed.length > 10) {
+                    this.recentlyViewed.pop();
+                }
+                this.saveState();
+            }
+            
+            updateBreadcrumb() {
+                const breadcrumbList = document.getElementById('breadcrumbList');
+                if (!breadcrumbList) return;
+                
+                const currentPage = this.getCurrentPageName();
+                
+                let breadcrumbHTML = `
+                    <li class="breadcrumb-item">
+                        <a href="#home">Home</a>
+                        <span class="breadcrumb-separator">/</span>
+                    </li>
+                `;
+                
+                if (currentPage === 'Gallery') {
+                    breadcrumbHTML += `
+                        <li class="breadcrumb-item">
+                            <a href="#gallery">Gallery</a>
+                            <span class="breadcrumb-separator">/</span>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="breadcrumb-current">
+                                ${this.currentCategory === 'all' ? 'All Photos' : 
+                                  this.currentCategory === 'favorites' ? 'Favorites' :
+                                  categoryInfo[this.currentCategory]?.name || this.currentCategory}
+                            </span>
+                        </li>
+                    `;
+                } else {
+                    breadcrumbHTML += `
+                        <li class="breadcrumb-item">
+                            <span class="breadcrumb-current">${currentPage}</span>
+                        </li>
+                    `;
+                }
+                
+                breadcrumbList.innerHTML = breadcrumbHTML;
+            }
+            
+            getCurrentPageName() {
+                const hash = window.location.hash;
+                if (hash.includes('gallery') || hash.includes('categories')) return 'Gallery';
+                if (hash.includes('journey')) return 'Journey';
+                if (hash.includes('about')) return 'About';
+                if (hash.includes('contact')) return 'Contact';
+                return 'Home';
+            }
+            
+            updateScrollProgress() {
+                const scrollProgress = document.getElementById('scrollProgress');
+                const scrollPercentage = document.getElementById('scrollPercentage');
+                
+                if (!scrollProgress || !scrollPercentage) return;
+                
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+                
+                scrollProgress.style.width = `${scrollPercent}%`;
+                scrollPercentage.textContent = `${Math.round(scrollPercent)}%`;
             }
             
             loadMore() {
@@ -2470,274 +3649,34 @@
             }
         }
 
-        // Photography Chatbot Knowledge Base
-        const photoChatbotKnowledge = {
-            'nature': {
-                keywords: ['nature', 'landscape', 'wildlife', 'forest', 'mountains'],
-                response: `🌲 Nature Photography Collection
-                
-Available Categories:
-1. Landscapes - Mountain ranges, forests, valleys
-2. Wildlife - Animals in their natural habitat
-3. Macro - Close-up details of plants and insects
-4. Seascapes - Oceans, lakes, and coastal scenes
-
-Popular Locations:
-- Canadian Rockies, Alberta
-- Long Point, Ontario beaches
-- Algonquin Provincial Park
-- Niagara Region
-
-*Browse the gallery or contact for specific nature photo inquiries.*`
-            },
-            'prints': {
-                keywords: ['prints', 'purchase', 'buy', 'order', 'price'],
-                response: `🖼️ Print Purchase Information
-                
-Print Options:
-- Fine Art Prints: Archival quality on premium paper
-- Canvas Prints: Gallery-wrapped canvases
-- Metal Prints: Modern, vibrant metal displays
-- Limited Editions: Signed and numbered series
-
-Sizes Available:
-- Small (8x10") from $75
-- Medium (16x20") from $150  
-- Large (24x36") from $300
-- Custom sizes available
-
-*Use the contact form for specific pricing and availability.*`
-            },
-            'workshops': {
-                keywords: ['workshops', 'classes', 'learn', 'teach', 'tutorial'],
-                response: `🎓 Photography Workshops
-                
-Upcoming Workshops:
-1. Landscape Mastery - Next: March 15, 2024
-   - Composition techniques
-   - Golden hour shooting
-   - Post-processing basics
-
-2. Urban Photography - Next: April 10, 2024
-   - Architectural photography
-   - Street photography ethics
-   - Night photography tips
-
-Workshop Details:
-- Duration: 4 hours
-- Group size: Max 8 participants
-- Includes: Handbook & light refreshments
-- Price: $150 per person
-
-*Contact for registration and schedule details.*`
-            },
-            'tips': {
-                keywords: ['tips', 'advice', 'how to', 'best time', 'settings'],
-                response: `💡 Photography Tips
-                
-Landscape Photography:
-- Golden Hour: 1 hour after sunrise / before sunset
-- Use tripod for sharp images
-- Shoot in RAW for better editing
-- Use ND filters for long exposures
-
-Camera Settings (Landscape):
-- Aperture: f/8 to f/16
-- ISO: 100-400 (base ISO)
-- Shutter: Adjust for proper exposure
-- Focus: Use hyperfocal distance
-
-Composition Rules:
-1. Rule of thirds
-2. Leading lines
-3. Frame within a frame
-4. Negative space
-
-*More specific questions? Just ask!*`
-            },
-            'hello': {
-                keywords: ['hello', 'hi', 'hey', 'help'],
-                response: `👋 Hello! I'm your photography assistant. 
-
-I can help you with:
-- Photo categories and locations
-- Print purchasing information  
-- Workshop schedules and details
-- Photography tips and techniques
-- Equipment recommendations
-- Collaboration inquiries
-
-Try asking specific questions like:
-- "What nature photos are available?"
-- "How much do prints cost?"
-- "When are the next workshops?"
-- "Best camera settings for landscapes?"
-
-How can I help you today? 📸`
-            }
-        };
-
-        // Initialize Photo Chatbot
-        class PhotoChatbot {
-            getResponse(question) {
-                const lowerQ = question.toLowerCase().trim();
-                
-                for (const [category, data] of Object.entries(photoChatbotKnowledge)) {
-                    for (const keyword of data.keywords) {
-                        if (lowerQ.includes(keyword)) {
-                            return data.response;
-                        }
-                    }
-                }
-                
-                return `📸 I'm not sure about "${question}". Try asking about:
-- Available photo categories
-- Print purchasing information
-- Workshop schedules
-- Photography tips
-- Equipment recommendations`;
-            }
-        }
-
-        // DOM Ready
+        // Initialize Enhanced Gallery
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Gallery
-            const gallery = new PhotoGallery();
+            const gallery = new EnhancedPhotoGallery();
             
-            const photoChatbot = new PhotoChatbot();
-            const chatToggle = document.getElementById('photoChatbotToggle');
-            const chatContainer = document.getElementById('photoChatbotContainer');
-            const chatBody = document.getElementById('photoChatbotBody');
-            const chatInput = document.getElementById('photoChatInput');
-            const quickQuestions = document.querySelectorAll('.quick-question');
-            const backToTop = document.getElementById('backToTop');
-
-            // Chatbot Toggle
-            chatToggle.addEventListener('click', () => {
-                chatContainer.classList.toggle('active');
+            // Initialize other interactive elements
+            initChatbot();
+            initBackToTop();
+            initKeyboardShortcuts(gallery);
+            initScrollTracking(gallery);
+            initContactForm();
+            
+            // Update breadcrumb on hash change
+            window.addEventListener('hashchange', () => {
+                gallery.updateBreadcrumb();
             });
-
-            // Close chatbot when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!chatContainer.contains(e.target) && !chatToggle.contains(e.target)) {
-                    chatContainer.classList.remove('active');
-                }
+            
+            // Save scroll position before unload
+            window.addEventListener('beforeunload', () => {
+                localStorage.setItem('scrollPosition', window.pageYOffset);
+                gallery.saveState();
             });
-
-            // Send Message Function
-            function sendPhotoMessage() {
-                const message = chatInput.value.trim();
-                if (message) {
-                    // Add user message
-                    addPhotoMessage(message, 'user');
-                    chatInput.value = '';
-                    
-                    // Show typing indicator
-                    const typingDiv = document.createElement('div');
-                    typingDiv.className = 'chat-message bot-message';
-                    typingDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
-                    chatBody.appendChild(typingDiv);
-                    
-                    // Get response
-                    setTimeout(() => {
-                        typingDiv.remove();
-                        const response = photoChatbot.getResponse(message);
-                        addPhotoMessage(response, 'bot');
-                    }, 1000 + Math.random() * 1000);
-                }
-            }
-
-            function addPhotoMessage(text, sender) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `chat-message ${sender}-message`;
-                messageDiv.innerHTML = `<div>${text.replace(/\n/g, '<br>')}</div>`;
-                chatBody.appendChild(messageDiv);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }
-
-            // Event Listeners
-            document.getElementById('photoChatSend').addEventListener('click', sendPhotoMessage);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') sendPhotoMessage();
-            });
-
-            quickQuestions.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const question = btn.getAttribute('data-question');
-                    addPhotoMessage(question, 'user');
-                    setTimeout(() => {
-                        const response = photoChatbot.getResponse(question);
-                        addPhotoMessage(response, 'bot');
-                    }, 500);
-                });
-            });
-
-            // Back to Top
+            
+            // Initialize scroll tracking
             window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
+                gallery.updateScrollProgress();
+                updateBackToTop();
             });
-
-            backToTop.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // Contact Form Submission
-            const contactForm = document.getElementById('photoContactForm');
-            const responseDiv = document.getElementById('photoFormResponse');
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    const submitBtn = this.querySelector('button[type="submit"]');
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
-                    submitBtn.disabled = true;
-                    
-                    try {
-                        const formData = new FormData(this);
-                        
-                        const response = await fetch(this.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: { 'Accept': 'application/json' }
-                        });
-                        
-                        if (response.ok) {
-                            responseDiv.innerHTML = `
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <i class="fas fa-check-circle me-2"></i>
-                                    Message sent successfully! I'll respond within 24 hours.
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                </div>
-                            `;
-                            this.reset();
-                        } else {
-                            throw new Error('Form submission failed');
-                        }
-                    } catch (error) {
-                        responseDiv.innerHTML = `
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <i class="fas fa-exclamation-circle me-2"></i>
-                                Error sending message. Please email me directly at ermiasgelaye@gmail.com
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        `;
-                    } finally {
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }
-                });
-            }
-
+            
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -2760,16 +3699,259 @@ How can I help you today? 📸`
                     }
                 });
             });
-
+        });
+        
+        function initChatbot() {
+            const chatToggle = document.getElementById('photoChatbotToggle');
+            const chatContainer = document.getElementById('photoChatbotContainer');
+            const chatBody = document.getElementById('photoChatbotBody');
+            const chatInput = document.getElementById('photoChatInput');
+            const quickQuestions = document.querySelectorAll('.quick-question');
+            
+            if (!chatToggle || !chatContainer) return;
+            
+            // Chatbot knowledge base
+            const photoChatbotKnowledge = {
+                'nature': {
+                    keywords: ['nature', 'landscape', 'wildlife', 'forest', 'mountains'],
+                    response: `🌲 Nature Photography Collection\n\nAvailable Categories:\n1. Landscapes - Mountain ranges, forests, valleys\n2. Wildlife - Animals in their natural habitat\n3. Macro - Close-up details of plants and insects\n4. Seascapes - Oceans, lakes, and coastal scenes\n\n*Browse the gallery or contact for specific nature photo inquiries.*`
+                },
+                'prints': {
+                    keywords: ['prints', 'purchase', 'buy', 'order', 'price'],
+                    response: `🖼️ Print Purchase Information\n\nPrint Options:\n- Fine Art Prints: Archival quality on premium paper\n- Canvas Prints: Gallery-wrapped canvases\n- Metal Prints: Modern, vibrant metal displays\n- Limited Editions: Signed and numbered series\n\n*Use the contact form for specific pricing and availability.*`
+                },
+                'workshops': {
+                    keywords: ['workshops', 'classes', 'learn', 'teach', 'tutorial'],
+                    response: `🎓 Photography Workshops\n\nUpcoming Workshops:\n1. Landscape Mastery - Next: March 15, 2024\n2. Urban Photography - Next: April 10, 2024\n\n*Contact for registration and schedule details.*`
+                },
+                'tips': {
+                    keywords: ['tips', 'advice', 'how to', 'best time', 'settings'],
+                    response: `💡 Photography Tips\n\nLandscape Photography:\n- Golden Hour: 1 hour after sunrise / before sunset\n- Use tripod for sharp images\n- Shoot in RAW for better editing\n\n*More specific questions? Just ask!*`
+                }
+            };
+            
+            function getResponse(question) {
+                const lowerQ = question.toLowerCase().trim();
+                
+                for (const [category, data] of Object.entries(photoChatbotKnowledge)) {
+                    for (const keyword of data.keywords) {
+                        if (lowerQ.includes(keyword)) {
+                            return data.response;
+                        }
+                    }
+                }
+                
+                return `📸 I'm not sure about "${question}". Try asking about:\n- Available photo categories\n- Print purchasing information\n- Workshop schedules\n- Photography tips`;
+            }
+            
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${sender}-message`;
+                messageDiv.innerHTML = `<div>${text.replace(/\n/g, '<br>')}</div>`;
+                chatBody.appendChild(messageDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+            
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    addMessage(message, 'user');
+                    chatInput.value = '';
+                    
+                    // Show typing indicator
+                    const typingDiv = document.createElement('div');
+                    typingDiv.className = 'chat-message bot-message';
+                    typingDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+                    chatBody.appendChild(typingDiv);
+                    
+                    setTimeout(() => {
+                        typingDiv.remove();
+                        const response = getResponse(message);
+                        addMessage(response, 'bot');
+                    }, 1000 + Math.random() * 1000);
+                }
+            }
+            
+            // Event listeners
+            chatToggle.addEventListener('click', () => {
+                chatContainer.classList.toggle('active');
+            });
+            
+            document.getElementById('photoChatSend').addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+            
+            quickQuestions.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const question = btn.getAttribute('data-question');
+                    addMessage(question, 'user');
+                    setTimeout(() => {
+                        const response = getResponse(question);
+                        addMessage(response, 'bot');
+                    }, 500);
+                });
+            });
+            
+            // Close chatbot when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!chatContainer.contains(e.target) && !chatToggle.contains(e.target)) {
+                    chatContainer.classList.remove('active');
+                }
+            });
+            
             // Auto-open chatbot after 5 seconds
             setTimeout(() => {
                 if (!chatContainer.classList.contains('active')) {
                     chatContainer.classList.add('active');
                 }
             }, 5000);
-        });
+        }
+        
+        function initBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            if (!backToTop) return;
+            
+            backToTop.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        function updateBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            if (!backToTop) return;
+            
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+        
+        function initKeyboardShortcuts(gallery) {
+            document.addEventListener('keydown', (e) => {
+                // Alt + key shortcuts
+                if (e.altKey) {
+                    switch(e.key.toLowerCase()) {
+                        case 'g':
+                            e.preventDefault();
+                            document.querySelector('[href="#gallery"]').click();
+                            break;
+                        case 'n':
+                            e.preventDefault();
+                            document.querySelector('[data-category="nature"]').click();
+                            break;
+                        case 'l':
+                            e.preventDefault();
+                            document.querySelector('[data-category="landscape"]').click();
+                            break;
+                        case 'u':
+                            e.preventDefault();
+                            document.querySelector('[data-category="urban"]').click();
+                            break;
+                        case 'w':
+                            e.preventDefault();
+                            document.querySelector('[data-category="water"]').click();
+                            break;
+                        case 't':
+                            e.preventDefault();
+                            document.querySelector('[data-category="travel"]').click();
+                            break;
+                        case 'f':
+                            e.preventDefault();
+                            const searchInput = document.getElementById('photoSearch');
+                            if (searchInput) searchInput.focus();
+                            break;
+                        case 'h':
+                            e.preventDefault();
+                            document.querySelector('[href="#home"]').click();
+                            break;
+                    }
+                }
+                
+                // Escape key closes modals
+                if (e.key === 'Escape') {
+                    const modals = document.querySelectorAll('.lightbox-modal, .chatbot-container.active');
+                    modals.forEach(modal => {
+                        if (modal.classList.contains('lightbox-modal')) {
+                            modal.querySelector('.close-lightbox')?.click();
+                        } else if (modal.classList.contains('chatbot-container')) {
+                            modal.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }
+        
+        function initScrollTracking(gallery) {
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                if (gallery && gallery.updateScrollProgress) {
+                    gallery.updateScrollProgress();
+                }
+                
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    localStorage.setItem('scrollPosition', window.pageYOffset);
+                }, 100);
+            });
+        }
+        
+        function initContactForm() {
+            const contactForm = document.getElementById('photoContactForm');
+            const responseDiv = document.getElementById('photoFormResponse');
+            
+            if (!contactForm || !responseDiv) return;
+            
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+                submitBtn.disabled = true;
+                
+                try {
+                    const formData = new FormData(this);
+                    
+                    const response = await fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    
+                    if (response.ok) {
+                        responseDiv.innerHTML = `
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fas fa-check-circle me-2"></i>
+                                Message sent successfully! I'll respond within 24 hours.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        `;
+                        this.reset();
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    responseDiv.innerHTML = `
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Error sending message. Please email me directly at ermiasgelaye@gmail.com
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    `;
+                } finally {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
 
-        // Typing indicator styles
+        // Add typing indicator styles
         const style = document.createElement('style');
         style.textContent = `
             .typing-indicator {
@@ -2789,15 +3971,6 @@ How can I help you today? 📸`
             @keyframes typing {
                 0%, 100% { opacity: 0.4; transform: scale(1); }
                 50% { opacity: 1; transform: scale(1.2); }
-            }
-            
-            .lightbox-modal {
-                animation: fadeIn 0.3s ease;
-            }
-            
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
             }
         `;
         document.head.appendChild(style);
