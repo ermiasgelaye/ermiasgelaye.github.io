@@ -84,7 +84,7 @@ time,
 mark,
 audio,
 video {
-  
+
   /* Positioning */
   margin: 0;
   vertical-align: baseline;
@@ -98,7 +98,7 @@ video {
 
   /* Visual */
   border: 0;
-  
+
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -112,21 +112,29 @@ header,
 hgroup,
 menu,
 nav,
-section { display: block; }
+section {
+  display: block;
+}
 
-body { line-height: 1; }
+body {
+  line-height: 1;
+}
 
 ol,
-ul { list-style: none; }
+ul {
+  list-style: none;
+}
 
 blockquote,
-q { quotes: none; }
+q {
+  quotes: none;
+}
 
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  
+
   /* Misc */
   content: '';
   content: none;
@@ -134,7 +142,7 @@ q:after {
 }
 
 table {
-  
+
   /* Visual */
   border-collapse: collapse;
   border-spacing: 0;

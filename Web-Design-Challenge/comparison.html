@@ -1,1063 +1,1079 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Visualization Comparison | Weather Analysis</title>
-    
-    <!-- Bootstrap & Font Awesome -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Custom Styles -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Visualization Comparison | Weather Analysis</title>
+
+  <!-- Bootstrap & Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Styles -->
   <style>
-      :root {
-        --primary-color: #007BFF;
-        --secondary-color: #000000;
-        --background-color: #f8f9fa;
-        --text-color: #212529;
-        --heading-font: 'Poppins', sans-serif;
-        --body-font: 'Inter', sans-serif;
-        --border-radius: 12px;
-        --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    :root {
+      --primary-color: #007BFF;
+      --secondary-color: #000000;
+      --background-color: #f8f9fa;
+      --text-color: #212529;
+      --heading-font: 'Poppins', sans-serif;
+      --body-font: 'Inter', sans-serif;
+      --border-radius: 12px;
+      --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--body-font);
+      font-size: 16px;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding-top: 76px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--heading-font);
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    h1:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), #0056b3);
+      border-radius: 2px;
+    }
+
+    /* Modern Navbar */
+    .navbar {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      padding: 0.75rem 0 !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      min-height: 60px !important;
+      height: 60px !important;
+    }
+
+    .navbar .container {
+      padding: 0 15px;
+    }
+
+    .navbar-brand {
+      color: white !important;
+      font-size: 1.4rem !important;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 !important;
+      margin-right: 1rem !important;
+      font-family: Georgia, Times, "Times New Roman", serif;
+    }
+
+    .navbar-brand i {
+      font-size: 1.5rem !important;
+    }
+
+    .navbar-nav .nav-link {
+      color: rgba(255, 255, 255, 0.9) !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      margin: 0 0.25rem !important;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .navbar-nav .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white !important;
+      transform: translateY(-2px);
+    }
+
+    .navbar-nav .nav-link.active {
+      background: rgba(255, 255, 255, 0.2);
+      color: white !important;
+    }
+
+    .navbar-toggler {
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+      padding: 0.25rem 0.5rem !important;
+    }
+
+    .dropdown-menu {
+      background: white;
+      border: none;
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 0.5rem 0;
+      margin-top: 0.5rem !important;
+    }
+
+    .dropdown-item {
+      color: var(--text-color);
+      padding: 0.5rem 1.25rem !important;
+      transition: all 0.2s ease;
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .dropdown-item:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateX(5px);
+    }
+
+    /* Main Container */
+    .container.main-content {
+      padding: 40px 15px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Project Header - COMPACT */
+    .project-header {
+      text-align: center;
+      margin-bottom: 2rem !important;
+      padding: 1.5rem !important;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .project-header h1 {
+      font-size: 2.2rem !important;
+      margin-bottom: 0.5rem !important;
+      position: relative;
+      padding-bottom: 0.75rem !important;
+    }
+
+    .project-header h1:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), #0056b3);
+      border-radius: 2px;
+    }
+
+    .project-header .lead {
+      font-size: 1.1rem !important;
+      margin-bottom: 1rem !important;
+      color: #666;
+    }
+
+    /* Tech Badges - COMPACT */
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem !important;
+      margin: 1rem 0 !important;
+      justify-content: center;
+    }
+
+    .tech-badge {
+      background: linear-gradient(135deg, var(--primary-color), #0056b3);
+      color: white;
+      padding: 0.4rem 0.8rem !important;
+      border-radius: 16px !important;
+      font-size: 0.8rem !important;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tech-badge i {
+      font-size: 0.75rem !important;
+    }
+
+    /* Dynamic Layout Container */
+    .dynamic-layout {
+      display: none;
+      /* Initially hidden */
+    }
+
+    .dynamic-layout.active {
+      display: block;
+    }
+
+    /* Content Cards */
+    .description-content {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 1.75rem !important;
+      margin-bottom: 1.5rem !important;
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+
+    .description-content:hover {
+      transform: translateY(-5px);
+    }
+
+    .description-header {
+      color: var(--primary-color);
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      font-family: Georgia, Times, "Times New Roman", serif;
+    }
+
+    .description-image {
+      width: 100%;
+      max-width: 100%;
+      height: 400px;
+      object-fit: contain;
+      border-radius: var(--border-radius);
+      margin: 1rem 0 !important;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      background: white;
+      padding: 20px;
+    }
+
+    .description-image:hover {
+      transform: scale(1.01);
+    }
+
+    /* Visualization Grid - COMPACT */
+    .visualization-grid {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 1.5rem !important;
+      margin-top: 1.5rem !important;
+      height: 100%;
+    }
+
+    .visualization-grid h2 {
+      color: var(--primary-color);
+      font-size: 1.5rem !important;
+      margin-bottom: 1rem !important;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .imageNav-photo {
+      width: 100%;
+      height: 180px !important;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .imageNav-photo:hover {
+      transform: translateY(-5px) scale(1.03);
+      border-color: var(--primary-color);
+      box-shadow: 0 10px 20px rgba(0, 123, 255, 0.1);
+    }
+
+    /* Active thumbnail style */
+    .imageNav-photo.active {
+      border-color: var(--primary-color);
+      border-width: 3px;
+      box-shadow: 0 8px 16px rgba(0, 123, 255, 0.2);
+    }
+
+    /* Thumbnail titles */
+    .viz-thumbnail p {
+      text-align: center;
+      margin-top: 0.5rem !important;
+      margin-bottom: 0.5rem !important;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      font-size: 0.85rem;
+    }
+
+    .viz-thumbnail p:hover {
+      color: var(--primary-color);
+    }
+
+    /* Equal Size Visualization Grid (Initial View) */
+    .comparison-grid {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 1.5rem !important;
+      margin-bottom: 1.5rem !important;
+    }
+
+    .comparison-grid h2 {
+      color: var(--primary-color);
+      font-size: 1.5rem !important;
+      margin-bottom: 1rem !important;
+      text-align: center;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .viz-card {
+      background: white;
+      border-radius: var(--border-radius);
+      border: 1px solid #e9ecef;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .viz-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      border-color: var(--primary-color);
+    }
+
+    .viz-image {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+      padding: 15px;
+    }
+
+    .viz-card:hover .viz-image {
+      transform: scale(1.02);
+    }
+
+    .viz-title {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .viz-description {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .viz-stats {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .viz-stats h6 {
+      color: var(--primary-color);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .viz-stats ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .viz-stats li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* Key Findings - COMPACT */
+    .key-findings {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 1.25rem !important;
+      border-radius: var(--border-radius);
+      margin: 1rem 0 !important;
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .key-findings h4 {
+      color: var(--primary-color);
+      font-size: 1.1rem !important;
+      margin-bottom: 0.75rem !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .key-findings ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .key-findings li {
+      margin-bottom: 0.5rem !important;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin-top: 1.5rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.25rem;
+      border: 1px solid #e9ecef;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .stat-card:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-title {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    /* Comparison Summary */
+    .comparison-summary {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      margin-top: 1.5rem;
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .comparison-summary h3 {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-summary p {
+      color: #666;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-summary ul {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .comparison-summary li {
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .comparison-summary strong {
+      color: var(--primary-color);
+    }
+
+    /* Footer - COMPACT */
+    .footer {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 1.5rem 0 !important;
+      margin-top: 2rem !important;
+      text-align: center;
+      width: 100%;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .footer p {
+      margin-bottom: 0.5rem !important;
+    }
+
+    .footer p.mb-2 {
+      font-size: 0.95rem;
+    }
+
+    .footer p.mb-3 {
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem !important;
+    }
+
+    .back-to-latitude {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--primary-color);
+      padding: 0.6rem 1.25rem !important;
+      border-radius: 24px !important;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 0.5rem !important;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .back-to-latitude:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+      text-decoration: none;
+      color: var(--primary-color);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Chatbot Styles */
+    .chatbot-wrapper {
+      position: fixed;
+      bottom: 20px !important;
+      right: 20px !important;
+      z-index: 1000;
+    }
+
+    .chatbot-toggle {
+      width: 55px !important;
+      height: 55px !important;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-color), #0056b3);
+      border: none;
+      color: white;
+      font-size: 1.25rem !important;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .chatbot-toggle:hover {
+      transform: scale(1.08);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    }
+
+    .chatbot-container {
+      position: absolute;
+      bottom: 65px !important;
+      right: 0;
+      width: 320px !important;
+      height: 450px !important;
+      background: white;
+      border-radius: 14px !important;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #e9ecef;
+    }
+
+    .chatbot-container.active {
+      display: flex;
+      animation: slideInUp 0.3s ease;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
       }
 
-      * {
-        box-sizing: border-box;
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chatbot-header {
+      padding: 1rem 1.25rem !important;
+      background: linear-gradient(135deg, var(--primary-color), #0056b3);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .chatbot-header h5 {
+      font-size: 1rem !important;
+      margin: 0;
+    }
+
+    .close-chatbot {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem !important;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .chatbot-body {
+      flex: 1;
+      padding: 1.25rem !important;
+      overflow-y: auto;
+      background: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .chat-message {
+      max-width: 85%;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
       }
 
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bot-message .message-content {
+      background: white;
+      color: var(--text-color);
+      border: 1px solid #e9ecef;
+      border-bottom-left-radius: 4px;
+      padding: 0.75rem !important;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
       body {
-        margin: 0;
-        font-family: var(--body-font);
-        font-size: 16px;
-        background-color: var(--background-color);
-        color: var(--text-color);
-        line-height: 1.6;
-        padding-top: 76px;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        padding-top: 70px;
       }
 
-      h1, h2, h3, h4, h5, h6 {
-        font-family: var(--heading-font);
-        margin-top: 0;
-        margin-bottom: 0.5em;
-        line-height: 1.3;
-        font-weight: 600;
-      }
-
-      h1 { 
-        font-size: 2.5rem; 
-        color: var(--primary-color); 
-        position: relative;
-        padding-bottom: 15px;
-      }
-
-      h1:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 80px;
-        height: 4px;
-        background: linear-gradient(90deg, var(--primary-color), #0056b3);
-        border-radius: 2px;
-      }
-
-      /* Modern Navbar */
       .navbar {
-        background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-        padding: 0.75rem 0 !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        min-height: 60px !important;
-        height: 60px !important;
-      }
-
-      .navbar .container {
-        padding: 0 15px;
+        min-height: 56px !important;
+        height: 56px !important;
+        padding: 0.5rem 0 !important;
       }
 
       .navbar-brand {
-        color: white !important;
-        font-size: 1.4rem !important;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 0 !important;
-        margin-right: 1rem !important;
-        font-family: Georgia, Times, "Times New Roman", serif;
+        font-size: 1.2rem !important;
       }
 
-      .navbar-brand i {
-        font-size: 1.5rem !important;
+      .container.main-content {
+        padding: 30px 15px !important;
       }
 
-      .navbar-nav .nav-link {
-        color: rgba(255, 255, 255, 0.9) !important;
-        font-weight: 500;
-        padding: 0.5rem 1rem !important;
-        margin: 0 0.25rem !important;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        font-size: 0.95rem;
+      .project-header {
+        padding: 1.25rem !important;
+        margin-bottom: 1.5rem !important;
       }
 
-      .navbar-nav .nav-link:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: white !important;
-        transform: translateY(-2px);
+      .project-header h1 {
+        font-size: 1.8rem !important;
       }
 
-      .navbar-nav .nav-link.active {
-        background: rgba(255, 255, 255, 0.2);
-        color: white !important;
+      .description-image {
+        height: 300px;
       }
 
-      .navbar-toggler {
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
-        padding: 0.25rem 0.5rem !important;
+      .viz-image {
+        height: 200px;
+      }
+
+      .imageNav-photo {
+        height: 150px !important;
+      }
+
+      .chatbot-container {
+        width: calc(100vw - 40px) !important;
+        right: 20px;
+        bottom: 60px !important;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .navbar-brand {
+        font-size: 1.1rem !important;
+      }
+
+      .container.main-content {
+        padding-top: 25px !important;
+      }
+
+      .project-header h1 {
+        font-size: 1.6rem !important;
+      }
+
+      .tech-badge {
+        padding: 0.35rem 0.7rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      .description-image {
+        height: 250px;
+      }
+
+      .viz-image {
+        height: 180px;
+      }
+
+      .imageNav-photo {
+        height: 130px !important;
+      }
+
+      .viz-title {
+        font-size: 1.1rem;
+      }
+
+      .description-header {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background-color: #121212;
+        --text-color: #f0f0f0;
+      }
+
+      .description-content,
+      .visualization-grid,
+      .project-header,
+      .viz-card,
+      .stat-card,
+      .comparison-grid,
+      .comparison-summary {
+        background: #1e1e1e;
+        color: #f0f0f0;
+        border-color: #444;
+      }
+
+      .navbar {
+        background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
       }
 
       .dropdown-menu {
-        background: white;
-        border: none;
-        border-radius: var(--border-radius);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        padding: 0.5rem 0;
-        margin-top: 0.5rem !important;
+        background: #2d2d2d;
       }
 
       .dropdown-item {
-        color: var(--text-color);
-        padding: 0.5rem 1.25rem !important;
-        transition: all 0.2s ease;
-        font-weight: 500;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        cursor: pointer;
+        color: #f0f0f0;
       }
 
       .dropdown-item:hover {
         background: var(--primary-color);
-        color: white;
-        transform: translateX(5px);
       }
 
-      /* Main Container */
-      .container.main-content {
-        padding: 40px 15px;
-        max-width: 1400px;
-        margin: 0 auto;
+      .viz-description,
+      .viz-stats ul,
+      .key-findings li,
+      .comparison-summary p,
+      .comparison-summary li,
+      .stat-title {
+        color: #ccc;
       }
 
-      /* Project Header - COMPACT */
-      .project-header {
-        text-align: center;
-        margin-bottom: 2rem !important;
-        padding: 1.5rem !important;
-        background: white;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-      }
-
-      .project-header h1 {
-        font-size: 2.2rem !important;
-        margin-bottom: 0.5rem !important;
-        position: relative;
-        padding-bottom: 0.75rem !important;
-      }
-
-      .project-header h1:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 3px;
-        background: linear-gradient(90deg, var(--primary-color), #0056b3);
-        border-radius: 2px;
-      }
-
-      .project-header .lead {
-        font-size: 1.1rem !important;
-        margin-bottom: 1rem !important;
-        color: #666;
-      }
-
-      /* Tech Badges - COMPACT */
-      .tech-badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem !important;
-        margin: 1rem 0 !important;
-        justify-content: center;
-      }
-
-      .tech-badge {
-        background: linear-gradient(135deg, var(--primary-color), #0056b3);
-        color: white;
-        padding: 0.4rem 0.8rem !important;
-        border-radius: 16px !important;
-        font-size: 0.8rem !important;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-      }
-
-      .tech-badge i {
-        font-size: 0.75rem !important;
-      }
-
-      /* Dynamic Layout Container */
-      .dynamic-layout {
-        display: none; /* Initially hidden */
-      }
-
-      .dynamic-layout.active {
-        display: block;
-      }
-
-      /* Content Cards */
-      .description-content {
-        background: white;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-        padding: 1.75rem !important;
-        margin-bottom: 1.5rem !important;
-        transition: transform 0.3s ease;
-        height: 100%;
-      }
-
-      .description-content:hover {
-        transform: translateY(-5px);
-      }
-
-      .description-header {
-        color: var(--primary-color);
-        font-size: 1.75rem;
-        margin-bottom: 1.5rem;
-        font-family: Georgia, Times, "Times New Roman", serif;
-      }
-
-      .description-image {
-        width: 100%;
-        max-width: 100%;
-        height: 400px;
-        object-fit: contain;
-        border-radius: var(--border-radius);
-        margin: 1rem 0 !important;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-        cursor: pointer;
-        background: white;
-        padding: 20px;
-      }
-
-      .description-image:hover {
-        transform: scale(1.01);
-      }
-
-      /* Visualization Grid - COMPACT */
-      .visualization-grid {
-        background: white;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-        padding: 1.5rem !important;
-        margin-top: 1.5rem !important;
-        height: 100%;
-      }
-
-      .visualization-grid h2 {
-        color: var(--primary-color);
-        font-size: 1.5rem !important;
-        margin-bottom: 1rem !important;
-        padding-bottom: 0.75rem;
-        border-bottom: 2px solid #f0f0f0;
-      }
-
-      .imageNav-photo {
-        width: 100%;
-        height: 180px !important;
-        object-fit: cover;
-        border-radius: 8px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 2px solid transparent;
-        cursor: pointer;
-      }
-
-      .imageNav-photo:hover {
-        transform: translateY(-5px) scale(1.03);
-        border-color: var(--primary-color);
-        box-shadow: 0 10px 20px rgba(0, 123, 255, 0.1);
-      }
-
-      /* Active thumbnail style */
-      .imageNav-photo.active {
-        border-color: var(--primary-color);
-        border-width: 3px;
-        box-shadow: 0 8px 16px rgba(0, 123, 255, 0.2);
-      }
-
-      /* Thumbnail titles */
-      .viz-thumbnail p {
-        text-align: center;
-        margin-top: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
-        font-weight: 500;
-        color: #333;
-        cursor: pointer;
-        transition: color 0.2s ease;
-        font-size: 0.85rem;
-      }
-
-      .viz-thumbnail p:hover {
-        color: var(--primary-color);
-      }
-
-      /* Equal Size Visualization Grid (Initial View) */
-      .comparison-grid {
-        background: white;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-        padding: 1.5rem !important;
-        margin-bottom: 1.5rem !important;
-      }
-
-      .comparison-grid h2 {
-        color: var(--primary-color);
-        font-size: 1.5rem !important;
-        margin-bottom: 1rem !important;
-        text-align: center;
-        padding-bottom: 0.75rem;
-        border-bottom: 2px solid #f0f0f0;
-      }
-
-      .viz-card {
-        background: white;
-        border-radius: var(--border-radius);
-        border: 1px solid #e9ecef;
-        padding: 1.25rem;
-        margin-bottom: 1.5rem;
-        transition: all 0.3s ease;
-        height: 100%;
-        cursor: pointer;
-      }
-
-      .viz-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        border-color: var(--primary-color);
-      }
-
-      .viz-image {
-        width: 100%;
-        height: 250px;
-        object-fit: contain;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
-        background: white;
-        padding: 15px;
-      }
-
-      .viz-card:hover .viz-image {
-        transform: scale(1.02);
-      }
-
-      .viz-title {
-        color: var(--primary-color);
-        font-size: 1.2rem;
-        margin-bottom: 0.75rem;
-        font-weight: 600;
-        text-align: center;
-      }
-
-      .viz-description {
-        color: #666;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin-bottom: 1rem;
-        text-align: center;
-      }
-
-      .viz-stats {
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        padding: 1rem;
-        border-radius: 8px;
-        margin-top: 1rem;
-      }
-
-      .viz-stats h6 {
-        color: var(--primary-color);
-        font-size: 0.85rem;
-        margin-bottom: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .viz-stats ul {
-        margin: 0;
-        padding-left: 1.25rem;
-        font-size: 0.8rem;
-        color: #666;
-      }
-
-      .viz-stats li {
-        margin-bottom: 0.25rem;
-      }
-
-      /* Key Findings - COMPACT */
-      .key-findings {
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        padding: 1.25rem !important;
-        border-radius: var(--border-radius);
-        margin: 1rem 0 !important;
-        border-left: 3px solid var(--primary-color);
-      }
-
-      .key-findings h4 {
-        color: var(--primary-color);
-        font-size: 1.1rem !important;
-        margin-bottom: 0.75rem !important;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .key-findings ul {
-        margin: 0;
-        padding-left: 1.25rem;
-      }
-
-      .key-findings li {
-        margin-bottom: 0.5rem !important;
-        font-size: 0.9rem;
-        line-height: 1.5;
-      }
-
-      /* Stats Grid */
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 15px;
-        margin-top: 1.5rem;
+      .viz-stats,
+      .key-findings,
+      .comparison-summary {
+        background: linear-gradient(135deg, #2d2d2d, #3d3d3d);
       }
 
       .stat-card {
-        background: white;
-        border-radius: 10px;
-        padding: 1.25rem;
-        border: 1px solid #e9ecef;
-        transition: all 0.3s ease;
-        text-align: center;
+        background: #2d2d2d;
+        border-color: #444;
       }
 
-      .stat-card:hover {
-        border-color: var(--primary-color);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      .description-image,
+      .viz-image {
+        background: #2d2d2d;
       }
 
-      .stat-title {
-        font-size: 0.85rem;
-        color: #666;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
+      .viz-thumbnail p {
+        color: #f0f0f0;
       }
 
-      .stat-value {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--primary-color);
-      }
-
-      /* Comparison Summary */
-      .comparison-summary {
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        padding: 1.5rem;
-        border-radius: var(--border-radius);
-        margin-top: 1.5rem;
-        border-left: 3px solid var(--primary-color);
-      }
-
-      .comparison-summary h3 {
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .comparison-summary p {
-        color: #666;
-        font-size: 1.05rem;
-        line-height: 1.7;
-        margin-bottom: 1rem;
-      }
-
-      .comparison-summary ul {
-        margin-top: 1rem;
-        padding-left: 1.5rem;
-      }
-
-      .comparison-summary li {
-        margin-bottom: 0.75rem;
-        font-size: 1rem;
-        color: #555;
-        line-height: 1.5;
-      }
-
-      .comparison-summary strong {
-        color: var(--primary-color);
-      }
-
-      /* Footer - COMPACT */
       .footer {
-        background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-        color: white;
-        padding: 1.5rem 0 !important;
-        margin-top: 2rem !important;
-        text-align: center;
-        width: 100%;
+        background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
       }
+    }
+  </style>
+</head>
 
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-globe-americas"></i>
+        Latitude Analysis
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      .footer p {
-        margin-bottom: 0.5rem !important;
-      }
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="fas fa-home mr-1"></i>Latitude Home
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="comparisonDropdown" data-toggle="dropdown">
+              <i class="fas fa-balance-scale mr-1"></i>Comparison Visualizations
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#" data-viz="temp">
+                <i class="fas fa-thermometer-half mr-2"></i>Max Temperature
+              </a>
+              <a class="dropdown-item" href="#" data-viz="humidity">
+                <i class="fas fa-tint mr-2"></i>Humidity
+              </a>
+              <a class="dropdown-item" href="#" data-viz="cloudiness">
+                <i class="fas fa-cloud mr-2"></i>Cloudiness
+              </a>
+              <a class="dropdown-item" href="#" data-viz="wind">
+                <i class="fas fa-wind mr-2"></i>Wind Speed
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="data.html">
+              <i class="fas fa-database mr-1"></i>Data
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">
+              <i class="fas fa-chart-line mr-1"></i>My Portfolio
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-      .footer p.mb-2 {
-        font-size: 0.95rem;
-      }
+  <!-- Main Content -->
+  <div class="container main-content">
+    <!-- Project Header -->
+    <div class="project-header">
+      <h1>Visualization Comparison</h1>
+      <p class="lead">Interactive Side-by-Side Analysis of Weather Patterns</p>
 
-      .footer p.mb-3 {
-        font-size: 0.85rem;
-        margin-bottom: 0.75rem !important;
-      }
+      <div class="tech-badges">
+        <span class="tech-badge"><i class="fas fa-chart-bar"></i> Data Visualization</span>
+        <span class="tech-badge"><i class="fas fa-chart-line"></i> Comparative Analysis</span>
+        <span class="tech-badge"><i class="fas fa-cloud-sun"></i> Weather Patterns</span>
+        <span class="tech-badge"><i class="fas fa-map-marked-alt"></i> Geographic Study</span>
+      </div>
+    </div>
 
-      .back-to-latitude {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: white;
-        color: var(--primary-color);
-        padding: 0.6rem 1.25rem !important;
-        border-radius: 24px !important;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        margin-top: 0.5rem !important;
-        text-decoration: none;
-        font-size: 0.9rem;
-      }
+    <!-- Initial View: All Four Visualizations in Equal Size -->
+    <div class="comparison-grid" id="initialView">
+      <h2><i class="fas fa-images mr-2"></i>Four Weather Visualizations</h2>
+      <p class="text-center text-muted mb-4" style="font-size: 1.05rem;">
+        Click any visualization to zoom in for detailed analysis
+      </p>
 
-      .back-to-latitude:hover {
-        background: #f0f0f0;
-        transform: translateY(-2px);
-        text-decoration: none;
-        color: var(--primary-color);
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-      }
+      <div class="row">
+        <!-- Temperature Card -->
+        <div class="col-lg-6 col-md-6 mb-4">
+          <div class="viz-card" data-viz="temp">
+            <div class="viz-title">
+              <i class="fas fa-thermometer-half mr-2"></i>Latitude vs. Max Temperature
+            </div>
+            <img src="Resources/assets/images/Fig1.png" alt="Latitude vs. Max Temperature" class="viz-image">
+            <div class="viz-description">
+              Analysis of temperature patterns across latitudes, showing strong correlation
+              between proximity to equator and higher temperatures.
+            </div>
+            <div class="viz-stats">
+              <h6><i class="fas fa-chart-line mr-1"></i>Correlation Strength: <strong>Strong</strong></h6>
+              <ul>
+                <li>Clear negative correlation in northern hemisphere</li>
+                <li>Symmetric distribution around equator</li>
+                <li>R² value: 0.84 (high correlation)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-      /* Chatbot Styles */
-      .chatbot-wrapper {
-        position: fixed;
-        bottom: 20px !important;
-        right: 20px !important;
-        z-index: 1000;
-      }
+        <!-- Humidity Card -->
+        <div class="col-lg-6 col-md-6 mb-4">
+          <div class="viz-card" data-viz="humidity">
+            <div class="viz-title">
+              <i class="fas fa-tint mr-2"></i>Latitude vs. Humidity
+            </div>
+            <img src="Resources/assets/images/Fig2.png" alt="Latitude vs. Humidity" class="viz-image">
+            <div class="viz-description">
+              Examination of humidity distribution across latitudes, showing complex
+              patterns influenced by local geography and proximity to water bodies.
+            </div>
+            <div class="viz-stats">
+              <h6><i class="fas fa-chart-line mr-1"></i>Correlation Strength: <strong>Weak</strong></h6>
+              <ul>
+                <li>High variability across all latitudes</li>
+                <li>Tropical regions show consistently high humidity</li>
+                <li>Desert regions create notable exceptions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-      .chatbot-toggle {
-        width: 55px !important;
-        height: 55px !important;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--primary-color), #0056b3);
-        border: none;
-        color: white;
-        font-size: 1.25rem !important;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
+        <!-- Cloudiness Card -->
+        <div class="col-lg-6 col-md-6 mb-4">
+          <div class="viz-card" data-viz="cloudiness">
+            <div class="viz-title">
+              <i class="fas fa-cloud mr-2"></i>Latitude vs. Cloudiness
+            </div>
+            <img src="Resources/assets/images/Fig3.png" alt="Latitude vs. Cloudiness" class="viz-image">
+            <div class="viz-description">
+              Study of cloud cover patterns, revealing minimal latitudinal correlation
+              and high variability influenced by local weather systems.
+            </div>
+            <div class="viz-stats">
+              <h6><i class="fas fa-chart-line mr-1"></i>Correlation Strength: <strong>Very Weak</strong></h6>
+              <ul>
+                <li>Measurement clustering at specific percentages</li>
+                <li>High variability at all latitudes</li>
+                <li>Complex atmospheric influences dominate</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-      .chatbot-toggle:hover {
-        transform: scale(1.08);
-        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
-      }
+        <!-- Wind Speed Card -->
+        <div class="col-lg-6 col-md-6 mb-4">
+          <div class="viz-card" data-viz="wind">
+            <div class="viz-title">
+              <i class="fas fa-wind mr-2"></i>Latitude vs. Wind Speed
+            </div>
+            <img src="Resources/assets/images/Fig4.png" alt="Latitude vs. Wind Speed" class="viz-image">
+            <div class="viz-description">
+              Analysis of wind patterns showing moderate correlation with latitude,
+              with higher variability at extreme latitudes due to jet stream influences.
+            </div>
+            <div class="viz-stats">
+              <h6><i class="fas fa-chart-line mr-1"></i>Correlation Strength: <strong>Moderate</strong></h6>
+              <ul>
+                <li>Most cities experience 0-15 mph winds</li>
+                <li>Higher variability at extreme latitudes</li>
+                <li>Calmer conditions near equator</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      .chatbot-container {
-        position: absolute;
-        bottom: 65px !important;
-        right: 0;
-        width: 320px !important;
-        height: 450px !important;
-        background: white;
-        border-radius: 14px !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-        border: 1px solid #e9ecef;
-      }
-
-      .chatbot-container.active {
-        display: flex;
-        animation: slideInUp 0.3s ease;
-      }
-
-      @keyframes slideInUp {
-        from { opacity: 0; transform: translateY(15px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      .chatbot-header {
-        padding: 1rem 1.25rem !important;
-        background: linear-gradient(135deg, var(--primary-color), #0056b3);
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .chatbot-header h5 {
-        font-size: 1rem !important;
-        margin: 0;
-      }
-
-      .close-chatbot {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.5rem !important;
-        cursor: pointer;
-        padding: 0;
-        line-height: 1;
-        opacity: 0.8;
-        transition: opacity 0.2s;
-      }
-
-      .chatbot-body {
-        flex: 1;
-        padding: 1.25rem !important;
-        overflow-y: auto;
-        background: #f8f9fa;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-
-      .chat-message {
-        max-width: 85%;
-        animation: fadeIn 0.3s ease;
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(8px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      .bot-message .message-content {
-        background: white;
-        color: var(--text-color);
-        border: 1px solid #e9ecef;
-        border-bottom-left-radius: 4px;
-        padding: 0.75rem !important;
-        font-size: 0.9rem;
-      }
-
-      /* Responsive Adjustments */
-      @media (max-width: 768px) {
-        body {
-          padding-top: 70px;
-        }
-
-        .navbar {
-          min-height: 56px !important;
-          height: 56px !important;
-          padding: 0.5rem 0 !important;
-        }
-        
-        .navbar-brand {
-          font-size: 1.2rem !important;
-        }
-        
-        .container.main-content {
-          padding: 30px 15px !important;
-        }
-        
-        .project-header {
-          padding: 1.25rem !important;
-          margin-bottom: 1.5rem !important;
-        }
-        
-        .project-header h1 {
-          font-size: 1.8rem !important;
-        }
-        
-        .description-image {
-          height: 300px;
-        }
-        
-        .viz-image {
-          height: 200px;
-        }
-        
-        .imageNav-photo {
-          height: 150px !important;
-        }
-        
-        .chatbot-container {
-          width: calc(100vw - 40px) !important;
-          right: 20px;
-          bottom: 60px !important;
-        }
-      }
-
-      @media (max-width: 576px) {
-        .navbar-brand {
-          font-size: 1.1rem !important;
-        }
-        
-        .container.main-content {
-          padding-top: 25px !important;
-        }
-        
-        .project-header h1 {
-          font-size: 1.6rem !important;
-        }
-        
-        .tech-badge {
-          padding: 0.35rem 0.7rem !important;
-          font-size: 0.75rem !important;
-        }
-        
-        .description-image {
-          height: 250px;
-        }
-        
-        .viz-image {
-          height: 180px;
-        }
-        
-        .imageNav-photo {
-          height: 130px !important;
-        }
-        
-        .viz-title {
-          font-size: 1.1rem;
-        }
-        
-        .description-header {
-          font-size: 1.5rem;
-        }
-      }
-
-      /* Dark Mode Support */
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --background-color: #121212;
-          --text-color: #f0f0f0;
-        }
-
-        .description-content,
-        .visualization-grid,
-        .project-header,
-        .viz-card,
-        .stat-card,
-        .comparison-grid,
-        .comparison-summary {
-          background: #1e1e1e;
-          color: #f0f0f0;
-          border-color: #444;
-        }
-
-        .navbar {
-          background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
-        }
-
-        .dropdown-menu {
-          background: #2d2d2d;
-        }
-
-        .dropdown-item {
-          color: #f0f0f0;
-        }
-
-        .dropdown-item:hover {
-          background: var(--primary-color);
-        }
-
-        .viz-description,
-        .viz-stats ul,
-        .key-findings li,
-        .comparison-summary p,
-        .comparison-summary li,
-        .stat-title {
-          color: #ccc;
-        }
-
-        .viz-stats,
-        .key-findings,
-        .comparison-summary {
-          background: linear-gradient(135deg, #2d2d2d, #3d3d3d);
-        }
-
-        .stat-card {
-          background: #2d2d2d;
-          border-color: #444;
-        }
-
-        .description-image,
-        .viz-image {
-          background: #2d2d2d;
-        }
-
-        .viz-thumbnail p {
-          color: #f0f0f0;
-        }
-
-        .footer {
-          background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <i class="fas fa-globe-americas"></i>
-          Latitude Analysis
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
+      <!-- View All Comparison Button -->
+      <div class="text-center mt-4">
+        <button class="btn btn-primary" id="viewComparisonBtn"
+          style="background: var(--primary-color); border-color: var(--primary-color); padding: 0.75rem 1.5rem;">
+          <i class="fas fa-expand-alt mr-2"></i>View Statistical Comparison
         </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <i class="fas fa-home mr-1"></i>Latitude Home
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" id="comparisonDropdown" data-toggle="dropdown">
-                <i class="fas fa-balance-scale mr-1"></i>Comparison Visualizations
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" data-viz="temp">
-                  <i class="fas fa-thermometer-half mr-2"></i>Max Temperature
-                </a>
-                <a class="dropdown-item" href="#" data-viz="humidity">
-                  <i class="fas fa-tint mr-2"></i>Humidity
-                </a>
-                <a class="dropdown-item" href="#" data-viz="cloudiness">
-                  <i class="fas fa-cloud mr-2"></i>Cloudiness
-                </a>
-                <a class="dropdown-item" href="#" data-viz="wind">
-                  <i class="fas fa-wind mr-2"></i>Wind Speed
-                </a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="data.html">
-                <i class="fas fa-database mr-1"></i>Data
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../index.html">
-                <i class="fas fa-chart-line mr-1"></i>My Portfolio
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
-    </nav>
+    </div>
 
-    <!-- Main Content -->
-    <div class="container main-content">
-      <!-- Project Header -->
-      <div class="project-header">
-        <h1>Visualization Comparison</h1>
-        <p class="lead">Interactive Side-by-Side Analysis of Weather Patterns</p>
-        
-        <div class="tech-badges">
-          <span class="tech-badge"><i class="fas fa-chart-bar"></i> Data Visualization</span>
-          <span class="tech-badge"><i class="fas fa-chart-line"></i> Comparative Analysis</span>
-          <span class="tech-badge"><i class="fas fa-cloud-sun"></i> Weather Patterns</span>
-          <span class="tech-badge"><i class="fas fa-map-marked-alt"></i> Geographic Study</span>
-        </div>
-      </div>
+    <!-- Dynamic Layout: Zoomed View (Initially Hidden) -->
+    <div class="dynamic-layout" id="zoomedView">
+      <div class="row">
+        <!-- Left Column: Selected Visualization (Large View) -->
+        <div class="col-lg-7 col-md-12">
+          <div class="description-content">
+            <h2 class="description-header" id="viz-title">Latitude vs. Max Temperature</h2>
+            <hr>
+            <img src="Resources/assets/images/Fig1.png" alt="Latitude vs. Max Temperature" class="description-image"
+              id="main-viz-image">
 
-      <!-- Initial View: All Four Visualizations in Equal Size -->
-      <div class="comparison-grid" id="initialView">
-        <h2><i class="fas fa-images mr-2"></i>Four Weather Visualizations</h2>
-        <p class="text-center text-muted mb-4" style="font-size: 1.05rem;">
-          Click any visualization to zoom in for detailed analysis
-        </p>
-        
-        <div class="row">
-          <!-- Temperature Card -->
-          <div class="col-lg-6 col-md-6 mb-4">
-            <div class="viz-card" data-viz="temp">
-              <div class="viz-title">
-                <i class="fas fa-thermometer-half mr-2"></i>Latitude vs. Max Temperature
-              </div>
-              <img src="Resources/assets/images/Fig1.png" 
-                   alt="Latitude vs. Max Temperature" 
-                   class="viz-image">
-              <div class="viz-description">
-                Analysis of temperature patterns across latitudes, showing strong correlation 
-                between proximity to equator and higher temperatures.
-              </div>
-              <div class="viz-stats">
-                <h6><i class="fas fa-chart-line mr-1"></i>Correlation Strength: <strong>Strong</strong></h6>
-                <ul>
-                  <li>Clear negative correlation in northern hemisphere</li>
-                  <li>Symmetric distribution around equator</li>
-                  <li>R² value: 0.84 (high correlation)</li>
-                </ul>
-              </div>
+            <div class="key-findings" id="viz-description">
+              <h4><i class="fas fa-search mr-2"></i>Key Findings</h4>
+              <ul>
+                <li>Temperatures increase as cities approach the equator (0° latitude)</li>
+                <li>Strong negative correlation between latitude and temperature in northern hemisphere</li>
+                <li>Temperature distribution is more symmetric around the equator</li>
+                <li>Southern hemisphere shows less temperature variation</li>
+              </ul>
             </div>
-          </div>
 
-          <!-- Humidity Card -->
-          <div class="col-lg-6 col-md-6 mb-4">
-            <div class="viz-card" data-viz="humidity">
-              <div class="viz-title">
-                <i class="fas fa-tint mr-2"></i>Latitude vs. Humidity
-              </div>
-              <img src="Resources/assets/images/Fig2.png" 
-                   alt="Latitude vs. Humidity" 
-                   class="viz-image">
-              <div class="viz-description">
-                Examination of humidity distribution across latitudes, showing complex 
-                patterns influenced by local geography and proximity to water bodies.
-              </div>
-              <div class="viz-stats">
-                <h6><i class="fas fa-chart-line mr-1"></i>Correlation Strength: <strong>Weak</strong></h6>
-                <ul>
-                  <li>High variability across all latitudes</li>
-                  <li>Tropical regions show consistently high humidity</li>
-                  <li>Desert regions create notable exceptions</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            <p id="viz-details">This scatter plot shows the relationship between latitude and maximum temperature. As
+              expected, cities closer to the equator (0° latitude) experience higher temperatures, while temperatures
+              decrease as we move toward the poles.</p>
 
-          <!-- Cloudiness Card -->
-          <div class="col-lg-6 col-md-6 mb-4">
-            <div class="viz-card" data-viz="cloudiness">
-              <div class="viz-title">
-                <i class="fas fa-cloud mr-2"></i>Latitude vs. Cloudiness
+            <!-- Statistics Section -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-title">Correlation Strength</div>
+                <div class="stat-value" id="correlation-strength">Strong</div>
               </div>
-              <img src="Resources/assets/images/Fig3.png" 
-                   alt="Latitude vs. Cloudiness" 
-                   class="viz-image">
-              <div class="viz-description">
-                Study of cloud cover patterns, revealing minimal latitudinal correlation 
-                and high variability influenced by local weather systems.
+              <div class="stat-card">
+                <div class="stat-title">Correlation Coefficient</div>
+                <div class="stat-value" id="correlation-coefficient">R² = 0.84</div>
               </div>
-              <div class="viz-stats">
-                <h6><i class="fas fa-chart-line mr-1"></i>Correlation Strength: <strong>Very Weak</strong></h6>
-                <ul>
-                  <li>Measurement clustering at specific percentages</li>
-                  <li>High variability at all latitudes</li>
-                  <li>Complex atmospheric influences dominate</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Wind Speed Card -->
-          <div class="col-lg-6 col-md-6 mb-4">
-            <div class="viz-card" data-viz="wind">
-              <div class="viz-title">
-                <i class="fas fa-wind mr-2"></i>Latitude vs. Wind Speed
-              </div>
-              <img src="Resources/assets/images/Fig4.png" 
-                   alt="Latitude vs. Wind Speed" 
-                   class="viz-image">
-              <div class="viz-description">
-                Analysis of wind patterns showing moderate correlation with latitude, 
-                with higher variability at extreme latitudes due to jet stream influences.
-              </div>
-              <div class="viz-stats">
-                <h6><i class="fas fa-chart-line mr-1"></i>Correlation Strength: <strong>Moderate</strong></h6>
-                <ul>
-                  <li>Most cities experience 0-15 mph winds</li>
-                  <li>Higher variability at extreme latitudes</li>
-                  <li>Calmer conditions near equator</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- View All Comparison Button -->
-        <div class="text-center mt-4">
-          <button class="btn btn-primary" id="viewComparisonBtn" style="background: var(--primary-color); border-color: var(--primary-color); padding: 0.75rem 1.5rem;">
-            <i class="fas fa-expand-alt mr-2"></i>View Statistical Comparison
-          </button>
-        </div>
-      </div>
-
-      <!-- Dynamic Layout: Zoomed View (Initially Hidden) -->
-      <div class="dynamic-layout" id="zoomedView">
-        <div class="row">
-          <!-- Left Column: Selected Visualization (Large View) -->
-          <div class="col-lg-7 col-md-12">
-            <div class="description-content">
-              <h2 class="description-header" id="viz-title">Latitude vs. Max Temperature</h2>
-              <hr>
-              <img src="Resources/assets/images/Fig1.png" 
-                   alt="Latitude vs. Max Temperature" 
-                   class="description-image" 
-                   id="main-viz-image">
-              
-              <div class="key-findings" id="viz-description">
-                <h4><i class="fas fa-search mr-2"></i>Key Findings</h4>
-                <ul>
-                  <li>Temperatures increase as cities approach the equator (0° latitude)</li>
-                  <li>Strong negative correlation between latitude and temperature in northern hemisphere</li>
-                  <li>Temperature distribution is more symmetric around the equator</li>
-                  <li>Southern hemisphere shows less temperature variation</li>
-                </ul>
-              </div>
-
-              <p id="viz-details">This scatter plot shows the relationship between latitude and maximum temperature. As expected, cities closer to the equator (0° latitude) experience higher temperatures, while temperatures decrease as we move toward the poles.</p>
-              
-              <!-- Statistics Section -->
-              <div class="stats-grid">
-                <div class="stat-card">
-                  <div class="stat-title">Correlation Strength</div>
-                  <div class="stat-value" id="correlation-strength">Strong</div>
-                </div>
-                <div class="stat-card">
-                  <div class="stat-title">Correlation Coefficient</div>
-                  <div class="stat-value" id="correlation-coefficient">R² = 0.84</div>
-                </div>
-                <div class="stat-card">
-                  <div class="stat-title">Statistical Significance</div>
-                  <div class="stat-value" id="significance">p < 0.001</div>
+              <div class="stat-card">
+                <div class="stat-title">Statistical Significance</div>
+                <div class="stat-value" id="significance">p < 0.001</div>
                 </div>
               </div>
             </div>
@@ -1069,59 +1085,47 @@
               <h2><i class="fas fa-images mr-2"></i>Visualization Gallery</h2>
               <p class="text-muted mb-3">Click any visualization to view detailed analysis</p>
               <hr>
-              
+
               <div class="container">
                 <div class="row">
                   <!-- Temperature Thumbnail -->
                   <div class="col-6 mb-4">
                     <div class="viz-thumbnail" data-viz="temp">
-                      <img src="Resources/assets/images/Fig1.png" 
-                           alt="Latitude vs. Max Temperature" 
-                           title="Latitude vs. Max Temperature" 
-                           class="imageNav-photo active"
-                           data-viz="temp">
+                      <img src="Resources/assets/images/Fig1.png" alt="Latitude vs. Max Temperature"
+                        title="Latitude vs. Max Temperature" class="imageNav-photo active" data-viz="temp">
                       <p>Max Temperature</p>
                     </div>
                   </div>
-                  
+
                   <!-- Humidity Thumbnail -->
                   <div class="col-6 mb-4">
                     <div class="viz-thumbnail" data-viz="humidity">
-                      <img src="Resources/assets/images/Fig2.png" 
-                           alt="Latitude vs. Humidity" 
-                           title="Latitude vs. Humidity" 
-                           class="imageNav-photo"
-                           data-viz="humidity">
+                      <img src="Resources/assets/images/Fig2.png" alt="Latitude vs. Humidity"
+                        title="Latitude vs. Humidity" class="imageNav-photo" data-viz="humidity">
                       <p>Humidity</p>
                     </div>
                   </div>
-                  
+
                   <!-- Cloudiness Thumbnail -->
                   <div class="col-6 mb-4">
                     <div class="viz-thumbnail" data-viz="cloudiness">
-                      <img src="Resources/assets/images/Fig3.png" 
-                           alt="Latitude vs. Cloudiness" 
-                           title="Latitude vs. Cloudiness" 
-                           class="imageNav-photo"
-                           data-viz="cloudiness">
+                      <img src="Resources/assets/images/Fig3.png" alt="Latitude vs. Cloudiness"
+                        title="Latitude vs. Cloudiness" class="imageNav-photo" data-viz="cloudiness">
                       <p>Cloudiness</p>
                     </div>
                   </div>
-                  
+
                   <!-- Wind Speed Thumbnail -->
                   <div class="col-6 mb-4">
                     <div class="viz-thumbnail" data-viz="wind">
-                      <img src="Resources/assets/images/Fig4.png" 
-                           alt="Latitude vs. Wind Speed" 
-                           title="Latitude vs. Wind Speed" 
-                           class="imageNav-photo"
-                           data-viz="wind">
+                      <img src="Resources/assets/images/Fig4.png" alt="Latitude vs. Wind Speed"
+                        title="Latitude vs. Wind Speed" class="imageNav-photo" data-viz="wind">
                       <p>Wind Speed</p>
                     </div>
                   </div>
                 </div>
               </div>
-              
+
               <!-- Back to Comparison Button -->
               <div class="mt-4 pt-3 border-top text-center">
                 <button class="btn btn-outline-primary" id="backToComparisonBtn" style="padding: 0.75rem 1.5rem;">
@@ -1137,10 +1141,10 @@
       <div class="comparison-summary" id="statsComparison">
         <h3><i class="fas fa-chart-bar mr-2"></i>Statistical Comparison</h3>
         <p>
-          The following statistics compare the correlation strength and statistical significance 
+          The following statistics compare the correlation strength and statistical significance
           of each weather factor's relationship with latitude:
         </p>
-        
+
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-title">Temperature Correlation</div>
@@ -1159,31 +1163,31 @@
             <div class="stat-value">R² = 0.04</div>
           </div>
         </div>
-        
+
         <div class="mt-4">
           <h4><i class="fas fa-lightbulb mr-2"></i>Key Insights</h4>
           <ul>
             <li>
-              <strong>Temperature shows the strongest correlation</strong> with latitude, with clear 
+              <strong>Temperature shows the strongest correlation</strong> with latitude, with clear
               patterns of decreasing temperature as distance from the equator increases.
             </li>
             <li>
-              <strong>Wind speed shows moderate correlation</strong>, with higher latitudes experiencing 
+              <strong>Wind speed shows moderate correlation</strong>, with higher latitudes experiencing
               more variability due to atmospheric circulation patterns.
             </li>
             <li>
-              <strong>Humidity displays weak correlation</strong>, indicating that local geographic 
+              <strong>Humidity displays weak correlation</strong>, indicating that local geographic
               features (proximity to water, elevation) have greater influence than latitude alone.
             </li>
             <li>
-              <strong>Cloudiness shows very weak correlation</strong>, suggesting complex atmospheric 
+              <strong>Cloudiness shows very weak correlation</strong>, suggesting complex atmospheric
               dynamics that are not primarily driven by latitudinal position.
             </li>
           </ul>
-          
+
           <p style="margin-top: 1.5rem; font-style: italic;">
-            <strong>Research Implication:</strong> While latitude strongly influences temperature, 
-            other weather factors are more heavily influenced by local geography and atmospheric 
+            <strong>Research Implication:</strong> While latitude strongly influences temperature,
+            other weather factors are more heavily influenced by local geography and atmospheric
             conditions, demonstrating the complexity of global climate patterns.
           </p>
         </div>
@@ -1206,19 +1210,20 @@
       <button class="chatbot-toggle" id="chatbotToggle">
         <i class="fas fa-robot"></i>
       </button>
-      
+
       <div class="chatbot-container" id="chatbotContainer">
         <div class="chatbot-header">
           <h5 class="mb-0"><i class="fas fa-robot mr-2"></i>Weather Analysis Assistant</h5>
           <button class="close-chatbot" id="closeChatbot">&times;</button>
         </div>
-        
+
         <div class="chatbot-body" id="chatbotBody">
           <div class="chat-message bot-message">
             <div class="message-content">
               <p><strong>👋 Hi! I'm your Weather Analysis Assistant</strong></p>
               <p>I can help you understand the comparative analysis of weather patterns across latitudes.</p>
-              <p>This page shows all four visualizations at equal size. Click any visualization to zoom in, or use the "Comparison Visualizations" dropdown menu.</p>
+              <p>This page shows all four visualizations at equal size. Click any visualization to zoom in, or use the
+                "Comparison Visualizations" dropdown menu.</p>
               <p>Try asking:</p>
               <ul>
                 <li>"Which visualization has the strongest correlation?"</li>
@@ -1229,12 +1234,14 @@
             </div>
           </div>
         </div>
-        
+
         <div class="chatbot-footer" style="padding: 0.875rem; border-top: 1px solid #e9ecef; background: white;">
           <div class="input-group">
-            <input type="text" class="form-control" id="chatInput" placeholder="Ask about comparison..." style="font-size: 0.9rem; padding: 0.5rem 0.75rem;">
+            <input type="text" class="form-control" id="chatInput" placeholder="Ask about comparison..."
+              style="font-size: 0.9rem; padding: 0.5rem 0.75rem;">
             <div class="input-group-append">
-              <button class="btn btn-primary" id="chatSend" style="background: var(--primary-color); border-color: var(--primary-color); padding: 0.5rem 0.875rem; font-size: 0.9rem;">
+              <button class="btn btn-primary" id="chatSend"
+                style="background: var(--primary-color); border-color: var(--primary-color); padding: 0.5rem 0.875rem; font-size: 0.9rem;">
                 <i class="fas fa-paper-plane"></i>
               </button>
             </div>
@@ -1246,7 +1253,7 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
       // Visualization Data
       const visualizationData = {
@@ -1317,7 +1324,7 @@
       };
 
       // Initialize the page
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMContentLoaded', function () {
         // DOM Elements
         const initialView = document.getElementById('initialView');
         const zoomedView = document.getElementById('zoomedView');
@@ -1350,14 +1357,14 @@
         // Function to update visualization content
         function updateVisualization(vizKey) {
           const data = visualizationData[vizKey];
-          
+
           // Update main image
           mainImage.src = data.image;
           mainImage.alt = data.alt;
-          
+
           // Update title
           vizTitle.textContent = data.title;
-          
+
           // Update key findings
           const findingsList = vizDescription.querySelector('ul');
           findingsList.innerHTML = '';
@@ -1366,15 +1373,15 @@
             li.textContent = finding;
             findingsList.appendChild(li);
           });
-          
+
           // Update details
           vizDetails.textContent = data.details;
-          
+
           // Update statistics
           correlationStrength.textContent = data.correlationStrength;
           correlationCoefficient.textContent = data.correlationCoefficient;
           significance.textContent = data.significance;
-          
+
           // Update active thumbnail
           document.querySelectorAll('.imageNav-photo').forEach(img => {
             img.classList.remove('active');
@@ -1384,7 +1391,7 @@
 
         // Add click handlers to initial view cards
         document.querySelectorAll('#initialView .viz-card').forEach(card => {
-          card.addEventListener('click', function() {
+          card.addEventListener('click', function () {
             const vizKey = this.getAttribute('data-viz');
             showZoomedView(vizKey);
           });
@@ -1392,7 +1399,7 @@
 
         // Add click handlers to zoomed view thumbnails
         document.querySelectorAll('.viz-thumbnail').forEach(thumbnail => {
-          thumbnail.addEventListener('click', function() {
+          thumbnail.addEventListener('click', function () {
             const vizKey = this.getAttribute('data-viz');
             updateVisualization(vizKey);
           });
@@ -1400,7 +1407,7 @@
 
         // Add click handlers to zoomed view thumbnail images
         document.querySelectorAll('.imageNav-photo').forEach(img => {
-          img.addEventListener('click', function(e) {
+          img.addEventListener('click', function (e) {
             e.stopPropagation();
             const vizKey = this.getAttribute('data-viz');
             updateVisualization(vizKey);
@@ -1409,7 +1416,7 @@
 
         // Add click handlers to zoomed view thumbnail text
         document.querySelectorAll('.viz-thumbnail p').forEach(p => {
-          p.addEventListener('click', function(e) {
+          p.addEventListener('click', function (e) {
             e.stopPropagation();
             const vizKey = this.parentElement.getAttribute('data-viz');
             updateVisualization(vizKey);
@@ -1418,7 +1425,7 @@
 
         // Add click handlers to dropdown menu items
         document.querySelectorAll('.dropdown-item[data-viz]').forEach(item => {
-          item.addEventListener('click', function(e) {
+          item.addEventListener('click', function (e) {
             e.preventDefault();
             const vizKey = this.getAttribute('data-viz');
             showZoomedView(vizKey);
@@ -1436,7 +1443,7 @@
         const chatSend = document.getElementById('chatSend');
         const chatInput = document.getElementById('chatInput');
         const chatBody = document.getElementById('chatbotBody');
-        
+
         // Comparison Page Knowledge Base
         const knowledgeBase = {
           'comparison|compare|all': {
@@ -1459,7 +1466,7 @@ Correlation Strength Rankings:
    - Complex atmospheric dynamics
    - R² = 0.04, p = 0.45`
           },
-          
+
           'temperature|temp|heat': {
             response: `🌡️ Temperature Analysis:
             
@@ -1476,7 +1483,7 @@ Statistical Significance:
 
 Click the temperature card or use the dropdown menu to zoom in for detailed analysis.`
           },
-          
+
           'wind|wind speed|breeze': {
             response: `💨 Wind Speed Comparison:
             
@@ -1492,7 +1499,7 @@ Statistical Significance:
 
 Click the wind speed card or use the dropdown menu to zoom in for detailed analysis.`
           },
-          
+
           'humidity|moisture|damp': {
             response: `💧 Humidity Comparison:
             
@@ -1508,7 +1515,7 @@ Statistical Significance:
 
 Click the humidity card or use the dropdown menu to zoom in for detailed analysis.`
           },
-          
+
           'cloud|cloudiness|cloud cover': {
             response: `☁️ Cloudiness Comparison:
             
@@ -1524,7 +1531,7 @@ Statistical Significance:
 
 Click the cloudiness card or use the dropdown menu to zoom in for detailed analysis.`
           },
-          
+
           'correlation|relationship|pattern': {
             response: `📈 Correlation Analysis:
             
@@ -1543,7 +1550,7 @@ Ranked by Correlation Strength:
 
 Key Insight: Latitude strongly influences temperature but has less effect on other weather factors.`
           },
-          
+
           'hi|hello|hey': {
             response: `👋 Hello! I'm your Weather Analysis Assistant
             
@@ -1576,7 +1583,7 @@ Try asking:
             // Add user message
             addMessage(message, 'user');
             chatInput.value = '';
-            
+
             // Show typing indicator
             const typingDiv = document.createElement('div');
             typingDiv.className = 'chat-message bot-message';
@@ -1591,7 +1598,7 @@ Try asking:
             `;
             chatBody.appendChild(typingDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
-            
+
             // Get response
             setTimeout(() => {
               typingDiv.remove();
@@ -1615,7 +1622,7 @@ Try asking:
 
         function getChatbotResponse(question) {
           const lowerQ = question.toLowerCase();
-          
+
           // Check knowledge base
           for (const [category, data] of Object.entries(knowledgeBase)) {
             const patterns = category.split('|');
@@ -1625,7 +1632,7 @@ Try asking:
               }
             }
           }
-          
+
           // Default response
           return `🤔 I'm not sure I understand your question about "${question}". 
 
@@ -1670,10 +1677,11 @@ Or try these interactive features:
           }
         `;
         document.head.appendChild(style);
-        
+
         // Initialize with temperature selected
         updateVisualization('temp');
       });
     </script>
-  </body>
+</body>
+
 </html>
