@@ -29,6 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <!-- Add Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
+
     <script
         src="https://www.paypal.com/sdk/js?client-id=AWNYodeZKLy8_wTKvp0OT2ErkqYfqTsqwasv361gjcqMmhheKZuxf9Jktd07giQGWeGgXmuWeFCczzkM&currency=USD"></script>
     <style>
@@ -2618,6 +2619,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
+
+        // --- 1. GLOBAL CONFIGURATION (Must be at the top) ---
+        const APP_CONFIG = {
+            API_BASE_URL: 'http://localhost:3000', // Points to your server.js
+            STRIPE_PUBLIC_KEY: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ'
+        };
+        // --- 2. INIT LIBS ---
+        AOS.init();
+        const stripe = Stripe(APP_CONFIG.STRIPE_PUBLIC_KEY);
         // Initialize AOS
         AOS.init({
             duration: 1000,
@@ -2639,9 +2649,6 @@
             pricePerImage: 9.99,
             currency: 'USD'
         };
-
-        // Initialize Stripe
-        const stripe = Stripe(paymentConfig.stripePublicKey);
         // Check for saved theme or prefered scheme
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
