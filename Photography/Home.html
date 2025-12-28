@@ -3566,6 +3566,7 @@
                 if (!btn) return;
 
                 btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing...';
+                console.log('Attempting payment to:', `${APP_CONFIG.API_BASE_URL}/api/create-checkout-session`);
                 try {
                     const res = await fetch(`${APP_CONFIG.API_BASE_URL}/api/create-checkout-session`, {
                         method: 'POST',
@@ -3584,7 +3585,9 @@
                     alert('Payment Error: ' + e.message);
                     btn.innerHTML = '<i class="fas fa-credit-card me-2"></i> Pay with Card';
                 }
+
             }
+
 
             initPayPal(src) {
                 const checkPP = setInterval(() => {
@@ -3682,6 +3685,11 @@
                 }
                 document.body.style.overflow = 'auto';
                 this.isPurchaseModalShown = false;
+
+                // Remove escape key handler
+                if (modal && modal._escapeHandler) {
+                    document.removeEventListener('keydown', modal._escapeHandler);
+                }
             }
 
             loadDownloadState() {
@@ -4807,7 +4815,7 @@
         // Initialize Enhanced Gallery
         document.addEventListener('DOMContentLoaded', function () {
             const gallery = new EnhancedPhotoGallery();
-
+            window.gallery = gallery;
             // Initialize other interactive elements
             initChatbot();
             initBackToTop();
