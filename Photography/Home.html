@@ -28,11 +28,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <!-- Add Stripe.js -->
-    <script src="https://js.stripe.com/v3/"></script>
-    <!-- Add PayPal SDK -->
-    <!-- Remove the existing PayPal script and add this instead -->
-    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&disable-funding=credit,card"></script>
-    <!-- Note: 'sb' is sandbox - replace with your actual PayPal Client ID -->
+ <script src="https://js.stripe.com/v3/"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AdAM3jjBv9reiEXhqPWf2LV7-evpSxYX2Q7klX7yL4f8Y5Os6XMxeBF8VR2GJBVH1OGrC9rTLgsGza84&currency=USD"></script>
     <style>
         :root {
             --primary-color: #007BFF;
@@ -2632,12 +2629,13 @@
         const themeToggle = document.getElementById('themeToggle');
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
         // Payment configuration - In production, use server-side API keys
-        const paymentConfig = {
-            stripePublicKey: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ', // Replace with your Stripe public key
-            paypalClientId: 'AdAM3jjBv9reiEXhqPWf2LV7-evpSxYX2Q7klX7yL4f8Y5Os6XMxeBF8VR2GJBVH1OGrC9rTLgsGza84', // Replace with your PayPal client ID
-            pricePerImage: 9.99,
-            currency: 'USD'
-        };
+const paymentConfig = {
+    stripePublicKey: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ',
+    // Replace with your REAL PayPal Client ID (not 'sb')
+    paypalClientId: 'AdAM3jjBv9reiEXhqPWf2LV7-evpSxYX2Q7klX7yL4f8Y5Os6XMxeBF8VR2GJBVH1OGrC9rTLgsGza84',
+    pricePerImage: 9.99,
+    currency: 'USD'
+};
 
         // Initialize Stripe
         const stripe = Stripe(paymentConfig.stripePublicKey);
@@ -4739,84 +4737,115 @@
                 this.initializePayPalButton(modal, image);
             }
 
-            initializePayPalButton(modal, image) {
-                const paypalContainer = modal.querySelector('#paypal-button-container');
+initializePayPalButton(modal, image) {
+    const paypalContainer = modal.querySelector('#paypal-button-container');
+    
+    if (!window.paypal) {
+        console.error('PayPal SDK not loaded');
+        paypalContainer.innerHTML = '<p class="text-danger">PayPal not available. Please try Stripe.</p>';
+        return;
+    }
 
-                if (!window.paypal) {
-                    console.error('PayPal SDK not loaded');
-                    paypalContainer.innerHTML = '<p class="text-danger">PayPal not available. Please try Stripe.</p>';
-                    return;
+    // First, check if PayPal SDK loaded properly
+    if (!paypal.Buttons) {
+        paypalContainer.innerHTML = '<p class="text-danger">PayPal SDK failed to load. Please refresh or try another method.</p>';
+        return;
+    }
+
+    paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color: 'gold',
+            shape: 'rect',
+            label: 'paypal'
+        },
+
+        createOrder: async (data, actions) => {
+            try {
+                const response = await fetch('/api/create-paypal-order', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userId: this.getUserId(),
+                        imageId: image.src,
+                        productName: 'Unlimited Downloads Access'
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Server error: ${response.status} - ${errorText}`);
                 }
 
-                window.paypal.Buttons({
-                    style: {
-                        layout: 'vertical',
-                        color: 'gold',
-                        shape: 'rect',
-                        label: 'paypal'
-                    },
-
-                    createOrder: async (data, actions) => {
-                        try {
-                            const response = await fetch('http://localhost:3000/api/create-paypal-order', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' }
-                            });
-
-                            if (!response.ok) {
-                                throw new Error('Failed to create PayPal order');
-                            }
-
-                            const orderData = await response.json();
-                            return orderData.id;
-                        } catch (error) {
-                            console.error('PayPal order creation error:', error);
-                            throw error;
-                        }
-                    },
-
-                    onApprove: async (data, actions) => {
-                        try {
-                            // Show loading state
-                            paypalContainer.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Processing payment...</p></div>';
-
-                            const response = await fetch('http://localhost:3000/api/capture-paypal-order', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ orderID: data.orderID })
-                            });
-
-                            const captureData = await response.json();
-
-                            if (captureData.success) {
-                                // Unlock downloads
-                                this.unlockUnlimitedDownloads();
-
-                                // Close modal
-                                this.closePaymentModal(modal);
-
-                                // Show success message
-                                this.showPaymentSuccess('PayPal payment successful! Unlimited downloads activated.');
-                            } else {
-                                throw new Error(captureData.error || 'Payment failed');
-                            }
-                        } catch (error) {
-                            console.error('PayPal capture error:', error);
-                            alert('Payment failed: ' + error.message);
-                            location.reload(); // Reload to reset PayPal button
-                        }
-                    },
-
-                    onError: (err) => {
-                        console.error('PayPal error:', err);
-                        alert('An error occurred with PayPal. Please try another payment method.');
-                    },
-
-                    onCancel: (data) => {
-                        console.log('PayPal payment cancelled');
-                    }
-                }).render('#paypal-button-container');
+                const orderData = await response.json();
+                
+                if (!orderData.id) {
+                    throw new Error('No order ID received from server');
+                }
+                
+                return orderData.id;
+            } catch (error) {
+                console.error('PayPal order creation error:', error);
+                paypalContainer.innerHTML = `<p class="text-danger">Error: ${error.message}. Please try Stripe or contact support.</p>`;
+                throw error;
             }
+        },
+
+        onApprove: async (data, actions) => {
+            try {
+                // Show loading state
+                paypalContainer.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Processing payment...</p></div>';
+
+                const response = await fetch('/api/capture-paypal-order', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        orderID: data.orderID,
+                        userId: this.getUserId()
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Capture failed: ${response.status} - ${errorText}`);
+                }
+
+                const captureData = await response.json();
+
+                if (captureData.success) {
+                    this.unlockUnlimitedDownloads();
+                    this.closePaymentModal(modal);
+                    this.showPaymentSuccess('PayPal payment successful! Unlimited downloads activated.');
+                } else {
+                    throw new Error(captureData.error || 'Payment verification failed');
+                }
+            } catch (error) {
+                console.error('PayPal capture error:', error);
+                alert(`Payment failed: ${error.message}\n\nIf the payment was processed, please contact ermiasgelaye@gmail.com for assistance.`);
+                location.reload();
+            }
+        },
+
+        onError: (err) => {
+            console.error('PayPal error:', err);
+            alert('PayPal encountered an error. Please try another payment method or contact support.');
+        },
+
+        onCancel: (data) => {
+            console.log('PayPal payment cancelled by user');
+            // Optional: Show a message that payment was cancelled
+        }
+    }).render('#paypal-button-container').catch(err => {
+        console.error('Failed to render PayPal buttons:', err);
+        paypalContainer.innerHTML = '<p class="text-danger">Failed to load PayPal. Please try another payment method.</p>';
+    });
+}
 
             showPaymentSuccess(message) {
                 const toast = document.createElement('div');
