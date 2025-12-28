@@ -1,38 +1,225 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Payment Successful</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful | ARC-NATURE PHOTOGRAPHY</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
         body {
-            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #007BFF, #2c3e50);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #007BFF, #2c3e50);
+            padding: 20px;
         }
+        
         .success-container {
-            text-align: center;
             background: white;
+            border-radius: 20px;
             padding: 3rem;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease;
         }
+        
         .success-icon {
-            font-size: 4rem;
+            width: 100px;
+            height: 100px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: scaleIn 0.5s ease 0.2s both;
+        }
+        
+        .success-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+        
+        h1 {
             color: #28a745;
             margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .features {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .features h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .features ul {
+            list-style: none;
+        }
+        
+        .features li {
+            padding: 0.5rem 0;
+            color: #555;
+        }
+        
+        .features li i {
+            color: #28a745;
+            margin-right: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #007BFF;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff4757;
+            animation: fall 5s linear infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 2rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="success-container">
-        <div class="success-icon">✓</div>
-        <h2>Payment Successful!</h2>
-        <p>Thank you for your purchase. Unlimited downloads have been activated.</p>
-        <p>You can now download any image without limits.</p>
-        <a href="index.html" class="btn btn-primary mt-3">Return to Gallery</a>
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        
+        <h1>Payment Successful! 🎉</h1>
+        
+        <p>Thank you for your purchase! Your payment has been processed successfully.</p>
+        <p>Unlimited downloads have been activated on your account.</p>
+        
+        <div class="features">
+            <h3>🎁 What You Get:</h3>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Unlimited high-resolution downloads</li>
+                <li><i class="fas fa-check-circle"></i> No watermarks on purchased photos</li>
+                <li><i class="fas fa-check-circle"></i> Commercial usage license</li>
+                <li><i class="fas fa-check-circle"></i> Priority support access</li>
+                <li><i class="fas fa-check-circle"></i> Exclusive member-only content</li>
+            </ul>
+        </div>
+        
+        <p>A confirmation email has been sent to your email address with your receipt and download instructions.</p>
+        
+        <a href="Home.html" class="btn">
+            <i class="fas fa-arrow-left me-2"></i> Return to Gallery
+        </a>
+        
+        <p style="margin-top: 2rem; font-size: 0.9rem; color: #999;">
+            Need help? Contact: <a href="mailto:ermiasgelaye@gmail.com" style="color: #007BFF;">ermiasgelaye@gmail.com</a>
+        </p>
     </div>
+    
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <script>
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#ff6b81'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // Create confetti on load
+        document.addEventListener('DOMContentLoaded', () => {
+            createConfetti();
+            
+            // Check URL parameters for payment status
+            const urlParams = new URLSearchParams(window.location.search);
+            const paymentStatus = urlParams.get('payment');
+            
+            if (paymentStatus === 'success') {
+                console.log('Payment successful!');
+                // You can add additional logic here, like updating user account
+            }
+            
+            // Auto-return to gallery after 10 seconds
+            setTimeout(() => {
+                // window.location.href = 'Home.html';
+            }, 10000);
+        });
+    </script>
 </body>
 </html>

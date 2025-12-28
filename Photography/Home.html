@@ -3498,31 +3498,6 @@
                 }
             }
 
-            async handleStripePayment() {
-                try {
-                    const response = await fetch('/api/create-checkout-session', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            items: [{ name: 'Unlimited Downloads', price: 9.99 }],
-                            userId: this.getUserId()
-                        })
-                    });
-
-                    const session = await response.json();
-
-                    const result = await stripe.redirectToCheckout({
-                        sessionId: session.id
-                    });
-
-                    if (result.error) {
-                        alert(result.error.message);
-                    }
-                } catch (error) {
-                    console.error('Stripe error:', error);
-                    alert('Error processing payment. Please try again.');
-                }
-            }
 
             async handlePayPalPayment() {
                 try {
@@ -4311,8 +4286,7 @@
                             </p>
                         </div>
                     </div>
-// In showLightbox method, update the download button section:
-<div class="mt-3 d-flex justify-content-between">
+                    <div class="mt-3 d-flex justify-content-between">
     <button class="btn btn-sm btn-outline-primary download-btn" data-src="${image.src}"
             ${this.downloadsRemaining <= 0 ? 'disabled' : ''}>
         <i class="fas fa-download me-1"></i>

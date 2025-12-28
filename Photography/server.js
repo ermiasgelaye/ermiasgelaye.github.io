@@ -1,44 +1,29 @@
 const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const paypal = require('@paypal/checkout-server-sdk');
+const stripe = require('stripe')('sk_test_your_stripe_secret_key_here'); // Replace with your Stripe secret key
 const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'],
-    credentials: true
-}));
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(cors());
 app.use(express.json());
-app.use(express.static('.')); // Serve your HTML files
-// Add a health check endpoint
+app.use(express.static('.'));
+
+// Health check endpoint
 app.get('/api/health', (req, res) => {
     res.json({ 
         status: 'ok', 
         timestamp: new Date().toISOString(),
-        services: {
-            stripe: !!process.env.STRIPE_SECRET_KEY,
-            paypal: !!process.env.PAYPAL_CLIENT_ID
-        }
+        service: 'Photography Portfolio API'
     });
 });
-// PayPal Setup
-let environment = new paypal.core.SandboxEnvironment(
-    process.env.PAYPAL_CLIENT_ID,
-    process.env.PAYPAL_SECRET
-);
-if (process.env.PAYPAL_ENVIRONMENT === 'production') {
-    environment = new paypal.core.LiveEnvironment(
-        process.env.PAYPAL_CLIENT_ID,
-        process.env.PAYPAL_SECRET
-    );
-}
-const paypalClient = new paypal.core.PayPalHttpClient(environment);
 
-// Stripe Checkout
+// Stripe Checkout Session
 app.post('/api/create-checkout-session', async (req, res) => {
     try {
-        const { items, imageId } = req.body;
+        const { imageId, title, price = 999 } = req.body;
         
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -47,95 +32,72 @@ app.post('/api/create-checkout-session', async (req, res) => {
                     currency: 'usd',
                     product_data: {
                         name: 'Unlimited Downloads - Photography Collection',
-                        description: 'Access to all high-resolution photos',
+                        description: title || 'Access to all high-resolution photos',
                     },
-                    unit_amount: 999, // $9.99 in cents
+                    unit_amount: price,
                 },
                 quantity: 1,
             }],
             mode: 'payment',
-            success_url: `${process.env.SITE_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.SITE_URL}/cancel.html`,
+            success_url: 'http://localhost:3000/Home.html?payment=success',
+            cancel_url: 'http://localhost:3000/Home.html?payment=cancel',
             metadata: {
                 imageId: imageId || 'unlimited',
-                userId: req.body.userId || 'anonymous'
+                purchaseType: 'unlimited_downloads'
             }
         });
 
-        res.json({ id: session.id });
-    } catch (error) {
-        console.error('Stripe error:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// PayPal Order Creation
-app.post('/api/create-paypal-order', async (req, res) => {
-    try {
-        const request = new paypal.orders.OrdersCreateRequest();
-        request.prefer("return=representation");
-        request.requestBody({
-            intent: 'CAPTURE',
-            purchase_units: [{
-                amount: {
-                    currency_code: 'USD',
-                    value: '9.99'
-                },
-                description: 'Unlimited Downloads - Photography Collection'
-            }]
-        });
-
-        const order = await paypalClient.execute(request);
-        res.json({ id: order.result.id });
-    } catch (error) {
-        console.error('PayPal error:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// PayPal Order Capture
-app.post('/api/capture-paypal-order', async (req, res) => {
-    try {
-        const { orderID } = req.body;
-        const request = new paypal.orders.OrdersCaptureRequest(orderID);
-        request.requestBody({});
-
-        const capture = await paypalClient.execute(request);
-        
-        // Here you would update your database to grant unlimited downloads
         res.json({ 
             success: true, 
-            orderId: capture.result.id,
-            message: 'Purchase successful! Unlimited downloads activated.'
+            id: session.id,
+            url: session.url 
         });
     } catch (error) {
-        console.error('PayPal capture error:', error);
-        res.status(500).json({ error: error.message });
+        console.error('Stripe error:', error);
+        res.status(500).json({ 
+            success: false,
+            error: error.message 
+        });
     }
 });
 
-// Verify Stripe Payment
+// Payment verification (for success page)
 app.post('/api/verify-payment', async (req, res) => {
     try {
         const { sessionId } = req.body;
         const session = await stripe.checkout.sessions.retrieve(sessionId);
         
-        if (session.payment_status === 'paid') {
-            // Here you would update your database to grant unlimited downloads
-            res.json({ 
-                success: true, 
-                message: 'Purchase successful! Unlimited downloads activated.',
-                downloadsRemaining: 999
-            });
-        } else {
-            res.json({ success: false, message: 'Payment not completed' });
-        }
+        res.json({ 
+            success: session.payment_status === 'paid',
+            payment_status: session.payment_status,
+            customer_email: session.customer_details?.email
+        });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ 
+            success: false,
+            error: error.message 
+        });
     }
 });
 
-const PORT = process.env.PORT || 3000;
+// Serve Home.html as default
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/Home.html');
+});
+
+// Start server
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`
+    🚀 Photography Portfolio Server Started!
+    📍 Local: http://localhost:${PORT}
+    
+    📸 Home Page: http://localhost:${PORT}/Home.html
+    🩺 Health Check: http://localhost:${PORT}/api/health
+    
+    💳 Payment Endpoints:
+       POST /api/create-checkout-session
+       POST /api/verify-payment
+    
+    ⚠️  Note: Replace Stripe keys with your own in server.js
+    `);
 });
