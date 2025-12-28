@@ -24,7 +24,13 @@
 
     <!-- AOS Animation -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- Add Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- Add PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
     <style>
         :root {
             --primary-color: #007BFF;
@@ -2567,7 +2573,16 @@
         // Dark Mode Toggle
         const themeToggle = document.getElementById('themeToggle');
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        // Payment configuration - In production, use server-side API keys
+        const paymentConfig = {
+            stripePublicKey: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ', // Replace with your Stripe public key
+            paypalClientId: 'AdAM3jjBv9reiEXhqPWf2LV7-evpSxYX2Q7klX7yL4f8Y5Os6XMxeBF8VR2GJBVH1OGrC9rTLgsGza84', // Replace with your PayPal client ID
+            pricePerImage: 9.99,
+            currency: 'USD'
+        };
 
+        // Initialize Stripe
+        const stripe = Stripe(paymentConfig.stripePublicKey);
         // Check for saved theme or prefered scheme
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
@@ -3415,6 +3430,163 @@
                 this.init();
                 this.loadDownloadState();
             }
+            // Add to your EnhancedPhotoGallery class:
+
+            async processPayment(method) {
+                if (method === 'stripe') {
+                    await this.handleStripePayment();
+                } else if (method === 'paypal') {
+                    await this.handlePayPalPayment();
+                }
+            }
+
+            async handleStripePayment() {
+                try {
+                    const response = await fetch('/api/create-checkout-session', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            items: [{ name: 'Unlimited Downloads', price: 9.99 }],
+                            userId: this.getUserId()
+                        })
+                    });
+
+                    const session = await response.json();
+
+                    const result = await stripe.redirectToCheckout({
+                        sessionId: session.id
+                    });
+
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                } catch (error) {
+                    console.error('Stripe error:', error);
+                    alert('Error processing payment. Please try again.');
+                }
+            }
+
+            async handlePayPalPayment() {
+                try {
+                    // Create PayPal order
+                    const createOrderResponse = await fetch('/api/create-paypal-order', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+
+                    const orderData = await createOrderResponse.json();
+
+                    // Render PayPal buttons
+                    if (window.paypal) {
+                        window.paypal.Buttons({
+                            createOrder: function (data, actions) {
+                                return orderData.id;
+                            },
+                            onApprove: async function (data, actions) {
+                                try {
+                                    // Capture the payment
+                                    const captureResponse = await fetch('/api/capture-paypal-order', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ orderID: data.orderID })
+                                    });
+
+                                    const captureData = await captureResponse.json();
+
+                                    if (captureData.success) {
+                                        this.unlockUnlimitedDownloads();
+                                        alert('Payment successful! Unlimited downloads activated.');
+                                    } else {
+                                        alert('Payment failed. Please try again.');
+                                    }
+                                } catch (error) {
+                                    console.error('PayPal capture error:', error);
+                                    alert('Error capturing payment.');
+                                }
+                            }.bind(this),
+                            onError: function (err) {
+                                console.error('PayPal error:', err);
+                                alert('An error occurred with PayPal.');
+                            }
+                        }).render('#paypal-button-container');
+                    }
+                } catch (error) {
+                    console.error('PayPal order error:', error);
+                    alert('Error creating PayPal order.');
+                }
+            }
+
+            getUserId() {
+                // Generate or retrieve a user identifier
+                let userId = localStorage.getItem('photoUserId');
+                if (!userId) {
+                    userId = 'user_' + Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem('photoUserId', userId);
+                }
+                return userId;
+            }
+
+            // Update the showPurchaseModal method to include real payment buttons:
+            showPurchaseModal(image) {
+                if (this.isPurchaseModalShown) return;
+                this.isPurchaseModalShown = true;
+
+                const modal = document.createElement('div');
+                modal.className = 'download-modal';
+
+                modal.innerHTML = `
+        <div class="download-modal-content" data-aos="zoom-in">
+            <h4>Unlimited Downloads</h4>
+            <p class="mb-4">You've used all 3 free downloads. Purchase unlimited downloads to continue.</p>
+            
+            <div style="background: var(--background-color); padding: 1.5rem; border-radius: var(--border-radius); margin: 1.5rem 0;">
+                <h2 class="text-primary">$9.99</h2>
+                <p class="mb-0">One-time payment for unlimited downloads</p>
+            </div>
+            
+            <div class="payment-buttons mb-4">
+                <button class="btn btn-primary btn-lg w-100 mb-2" id="payWithStripe">
+                    <i class="fas fa-credit-card me-2"></i>Pay with Card (Stripe)
+                </button>
+                <div id="paypal-button-container" class="mb-2"></div>
+            </div>
+            
+            <div class="download-actions">
+                <button class="btn-purchase" id="cancelPurchase">
+                    <i class="fas fa-times me-2"></i>Not Now
+                </button>
+            </div>
+            
+            <p class="small text-muted mt-3">Contact for custom licensing or bulk purchases</p>
+        </div>
+    `;
+
+                document.body.appendChild(modal);
+                document.body.style.overflow = 'hidden';
+
+                // Event listeners
+                modal.querySelector('#payWithStripe').addEventListener('click', () => {
+                    this.handleStripePayment();
+                });
+
+                // Initialize PayPal button
+                this.handlePayPalPayment();
+
+                modal.querySelector('#cancelPurchase').addEventListener('click', () => {
+                    document.body.removeChild(modal);
+                    document.body.style.overflow = 'auto';
+                    this.isPurchaseModalShown = false;
+                });
+
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        document.body.removeChild(modal);
+                        document.body.style.overflow = 'auto';
+                        this.isPurchaseModalShown = false;
+                    }
+                });
+            }
+
             loadDownloadState() {
                 try {
                     const saved = JSON.parse(localStorage.getItem('photoDownloadState'));
