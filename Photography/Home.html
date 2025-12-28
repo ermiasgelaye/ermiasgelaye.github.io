@@ -25,7 +25,7 @@
     <!-- AOS Animation -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    <style>
+   <style>
         :root {
             --primary-color: #007BFF;
             --secondary-color: #2c3e50;
@@ -168,7 +168,7 @@
             opacity: 1;
         }
 
-        /* Enhanced Navigation */
+        /* Enhanced Navigation - Mobile Optimized */
         .navbar {
             background: white;
             backdrop-filter: blur(10px);
@@ -190,6 +190,7 @@
             align-items: center;
             gap: 15px;
             text-decoration: none;
+            max-width: 70%;
         }
 
         .nav-logo {
@@ -210,15 +211,34 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .nav-brand-text {
+                font-size: 1.2rem;
+                max-width: 150px;
+            }
+
+            .nav-logo {
+                height: 40px;
+            }
+
+            .navbar-brand {
+                max-width: 60%;
+            }
         }
 
         .nav-link {
             color: #007bff !important;
             font-weight: 500;
-            margin: 0 1rem;
+            margin: 0 0.5rem;
             transition: var(--transition);
             position: relative;
-            padding: 0.5rem 0 !important;
+            padding: 0.5rem 0.5rem !important;
+            white-space: nowrap;
         }
 
         body.dark-mode .nav-link {
@@ -245,7 +265,46 @@
             width: 100%;
         }
 
-        /* FIXED CONTRAST: Hero Section */
+        /* Mobile Navigation Optimization */
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .navbar-collapse {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                text-align: center;
+                background: var(--surface-color);
+                padding: 1rem;
+                border-radius: var(--border-radius);
+                margin-top: 1rem;
+                box-shadow: var(--box-shadow);
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+
+            .nav-item {
+                margin: 0.25rem 0;
+            }
+
+            .nav-link {
+                margin: 0;
+                padding: 0.75rem 1rem !important;
+                display: block;
+                border-radius: 8px;
+            }
+
+            .nav-link:hover {
+                background: var(--background-color);
+            }
+        }
+
+        /* Hero Section */
         .hero-section {
             min-height: 100vh;
             position: relative;
@@ -380,7 +439,7 @@
             color: white;
         }
 
-        /* FIXED CONTRAST: Tagline Section */
+        /* Tagline Section */
         .tagline-section {
             padding: 6rem 0;
             position: relative;
@@ -398,6 +457,19 @@
             background-position: center;
             background-attachment: fixed;
             z-index: 1;
+        }
+
+        /* Lazy Loading */
+        .lazy-image {
+            opacity: 0;
+            filter: blur(5px);
+            transition: opacity 0.3s ease, filter 0.3s ease;
+            background: linear-gradient(45deg, var(--surface-color), var(--border-color));
+        }
+
+        .lazy-image.loaded {
+            opacity: 1;
+            filter: blur(0);
         }
 
         .tagline-container {
@@ -471,7 +543,7 @@
             box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
         }
 
-        /* ENHANCED Gallery Section - Focus on Photos */
+        /* Gallery Section */
         .gallery-section {
             padding: 3rem 0;
         }
@@ -498,6 +570,12 @@
             width: 100px;
             height: 3px;
             background: var(--primary-color);
+        }
+
+        .section-title .text-muted {
+            color: var(--text-color) !important;
+            opacity: 0.8;
+            font-size: 1.1rem;
         }
 
         /* Modern Gallery Grid */
@@ -578,7 +656,7 @@
             font-size: 1.2rem;
         }
 
-        /* FIXED CONTRAST: Journey Section */
+        /* Journey Section */
         .journey-section {
             padding: 6rem 0;
             position: relative;
@@ -769,7 +847,7 @@
             font-size: 0.9rem;
         }
 
-        /* Photography Chatbot */
+        /* Photography Chatbot - Manual Open Only */
         .photo-chatbot {
             position: fixed;
             bottom: 30px;
@@ -833,6 +911,22 @@
             background: var(--gradient-1);
             padding: 1.5rem;
             color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .chatbot-close:hover {
+            transform: scale(1.2);
         }
 
         .chatbot-body {
@@ -1019,9 +1113,7 @@
             background: var(--accent-color);
         }
 
-        /* ========== ENHANCED INTERACTIVE ELEMENTS ========== */
-
-        /* Breadcrumb Navigation */
+        /* Interactive Elements */
         .breadcrumb-nav {
             position: sticky;
             top: 80px;
@@ -1187,7 +1279,7 @@
             transition: width 0.3s ease;
         }
 
-        /* Image Actions */
+        /* Image Actions - FIXED: Now visible with proper colors */
         .image-actions {
             position: absolute;
             top: 10px;
@@ -1207,24 +1299,37 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
-            color: var(--text-color);
+            color: white;
             font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        body.dark-mode .action-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border: 1px solid var(--border-color);
         }
 
         .action-btn:hover {
             background: var(--primary-color);
             color: white;
             transform: scale(1.1);
+            border-color: var(--primary-color);
         }
 
         .action-btn.favorite.active {
+            background: #ff4757;
+            color: white;
+        }
+
+        body.dark-mode .action-btn.favorite.active {
             background: #ff4757;
             color: white;
         }
@@ -1459,6 +1564,127 @@
             transform: translateY(-5px);
         }
 
+        /* Text Theme Classes */
+        .theme-text {
+            color: #000000;
+        }
+
+        .dark-mode .theme-text {
+            color: #ffffff;
+        }
+
+        .theme-text-heading {
+            color: #212529;
+        }
+
+        .dark-mode .theme-text-heading {
+            color: #ffffff;
+        }
+
+        /* SURPRISE FEATURE: Image of the Day */
+        .image-of-day-banner {
+            background: var(--gradient-1);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            top: 80px;
+            width: 100%;
+            z-index: 998;
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-of-day-banner.show {
+            transform: translateY(0);
+        }
+
+        .image-of-day-banner a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .image-of-day-banner a:hover {
+            color: #ffd700;
+        }
+
+        /* SURPRISE: Photography Challenge */
+        .photo-challenge {
+            background: var(--gradient-2);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-challenge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            opacity: 0.2;
+        }
+
+        .challenge-timer {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* SURPRISE: Smart Image Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Progressive Loading Styles */
+        .progressive-load {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progressive-load::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--surface-color);
+            z-index: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .progressive-load.loaded::before {
+            opacity: 0;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero-title {
@@ -1485,10 +1711,13 @@
                 border-radius: var(--border-radius);
                 margin-top: 1rem;
                 box-shadow: var(--box-shadow);
+                max-height: 70vh;
+                overflow-y: auto;
             }
 
             .nav-brand-text {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
+                max-width: 150px;
             }
 
             .nav-logo {
@@ -1508,11 +1737,14 @@
                 overflow-x: auto;
                 white-space: nowrap;
                 padding: 1rem 0.5rem;
+                -webkit-overflow-scrolling: touch;
             }
 
             .category-btn {
                 display: inline-block;
                 white-space: nowrap;
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
             }
 
             .theme-toggle {
@@ -1528,7 +1760,6 @@
                 transform: translateY(-5px);
             }
 
-            /* Enhanced Elements Mobile */
             .interactive-controls {
                 display: none;
             }
@@ -1556,6 +1787,26 @@
                 width: 100%;
                 height: 200px;
             }
+
+            .image-of-day-banner {
+                top: 70px;
+                font-size: 0.9rem;
+                padding: 0.75rem;
+            }
+
+            .photo-challenge {
+                padding: 1.5rem;
+            }
+
+            .challenge-timer {
+                font-size: 1.5rem;
+            }
+
+            .action-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
         }
 
         @media (min-width: 769px) {
@@ -1574,31 +1825,83 @@
             }
         }
 
-        .theme-text {
-            color: #000000;
-            /* default for light mode */
+        /* Typing indicator for chatbot */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 10px;
         }
 
-        @media (prefers-color-scheme: dark) {
-            .theme-text {
-                color: #ffffff;
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
             }
         }
 
-        /* OR if you toggle dark mode with a JavaScript class */
-        .dark-mode .theme-text {
-            color: #ffffff;
-            /* white for dark mode */
+        /* SURPRISE: Smart Cache Indicator */
+        .cache-status {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: var(--box-shadow);
         }
 
-        .theme-text-heading {
-            color: #212529;
-            /* darker black for headings in light mode */
+        .cache-status.visible {
+            opacity: 1;
         }
 
-        .dark-mode .theme-text-heading {
-            color: #ffffff;
-            /* white for headings in dark mode */
+        /* SURPRISE: Performance Stats */
+        .performance-stats {
+            position: fixed;
+            top: 120px;
+            left: 30px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: var(--box-shadow);
+        }
+
+        .performance-stats.visible {
+            opacity: 0.8;
         }
     </style>
 </head>
