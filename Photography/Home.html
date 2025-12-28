@@ -30,7 +30,9 @@
     <!-- Add Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
     <!-- Add PayPal SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+    <!-- Remove the existing PayPal script and add this instead -->
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&disable-funding=credit,card"></script>
+    <!-- Note: 'sb' is sandbox - replace with your actual PayPal Client ID -->
     <style>
         :root {
             --primary-color: #007BFF;
@@ -2083,6 +2085,62 @@
             justify-content: center;
             font-weight: 600;
         }
+        /* Payment Modal Styles */
+.download-modal-content {
+    max-width: 500px;
+    position: relative;
+}
+
+.payment-options {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.payment-method {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.payment-method:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.payment-features {
+    background: var(--surface-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+/* PayPal button container */
+#paypal-button-container {
+    min-height: 48px;
+}
+
+/* Success message */
+.success-message {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin: 1rem 0;
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
     </style>
 </head>
 
@@ -4129,6 +4187,13 @@
                 div.addEventListener('click', (e) => {
                     if (!e.target.closest('.image-actions') && !e.target.closest('[data-action="info"]')) {
                         this.showLightbox(image, index);
+                        const purchaseBtn = modal.querySelector('.purchase-btn');
+                        if (purchaseBtn) {
+                            purchaseBtn.addEventListener('click', () => {
+                                this.closeLightbox(modal);
+                                setTimeout(() => this.showPurchaseModal(image), 300);
+    });
+}
                     }
                 });
 
@@ -4246,21 +4311,28 @@
                             </p>
                         </div>
                     </div>
-                    <div class="mt-3 d-flex justify-content-between">
-                        <button class="btn btn-sm btn-outline-primary download-btn" data-src="${image.src}"
-                                ${this.downloadsRemaining <= 0 ? 'disabled' : ''}>
-                            <i class="fas fa-download me-1"></i>
-                            ${this.downloadsRemaining <= 0 ? 'Download Limit Reached' : `Download (${this.downloadsRemaining} left)`}
-                        </button>
-                        <button class="btn btn-sm btn-outline-secondary share-btn" data-src="${image.src}">
-                            <i class="fas fa-share-alt me-1"></i>Share
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger favorite-btn ${this.favorites.has(image.src) ? 'active' : ''}" 
-                                data-src="${image.src}">
-                            <i class="fas fa-heart me-1"></i>
-                            ${this.favorites.has(image.src) ? 'Remove Favorite' : 'Add Favorite'}
-                        </button>
-                    </div>
+// In showLightbox method, update the download button section:
+<div class="mt-3 d-flex justify-content-between">
+    <button class="btn btn-sm btn-outline-primary download-btn" data-src="${image.src}"
+            ${this.downloadsRemaining <= 0 ? 'disabled' : ''}>
+        <i class="fas fa-download me-1"></i>
+        ${this.downloadsRemaining <= 0 ? 'Download Limit Reached' : `Download (${this.downloadsRemaining} left)`}
+    </button>
+    <button class="btn btn-sm btn-outline-secondary share-btn" data-src="${image.src}">
+        <i class="fas fa-share-alt me-1"></i>Share
+    </button>
+    <button class="btn btn-sm btn-outline-danger favorite-btn ${this.favorites.has(image.src) ? 'active' : ''}" 
+            data-src="${image.src}">
+        <i class="fas fa-heart me-1"></i>
+        ${this.favorites.has(image.src) ? 'Remove Favorite' : 'Add Favorite'}
+    </button>
+    
+    ${this.downloadsRemaining <= 0 ? `
+        <button class="btn btn-sm btn-success purchase-btn" data-src="${image.src}">
+            <i class="fas fa-unlock me-1"></i>Unlock Downloads
+        </button>
+    ` : ''}
+</div>
                 </div>
                 
                 <button class="close-lightbox">
@@ -4553,7 +4625,6 @@
                     }, 300);
                 }, 3000);
             }
-
             showPurchaseModal(image) {
                 if (this.isPurchaseModalShown) return;
                 this.isPurchaseModalShown = true;
@@ -4562,82 +4633,229 @@
                 modal.className = 'download-modal';
 
                 modal.innerHTML = `
-            <div class="download-modal-content" data-aos="zoom-in">
-                <h4>Unlimited Downloads</h4>
-                <p class="mb-4">You've used all 3 free downloads. Purchase unlimited downloads to continue.</p>
-                
-                <div style="background: var(--background-color); padding: 1.5rem; border-radius: var(--border-radius); margin: 1.5rem 0;">
-                    <h2 class="text-primary">$9.99</h2>
-                    <p class="mb-0">One-time payment for unlimited downloads</p>
+        <div class="download-modal-content" data-aos="zoom-in">
+            <button class="close-lightbox" id="closePaymentModal" style="position: absolute; top: 10px; right: 10px;">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <h4 class="mb-3">Unlimited Downloads</h4>
+            <p class="mb-4">You've used all 3 free downloads. Purchase unlimited downloads for $9.99</p>
+            
+            <div class="payment-options">
+                <div class="payment-method mb-3">
+                    <button class="btn btn-primary btn-lg w-100 mb-2" id="payWithStripe">
+                        <i class="fas fa-credit-card me-2"></i>Pay with Card
+                    </button>
+                    <p class="small text-muted mb-0">Secure payment via Stripe</p>
                 </div>
                 
-                <ul class="text-start mb-4">
-                    <li>Unlimited high-resolution downloads</li>
-                    <li>No watermarks on purchased downloads</li>
-                    <li>Commercial usage license</li>
-                    <li>Priority support</li>
-                    <li>Access to exclusive photos</li>
-                </ul>
-                
-                <div class="download-actions">
-                    <button class="btn-download" id="purchaseNow">
-                        <i class="fas fa-credit-card me-2"></i>Purchase Now
-                    </button>
-                    <button class="btn-purchase" id="cancelPurchase">
-                        <i class="fas fa-times me-2"></i>Not Now
-                    </button>
+                <div class="payment-method mb-3">
+                    <div id="paypal-button-container"></div>
+                    <p class="small text-muted mb-0">Secure payment via PayPal</p>
                 </div>
-                
-                <p class="small text-muted mt-3">Contact for custom licensing or bulk purchases</p>
             </div>
-        `;
+            
+            <div class="payment-features mt-4">
+                <h6 class="mb-2">What you get:</h6>
+                <ul class="list-unstyled small">
+                    <li><i class="fas fa-check text-success me-2"></i> Unlimited high-resolution downloads</li>
+                    <li><i class="fas fa-check text-success me-2"></i> No watermarks on purchased downloads</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Commercial usage license</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Priority support</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Access to exclusive photos</li>
+                </ul>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" id="cancelPurchase">
+                    <i class="fas fa-times me-2"></i>Maybe Later
+                </button>
+            </div>
+        </div>
+    `;
 
                 document.body.appendChild(modal);
                 document.body.style.overflow = 'hidden';
 
-                // Event listeners
-                modal.querySelector('#purchaseNow').addEventListener('click', () => {
-                    alert('Redirecting to payment processor...\n\nIn a real implementation, this would connect to Stripe/PayPal.');
-                    // Here you would integrate with your payment processor
-                    // For now, we'll simulate purchase success
-                    this.unlockUnlimitedDownloads();
-                    document.body.removeChild(modal);
-                    document.body.style.overflow = 'auto';
-                    this.isPurchaseModalShown = false;
+                // Initialize payment buttons
+                this.initializePaymentButtons(modal, image);
+
+                // Close button event
+                modal.querySelector('#closePaymentModal').addEventListener('click', () => {
+                    this.closePaymentModal(modal);
                 });
 
+                // Cancel button event
                 modal.querySelector('#cancelPurchase').addEventListener('click', () => {
-                    document.body.removeChild(modal);
-                    document.body.style.overflow = 'auto';
-                    this.isPurchaseModalShown = false;
+                    this.closePaymentModal(modal);
                 });
 
+                // Close on background click
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) {
-                        document.body.removeChild(modal);
-                        document.body.style.overflow = 'auto';
-                        this.isPurchaseModalShown = false;
+                        this.closePaymentModal(modal);
                     }
                 });
+
+                // Close on escape key
+                const handleEscape = (e) => {
+                    if (e.key === 'Escape') {
+                        this.closePaymentModal(modal);
+                        document.removeEventListener('keydown', handleEscape);
+                    }
+                };
+                document.addEventListener('keydown', handleEscape);
+                modal._escapeHandler = handleEscape;
             }
 
-            unlockUnlimitedDownloads() {
-                this.downloadsRemaining = 999; // Unlimited
-                localStorage.setItem('unlimitedDownloads', 'true');
-                this.saveDownloadState();
+            closePaymentModal(modal) {
+                if (modal._escapeHandler) {
+                    document.removeEventListener('keydown', modal._escapeHandler);
+                }
+                if (modal.parentNode) {
+                    document.body.removeChild(modal);
+                }
+                document.body.style.overflow = 'auto';
+                this.isPurchaseModalShown = false;
+            }
 
-                // Show success message
+            initializePaymentButtons(modal, image) {
+                // Stripe button
+                const stripeButton = modal.querySelector('#payWithStripe');
+                stripeButton.addEventListener('click', async () => {
+                    try {
+                        stripeButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+                        stripeButton.disabled = true;
+
+                        const response = await fetch('http://localhost:3000/api/create-checkout-session', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                items: [{ name: 'Unlimited Downloads', price: 9.99 }],
+                                imageId: image.src,
+                                userId: this.getUserId()
+                            })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Failed to create checkout session');
+                        }
+
+                        const session = await response.json();
+
+                        // Redirect to Stripe Checkout
+                        const result = await stripe.redirectToCheckout({
+                            sessionId: session.id
+                        });
+
+                        if (result.error) {
+                            alert(result.error.message);
+                            stripeButton.innerHTML = '<i class="fas fa-credit-card me-2"></i>Pay with Card';
+                            stripeButton.disabled = false;
+                        }
+                    } catch (error) {
+                        console.error('Stripe error:', error);
+                        alert('Error processing payment. Please try again.');
+                        stripeButton.innerHTML = '<i class="fas fa-credit-card me-2"></i>Pay with Card';
+                        stripeButton.disabled = false;
+                    }
+                });
+
+                // PayPal button
+                this.initializePayPalButton(modal, image);
+            }
+
+            initializePayPalButton(modal, image) {
+                const paypalContainer = modal.querySelector('#paypal-button-container');
+
+                if (!window.paypal) {
+                    console.error('PayPal SDK not loaded');
+                    paypalContainer.innerHTML = '<p class="text-danger">PayPal not available. Please try Stripe.</p>';
+                    return;
+                }
+
+                window.paypal.Buttons({
+                    style: {
+                        layout: 'vertical',
+                        color: 'gold',
+                        shape: 'rect',
+                        label: 'paypal'
+                    },
+
+                    createOrder: async (data, actions) => {
+                        try {
+                            const response = await fetch('http://localhost:3000/api/create-paypal-order', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' }
+                            });
+
+                            if (!response.ok) {
+                                throw new Error('Failed to create PayPal order');
+                            }
+
+                            const orderData = await response.json();
+                            return orderData.id;
+                        } catch (error) {
+                            console.error('PayPal order creation error:', error);
+                            throw error;
+                        }
+                    },
+
+                    onApprove: async (data, actions) => {
+                        try {
+                            // Show loading state
+                            paypalContainer.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Processing payment...</p></div>';
+
+                            const response = await fetch('http://localhost:3000/api/capture-paypal-order', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ orderID: data.orderID })
+                            });
+
+                            const captureData = await response.json();
+
+                            if (captureData.success) {
+                                // Unlock downloads
+                                this.unlockUnlimitedDownloads();
+
+                                // Close modal
+                                this.closePaymentModal(modal);
+
+                                // Show success message
+                                this.showPaymentSuccess('PayPal payment successful! Unlimited downloads activated.');
+                            } else {
+                                throw new Error(captureData.error || 'Payment failed');
+                            }
+                        } catch (error) {
+                            console.error('PayPal capture error:', error);
+                            alert('Payment failed: ' + error.message);
+                            location.reload(); // Reload to reset PayPal button
+                        }
+                    },
+
+                    onError: (err) => {
+                        console.error('PayPal error:', err);
+                        alert('An error occurred with PayPal. Please try another payment method.');
+                    },
+
+                    onCancel: (data) => {
+                        console.log('PayPal payment cancelled');
+                    }
+                }).render('#paypal-button-container');
+            }
+
+            showPaymentSuccess(message) {
                 const toast = document.createElement('div');
                 toast.className = 'download-toast';
                 toast.innerHTML = `
-            <div style="background: #28a745; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-check"></i>
-            </div>
-            <div>
-                <div class="fw-bold">Unlimited Downloads Activated!</div>
-                <div class="small">Thank you for your purchase</div>
-            </div>
-        `;
+        <div style="background: #28a745; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-check"></i>
+        </div>
+        <div>
+            <div class="fw-bold">Payment Successful!</div>
+            <div class="small">${message}</div>
+        </div>
+    `;
 
                 document.body.appendChild(toast);
                 setTimeout(() => toast.classList.add('show'), 10);
@@ -4645,11 +4863,21 @@
                 setTimeout(() => {
                     toast.classList.remove('show');
                     setTimeout(() => {
-                        if (toast.parentNode) document.body.removeChild(toast);
+                        if (toast.parentNode) {
+                            document.body.removeChild(toast);
+                        }
                     }, 300);
-                }, 3000);
+                }, 5000);
             }
 
+            getUserId() {
+                let userId = localStorage.getItem('photoUserId');
+                if (!userId) {
+                    userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem('photoUserId', userId);
+                }
+                return userId;
+            }
 
 
             shareImage(image) {

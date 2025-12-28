@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Test</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+    <script>
+        const stripe = Stripe('pk_test_your_test_key_here');
+        
+        async function testStripe() {
+            try {
+                const response = await fetch('http://localhost:3000/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        items: [{ name: 'Test Product', price: 9.99 }],
+                        userId: 'test_user'
+                    })
+                });
+                
+                const session = await response.json();
+                console.log('Stripe session:', session);
+                
+                const result = await stripe.redirectToCheckout({
+                    sessionId: session.id
+                });
+                
+                if (result.error) {
+                    console.error('Stripe error:', result.error);
+                }
+            } catch (error) {
+                console.error('Test error:', error);
+            }
+        }
+        
+        function testPayPal() {
+            paypal.Buttons({
+                createOrder: async () => {
+                    const response = await fetch('http://localhost:3000/api/create-paypal-order');
+                    const order = await response.json();
+                    return order.id;
+                },
+                onApprove: async (data) => {
+                    const response = await fetch('http://localhost:3000/api/capture-paypal-order', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ orderID: data.orderID })
+                    });
+                    
+                    const result = await response.json();
+                    console.log('PayPal result:', result);
+                    alert('Payment successful!');
+                }
+            }).render('#paypal-test');
+        }
+        
+        // Test server health
+        async function testHealth() {
+            const response = await fetch('http://localhost:3000/api/health');
+            const health = await response.json();
+            console.log('Server health:', health);
+            document.getElementById('health-status').textContent = 
+                `Server: ${health.status}, Stripe: ${health.services.stripe ? 'OK' : 'Missing'}, PayPal: ${health.services.paypal ? 'OK' : 'Missing'}`;
+        }
+        
+        window.onload = () => {
+            testHealth();
+            testPayPal();
+        };
+    </script>
+</head>
+<body>
+    <h1>Payment Test Page</h1>
+    <div id="health-status">Loading...</div>
+    <button onclick="testStripe()">Test Stripe</button>
+    <div id="paypal-test" style="width: 200px; margin-top: 20px;"></div>
+</body>
+</html>
