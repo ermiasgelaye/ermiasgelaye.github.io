@@ -28,8 +28,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <!-- Add Stripe.js -->
- <script src="https://js.stripe.com/v3/"></script>
-<script src="https://www.paypal.com/sdk/js?client-id=AdAM3jjBv9reiEXhqPWf2LV7-evpSxYX2Q7klX7yL4f8Y5Os6XMxeBF8VR2GJBVH1OGrC9rTLgsGza84&currency=USD"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AWNYodeZKLy8_wTKvp0OT2ErkqYfqTsqwasv361gjcqMmhheKZuxf9Jktd07giQGWeGgXmuWeFCczzkM&currency=USD"></script>
     <style>
         :root {
             --primary-color: #007BFF;
@@ -43,7 +44,7 @@
             --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --border-accent: 2px solid #007BFF;
-            --gradient-1: linear-gradient(135deg, #007BFF, #2c3e50);
+            --gradient-1: linear-gradient(135deg, #007BFF, #30353a);
             --gradient-2: linear-gradient(135deg, #3498db, #2c3e50);
             --hero-overlay: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
             --text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
@@ -2082,62 +2083,64 @@
             justify-content: center;
             font-weight: 600;
         }
+
         /* Payment Modal Styles */
-.download-modal-content {
-    max-width: 500px;
-    position: relative;
-}
+        .download-modal-content {
+            max-width: 500px;
+            position: relative;
+        }
 
-.payment-options {
-    background: var(--surface-color);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
-}
+        .payment-options {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
 
-.payment-method {
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color);
-}
+        .payment-method {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-.payment-method:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
+        .payment-method:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
 
-.payment-features {
-    background: var(--surface-color);
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
-}
+        .payment-features {
+            background: var(--surface-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
 
-/* PayPal button container */
-#paypal-button-container {
-    min-height: 48px;
-}
+        /* PayPal button container */
+        #paypal-button-container {
+            min-height: 48px;
+        }
 
-/* Success message */
-.success-message {
-    background: linear-gradient(135deg, #28a745, #20c997);
-    color: white;
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    text-align: center;
-    margin: 1rem 0;
-    animation: fadeInUp 0.5s ease;
-}
+        /* Success message */
+        .success-message {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 1rem 0;
+            animation: fadeInUp 0.5s ease;
+        }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -2629,13 +2632,13 @@
         const themeToggle = document.getElementById('themeToggle');
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
         // Payment configuration - In production, use server-side API keys
-const paymentConfig = {
-    stripePublicKey: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ',
-    // Replace with your REAL PayPal Client ID (not 'sb')
-    paypalClientId: 'AdAM3jjBv9reiEXhqPWf2LV7-evpSxYX2Q7klX7yL4f8Y5Os6XMxeBF8VR2GJBVH1OGrC9rTLgsGza84',
-    pricePerImage: 9.99,
-    currency: 'USD'
-};
+        const paymentConfig = {
+            stripePublicKey: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ',
+            // Replace with your REAL PayPal Client ID (not 'sb')
+            paypalClientId: 'AdAM3jjBv9reiEXhqPWf2LV7-evpSxYX2Q7klX7yL4f8Y5Os6XMxeBF8VR2GJBVH1OGrC9rTLgsGza84',
+            pricePerImage: 9.99,
+            currency: 'USD'
+        };
 
         // Initialize Stripe
         const stripe = Stripe(paymentConfig.stripePublicKey);
@@ -4165,8 +4168,8 @@ const paymentConfig = {
                             purchaseBtn.addEventListener('click', () => {
                                 this.closeLightbox(modal);
                                 setTimeout(() => this.showPurchaseModal(image), 300);
-    });
-}
+                            });
+                        }
                     }
                 });
 
@@ -4737,115 +4740,94 @@ const paymentConfig = {
                 this.initializePayPalButton(modal, image);
             }
 
-initializePayPalButton(modal, image) {
-    const paypalContainer = modal.querySelector('#paypal-button-container');
-    
-    if (!window.paypal) {
-        console.error('PayPal SDK not loaded');
-        paypalContainer.innerHTML = '<p class="text-danger">PayPal not available. Please try Stripe.</p>';
-        return;
-    }
+            initializePayPalButton(modal, image) {
+                const paypalContainer = modal.querySelector('#paypal-button-container');
 
-    // First, check if PayPal SDK loaded properly
-    if (!paypal.Buttons) {
-        paypalContainer.innerHTML = '<p class="text-danger">PayPal SDK failed to load. Please refresh or try another method.</p>';
-        return;
-    }
+                // Check if SDK loaded
+                if (!window.paypal) {
+                    paypalContainer.innerHTML = '<div class="alert alert-danger">PayPal SDK failed to load. Please check your internet or ad-blocker.</div>';
+                    return;
+                }
 
-    paypal.Buttons({
-        style: {
-            layout: 'vertical',
-            color: 'gold',
-            shape: 'rect',
-            label: 'paypal'
-        },
+                paypalContainer.innerHTML = ''; // Clear previous buttons
 
-        createOrder: async (data, actions) => {
-            try {
-                const response = await fetch('/api/create-paypal-order', {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                paypal.Buttons({
+                    style: {
+                        layout: 'vertical',
+                        color: 'gold',
+                        shape: 'rect',
+                        label: 'paypal'
                     },
-                    body: JSON.stringify({
-                        userId: this.getUserId(),
-                        imageId: image.src,
-                        productName: 'Unlimited Downloads Access'
-                    })
-                });
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Server error: ${response.status} - ${errorText}`);
-                }
+                    createOrder: async (data, actions) => {
+                        try {
+                            // 1. Call your backend to create the order
+                            const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/create-paypal-order`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json' // <--- Added missing header
+                                },
+                                // We can send product info here if your server needs it
+                                body: JSON.stringify({
+                                    imageId: image.src
+                                })
+                            });
 
-                const orderData = await response.json();
-                
-                if (!orderData.id) {
-                    throw new Error('No order ID received from server');
-                }
-                
-                return orderData.id;
-            } catch (error) {
-                console.error('PayPal order creation error:', error);
-                paypalContainer.innerHTML = `<p class="text-danger">Error: ${error.message}. Please try Stripe or contact support.</p>`;
-                throw error;
-            }
-        },
+                            // 2. Check for Server Errors (e.g., 500 Internal Server Error)
+                            if (!response.ok) {
+                                const errorData = await response.json();
+                                throw new Error(errorData.error || `Server Error: ${response.status}`);
+                            }
 
-        onApprove: async (data, actions) => {
-            try {
-                // Show loading state
-                paypalContainer.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Processing payment...</p></div>';
-
-                const response = await fetch('/api/capture-paypal-order', {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                            const order = await response.json();
+                            return order.id; // Return the ID to PayPal
+                        } catch (error) {
+                            console.error('PayPal CreateOrder Error:', error);
+                            alert(`Payment could not start: ${error.message}`);
+                            throw error; // Stop PayPal modal from loading
+                        }
                     },
-                    body: JSON.stringify({ 
-                        orderID: data.orderID,
-                        userId: this.getUserId()
-                    })
-                });
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Capture failed: ${response.status} - ${errorText}`);
-                }
+                    onApprove: async (data, actions) => {
+                        try {
+                            // 3. Capture the payment
+                            const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/capture-paypal-order`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ orderID: data.orderID })
+                            });
 
-                const captureData = await response.json();
+                            const result = await response.json();
 
-                if (captureData.success) {
-                    this.unlockUnlimitedDownloads();
-                    this.closePaymentModal(modal);
-                    this.showPaymentSuccess('PayPal payment successful! Unlimited downloads activated.');
-                } else {
-                    throw new Error(captureData.error || 'Payment verification failed');
-                }
-            } catch (error) {
-                console.error('PayPal capture error:', error);
-                alert(`Payment failed: ${error.message}\n\nIf the payment was processed, please contact ermiasgelaye@gmail.com for assistance.`);
-                location.reload();
+                            if (result.success) {
+                                // Success! Unlock downloads
+                                this.downloadsRemaining = Infinity;
+                                localStorage.setItem('unlimited_unlocked', 'true');
+                                this.updateDownloadUI();
+
+                                // Close modal and show success
+                                if (document.body.contains(modal)) {
+                                    document.body.removeChild(modal);
+                                    document.body.style.overflow = 'auto';
+                                }
+                                this.isPurchaseModalShown = false;
+                                this.showToast('Payment Successful! Downloads Unlocked.');
+                            } else {
+                                throw new Error('Payment capture failed.');
+                            }
+                        } catch (error) {
+                            console.error('PayPal Capture Error:', error);
+                            alert("Payment processing failed. Please contact support.");
+                        }
+                    },
+
+                    onError: (err) => {
+                        console.error('PayPal Widget Error:', err);
+                        // Don't alert "Failed to fetch" here; rely on the createOrder catch block above for specifics
+                    }
+                }).render('#paypal-button-container');
             }
-        },
 
-        onError: (err) => {
-            console.error('PayPal error:', err);
-            alert('PayPal encountered an error. Please try another payment method or contact support.');
-        },
-
-        onCancel: (data) => {
-            console.log('PayPal payment cancelled by user');
-            // Optional: Show a message that payment was cancelled
-        }
-    }).render('#paypal-button-container').catch(err => {
-        console.error('Failed to render PayPal buttons:', err);
-        paypalContainer.innerHTML = '<p class="text-danger">Failed to load PayPal. Please try another payment method.</p>';
-    });
-}
 
             showPaymentSuccess(message) {
                 const toast = document.createElement('div');
