@@ -2861,7 +2861,7 @@
             <p class="mb-4">You've used all 3 free downloads. Purchase unlimited downloads to continue.</p>
             
             <div style="background: var(--background-color); padding: 1.5rem; border-radius: var(--border-radius); margin: 1.5rem 0;">
-                <h2 class="text-primary">$9.99</h2>
+                <h2 class="text-primary">$30.00</h2>
                 <p class="mb-0">One-time payment for unlimited downloads</p>
             </div>
             
@@ -3719,7 +3719,7 @@
                 </div>
                 
                 <p class="small">Downloading: <strong>${image.title}</strong></p>
-                <p class="small text-muted">Free downloads reset periodically. Purchase unlimited downloads for $9.99</p>
+                <p class="small text-muted">Free downloads reset periodically. Purchase unlimited downloads for $30.00</p>
                 
                 <div class="download-actions">
                     <button class="btn-download" id="confirmDownload">
@@ -3911,7 +3911,7 @@
             </button>
             
             <h4 class="mb-3">Unlimited Downloads</h4>
-            <p class="mb-4">You've used all 3 free downloads. Purchase unlimited downloads for $9.99</p>
+            <p class="mb-4">You've used all 3 free downloads. Purchase unlimited downloads for $30.00</p>
             
             <div class="payment-options">
                 <div class="payment-method mb-3">
@@ -4004,7 +4004,7 @@
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
-                                items: [{ name: 'Unlimited Downloads', price: 9.99 }],
+                                items: [{ name: 'Unlimited Downloads', price: 30.00 }],
                                 imageId: image.src,
                                 userId: this.getUserId()
                             })
@@ -4038,93 +4038,133 @@
                 this.initializePayPalButton(modal, image);
             }
 
-            initializePayPalButton(modal, image) {
-                const paypalContainer = modal.querySelector('#paypal-button-container');
-
-                // Check if SDK loaded
-                if (!window.paypal) {
-                    paypalContainer.innerHTML = '<div class="alert alert-danger">PayPal SDK failed to load. Please check your internet or ad-blocker.</div>';
-                    return;
-                }
-
-                paypalContainer.innerHTML = ''; // Clear previous buttons
-
-                paypal.Buttons({
-                    style: {
-                        layout: 'vertical',
-                        color: 'gold',
-                        shape: 'rect',
-                        label: 'paypal'
-                    },
-
-                    createOrder: async (data, actions) => {
-                        try {
-                            // 1. Call your backend to create the order
-                            const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/create-paypal-order`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json' // <--- Added missing header
-                                },
-                                // We can send product info here if your server needs it
-                                body: JSON.stringify({
-                                    imageId: image.src
-                                })
-                            });
-
-                            // 2. Check for Server Errors (e.g., 500 Internal Server Error)
-                            if (!response.ok) {
-                                const errorData = await response.json();
-                                throw new Error(errorData.error || `Server Error: ${response.status}`);
-                            }
-
-                            const order = await response.json();
-                            return order.id; // Return the ID to PayPal
-                        } catch (error) {
-                            console.error('PayPal CreateOrder Error:', error);
-                            alert(`Payment could not start: ${error.message}`);
-                            throw error; // Stop PayPal modal from loading
-                        }
-                    },
-
-                    onApprove: async (data, actions) => {
-                        try {
-                            // 3. Capture the payment
-                            const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/capture-paypal-order`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ orderID: data.orderID })
-                            });
-
-                            const result = await response.json();
-
-                            if (result.success) {
-                                // Success! Unlock downloads
-                                this.downloadsRemaining = Infinity;
-                                localStorage.setItem('unlimited_unlocked', 'true');
-                                this.updateDownloadUI();
-
-                                // Close modal and show success
-                                if (document.body.contains(modal)) {
-                                    document.body.removeChild(modal);
-                                    document.body.style.overflow = 'auto';
-                                }
-                                this.isPurchaseModalShown = false;
-                                this.showToast('Payment Successful! Downloads Unlocked.');
-                            } else {
-                                throw new Error('Payment capture failed.');
-                            }
-                        } catch (error) {
-                            console.error('PayPal Capture Error:', error);
-                            alert("Payment processing failed. Please contact support.");
-                        }
-                    },
-
-                    onError: (err) => {
-                        console.error('PayPal Widget Error:', err);
-                        // Don't alert "Failed to fetch" here; rely on the createOrder catch block above for specifics
+        initializePayPalButton(modal, image) {
+    const paypalContainer = modal.querySelector('#paypal-button-container');
+    
+    if (!window.paypal) {
+        paypalContainer.innerHTML = `
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                PayPal loading... Please wait.
+            </div>
+        `;
+        return;
+    }
+    
+    paypalContainer.innerHTML = '';
+    
+    // Clear any existing buttons
+    paypalContainer.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div></div>';
+    
+    try {
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'rect',
+                label: 'paypal'
+            },
+            
+            createOrder: async (data, actions) => {
+                console.log('Creating PayPal order...');
+                
+                try {
+                    const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/create-paypal-order`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ amount: 30.00 })
+                    });
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`Server error: ${response.status} - ${errorText}`);
                     }
-                }).render('#paypal-button-container');
+                    
+                    const orderData = await response.json();
+                    console.log('Order created:', orderData);
+                    
+                    if (!orderData.id) {
+                        throw new Error('No order ID returned from server');
+                    }
+                    
+                    return orderData.id;
+                    
+                } catch (error) {
+                    console.error('PayPal createOrder error:', error);
+                    alert(`PayPal error: ${error.message}. Please try Stripe instead.`);
+                    throw error;
+                }
+            },
+            
+            onApprove: async (data, actions) => {
+                console.log('Approving order:', data.orderID);
+                
+                try {
+                    const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/capture-paypal-order`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ orderID: data.orderID })
+                    });
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`Capture failed: ${response.status} - ${errorText}`);
+                    }
+                    
+                    const result = await response.json();
+                    console.log('Capture result:', result);
+                    
+                    if (result.success) {
+                        // Success! Unlock downloads
+                        this.downloadsRemaining = Infinity;
+                        localStorage.setItem('unlimited_unlocked', 'true');
+                        this.saveDownloadState();
+                        
+                        // Close modal
+                        if (document.body.contains(modal)) {
+                            document.body.removeChild(modal);
+                            document.body.style.overflow = 'auto';
+                        }
+                        this.isPurchaseModalShown = false;
+                        
+                        // Show success message
+                        alert('🎉 Payment successful! You now have unlimited downloads.');
+                        
+                        // Refresh page to update UI
+                        setTimeout(() => window.location.reload(), 1000);
+                        
+                    } else {
+                        throw new Error('Payment was not successful');
+                    }
+                    
+                } catch (error) {
+                    console.error('PayPal capture error:', error);
+                    alert(`Payment failed: ${error.message}. Please contact support.`);
+                }
+            },
+            
+            onError: (err) => {
+                console.error('PayPal button error:', err);
+                alert('There was an error with PayPal. Please try another payment method.');
+            },
+            
+            onCancel: (data) => {
+                console.log('PayPal payment cancelled:', data);
+                // Optional: Show cancelled message
             }
+            
+        }).render('#paypal-button-container');
+        
+    } catch (error) {
+        console.error('PayPal button creation failed:', error);
+        paypalContainer.innerHTML = `
+            <div class="alert alert-danger">
+                <i class="fas fa-times-circle me-2"></i>
+                Could not load PayPal. Please use Stripe or try again later.
+            </div>
+        `;
+    }
+}
 
 
             showPaymentSuccess(message) {
