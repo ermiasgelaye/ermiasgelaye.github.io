@@ -1632,18 +1632,6 @@
             overflow: hidden;
         }
 
-        .photo-challenge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            opacity: 0.2;
-        }
-
         .challenge-timer {
             font-size: 2.5rem;
             font-weight: 700;
@@ -2636,7 +2624,7 @@
          // --- 1. GLOBAL CONFIGURATION ---
         const APP_CONFIG = {
             // Use your Vercel backend URL
-            API_BASE_URL: 'https://photo-backend-xi.vercel.app/',
+            API_BASE_URL: 'https://photo-backend-ten.vercel.app/',
 
             // Your existing keys
             STRIPE_PUBLIC_KEY: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ',
@@ -4000,7 +3988,7 @@
                         stripeButton.disabled = true;
 
                         // Replace line 3890 with:
-                       const response = await fetch('https://photo-backend-xi.vercel.app/api/create-checkout-session', {
+                       const response = await fetch('https://photo-backend-ten.vercel.app/api/create-checkout-session', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
