@@ -2628,7 +2628,7 @@
 
             // Your existing keys
             STRIPE_PUBLIC_KEY:'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ',
-            PAYPAL_CLIENT_ID: 'AWNYodeZKLy8_wTKvp0OT2ErkqYfqTsqwasv361gjcqMmhheKZuxf9Jktd07giQGWeGgXmuWeFCczzkM'
+            PAYPAL_CLIENT_ID: 'AQ_jpAzGqFSS9drvNKT3bVLm8jDFL_wK9TqyE8vcVWLyNtbV3s3OFnw8AGWT49JkkOus6PKlHBxn1pIh'
         };
 
         // --- 2. INIT EXTERNAL LIBS ---
@@ -2655,20 +2655,43 @@
         }
 
         // Dynamically load PayPal SDK only if client ID is valid
-        if (APP_CONFIG.PAYPAL_CLIENT_ID && APP_CONFIG.PAYPAL_CLIENT_ID.length > 10) {
-            const ppScript = document.createElement('script');
-            ppScript.src = `https://www.paypal.com/sdk/js?client-id=${APP_CONFIG.PAYPAL_CLIENT_ID}&currency=USD`;
-            ppScript.async = true;
-            ppScript.onload = function () {
-                console.log('PayPal SDK loaded successfully');
-            };
-            ppScript.onerror = function () {
-                console.error('Failed to load PayPal SDK');
-            };
-            document.head.appendChild(ppScript);
-        } else {
-            console.warn('Invalid or missing PayPal Client ID');
-        }
+// Replace the PayPal initialization section
+if (APP_CONFIG.PAYPAL_CLIENT_ID && APP_CONFIG.PAYPAL_CLIENT_ID.length > 10) {
+    // Check if PayPal is already loaded
+    if (!window.paypal) {
+        const ppScript = document.createElement('script');
+        ppScript.src = `https://www.paypal.com/sdk/js?client-id=${APP_CONFIG.PAYPAL_CLIENT_ID}&currency=USD&components=buttons`;
+        ppScript.async = true;
+        ppScript.onload = function () {
+            console.log('PayPal SDK loaded successfully');
+            // Initialize PayPal buttons after load
+            if (window.paypal) {
+                initializeAllPayPalButtons();
+            }
+        };
+        ppScript.onerror = function () {
+            console.error('Failed to load PayPal SDK');
+            showPaymentFallback();
+        };
+        document.head.appendChild(ppScript);
+    }
+} else {
+    console.warn('Invalid PayPal Client ID');
+    showPaymentFallback();
+}
+
+function showPaymentFallback() {
+    // Show alternative payment message
+    const paypalContainers = document.querySelectorAll('#paypal-button-container');
+    paypalContainers.forEach(container => {
+        container.innerHTML = `
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                PayPal is temporarily unavailable. Please use Stripe or contact us directly.
+            </div>
+        `;
+    });
+}
 
         // Dark Mode Logic
         const themeToggle = document.getElementById('themeToggle');
