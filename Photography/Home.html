@@ -29,8 +29,8 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <!-- Add Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=AdAM3jjBv9reiEXhqPWf2LV7-evpSxYX2Q7klX7yL4f8Y5Os6XMxeBF8VR2GJBVH1OGrC9rTLgsGza84&currency=USD"></script>
+   
+    <script src="https://www.paypal.com/sdk/js?client-id=AQ_jpAzGqFSS9drvNKT3bVLm8jDFL_wK9TqyE8vcVWLyNtbV3s3OFnw8AGWT49JkkOus6PKlHBxn1pIh&currency=USD&disable-funding=card"></script>
     <style>
         :root {
             --primary-color: #007BFF;
@@ -2628,12 +2628,43 @@
         // --- 1. GLOBAL CONFIGURATION ---
         const APP_CONFIG = {
             // Use your Vercel backend URL
-            API_BASE_URL: 'https://photo-backend-ten.vercel.app/',
+            API_BASE_URL: 'https://photo-backend-ten.vercel.app',
 
             // Your existing keys
             STRIPE_PUBLIC_KEY: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ',
             PAYPAL_CLIENT_ID: 'AQ_jpAzGqFSS9drvNKT3bVLm8jDFL_wK9TqyE8vcVWLyNtbV3s3OFnw8AGWT49JkkOus6PKlHBxn1pIh'
         };
+
+        // Add this function to test PayPal connection
+        async function testPayPalConnection() {
+            try {
+                console.log('🔍 Testing PayPal connection...');
+
+                const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/debug-paypal`);
+                const data = await response.json();
+
+                console.log('PayPal Debug Info:', data);
+
+                if (!data.configured) {
+                    console.error('❌ PayPal not configured on server');
+                    return false;
+                }
+
+                console.log('✅ PayPal server connection OK');
+                return true;
+
+            } catch (error) {
+                console.error('PayPal test failed:', error);
+                return false;
+            }
+        }
+
+        // Call this on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Test PayPal connection after a delay
+            setTimeout(testPayPalConnection, 2000);
+        });
+
 
         // --- 2. INIT EXTERNAL LIBS ---
         // Initialize AOS only if it exists
@@ -2697,7 +2728,7 @@
             });
         }
 
-        
+
 
         // Dark Mode Logic
         const themeToggle = document.getElementById('themeToggle');
@@ -4050,25 +4081,25 @@
                 this.initializePayPalButton(modal, image);
             }
 
+
             initializePayPalButton(modal, image) {
                 const paypalContainer = modal.querySelector('#paypal-button-container');
+                paypalContainer.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div><p>Loading PayPal...</p></div>';
 
+                // Check if PayPal SDK is loaded
                 if (!window.paypal) {
+                    console.error('PayPal SDK not loaded');
                     paypalContainer.innerHTML = `
             <div class="alert alert-warning">
                 <i class="fas fa-exclamation-triangle me-2"></i>
-                PayPal loading... Please wait.
+                PayPal not loaded. Please refresh or use Stripe.
             </div>
         `;
                     return;
                 }
 
-                paypalContainer.innerHTML = '';
-
-                // Clear any existing buttons
-                paypalContainer.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div></div>';
-
                 try {
+                    // Use a simpler, more reliable approach
                     paypal.Buttons({
                         style: {
                             layout: 'vertical',
@@ -4078,13 +4109,14 @@
                         },
 
                         createOrder: async (data, actions) => {
-                            console.log('Creating PayPal order...');
-
                             try {
+                                console.log('Creating PayPal order...');
+
                                 const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/create-paypal-order`, {
                                     method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({ amount: 30.00 })
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
                                 });
 
                                 if (!response.ok) {
@@ -4096,31 +4128,43 @@
                                 console.log('Order created:', orderData);
 
                                 if (!orderData.id) {
-                                    throw new Error('No order ID returned from server');
+                                    throw new Error('No order ID returned');
                                 }
 
                                 return orderData.id;
 
                             } catch (error) {
-                                console.error('PayPal createOrder error:', error);
-                                alert(`PayPal error: ${error.message}. Please try Stripe instead.`);
+                                console.error('Create order error:', error);
+
+                                // Show user-friendly error
+                                paypalContainer.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-times-circle me-2"></i>
+                            Failed to create order: ${error.message}
+                            <button class="btn btn-sm btn-primary mt-2 w-100" onclick="location.reload()">
+                                Retry
+                            </button>
+                        </div>
+                    `;
+
                                 throw error;
                             }
                         },
 
                         onApprove: async (data, actions) => {
-                            console.log('Approving order:', data.orderID);
-
                             try {
+                                console.log('Approving order:', data.orderID);
+
                                 const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/capture-paypal-order`, {
                                     method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
                                     body: JSON.stringify({ orderID: data.orderID })
                                 });
 
                                 if (!response.ok) {
-                                    const errorText = await response.text();
-                                    throw new Error(`Capture failed: ${response.status} - ${errorText}`);
+                                    throw new Error(`Capture failed: ${response.status}`);
                                 }
 
                                 const result = await response.json();
@@ -4132,37 +4176,42 @@
                                     localStorage.setItem('unlimited_unlocked', 'true');
                                     this.saveDownloadState();
 
+                                    // Show success message
+                                    this.showSuccessMessage('Payment successful! Unlimited downloads unlocked.');
+
                                     // Close modal
-                                    if (document.body.contains(modal)) {
+                                    if (modal.parentNode) {
                                         document.body.removeChild(modal);
-                                        document.body.style.overflow = 'auto';
                                     }
                                     this.isPurchaseModalShown = false;
 
-                                    // Show success message
-                                    alert('🎉 Payment successful! You now have unlimited downloads.');
-
-                                    // Refresh page to update UI
-                                    setTimeout(() => window.location.reload(), 1000);
+                                    // Refresh UI
+                                    setTimeout(() => {
+                                        const event = new CustomEvent('downloads-unlocked');
+                                        window.dispatchEvent(event);
+                                    }, 500);
 
                                 } else {
                                     throw new Error('Payment was not successful');
                                 }
 
                             } catch (error) {
-                                console.error('PayPal capture error:', error);
-                                alert(`Payment failed: ${error.message}. Please contact support.`);
+                                console.error('Approve error:', error);
+                                this.showErrorMessage(`Payment failed: ${error.message}`);
                             }
                         },
 
                         onError: (err) => {
                             console.error('PayPal button error:', err);
-                            alert('There was an error with PayPal. Please try another payment method.');
-                        },
-
-                        onCancel: (data) => {
-                            console.log('PayPal payment cancelled:', data);
-                            // Optional: Show cancelled message
+                            paypalContainer.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-times-circle me-2"></i>
+                        PayPal error: ${err.message || 'Unknown error'}
+                        <button class="btn btn-sm btn-primary mt-2 w-100" onclick="this.parentElement.innerHTML=''; initializePayPalButton()">
+                            Try Again
+                        </button>
+                    </div>
+                `;
                         }
 
                     }).render('#paypal-button-container');
@@ -4172,11 +4221,12 @@
                     paypalContainer.innerHTML = `
             <div class="alert alert-danger">
                 <i class="fas fa-times-circle me-2"></i>
-                Could not load PayPal. Please use Stripe or try again later.
+                Could not create PayPal button: ${error.message}
             </div>
         `;
                 }
             }
+
 
 
             showPaymentSuccess(message) {
