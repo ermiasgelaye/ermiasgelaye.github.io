@@ -1966,6 +1966,7 @@
             border-radius: var(--border-radius);
             padding: 2.5rem;
             max-width: 500px;
+            max-height: 970px;
             width: 100%;
             text-align: center;
             border: 1px solid var(--border-color);
@@ -3982,12 +3983,7 @@ class EnhancedPhotoGallery {
                     <i class="fas fa-times"></i>
                 </button>
                 
-                <h4 class="mb-3">Upgrade to Unlimited Downloads</h4>
-                <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i>
-                    You currently have <strong>${remainingDownloads}</strong> free download${remainingDownloads === 1 ? '' : 's'} remaining.
-                    Purchase unlimited access now to enjoy all benefits!
-                </div>
+                <h7 class="mb-3">Upgrade to Unlimited Downloads</h7>
                 
                 <div style="background: var(--background-color); padding: 1.5rem; border-radius: var(--border-radius); margin: 1.5rem 0;">
                     <h2 class="text-primary">$30.00</h2>
@@ -4093,12 +4089,7 @@ class EnhancedPhotoGallery {
                     <i class="fas fa-times"></i>
                 </button>
                 
-                <h4 class="mb-3">Upgrade to Unlimited Downloads</h4>
-                
-                <div class="alert alert-success">
-                    <i class="fas fa-crown me-2"></i>
-                    <strong>Premium Features Unlocked!</strong>
-                </div>
+                <h7 class="mb-3">Upgrade to Unlimited Downloads</h7>
                 
                 <div style="background: var(--background-color); padding: 1.5rem; border-radius: var(--border-radius); margin: 1.5rem 0;">
                     <h2 class="text-primary">$30.00</h2>
@@ -4197,7 +4188,7 @@ class EnhancedPhotoGallery {
                     <i class="fas fa-times"></i>
                 </button>
                 
-                <h4 class="mb-3">Unlock Unlimited Downloads</h4>
+                <h7 class="mb-3">Unlock Unlimited Downloads</h7>
                 <p class="mb-4">You've used all 3 free downloads for this year. Purchase unlimited access for $30.00</p>
                 
                 <div style="background: var(--background-color); padding: 1.5rem; border-radius: var(--border-radius); margin: 1.5rem 0;">
@@ -4338,9 +4329,6 @@ class EnhancedPhotoGallery {
     initializePayPalButton(modal, image) {
         const paypalContainer = modal.querySelector('#paypal-button-container');
         if (!paypalContainer) return;
-        
-        paypalContainer.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div><p>Loading PayPal...</p></div>';
-        
         if (!window.paypal) {
             console.error('PayPal SDK not loaded');
             paypalContainer.innerHTML = `
