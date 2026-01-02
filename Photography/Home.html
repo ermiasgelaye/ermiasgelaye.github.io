@@ -24,14 +24,11 @@
 
     <!-- AOS Animation -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <!-- Add Stripe.js -->
+    
+    <!-- Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
 
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=AQ_jpAzGqFSS9drvNKT3bVLm8jDFL_wK9TqyE8vcVWLyNtbV3s3OFnw8AGWT49JkkOus6PKlHBxn1pIh&currency=USD&disable-funding=card"></script>
+    <!-- PayPal SDK (will be loaded dynamically) -->
     <style>
         :root {
             --primary-color: #007BFF;
@@ -82,12 +79,7 @@
             scroll-behavior: smooth;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
+        h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
             line-height: 1.2;
@@ -175,7 +167,7 @@
             opacity: 1;
         }
 
-        /* Enhanced Navigation - Mobile Optimized */
+        /* Enhanced Navigation */
         .navbar {
             background: white;
             backdrop-filter: blur(10px);
@@ -228,11 +220,9 @@
                 font-size: 1.2rem;
                 max-width: 150px;
             }
-
             .nav-logo {
                 height: 40px;
             }
-
             .navbar-brand {
                 max-width: 60%;
             }
@@ -272,17 +262,7 @@
             width: 100%;
         }
 
-        /* Mobile Navigation Optimization */
-        .navbar-toggler {
-            border: none;
-            padding: 0.25rem 0.5rem;
-        }
-
-        .navbar-collapse {
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
+        /* Mobile Navigation */
         @media (max-width: 768px) {
             .navbar-nav {
                 text-align: center;
@@ -403,7 +383,7 @@
             font-weight: 300;
         }
 
-        /* Enhanced Buttons */
+        /* Buttons */
         .btn-gallery {
             background: var(--gradient-1);
             color: white;
@@ -466,19 +446,6 @@
             z-index: 1;
         }
 
-        /* Lazy Loading */
-        .lazy-image {
-            opacity: 0;
-            filter: blur(5px);
-            transition: opacity 0.3s ease, filter 0.3s ease;
-            background: linear-gradient(45deg, var(--surface-color), var(--border-color));
-        }
-
-        .lazy-image.loaded {
-            opacity: 1;
-            filter: blur(0);
-        }
-
         .tagline-container {
             max-width: 800px;
             margin: 0 auto;
@@ -516,7 +483,7 @@
             font-weight: 300;
         }
 
-        /* Enhanced Category Navigation */
+        /* Category Navigation */
         .category-nav {
             background: var(--surface-color);
             padding: 1.5rem;
@@ -854,7 +821,7 @@
             font-size: 0.9rem;
         }
 
-        /* Photography Chatbot - Manual Open Only */
+        /* Photography Chatbot */
         .photo-chatbot {
             position: fixed;
             bottom: 30px;
@@ -907,7 +874,6 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1090,84 +1056,36 @@
             }
         }
 
-        /* Image placeholder styling */
-        .image-placeholder {
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .search-input {
             width: 100%;
-            height: 100%;
-            background: var(--gradient-2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--surface-color);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-color);
-        }
-
-        /* Interactive Elements */
-        .breadcrumb-nav {
-            position: sticky;
-            top: 80px;
-            z-index: 997;
-            background: var(--surface-color);
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 2rem;
-            display: none;
-        }
-
-        .breadcrumb-list {
-            display: flex;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .breadcrumb-item {
-            display: flex;
-            align-items: center;
-        }
-
-        .breadcrumb-item a {
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
             color: var(--text-color);
-            text-decoration: none;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
+            font-size: 0.9rem;
             transition: var(--transition);
         }
 
-        .breadcrumb-item a:hover {
-            background: var(--background-color);
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
         }
 
-        .breadcrumb-separator {
-            margin: 0 0.5rem;
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
             color: var(--text-color);
             opacity: 0.5;
-        }
-
-        .breadcrumb-current {
-            color: var(--primary-color);
-            font-weight: 600;
         }
 
         /* Interactive Controls */
@@ -1286,7 +1204,7 @@
             transition: width 0.3s ease;
         }
 
-        /* Image Actions - FIXED: Now visible with proper colors */
+        /* Image Actions */
         .image-actions {
             position: absolute;
             top: 10px;
@@ -1341,75 +1259,6 @@
             color: white;
         }
 
-        /* Quick Navigation */
-        .quick-nav {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 998;
-            background: var(--surface-color);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--box-shadow);
-            padding: 1rem;
-            display: none;
-        }
-
-        .quick-nav-item {
-            display: block;
-            width: 40px;
-            height: 40px;
-            margin: 0.5rem 0;
-            border-radius: 50%;
-            background: var(--background-color);
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .quick-nav-item:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.1);
-        }
-
-        /* Search Bar */
-        .search-container {
-            position: relative;
-            margin: 2rem 0;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 0.75rem 1rem 0.75rem 3rem;
-            background: var(--background-color);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-color);
-            opacity: 0.5;
-        }
-
         /* Favorite Counter */
         .favorite-counter {
             position: fixed;
@@ -1454,7 +1303,7 @@
             justify-content: center;
         }
 
-        /* Enhanced Lightbox */
+        /* Enhanced Lightbox - FIXED FOR MOBILE */
         .lightbox-modal {
             position: fixed;
             top: 0;
@@ -1466,24 +1315,34 @@
             align-items: center;
             justify-content: center;
             z-index: 2000;
-            padding: 2rem;
+            padding: 1rem;
             animation: fadeIn 0.3s ease;
+            overflow-y: auto;
         }
 
         .lightbox-content {
             position: relative;
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 100%;
+            max-height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 1rem;
+        }
+
+        .lightbox-image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            max-height: 70vh;
         }
 
         .lightbox-image {
             max-width: 100%;
-            max-height: 60vh;
+            max-height: 70vh;
             object-fit: contain;
             border-radius: var(--border-radius);
+            margin: 0 auto;
         }
 
         .lightbox-info {
@@ -1494,6 +1353,7 @@
             margin-top: 1rem;
             width: 100%;
             max-width: 800px;
+            box-sizing: border-box;
         }
 
         .lightbox-nav {
@@ -1543,374 +1403,6 @@
             font-size: 1.2rem;
         }
 
-        /* List View */
-        .list-view .gallery-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .list-view .gallery-item {
-            display: flex;
-            height: 200px;
-            aspect-ratio: unset;
-        }
-
-        .list-view .gallery-item img {
-            width: 300px;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .list-view .gallery-overlay {
-            position: relative;
-            flex: 1;
-            transform: none;
-            opacity: 1;
-            background: none;
-            padding: 1rem;
-            color: var(--text-color);
-        }
-
-        .list-view .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Text Theme Classes */
-        .theme-text {
-            color: #000000;
-        }
-
-        .dark-mode .theme-text {
-            color: #ffffff;
-        }
-
-        .theme-text-heading {
-            color: #212529;
-        }
-
-        .dark-mode .theme-text-heading {
-            color: #ffffff;
-        }
-
-        /* SURPRISE FEATURE: Image of the Day */
-        .image-of-day-banner {
-            background: var(--gradient-1);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            position: fixed;
-            top: 80px;
-            width: 100%;
-            z-index: 998;
-            transform: translateY(-100%);
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .image-of-day-banner.show {
-            transform: translateY(0);
-        }
-
-        .image-of-day-banner a {
-            color: white;
-            text-decoration: underline;
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-
-        .image-of-day-banner a:hover {
-            color: #ffd700;
-        }
-
-        /* SURPRISE: Photography Challenge */
-        .photo-challenge {
-            background: var(--gradient-2);
-            color: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            margin: 3rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .challenge-timer {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 1rem 0;
-            color: white;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        /* SURPRISE: Smart Image Preloader */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--background-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .preloader.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Progressive Loading Styles */
-        .progressive-load {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progressive-load::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--surface-color);
-            z-index: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .progressive-load.loaded::before {
-            opacity: 0;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-content-wrapper {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .chatbot-container {
-                width: 90vw;
-                right: 5vw;
-            }
-
-            .chat-topics {
-                margin: 0.5rem 0;
-                padding-left: 1.25rem;
-                font-size: 0.9rem;
-                color: var(--text-color)
-            }
-
-            .navbar-nav {
-                text-align: center;
-                background: var(--surface-color);
-                padding: 1rem;
-                border-radius: var(--border-radius);
-                margin-top: 1rem;
-                box-shadow: var(--box-shadow);
-                max-height: 70vh;
-                overflow-y: auto;
-            }
-
-            .nav-brand-text {
-                font-size: 1.2rem;
-                max-width: 150px;
-            }
-
-            .nav-logo {
-                height: 40px;
-            }
-
-            .tagline-container,
-            .journey-content {
-                padding: 2rem;
-            }
-
-            .tagline-title {
-                font-size: 2rem;
-            }
-
-            .category-nav {
-                overflow-x: auto;
-                white-space: nowrap;
-                padding: 1rem 0.5rem;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .category-btn {
-                display: inline-block;
-                white-space: nowrap;
-                font-size: 0.9rem;
-                padding: 0.5rem 1rem;
-            }
-
-            .theme-toggle {
-                top: 70px;
-                right: 15px;
-            }
-
-            .hero-image-container {
-                transform: none;
-            }
-
-            .hero-image-container:hover {
-                transform: translateY(-5px);
-            }
-
-            .interactive-controls {
-                display: none;
-            }
-
-            .quick-nav {
-                display: block;
-                right: 15px;
-            }
-
-            .breadcrumb-nav {
-                display: block;
-            }
-
-            .favorite-counter {
-                bottom: 180px;
-                right: 15px;
-            }
-
-            .list-view .gallery-item {
-                flex-direction: column;
-                height: auto;
-            }
-
-            .list-view .gallery-item img {
-                width: 100%;
-                height: 200px;
-            }
-
-            .image-of-day-banner {
-                top: 70px;
-                font-size: 0.9rem;
-                padding: 0.75rem;
-            }
-
-            .photo-challenge {
-                padding: 1.5rem;
-            }
-
-            .challenge-timer {
-                font-size: 1.5rem;
-            }
-
-            .action-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .quick-nav {
-                display: block;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Typing indicator for chatbot */
-        .typing-indicator {
-            display: flex;
-            gap: 4px;
-            padding: 10px;
-        }
-
-        .typing-indicator span {
-            width: 8px;
-            height: 8px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            animation: typing 1.4s infinite;
-        }
-
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typing {
-
-            0%,
-            100% {
-                opacity: 0.4;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-        }
-
-        /* SURPRISE: Smart Cache Indicator */
-        .cache-status {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            color: var(--text-color);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            box-shadow: var(--box-shadow);
-        }
-
-        .cache-status.visible {
-            opacity: 1;
-        }
-
-        /* SURPRISE: Performance Stats */
-        .performance-stats {
-            position: fixed;
-            top: 120px;
-            left: 30px;
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            font-size: 0.8rem;
-            color: var(--text-color);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            box-shadow: var(--box-shadow);
-        }
-
-        .performance-stats.visible {
-            opacity: 0.8;
-        }
-
         /* Watermark Styles */
         .image-watermark {
             position: absolute;
@@ -1936,11 +1428,6 @@
 
         .gallery-item:hover .image-watermark {
             opacity: 1;
-        }
-
-        .lightbox-image-container {
-            position: relative;
-            display: inline-block;
         }
 
         .lightbox-image-container .image-watermark {
@@ -2136,11 +1623,228 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Download Counter UI */
+        .download-counter-ui {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            z-index: 999;
+            display: none;
+            box-shadow: var(--box-shadow);
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .download-counter-ui i {
+            color: var(--primary-color);
+        }
+
+        /* Mobile-specific Lightbox Fixes */
+        @media (max-width: 768px) {
+            .lightbox-modal {
+                padding: 0.5rem;
+                align-items: flex-start;
+                padding-top: 20vh;
+            }
+            
+            .lightbox-content {
+                padding: 0.5rem;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .lightbox-image {
+                max-height: 50vh;
+            }
+            
+            .lightbox-info {
+                padding: 1rem;
+                margin-top: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .lightbox-nav {
+                position: fixed;
+                top: 50%;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding: 0 1rem;
+                transform: translateY(-50%);
+                z-index: 2001;
+            }
+            
+            .lightbox-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .close-lightbox {
+                top: 10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .download-counter-ui {
+                bottom: 100px;
+                right: 15px;
+                font-size: 0.8rem;
+                padding: 0.5rem 0.75rem;
+            }
+        }
+
+        /* For very small screens */
+        @media (max-width: 480px) {
+            .lightbox-image {
+                max-height: 40vh;
+            }
+            
+            .lightbox-info {
+                padding: 0.75rem;
+                font-size: 0.85rem;
+            }
+            
+            .lightbox-info h5 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .lightbox-info .row {
+                margin-bottom: 0.5rem;
+            }
+            
+            .lightbox-info .col-md-6 {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .chatbot-container {
+                width: 90vw;
+                right: 5vw;
+            }
+            .tagline-container,
+            .journey-content {
+                padding: 2rem;
+            }
+            .tagline-title {
+                font-size: 2rem;
+            }
+            .category-nav {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 1rem 0.5rem;
+                -webkit-overflow-scrolling: touch;
+            }
+            .category-btn {
+                display: inline-block;
+                white-space: nowrap;
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+            .theme-toggle {
+                top: 70px;
+                right: 15px;
+            }
+            .hero-image-container {
+                transform: none;
+            }
+            .hero-image-container:hover {
+                transform: translateY(-5px);
+            }
+            .interactive-controls {
+                display: none;
+            }
+            .favorite-counter {
+                bottom: 180px;
+                right: 15px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Typing indicator for chatbot */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 10px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
         }
     </style>
 </head>
@@ -2180,94 +1884,7 @@
         </div>
     </nav>
 
-    <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb-nav">
-        <div class="container">
-            <ul class="breadcrumb-list" id="breadcrumbList">
-                <li class="breadcrumb-item">
-                    <a href="#home">Home</a>
-                    <span class="breadcrumb-separator">/</span>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Interactive Controls -->
-    <div class="interactive-controls" id="interactiveControls">
-        <div class="control-toggle" id="controlToggle">
-            <i class="fas fa-sliders-h"></i>
-        </div>
-        <div class="control-content">
-            <div class="control-item">
-                <div class="control-label">View Mode</div>
-                <div class="view-toggle">
-                    <button class="view-btn active" id="gridViewBtn" title="Grid View">
-                        <i class="fas fa-th-large"></i>
-                    </button>
-                    <button class="view-btn" id="listViewBtn" title="List View">
-                        <i class="fas fa-list"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="control-item">
-                <div class="control-label">Sort By</div>
-                <select class="sort-select" id="sortSelect">
-                    <option value="default">Default Order</option>
-                    <option value="title">Title A-Z</option>
-                    <option value="category">Category</option>
-                    <option value="favorites">Most Favorited</option>
-                    <option value="random">Random</option>
-                </select>
-            </div>
-
-            <div class="control-item">
-                <div class="control-label">Items Per Page</div>
-                <input type="range" id="itemsPerPage" min="12" max="60" step="12" value="40" class="form-range">
-                <div class="progress-indicator">
-                    <div class="progress-bar" id="itemsProgress"></div>
-                </div>
-            </div>
-
-            <div class="control-item">
-                <div class="control-label">Scroll Progress</div>
-                <div class="progress-indicator">
-                    <div class="progress-bar" id="scrollProgress"></div>
-                </div>
-                <div class="text-center small mt-1" id="scrollPercentage">0%</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Quick Navigation -->
-    <div class="quick-nav" id="quickNav">
-        <a href="#home" class="quick-nav-item" title="Home">
-            <i class="fas fa-home"></i>
-        </a>
-        <a href="#gallery" class="quick-nav-item" title="Gallery">
-            <i class="fas fa-images"></i>
-        </a>
-        <a href="#categories" class="quick-nav-item" title="Categories">
-            <i class="fas fa-th-large"></i>
-        </a>
-        <a href="#journey" class="quick-nav-item" title="Journey">
-            <i class="fas fa-road"></i>
-        </a>
-        <a href="#about" class="quick-nav-item" title="About">
-            <i class="fas fa-user"></i>
-        </a>
-        <a href="#contact" class="quick-nav-item" title="Contact">
-            <i class="fas fa-envelope"></i>
-        </a>
-    </div>
-
-    <!-- Favorite Counter -->
-    <button class="favorite-counter" id="favoriteCounter" title="View Favorites">
-        <i class="fas fa-heart"></i>
-        <span class="counter-badge" id="favoriteCount">0</span>
-    </button>
-
-    <!-- Hero Section with Background 1 - FIXED CONTRAST -->
+    <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="hero-background"></div>
         <div class="container">
@@ -2296,7 +1913,7 @@
         </div>
     </section>
 
-    <!-- Tagline Section with Background 2 - FIXED CONTRAST -->
+    <!-- Tagline Section -->
     <section class="tagline-section">
         <div class="tagline-background"></div>
         <div class="container">
@@ -2368,9 +1985,8 @@
                 </div>
             </div>
 
-            <!-- Gallery Grid - Dynamically loaded -->
+            <!-- Gallery Grid -->
             <div class="gallery-grid" id="photoGallery">
-                <!-- Images will be loaded here dynamically -->
                 <div class="loading-spinner" id="loadingSpinner">
                     <div class="spinner"></div>
                     <p>Loading photos...</p>
@@ -2385,7 +2001,7 @@
         </div>
     </section>
 
-    <!-- Journey Section with Background 3 - FIXED CONTRAST -->
+    <!-- Journey Section -->
     <section id="journey" class="journey-section">
         <div class="journey-background"></div>
         <div class="container">
@@ -2416,7 +2032,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 about-text" data-aos="fade-left">
-                    <h2 class="mb-4" style="color: var(--text-color);">Behind the Lens </h2>
+                    <h2 class="mb-4" style="color: var(--text-color);">Behind the Lens</h2>
                     <p class="lead">
                         I go by the name Ermias, a travel enthusiast on a quest to capture the enchanting essence of
                         nature's marvels and architectural wonders,
@@ -2525,8 +2141,7 @@
                         <li class="mb-2"><a href="#contact" class="text-decoration-none"
                                 style="color: var(--text-color);">Contact</a></li>
                         <li class="mb-2"><a href="https://ermiasgelaye.github.io" target="_blank"
-                                class="text-decoration-none" style="color: var(--text-color);">Data Science
-                                Portfolio</a></li>
+                                class="text-decoration-none" style="color: var(--text-color);">Data Science Portfolio</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 mb-4">
@@ -2563,6 +2178,18 @@
         <i class="fas fa-arrow-up"></i>
     </a>
 
+    <!-- Favorite Counter -->
+    <button class="favorite-counter" id="favoriteCounter" title="View Favorites">
+        <i class="fas fa-heart"></i>
+        <span class="counter-badge" id="favoriteCount">0</span>
+    </button>
+
+    <!-- Download Counter UI -->
+    <div class="download-counter-ui" id="downloadCounterUI">
+        <i class="fas fa-download"></i>
+        <span id="downloadCountText">3/3 downloads remaining</span>
+    </div>
+
     <!-- Photography Chatbot -->
     <div class="photo-chatbot">
         <button class="chatbot-toggle" id="photoChatbotToggle">
@@ -2584,8 +2211,7 @@
                         <li><i class="fas fa-calendar me-2"></i> Workshop information</li>
                         <li><i class="fas fa-camera me-2"></i> Photography tips</li>
                     </ul>
-                    <p class="mt-3 small">Try asking: "What nature photos are available?" or "How to purchase prints?"
-                    </p>
+                    <p class="mt-3 small">Try asking: "What nature photos are available?" or "How to purchase prints?"</p>
                 </div>
             </div>
 
@@ -2619,6 +2245,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
+        // Configuration
+        const APP_CONFIG = {
+            API_BASE_URL: 'https://photo-backend-ten.vercel.app',
+            STRIPE_PUBLIC_KEY: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ',
+            PAYPAL_CLIENT_ID: 'AQ_jpAzGqFSS9drvNKT3bVLm8jDFL_wK9TqyE8vcVWLyNtbV3s3OFnw8AGWT49JkkOus6PKlHBxn1pIh'
+        };
+
         // Initialize AOS
         AOS.init({
             duration: 1000,
@@ -2626,59 +2259,7 @@
             offset: 100
         });
 
-        // --- 1. GLOBAL CONFIGURATION ---
-        const APP_CONFIG = {
-            // Use your Vercel backend URL
-            API_BASE_URL: 'https://photo-backend-ten.vercel.app',
-
-            // Your existing keys
-            STRIPE_PUBLIC_KEY: 'pk_live_51Sj9nV02gaqWYHHq2AAYcbU3GQIOy6IB86RUwmJ8QCZIeQbR5UAk7zJHM1wGIMxV3pplDirufziIvMepBLS84J9a00AWlk0NrQ',
-            PAYPAL_CLIENT_ID: 'AQ_jpAzGqFSS9drvNKT3bVLm8jDFL_wK9TqyE8vcVWLyNtbV3s3OFnw8AGWT49JkkOus6PKlHBxn1pIh'
-        };
-
-        // Add this function to test PayPal connection
-        async function testPayPalConnection() {
-            try {
-                console.log('🔍 Testing PayPal connection...');
-
-                const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/debug-paypal`);
-                const data = await response.json();
-
-                console.log('PayPal Debug Info:', data);
-
-                if (!data.configured) {
-                    console.error('❌ PayPal not configured on server');
-                    return false;
-                }
-
-                console.log('✅ PayPal server connection OK');
-                return true;
-
-            } catch (error) {
-                console.error('PayPal test failed:', error);
-                return false;
-            }
-        }
-
-        // Call this on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            // Test PayPal connection after a delay
-            setTimeout(testPayPalConnection, 2000);
-        });
-
-
-        // --- 2. INIT EXTERNAL LIBS ---
-        // Initialize AOS only if it exists
-        if (typeof AOS !== 'undefined') {
-            AOS.init({
-                duration: 1000,
-                once: true,
-                offset: 100,
-                disable: window.innerWidth < 768 // Disable on mobile for performance
-            });
-        }
-
-        // Initialize Stripe only if the public key is valid
+        // Initialize Stripe
         let stripe = null;
         if (APP_CONFIG.STRIPE_PUBLIC_KEY && APP_CONFIG.STRIPE_PUBLIC_KEY.startsWith('pk_')) {
             try {
@@ -2686,115 +2267,17 @@
             } catch (error) {
                 console.error('Failed to initialize Stripe:', error);
             }
-        } else {
-            console.warn('Invalid or missing Stripe public key');
         }
 
-        // Dynamically load PayPal SDK only if client ID is valid
-        // Replace the PayPal initialization section
+        // Load PayPal SDK dynamically
         if (APP_CONFIG.PAYPAL_CLIENT_ID && APP_CONFIG.PAYPAL_CLIENT_ID.length > 10) {
-            // Check if PayPal is already loaded
-            if (!window.paypal) {
-                const ppScript = document.createElement('script');
-                ppScript.src = `https://www.paypal.com/sdk/js?client-id=${APP_CONFIG.PAYPAL_CLIENT_ID}&currency=USD&components=buttons`;
-                ppScript.async = true;
-                ppScript.onload = function () {
-                    console.log('PayPal SDK loaded successfully');
-                    // Initialize PayPal buttons after load
-                    if (window.paypal) {
-                        initializeAllPayPalButtons();
-                    }
-                };
-                ppScript.onerror = function () {
-                    console.error('Failed to load PayPal SDK');
-                    showPaymentFallback();
-                };
-                document.head.appendChild(ppScript);
-            }
-        } else {
-            console.warn('Invalid PayPal Client ID');
-            showPaymentFallback();
+            const ppScript = document.createElement('script');
+            ppScript.src = `https://www.paypal.com/sdk/js?client-id=${APP_CONFIG.PAYPAL_CLIENT_ID}&currency=USD&components=buttons`;
+            ppScript.async = true;
+            document.head.appendChild(ppScript);
         }
 
-        function showPaymentFallback() {
-            // Show alternative payment message
-            const paypalContainers = document.querySelectorAll('#paypal-button-container');
-            paypalContainers.forEach(container => {
-                container.innerHTML = `
-            <div class="alert alert-warning">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                PayPal is temporarily unavailable. Please use Stripe or contact us directly.
-            </div>
-        `;
-            });
-        }
-
-
-
-        // Dark Mode Logic
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-            const currentTheme = localStorage.getItem('theme');
-
-            // Apply theme based on saved preference or system preference
-            const applyTheme = (isDark) => {
-                if (isDark) {
-                    document.body.classList.add('dark-mode');
-                    if (themeToggle.querySelector('i')) {
-                        themeToggle.querySelector('i').className = 'fas fa-sun';
-                    }
-                } else {
-                    document.body.classList.remove('dark-mode');
-                    if (themeToggle.querySelector('i')) {
-                        themeToggle.querySelector('i').className = 'fas fa-moon';
-                    }
-                }
-            };
-
-            // Set initial theme
-            if (currentTheme === 'dark') {
-                applyTheme(true);
-            } else if (currentTheme === 'light') {
-                applyTheme(false);
-            } else if (prefersDarkScheme.matches) {
-                applyTheme(true);
-                localStorage.setItem('theme', 'dark');
-            }
-
-            // Toggle theme on click
-            themeToggle.addEventListener('click', function () {
-                const isDarkMode = !document.body.classList.contains('dark-mode');
-                applyTheme(isDarkMode);
-                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-            });
-
-            // Listen for system theme changes
-            prefersDarkScheme.addEventListener('change', (e) => {
-                if (!localStorage.getItem('theme')) { // Only auto-switch if no user preference
-                    applyTheme(e.matches);
-                }
-            });
-        }
-
-        // Update copyright year
-        const currentYearElement = document.getElementById('currentYear');
-        if (currentYearElement) {
-            currentYearElement.textContent = new Date().getFullYear();
-        }
-        // Category information
-        const categoryInfo = {
-            'nature': { name: 'Nature', icon: 'leaf', count: 121, description: 'Natural wonders and flora' },
-            'landscape': { name: 'Landscape', icon: 'mountain', count: 116, description: 'Scenic views and horizons' },
-            'travel': { name: 'Travel', icon: 'globe-americas', count: 83, description: 'Journeys and destinations' },
-            'urban': { name: 'Urban', icon: 'city', count: 145, description: 'Cityscapes and architecture' },
-            'water': { name: 'Water', icon: 'water', count: 211, description: 'Oceans, lakes, and rivers' },
-            'wildlife': { name: 'Wildlife', icon: 'paw', count: 46, description: 'Animals in their habitat' }
-        };
-
-
-
-        // Enhanced Gallery with State Persistence
+        // Enhanced Photo Gallery Class with Download Security
         class EnhancedPhotoGallery {
             constructor() {
                 this.currentCategory = 'all';
@@ -2803,368 +2286,166 @@
                 this.filteredImages = [];
                 this.isLoading = false;
                 this.favorites = new Set();
-                this.viewMode = 'grid'; // 'grid' or 'list'
+                this.viewMode = 'grid';
                 this.sortMethod = 'default';
                 this.searchTerm = '';
                 this.currentLightboxIndex = -1;
                 this.recentlyViewed = [];
+                
+                // Enhanced download tracking
+                this.userIdentifier = this.getUserIdentifier();
                 this.downloadsRemaining = 3;
                 this.downloadedImages = new Set();
                 this.isPurchaseModalShown = false;
-
+                
+                // DOM Elements
                 this.galleryElement = document.getElementById('photoGallery');
                 this.loadMoreBtn = document.getElementById('loadMore');
                 this.loadingSpinner = document.getElementById('loadingSpinner');
                 this.categoryButtons = document.querySelectorAll('.category-btn');
-                this.categoryStats = document.getElementById('categoryStats');
                 this.currentCountElement = document.getElementById('currentCount');
                 this.totalCountElement = document.getElementById('totalCount');
                 this.currentCategoryElement = document.getElementById('currentCategory');
-   
-                this.unlimitedUnlocked = localStorage.getItem('unlimited_unlocked') === 'true';
-                this.loadState();
-                this.init();
+                
+                // Initialize
+                this.checkUnlimitedAccess();
                 this.loadDownloadState();
+                this.init();
+                this.updateDownloadCounterUI();
             }
-            // Add to your EnhancedPhotoGallery class:
-
-            async processPayment(method) {
-                if (method === 'stripe') {
-                    await this.handleStripePayment();
-                } else if (method === 'paypal') {
-                    await this.handlePayPalPayment();
-                }
-            }
-
-
-            async handlePayPalPayment() {
-                try {
-                    // Create PayPal order
-                    const createOrderResponse = await fetch('/api/create-paypal-order', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' }
-                    });
-
-                    const orderData = await createOrderResponse.json();
-
-                    // Render PayPal buttons
-                    if (window.paypal) {
-                        window.paypal.Buttons({
-                            createOrder: function (data, actions) {
-                                return orderData.id;
-                            },
-                            onApprove: async function (data, actions) {
-                                try {
-                                    // Capture the payment
-                                    const captureResponse = await fetch('/api/capture-paypal-order', {
-                                        method: 'POST',
-                                        headers: { 'Content-Type': 'application/json' },
-                                        body: JSON.stringify({ orderID: data.orderID })
-                                    });
-
-                                    const captureData = await captureResponse.json();
-
-                                    if (captureData.success) {
-                                        this.unlockUnlimitedDownloads();
-                                        alert('Payment successful! Unlimited downloads activated.');
-                                    } else {
-                                        alert('Payment failed. Please try again.');
-                                    }
-                                } catch (error) {
-                                    console.error('PayPal capture error:', error);
-                                    alert('Error capturing payment.');
-                                }
-                            }.bind(this),
-                            onError: function (err) {
-                                console.error('PayPal error:', err);
-                                alert('An error occurred with PayPal.');
-                            }
-                        }).render('#paypal-button-container');
-                    }
-                } catch (error) {
-                    console.error('PayPal order error:', error);
-                    alert('Error creating PayPal order.');
-                }
-            }
-
-            getUserId() {
-                // Generate or retrieve a user identifier
+            
+            // Generate user identifier with device fingerprint
+            getUserIdentifier() {
                 let userId = localStorage.getItem('photoUserId');
+                
                 if (!userId) {
-                    userId = 'user_' + Math.random().toString(36).substr(2, 9);
+                    // Create composite identifier
+                    const fingerprint = {
+                        userAgent: navigator.userAgent,
+                        platform: navigator.platform,
+                        languages: navigator.languages?.join(',') || navigator.language,
+                        screenResolution: `${screen.width}x${screen.height}`,
+                        colorDepth: screen.colorDepth,
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        createdAt: Date.now(),
+                        randomId: 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+                    };
+                    
+                    userId = btoa(JSON.stringify(fingerprint));
                     localStorage.setItem('photoUserId', userId);
                 }
+                
                 return userId;
             }
-
-            // Update the showPurchaseModal method to include real payment buttons:
-            showPurchaseModal(image) {
-                if (this.isPurchaseModalShown) return;
-                this.isPurchaseModalShown = true;
-
-                const modal = document.createElement('div');
-                modal.className = 'download-modal';
-
-                modal.innerHTML = `
-        <div class="download-modal-content" data-aos="zoom-in">
-            <h4>Unlimited Downloads</h4>
-            <p class="mb-4">You've used all 3 free downloads. Purchase unlimited downloads to continue.</p>
             
-            <div style="background: var(--background-color); padding: 1.5rem; border-radius: var(--border-radius); margin: 1.5rem 0;">
-                <h2 class="text-primary">$30.00</h2>
-                <p class="mb-0">One-time payment for unlimited downloads</p>
-            </div>
-            
-            <div class="payment-buttons mb-4">
-                <button class="btn btn-primary btn-lg w-100 mb-2" id="payWithStripe">
-                    <i class="fas fa-credit-card me-2"></i>Pay with Card (Stripe)
-                </button>
-                <div id="paypal-button-container" class="mb-2"></div>
-            </div>
-            
-            <div class="download-actions">
-                <button class="btn-purchase" id="cancelPurchase">
-                    <i class="fas fa-times me-2"></i>Not Now
-                </button>
-            </div>
-            
-            <p class="small text-muted mt-3">Contact for custom licensing or bulk purchases</p>
-        </div>
-    `;
-
-                document.body.appendChild(modal);
-                document.body.style.overflow = 'hidden';
-
-                // Event listeners
-                modal.querySelector('#payWithStripe').addEventListener('click', () => {
-                    this.handleStripePayment();
-
-                });
-
-
-
-
-
-                // Initialize PayPal button
-                this.handlePayPalPayment();
-
-                modal.querySelector('#cancelPurchase').addEventListener('click', () => {
-                    document.body.removeChild(modal);
-                    document.body.style.overflow = 'auto';
-                    this.isPurchaseModalShown = false;
-                });
-
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        document.body.removeChild(modal);
-                        document.body.style.overflow = 'auto';
-                        this.isPurchaseModalShown = false;
-                    }
-                });
+            // Check if unlimited access is still valid
+            checkUnlimitedAccess() {
+                const expiry = localStorage.getItem('unlocked_expiry');
+                if (expiry && Date.now() > parseInt(expiry)) {
+                    localStorage.removeItem('unlimited_unlocked');
+                    localStorage.removeItem('unlocked_date');
+                    localStorage.removeItem('unlocked_expiry');
+                    return false;
+                }
+                return localStorage.getItem('unlimited_unlocked') === 'true';
             }
-
+            
+            // Load download state with yearly reset
             loadDownloadState() {
                 try {
-                    const saved = JSON.parse(localStorage.getItem('photoDownloadState'));
-                    if (saved) {
-                        this.downloadsRemaining = saved.downloadsRemaining || 3;
-                        this.downloadedImages = new Set(saved.downloadedImages || []);
+                    const currentYear = new Date().getFullYear();
+                    const lastResetYear = localStorage.getItem('downloadResetYear');
+                    
+                    // Reset if new year
+                    if (!lastResetYear || parseInt(lastResetYear) < currentYear) {
+                        localStorage.setItem('downloadResetYear', currentYear.toString());
+                        this.downloadsRemaining = 3;
+                        this.downloadedImages.clear();
+                        this.saveDownloadState();
+                        return;
+                    }
+                    
+                    // Load existing state
+                    const state = JSON.parse(localStorage.getItem('photoDownloadState') || '{}');
+                    if (state.userId === this.userIdentifier && state.year === currentYear) {
+                        this.downloadsRemaining = state.downloadsRemaining || 3;
+                        this.downloadedImages = new Set(state.downloadedImages || []);
                     }
                 } catch (e) {
                     console.log('No download state found');
                 }
             }
-
+            
+            // Save download state
+            saveDownloadState() {
+                const state = {
+                    userId: this.userIdentifier,
+                    downloadsRemaining: this.downloadsRemaining,
+                    downloadedImages: Array.from(this.downloadedImages),
+                    timestamp: Date.now(),
+                    year: new Date().getFullYear()
+                };
+                localStorage.setItem('photoDownloadState', JSON.stringify(state));
+                this.updateDownloadCounterUI();
+            }
+            
+            // Update download counter UI
             updateDownloadCounterUI() {
                 const counterUI = document.getElementById('downloadCounterUI');
                 const countText = document.getElementById('downloadCountText');
-
+                
                 if (counterUI && countText) {
-                    if (this.downloadsRemaining < 3) {
-                        counterUI.style.display = 'block';
+                    if (this.checkUnlimitedAccess()) {
+                        counterUI.innerHTML = '<i class="fas fa-unlock"></i><span>Unlimited downloads</span>';
+                        counterUI.style.display = 'flex';
+                        counterUI.style.background = 'var(--success-color, #28a745)';
+                        counterUI.style.color = 'white';
+                    } else if (this.downloadsRemaining < 3) {
+                        counterUI.style.display = 'flex';
                         countText.textContent = `${this.downloadsRemaining}/3 downloads remaining`;
-
-                        // Add warning style if low
+                        
                         if (this.downloadsRemaining === 0) {
                             counterUI.style.background = 'var(--danger-color, #dc3545)';
                             counterUI.style.color = 'white';
                         } else if (this.downloadsRemaining === 1) {
                             counterUI.style.background = 'var(--warning-color, #ffc107)';
                             counterUI.style.color = 'black';
+                        } else {
+                            counterUI.style.background = 'var(--surface-color)';
+                            counterUI.style.color = 'var(--text-color)';
                         }
                     } else {
                         counterUI.style.display = 'none';
                     }
                 }
             }
-            saveDownloadState() {
-                const state = {
-                    downloadsRemaining: this.downloadsRemaining,
-                    downloadedImages: Array.from(this.downloadedImages),
-                    timestamp: Date.now()
-                };
-                localStorage.setItem('photoDownloadState', JSON.stringify(state));
-            }
-
-
-            resetDownloads() {
-                // Optional: Reset downloads daily or weekly
-                const lastReset = localStorage.getItem('lastDownloadReset');
-                const today = new Date().toDateString();
-
-                if (lastReset !== today) {
-                    this.downloadsRemaining = 3;
-                    this.downloadedImages.clear();
-                    localStorage.setItem('lastDownloadReset', today);
-                    this.saveDownloadState();
-                }
-            }
-
-
-
-            loadState() {
-                // Load from localStorage
-                try {
-                    const savedState = JSON.parse(localStorage.getItem('photoGalleryState'));
-                    if (savedState) {
-                        this.currentCategory = savedState.currentCategory || 'all';
-                        this.currentPage = savedState.currentPage || 1;
-                        this.favorites = new Set(savedState.favorites || []);
-                        this.viewMode = savedState.viewMode || 'grid';
-                        this.sortMethod = savedState.sortMethod || 'default';
-                        this.recentlyViewed = savedState.recentlyViewed || [];
-
-                        // Restore UI state
-                        this.restoreUIState();
-                    }
-                } catch (e) {
-                    console.log('No saved state found');
-                }
-            }
-
-            saveState() {
-                const state = {
-                    currentCategory: this.currentCategory,
-                    currentPage: this.currentPage,
-                    favorites: Array.from(this.favorites),
-                    viewMode: this.viewMode,
-                    sortMethod: this.sortMethod,
-                    recentlyViewed: this.recentlyViewed.slice(-10),
-                    scrollPosition: window.pageYOffset,
-                    timestamp: Date.now()
-                };
-
-                localStorage.setItem('photoGalleryState', JSON.stringify(state));
-            }
-
-            restoreUIState() {
-                // Restore category button active state
-                document.querySelectorAll('.category-btn').forEach(btn => {
-                    if (btn.dataset.category === this.currentCategory) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
-                });
-
-                // Update view mode
-                this.setViewMode(this.viewMode);
-
-                // Update sort select
-                const sortSelect = document.getElementById('sortSelect');
-                if (sortSelect) sortSelect.value = this.sortMethod;
-
-                // Update items per page slider
-                const itemsSlider = document.getElementById('itemsPerPage');
-                if (itemsSlider) {
-                    itemsSlider.value = this.imagesPerPage;
-                    const itemsProgress = document.getElementById('itemsProgress');
-                    if (itemsProgress) {
-                        itemsProgress.style.width = `${(this.imagesPerPage / 60) * 100}%`;
-                    }
-                }
-
-                // Update favorite counter
-                this.updateFavoriteCounter();
-
-                // Restore scroll position if needed
-                setTimeout(() => {
-                    const savedScroll = localStorage.getItem('scrollPosition');
-                    if (savedScroll && performance.navigation.type === 1) {
-                        window.scrollTo(0, parseInt(savedScroll));
-                    }
-                }, 100);
-            }
-
+            
+            // Initialize gallery
             init() {
                 this.showLoading();
                 setTimeout(() => {
                     this.setupEventListeners();
                     this.hideLoading();
                     this.filterByCategory(this.currentCategory);
-                    this.updateBreadcrumb();
                     this.updateScrollProgress();
                 }, 500);
             }
-
+            
             setupEventListeners() {
                 // Category filter buttons
                 this.categoryButtons.forEach(btn => {
                     btn.addEventListener('click', () => {
                         const category = btn.dataset.category;
                         this.filterByCategory(category);
-
-                        // Update active state
                         this.categoryButtons.forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
-
-                        this.updateBreadcrumb();
                         this.saveState();
                     });
                 });
-
+                
                 // Load more button
                 this.loadMoreBtn.addEventListener('click', () => this.loadMore());
-
-                // View mode toggle
-                const gridViewBtn = document.getElementById('gridViewBtn');
-                const listViewBtn = document.getElementById('listViewBtn');
-
-                if (gridViewBtn && listViewBtn) {
-                    gridViewBtn.addEventListener('click', () => {
-                        this.setViewMode('grid');
-                        this.saveState();
-                    });
-
-                    listViewBtn.addEventListener('click', () => {
-                        this.setViewMode('list');
-                        this.saveState();
-                    });
-                }
-
-                // Sort control
-                const sortSelect = document.getElementById('sortSelect');
-                if (sortSelect) {
-                    sortSelect.addEventListener('change', () => {
-                        this.sortMethod = sortSelect.value;
-                        this.renderGallery();
-                        this.saveState();
-                    });
-                }
-
-                // Items per page slider
-                const itemsSlider = document.getElementById('itemsPerPage');
-                if (itemsSlider) {
-                    itemsSlider.addEventListener('input', () => {
-                        this.imagesPerPage = parseInt(itemsSlider.value);
-                        const itemsProgress = document.getElementById('itemsProgress');
-                        if (itemsProgress) {
-                            itemsProgress.style.width = `${(itemsSlider.value / 60) * 100}%`;
-                        }
-                        this.renderGallery();
-                        this.saveState();
-                    });
-                }
+                
                 // Search functionality
                 const searchInput = document.getElementById('photoSearch');
                 if (searchInput) {
@@ -3176,106 +2457,30 @@
                         }, 300);
                     });
                 }
-
-                // Add this to your JavaScript file
-                document.addEventListener('DOMContentLoaded', function () {
-                    const searchInput = document.getElementById('photoSearch');
-                    const gallery = new EnhancedPhotoGallery();
-                    gallery.resetDownloads();
-
-                    if (searchInput) {
-                        searchInput.addEventListener('input', function (e) {
-                            const searchTerm = e.target.value.toLowerCase();
-                            filterPhotos(searchTerm);
-                        });
-                    }
-
-                    function filterPhotos(searchTerm) {
-                        // Assuming you have photo elements with a specific class
-                        const photos = document.querySelectorAll('.photo-item');
-
-                        photos.forEach(photo => {
-                            const title = photo.getAttribute('data-title') || '';
-                            const location = photo.getAttribute('data-location') || '';
-                            const tags = photo.getAttribute('data-tags') || '';
-
-                            const searchContent = (title + location + tags).toLowerCase();
-
-                            if (searchContent.includes(searchTerm)) {
-                                photo.style.display = 'block'; // or whatever display you use
-                            } else {
-                                photo.style.display = 'none';
-                            }
-                        });
-                    }
-                });
+                
                 // Favorite counter
                 const favoriteCounter = document.getElementById('favoriteCounter');
                 if (favoriteCounter) {
                     favoriteCounter.addEventListener('click', () => {
                         if (this.favorites.size === 0) return;
-
-                        // Show only favorites
-                        this.filteredImages = allImages.filter(img =>
-                            this.favorites.has(img.src)
-                        );
+                        this.filteredImages = allImages.filter(img => this.favorites.has(img.src));
                         this.currentCategory = 'favorites';
                         this.renderGallery();
-
-                        // Scroll to gallery
                         document.querySelector('#gallery').scrollIntoView({ behavior: 'smooth' });
-
-                        // Update UI
-                        this.updateBreadcrumb();
-                    });
-                }
-
-                // Control panel toggle
-                const controlToggle = document.getElementById('controlToggle');
-                if (controlToggle) {
-                    controlToggle.addEventListener('click', () => {
-                        const controls = document.getElementById('interactiveControls');
-                        controls.classList.toggle('collapsed');
-                        const icon = controlToggle.querySelector('i');
-                        icon.className = controls.classList.contains('collapsed')
-                            ? 'fas fa-chevron-right'
-                            : 'fas fa-sliders-h';
                     });
                 }
             }
-
-            setViewMode(mode) {
-                this.viewMode = mode;
-                this.galleryElement.parentElement.parentElement.className =
-                    `gallery-section ${mode === 'list' ? 'list-view' : ''}`;
-
-                const gridBtn = document.getElementById('gridViewBtn');
-                const listBtn = document.getElementById('listViewBtn');
-
-                if (gridBtn && listBtn) {
-                    if (mode === 'grid') {
-                        gridBtn.classList.add('active');
-                        listBtn.classList.remove('active');
-                    } else {
-                        gridBtn.classList.remove('active');
-                        listBtn.classList.add('active');
-                    }
-                }
-
-                this.renderGallery();
-            }
-
+            
             filterByCategory(category) {
                 this.currentCategory = category;
                 this.currentPage = 1;
-
+                
                 if (category === 'all') {
                     this.filteredImages = [...allImages];
                 } else {
                     this.filteredImages = allImages.filter(img => img.category === category);
                 }
-
-                // Apply search filter if active
+                
                 if (this.searchTerm) {
                     this.filteredImages = this.filteredImages.filter(img =>
                         img.title.toLowerCase().includes(this.searchTerm) ||
@@ -3283,75 +2488,61 @@
                         img.tags.some(tag => tag.toLowerCase().includes(this.searchTerm))
                     );
                 }
-
-                // Apply sorting
+                
                 this.filteredImages = this.sortImages(this.filteredImages);
-
                 this.renderGallery();
                 this.updateStats();
             }
-
+            
             sortImages(images) {
                 const sorted = [...images];
-
                 switch (this.sortMethod) {
-                    case 'title':
-                        sorted.sort((a, b) => a.title.localeCompare(b.title));
-                        break;
-                    case 'category':
-                        sorted.sort((a, b) => a.category.localeCompare(b.category));
-                        break;
-                    case 'favorites':
-                        sorted.sort((a, b) => {
-                            const aFav = this.favorites.has(a.src) ? 1 : 0;
-                            const bFav = this.favorites.has(b.src) ? 1 : 0;
-                            return bFav - aFav;
-                        });
-                        break;
-                    case 'random':
-                        sorted.sort(() => Math.random() - 0.5);
-                        break;
+                    case 'title': sorted.sort((a, b) => a.title.localeCompare(b.title)); break;
+                    case 'category': sorted.sort((a, b) => a.category.localeCompare(b.category)); break;
+                    case 'favorites': sorted.sort((a, b) => {
+                        const aFav = this.favorites.has(a.src) ? 1 : 0;
+                        const bFav = this.favorites.has(b.src) ? 1 : 0;
+                        return bFav - aFav;
+                    }); break;
+                    case 'random': sorted.sort(() => Math.random() - 0.5); break;
                 }
-
                 return sorted;
             }
-
+            
             searchImages(term) {
                 this.searchTerm = term.toLowerCase();
                 this.currentPage = 1;
-
+                
                 if (term === '') {
                     this.filterByCategory(this.currentCategory);
                 } else {
                     this.filteredImages = allImages.filter(img =>
                         (this.currentCategory === 'all' || img.category === this.currentCategory) &&
                         (img.title.toLowerCase().includes(term) ||
-                            img.location.toLowerCase().includes(term) ||
-                            img.tags.some(tag => tag.toLowerCase().includes(term)))
+                         img.location.toLowerCase().includes(term) ||
+                         img.tags.some(tag => tag.toLowerCase().includes(term)))
                     );
-
                     this.filteredImages = this.sortImages(this.filteredImages);
                     this.renderGallery();
                     this.updateStats();
                 }
             }
-
-
+            
             updateStats() {
                 const total = this.filteredImages.length;
                 const shown = Math.min(total, this.currentPage * this.imagesPerPage);
                 let categoryName = this.currentCategory === 'all' ? 'All Categories' :
                     this.currentCategory === 'favorites' ? 'Favorites' :
-                        categoryInfo[this.currentCategory]?.name || this.currentCategory;
-
+                    categoryInfo[this.currentCategory]?.name || this.currentCategory;
+                
                 this.currentCountElement.textContent = shown;
                 this.totalCountElement.textContent = total;
                 this.currentCategoryElement.textContent = categoryName;
             }
-
+            
             renderGallery() {
                 this.galleryElement.innerHTML = '';
-
+                
                 if (this.filteredImages.length === 0) {
                     this.galleryElement.innerHTML = `
                         <div class="no-images text-center py-5" data-aos="fade-up">
@@ -3363,169 +2554,85 @@
                     this.loadMoreBtn.style.display = 'none';
                     return;
                 }
-
+                
                 const imagesToShow = this.filteredImages.slice(0, this.currentPage * this.imagesPerPage);
-
+                
                 imagesToShow.forEach((image, index) => {
                     const galleryItem = this.createGalleryItem(image, index);
                     this.galleryElement.appendChild(galleryItem);
                 });
-
-                // Show/hide load more button
+                
                 if (this.filteredImages.length > imagesToShow.length) {
                     this.loadMoreBtn.style.display = 'block';
                 } else {
                     this.loadMoreBtn.style.display = 'none';
                 }
-
-                // Reinitialize AOS for new elements
+                
                 AOS.refresh();
                 this.updateStats();
                 this.updateFavoriteCounter();
             }
-
+            
             createGalleryItem(image, index) {
-                if (this.viewMode === 'list') {
-                    return this.createListGalleryItem(image, index);
-                }
-                return this.createGridGalleryItem(image, index);
-
-            }
-
-
-            createGridGalleryItem(image, index) {
                 const categoryData = categoryInfo[image.category] || { name: image.category, icon: 'image' };
                 const isFavorite = this.favorites.has(image.src);
-
+                
                 const div = document.createElement('div');
                 div.className = 'gallery-item';
                 div.setAttribute('data-aos', 'fade-up');
                 div.setAttribute('data-aos-delay', (index % 6) * 100);
                 div.dataset.src = image.src;
                 div.dataset.index = index;
-
+                
                 div.innerHTML = `
-            <img src="${image.src}" alt="${image.title}" 
-                 onerror="this.parentElement.innerHTML = '<div class=\"image-placeholder\"><i class=\"fas fa-${categoryData.icon}\"></i></div>';">
-            <div class="image-watermark">Photo by ${image.photographer || 'Ermias Gaga'}</div>
-            <div class="gallery-overlay">
-                <h6 class="mb-2">${image.title}</h6>
-                <p class="small mb-2">${image.location}</p>
-                <div class="d-flex flex-wrap">
-                    ${image.tags.slice(0, 3).map(tag => `<span class="badge bg-primary me-1 mb-1">${tag}</span>`).join('')}
-                    ${image.tags.length > 3 ? `<span class="badge bg-secondary me-1 mb-1">+${image.tags.length - 3}</span>` : ''}
-                </div>
-                <div class="mt-2">
-                    <span class="badge bg-secondary">
-                        <i class="fas fa-${categoryData.icon} me-1"></i>${categoryData.name}
-                    </span>
-                </div>
-            </div>
-            <div class="image-actions">
-                <button class="action-btn favorite ${isFavorite ? 'active' : ''}" 
-                        data-action="favorite" data-src="${image.src}" 
-                        title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
-                    <i class="fas fa-heart"></i>
-                </button>
-                <button class="action-btn" data-action="info" data-src="${image.src}" title="View details">
-                    <i class="fas fa-info-circle"></i>
-                </button>
-                <button class="action-btn" data-action="share" data-src="${image.src}" title="Share">
-                    <i class="fas fa-share-alt"></i>
-                </button>
-            </div>
-        `;
-
-                // Add click handler for lightbox
+                    <img src="${image.src}" alt="${image.title}" 
+                         onerror="this.parentElement.innerHTML = '<div class=\"image-placeholder\"><i class=\"fas fa-${categoryData.icon}\"></i></div>';">
+                    <div class="image-watermark">Photo by ${image.photographer || 'Ermias Gaga'}</div>
+                    <div class="gallery-overlay">
+                        <h6 class="mb-2">${image.title}</h6>
+                        <p class="small mb-2">${image.location}</p>
+                        <div class="d-flex flex-wrap">
+                            ${image.tags.slice(0, 3).map(tag => `<span class="badge bg-primary me-1 mb-1">${tag}</span>`).join('')}
+                            ${image.tags.length > 3 ? `<span class="badge bg-secondary me-1 mb-1">+${image.tags.length - 3}</span>` : ''}
+                        </div>
+                        <div class="mt-2">
+                            <span class="badge bg-secondary">
+                                <i class="fas fa-${categoryData.icon} me-1"></i>${categoryData.name}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="image-actions">
+                        <button class="action-btn favorite ${isFavorite ? 'active' : ''}" 
+                                data-action="favorite" data-src="${image.src}" 
+                                title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="action-btn" data-action="info" data-src="${image.src}" title="View details">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                        <button class="action-btn" data-action="share" data-src="${image.src}" title="Share">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                `;
+                
                 div.addEventListener('click', (e) => {
                     if (!e.target.closest('.image-actions')) {
                         this.showLightbox(image, index);
                     }
                 });
-
-                // Add event listeners for action buttons
-                this.addActionListeners(div, image);
-
-                return div;
-            }
-
-            createListGalleryItem(image, index) {
-                const categoryData = categoryInfo[image.category] || { name: image.category, icon: 'image' };
-                const isFavorite = this.favorites.has(image.src);
-
-                const div = document.createElement('div');
-                div.className = 'gallery-item';
-                div.setAttribute('data-aos', 'fade-up');
-                div.setAttribute('data-aos-delay', (index % 3) * 100);
-                div.dataset.src = image.src;
-                div.dataset.index = index;
-
-                div.innerHTML = `
-                    <img src="${image.src}" alt="${image.title}" 
-                         onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/ffffff?text=Image+Not+Available'">
-                    <div class="gallery-overlay">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-<div>
-    <h6 class="mb-1 theme-text">${image.title}</h6>
-    <p class="small mb-2 theme-text">
-        <i class="fas fa-map-marker-alt me-1"></i>${image.location}
-    </p>
-</div>
-                                                       
-                            <div class="image-actions" style="position: relative; opacity: 1; top: 0; right: 0;">
-                                <button class="action-btn favorite ${isFavorite ? 'active' : ''}" 
-                                        data-action="favorite" data-src="${image.src}">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="d-flex flex-wrap mb-3">
-                            ${image.tags.slice(0, 3).map(tag =>
-                    `<span class="badge bg-primary me-1 mb-1">${tag}</span>`
-                ).join('')}
-                        </div>
-                        
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <span class="badge bg-secondary me-2">
-                                    <i class="fas fa-${categoryData.icon} me-1"></i>${categoryData.name}
-                                </span>
-                                <span class="small">
-                                    <i class="fas fa-camera me-1"></i>${image.photographer || 'Ermias Gaga'}
-                                </span>
-                            </div>
-                            <button class="btn btn-sm btn-outline-primary" data-action="info" data-src="${image.src}">
-                                <i class="fas fa-info-circle me-1"></i>Details
-                            </button>
-                        </div>
-                    </div>
-                `;
-
-                div.addEventListener('click', (e) => {
-                    if (!e.target.closest('.image-actions') && !e.target.closest('[data-action="info"]')) {
-                        this.showLightbox(image, index);
-                        const purchaseBtn = modal.querySelector('.purchase-btn');
-                        if (purchaseBtn) {
-                            purchaseBtn.addEventListener('click', () => {
-                                this.closeLightbox(modal);
-                                setTimeout(() => this.showPurchaseModal(image), 300);
-                            });
-                        }
-                    }
-                });
-
+                
                 this.addActionListeners(div, image);
                 return div;
             }
-
+            
             addActionListeners(element, image) {
                 element.querySelectorAll('[data-action]').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();
                         const action = btn.dataset.action;
                         const src = btn.dataset.src;
-
+                        
                         switch (action) {
                             case 'favorite':
                                 this.toggleFavorite(src, btn);
@@ -3540,7 +2647,7 @@
                     });
                 });
             }
-
+            
             toggleFavorite(imageSrc, button) {
                 if (this.favorites.has(imageSrc)) {
                     this.favorites.delete(imageSrc);
@@ -3549,162 +2656,156 @@
                     this.favorites.add(imageSrc);
                     button.classList.add('active');
                 }
-
                 this.updateFavoriteCounter();
                 this.saveState();
             }
-
+            
             updateFavoriteCounter() {
                 const counter = document.getElementById('favoriteCount');
                 const favoriteCounter = document.getElementById('favoriteCounter');
-
+                
                 if (counter) {
                     const total = this.favorites.size;
                     counter.textContent = total;
-
-                    // Show/hide counter
                     if (favoriteCounter) {
-                        if (total > 0) {
-                            favoriteCounter.style.display = 'flex';
-                        } else {
-                            favoriteCounter.style.display = 'none';
-                        }
+                        favoriteCounter.style.display = total > 0 ? 'flex' : 'none';
                     }
                 }
             }
-
+            
+            // Enhanced Lightbox with Download Security
             showLightbox(image, index) {
                 this.currentLightboxIndex = index;
                 this.addToRecentlyViewed(image);
-
+                
                 const modal = document.createElement('div');
                 modal.className = 'lightbox-modal';
-
-                // Find previous and next images
+                
                 const prevIndex = index > 0 ? index - 1 : this.filteredImages.length - 1;
                 const nextIndex = index < this.filteredImages.length - 1 ? index + 1 : 0;
                 const prevImage = this.filteredImages[prevIndex];
                 const nextImage = this.filteredImages[nextIndex];
-
+                
+                const hasUnlimited = this.checkUnlimitedAccess();
+                const canDownload = hasUnlimited || this.downloadsRemaining > 0 || this.downloadedImages.has(image.src);
+                
                 modal.innerHTML = `
-            <div class="lightbox-content">
-                <div class="lightbox-nav">
-                    <button class="lightbox-btn prev-btn" title="Previous">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="lightbox-btn next-btn" title="Next">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                
-                <div class="lightbox-image-container">
-                    <img src="${image.src}" alt="${image.title}" class="lightbox-image"
-                         onerror="this.src='https://via.placeholder.com/800x600/1a1a1a/ffffff?text=Image+Not+Available'">
-                    <div class="image-watermark">Photo by ${image.photographer || 'Ermias Gaga'}</div>
-                </div>
-                
-                <div class="lightbox-info">
-                    <h5 class="mb-3 theme-text-heading">${image.title}</h5>
-                    <div class="row">
-                        <div class="col-md-6 mb-2">
-                            <strong><i class="fas fa-map-marker-alt me-2"></i>Location:</strong>
-                            <p class="mb-0">${image.location}</p>
+                    <div class="lightbox-content">
+                        <div class="lightbox-nav">
+                            <button class="lightbox-btn prev-btn" title="Previous">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="lightbox-btn next-btn" title="Next">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
                         </div>
-                        <div class="col-md-6 mb-2">
-                            <strong><i class="fas fa-tags me-2"></i>Category:</strong>
-                            <p class="mb-0">
-                                <span class="badge bg-primary">
-                                    ${categoryInfo[image.category]?.name || image.category}
-                                </span>
-                            </p>
+                        
+                        <div class="lightbox-image-container">
+                            <img src="${image.src}" alt="${image.title}" class="lightbox-image"
+                                 onerror="this.src='https://via.placeholder.com/800x600/1a1a1a/ffffff?text=Image+Not+Available'">
+                            <div class="image-watermark">Photo by ${image.photographer || 'Ermias Gaga'}</div>
                         </div>
-                        <div class="col-md-6 mb-2">
-                            <strong><i class="fas fa-camera me-2"></i>Photographer:</strong>
-                            <p class="mb-0">${image.photographer || 'Ermias Gaga'}</p>
+                        
+                        <div class="lightbox-info">
+                            <h5 class="mb-3 theme-text-heading">${image.title}</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <strong><i class="fas fa-map-marker-alt me-2"></i>Location:</strong>
+                                    <p class="mb-0">${image.location}</p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <strong><i class="fas fa-tags me-2"></i>Category:</strong>
+                                    <p class="mb-0">
+                                        <span class="badge bg-primary">
+                                            ${categoryInfo[image.category]?.name || image.category}
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <strong><i class="fas fa-camera me-2"></i>Photographer:</strong>
+                                    <p class="mb-0">${image.photographer || 'Ermias Gaga'}</p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <strong><i class="fas fa-hashtag me-2"></i>Tags:</strong>
+                                    <p class="mb-0">
+                                        ${image.tags.map(tag => `<span class="badge bg-secondary me-1">${tag}</span>`).join('')}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-3 d-flex flex-wrap gap-2 justify-content-between">
+                                <button class="btn btn-sm ${hasUnlimited ? 'btn-success' : 'btn-primary'} download-btn" data-src="${image.src}"
+                                        ${!canDownload ? 'style="display:none"' : ''}>
+                                    <i class="fas fa-download me-1"></i>
+                                    ${hasUnlimited ? 'Download (Unlimited)' : 
+                                      this.downloadedImages.has(image.src) ? 'Download Again' : 
+                                      `Download (${this.downloadsRemaining} left)`}
+                                </button>
+                                
+                                ${!canDownload ? `
+                                    <button class="btn btn-sm btn-success unlock-btn" data-src="${image.src}">
+                                        <i class="fas fa-unlock me-1"></i>Unlock Downloads
+                                    </button>
+                                ` : ''}
+                                
+                                <button class="btn btn-sm btn-outline-secondary share-btn" data-src="${image.src}">
+                                    <i class="fas fa-share-alt me-1"></i>Share
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger favorite-btn ${this.favorites.has(image.src) ? 'active' : ''}" 
+                                        data-src="${image.src}">
+                                    <i class="fas fa-heart me-1"></i>
+                                    ${this.favorites.has(image.src) ? 'Remove Favorite' : 'Add Favorite'}
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-2">
-                            <strong><i class="fas fa-hashtag me-2"></i>Tags:</strong>
-                            <p class="mb-0">
-                                ${image.tags.map(tag => `<span class="badge bg-secondary me-1">${tag}</span>`).join('')}
-                            </p>
-                        </div>
+                        
+                        <button class="close-lightbox">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-<div class="mt-3 d-flex justify-content-between">
-    <button class="btn btn-sm btn-outline-primary download-btn" data-src="${image.src}"
-            ${this.downloadsRemaining <= 0 ? 'style="display:none"' : ''}>
-        <i class="fas fa-download me-1"></i>
-        ${localStorage.getItem('unlimited_unlocked') === 'true' ? 'Download' : `Download (${this.downloadsRemaining} left)`}
-    </button>
-    
-    ${this.downloadsRemaining <= 0 && localStorage.getItem('unlimited_unlocked') !== 'true' ? `
-        <button class="btn btn-sm btn-success unlock-btn" data-src="${image.src}">
-            <i class="fas fa-unlock me-1"></i>Unlock Downloads
-        </button>
-    ` : ''}
-    
-    <button class="btn btn-sm btn-outline-secondary share-btn" data-src="${image.src}">
-        <i class="fas fa-share-alt me-1"></i>Share
-    </button>
-    <button class="btn btn-sm btn-outline-danger favorite-btn ${this.favorites.has(image.src) ? 'active' : ''}" 
-            data-src="${image.src}">
-        <i class="fas fa-heart me-1"></i>
-        ${this.favorites.has(image.src) ? 'Remove Favorite' : 'Add Favorite'}
-    </button>
-</div>
-                </div>
+                `;
                 
-                <button class="close-lightbox">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-
                 document.body.appendChild(modal);
                 document.body.style.overflow = 'hidden';
-
-                // Event listeners for lightbox
+                
+                // Event listeners
                 const closeBtn = modal.querySelector('.close-lightbox');
                 const prevBtn = modal.querySelector('.prev-btn');
                 const nextBtn = modal.querySelector('.next-btn');
                 const downloadBtn = modal.querySelector('.download-btn');
+                const unlockBtn = modal.querySelector('.unlock-btn');
                 const shareBtn = modal.querySelector('.share-btn');
                 const favoriteBtn = modal.querySelector('.favorite-btn');
-
+                
                 closeBtn.addEventListener('click', () => this.closeLightbox(modal));
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) this.closeLightbox(modal);
                 });
-
+                
                 prevBtn.addEventListener('click', () => {
                     this.closeLightbox(modal);
                     setTimeout(() => this.showLightbox(prevImage, prevIndex), 100);
                 });
-
+                
                 nextBtn.addEventListener('click', () => {
                     this.closeLightbox(modal);
                     setTimeout(() => this.showLightbox(nextImage, nextIndex), 100);
                 });
-
-                downloadBtn.addEventListener('click', () => this.downloadImage(image));
-                shareBtn.addEventListener('click', () => this.shareImage(image));
-
-                if (this.downloadsRemaining <= 0 && localStorage.getItem('unlimited_unlocked') !== 'true') {
-                    const unlockBtn = modal.querySelector('.unlock-btn');
-                    if (unlockBtn) {
-                        unlockBtn.addEventListener('click', () => {
-                            this.closeLightbox(modal);
-                            setTimeout(() => this.showPurchaseModal(image), 300);
-                        });
-                    }
-                }
-                favoriteBtn.addEventListener('click', () => {
+                
+                downloadBtn?.addEventListener('click', () => this.downloadImage(image));
+                unlockBtn?.addEventListener('click', () => {
+                    this.closeLightbox(modal);
+                    setTimeout(() => this.showPurchaseModal(image), 300);
+                });
+                shareBtn?.addEventListener('click', () => this.shareImage(image));
+                
+                favoriteBtn?.addEventListener('click', () => {
                     this.toggleFavorite(image.src, favoriteBtn);
                     favoriteBtn.innerHTML = this.favorites.has(image.src)
                         ? '<i class="fas fa-heart me-1"></i>Remove Favorite'
                         : '<i class="fas fa-heart me-1"></i>Add Favorite';
                     favoriteBtn.classList.toggle('active');
                 });
-
+                
                 // Keyboard navigation
                 const handleKeydown = (e) => {
                     switch (e.key) {
@@ -3721,11 +2822,11 @@
                             break;
                     }
                 };
-
+                
                 document.addEventListener('keydown', handleKeydown);
                 modal._keydownHandler = handleKeydown;
             }
-
+            
             closeLightbox(modal) {
                 if (modal._keydownHandler) {
                     document.removeEventListener('keydown', modal._keydownHandler);
@@ -3733,128 +2834,163 @@
                 document.body.removeChild(modal);
                 document.body.style.overflow = 'auto';
             }
-
-            showImageInfo(image) {
-                alert(`Image Details:\n\nTitle: ${image.title}\nLocation: ${image.location}\nCategory: ${categoryInfo[image.category]?.name || image.category}\nPhotographer: ${image.photographer || 'Ermias Gaga'}\nTags: ${image.tags.join(', ')}`);
-            }
-
-            downloadImage(image) {
-                // Check if unlimited downloads are unlocked
-                if (localStorage.getItem('unlimited_unlocked') === 'true') {
-                    this.directDownload(image);
+            
+            // Download with Security Checks
+            async downloadImage(image) {
+                // Check unlimited access
+                if (this.checkUnlimitedAccess()) {
+                    await this.processDownloadWithWatermark(image);
                     return;
                 }
-
-                // Check if image was already downloaded
+                
+                // Check if already downloaded
                 if (this.downloadedImages.has(image.src)) {
-                    this.directDownload(image);
+                    await this.processDownloadWithWatermark(image);
                     return;
                 }
-
+                
                 // Check download limit
                 if (this.downloadsRemaining <= 0) {
                     this.showPurchaseModal(image);
                     return;
                 }
-
-                // Show download confirmation modal
+                
+                // Show download confirmation
                 this.showDownloadModal(image);
             }
-
+            
             showDownloadModal(image) {
                 const modal = document.createElement('div');
                 modal.className = 'download-modal';
-
+                
                 const progressPercent = ((3 - this.downloadsRemaining) / 3) * 100;
-
+                
                 modal.innerHTML = `
-            <div class="download-modal-content" data-aos="zoom-in">
-                <h4>Download Image</h4>
-                <p>You have <strong>${this.downloadsRemaining}</strong> free download${this.downloadsRemaining === 1 ? '' : 's'} remaining.</p>
+                    <div class="download-modal-content" data-aos="zoom-in">
+                        <h4>Download Image</h4>
+                        <p>You have <strong>${this.downloadsRemaining}</strong> free download${this.downloadsRemaining === 1 ? '' : 's'} remaining this year.</p>
+                        
+                        <div class="download-counter">
+                            ${this.downloadsRemaining}/3
+                        </div>
+                        
+                        <div class="download-progress">
+                            <div class="download-progress-bar" style="width: ${progressPercent}%"></div>
+                        </div>
+                        
+                        <p class="small">Downloading: <strong>${image.title}</strong></p>
+                        <p class="small text-muted mb-3">Free downloads reset each calendar year. Purchase unlimited downloads for $30.00</p>
+                        
+                        <div class="alert alert-info small">
+                            <i class="fas fa-shield-alt me-2"></i>
+                            Downloads are tracked per device to prevent abuse.
+                        </div>
+                        
+                        <div class="download-actions">
+                            <button class="btn-download" id="confirmDownload">
+                                <i class="fas fa-download me-2"></i>Download Now
+                            </button>
+                            <button class="btn-purchase" id="purchaseDownloads">
+                                <i class="fas fa-shopping-cart me-2"></i>Purchase Unlimited
+                            </button>
+                        </div>
+                    </div>
+                `;
                 
-                <div class="download-counter">
-                    ${this.downloadsRemaining}/3
-                </div>
-                
-                <div class="download-progress">
-                    <div class="download-progress-bar" style="width: ${progressPercent}%"></div>
-                </div>
-                
-                <p class="small">Downloading: <strong>${image.title}</strong></p>
-                <p class="small text-muted">Free downloads reset periodically. Purchase unlimited downloads for $30.00</p>
-                
-                <div class="download-actions">
-                    <button class="btn-download" id="confirmDownload">
-                        <i class="fas fa-download me-2"></i>Download Now
-                    </button>
-                    <button class="btn-purchase" id="purchaseDownloads">
-                        <i class="fas fa-shopping-cart me-2"></i>Purchase Unlimited
-                    </button>
-                </div>
-            </div>
-        `;
-
                 document.body.appendChild(modal);
                 document.body.style.overflow = 'hidden';
-
-                // Event listeners
-                modal.querySelector('#confirmDownload').addEventListener('click', () => {
-                    this.processDownload(image, modal);
+                
+                modal.querySelector('#confirmDownload').addEventListener('click', async () => {
+                    // Track download
+                    await this.trackDownload(image);
+                    
+                    // Process download
+                    await this.processDownloadWithWatermark(image);
+                    
+                    // Close modal
+                    document.body.removeChild(modal);
+                    document.body.style.overflow = 'auto';
                 });
-
+                
                 modal.querySelector('#purchaseDownloads').addEventListener('click', () => {
                     this.showPurchaseModal(image);
                     document.body.removeChild(modal);
                     document.body.style.overflow = 'auto';
                 });
-
-                // Close modal on background click
+                
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) {
                         document.body.removeChild(modal);
                         document.body.style.overflow = 'auto';
                     }
                 });
-
-                // Close on escape
-                const handleEscape = (e) => {
-                    if (e.key === 'Escape') {
-                        document.body.removeChild(modal);
-                        document.body.style.overflow = 'auto';
-                        document.removeEventListener('keydown', handleEscape);
-                    }
-                };
-                document.addEventListener('keydown', handleEscape);
             }
-
-            processDownload(image, modal) {
-                // Create canvas for watermark
-                const img = new Image();
-                img.crossOrigin = 'anonymous';
-                img.src = image.src;
-
-                img.onload = () => {
+            
+            async trackDownload(image) {
+                // Decrement counter
+                this.downloadsRemaining--;
+                this.downloadedImages.add(image.src);
+                this.saveDownloadState();
+                
+                // Track in localStorage
+                const downloadRecord = {
+                    userId: this.userIdentifier,
+                    imageSrc: image.src,
+                    imageTitle: image.title,
+                    timestamp: Date.now(),
+                    userAgent: navigator.userAgent,
+                    remainingDownloads: this.downloadsRemaining,
+                    year: new Date().getFullYear()
+                };
+                
+                // Save to download history
+                let downloadHistory = JSON.parse(localStorage.getItem('downloadHistory') || '{}');
+                if (!downloadHistory[this.userIdentifier]) {
+                    downloadHistory[this.userIdentifier] = [];
+                }
+                downloadHistory[this.userIdentifier].push(downloadRecord);
+                localStorage.setItem('downloadHistory', JSON.stringify(downloadHistory));
+                
+                // Send to backend (optional)
+                try {
+                    await fetch(`${APP_CONFIG.API_BASE_URL}/api/track-download`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(downloadRecord)
+                    });
+                } catch (error) {
+                    console.log('Download tracking failed, continuing locally');
+                }
+            }
+            
+            async processDownloadWithWatermark(image) {
+                try {
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+                    img.src = image.src;
+                    
+                    await new Promise((resolve, reject) => {
+                        img.onload = resolve;
+                        img.onerror = reject;
+                    });
+                    
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-
-                    // Set canvas dimensions
+                    
                     canvas.width = img.width;
                     canvas.height = img.height;
-
-                    // Draw image
+                    
                     ctx.drawImage(img, 0, 0);
-
+                    
                     // Add watermark
                     ctx.font = 'bold 24px Inter, sans-serif';
                     ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
                     ctx.textAlign = 'right';
                     ctx.textBaseline = 'bottom';
-
-                    // Calculate text metrics
-                    const watermarkText = `Photo by ${image.photographer || 'Ermias Gaga'}`;
+                    
+                    const watermarkText = `© ${image.photographer || 'Ermias Gaga'}`;
                     const textWidth = ctx.measureText(watermarkText).width;
-
-                    // Add background for better readability
+                    
                     ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
                     ctx.fillRect(
                         canvas.width - textWidth - 40,
@@ -3862,67 +2998,39 @@
                         textWidth + 20,
                         30
                     );
-
-                    // Draw text
+                    
                     ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
                     ctx.fillText(
                         watermarkText,
                         canvas.width - 20,
                         canvas.height - 20
                     );
-
+                    
                     // Convert to blob and download
                     canvas.toBlob((blob) => {
                         const url = URL.createObjectURL(blob);
                         const link = document.createElement('a');
                         link.href = url;
                         link.download = `${image.title.replace(/\s+/g, '_')}_watermarked.jpg`;
-
+                        
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
                         URL.revokeObjectURL(url);
-
-                        // Update download count
-                        this.downloadsRemaining--;
-                        this.downloadedImages.add(image.src);
-                        this.saveDownloadState();
-
-                        // Close modal
-                        document.body.removeChild(modal);
-                        document.body.style.overflow = 'auto';
-
-                        // Show toast notification
+                        
+                        // Show success toast
                         this.showDownloadToast();
-
-                        // Update UI if in lightbox
-                        const lightbox = document.querySelector('.lightbox-modal');
-                        if (lightbox) {
-                            const downloadBtn = lightbox.querySelector('.download-btn');
-                            if (downloadBtn) {
-                                if (this.downloadsRemaining <= 0) {
-                                    downloadBtn.disabled = true;
-                                    downloadBtn.innerHTML = '<i class="fas fa-ban me-1"></i>Download Limit Reached';
-                                } else {
-                                    downloadBtn.innerHTML = `<i class="fas fa-download me-1"></i>Download (${this.downloadsRemaining} left)`;
-                                }
-                            }
-                        }
+                        
                     }, 'image/jpeg', 0.95);
-                };
-
-                img.onerror = () => {
-                    // Fallback to direct download if watermarking fails
+                    
+                } catch (error) {
+                    console.error('Watermarking failed:', error);
+                    // Fallback to direct download
                     this.directDownload(image);
-                    this.downloadsRemaining--;
-                    this.downloadedImages.add(image.src);
-                    this.saveDownloadState();
-                    document.body.removeChild(modal);
-                    document.body.style.overflow = 'auto';
                     this.showDownloadToast();
-                };
+                }
             }
-
+            
             directDownload(image) {
                 const link = document.createElement('a');
                 link.href = image.src;
@@ -3931,25 +3039,24 @@
                 link.click();
                 document.body.removeChild(link);
             }
-
+            
             showDownloadToast() {
                 const toast = document.createElement('div');
                 toast.className = 'download-toast';
-
+                
+                const hasUnlimited = this.checkUnlimitedAccess();
+                
                 toast.innerHTML = `
-            <div class="toast-count">${this.downloadsRemaining}</div>
-            <div>
-                <div class="fw-bold">Download Complete</div>
-                <div class="small">${this.downloadsRemaining} free download${this.downloadsRemaining === 1 ? '' : 's'} remaining</div>
-            </div>
-        `;
-
+                    <div class="toast-count">${hasUnlimited ? '∞' : this.downloadsRemaining}</div>
+                    <div>
+                        <div class="fw-bold">Download Complete</div>
+                        <div class="small">${hasUnlimited ? 'Unlimited downloads active' : `${this.downloadsRemaining} free download${this.downloadsRemaining === 1 ? '' : 's'} remaining`}</div>
+                    </div>
+                `;
+                
                 document.body.appendChild(toast);
-
-                // Show toast
                 setTimeout(() => toast.classList.add('show'), 10);
-
-                // Hide after 3 seconds
+                
                 setTimeout(() => {
                     toast.classList.remove('show');
                     setTimeout(() => {
@@ -3959,78 +3066,90 @@
                     }, 300);
                 }, 3000);
             }
+            
+            // Purchase Modal with Payment Options
             showPurchaseModal(image) {
                 if (this.isPurchaseModalShown) return;
                 this.isPurchaseModalShown = true;
-
+                
                 const modal = document.createElement('div');
                 modal.className = 'download-modal';
-
-                modal.innerHTML = `
-        <div class="download-modal-content" data-aos="zoom-in">
-            <button class="close-lightbox" id="closePaymentModal" style="position: absolute; top: 10px; right: 10px;">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <h4 class="mb-3">Unlimited Downloads</h4>
-            <p class="mb-4">You've used all 3 free downloads. Purchase unlimited downloads for $30.00</p>
-            
-            <div class="payment-options">
-                <div class="payment-method mb-3">
-                    <button class="btn btn-primary btn-lg w-100 mb-2" id="payWithStripe">
-                        <i class="fas fa-credit-card me-2"></i>Pay with Card
-                    </button>
-                    <p class="small text-muted mb-0">Secure payment via Stripe</p>
-                </div>
                 
-                <div class="payment-method mb-3">
-                    <div id="paypal-button-container"></div>
-                    <p class="small text-muted mb-0">Secure payment via PayPal</p>
-                </div>
-            </div>
-            
-            <div class="payment-features mt-4">
-                <h6 class="mb-2">What you get:</h6>
-                <ul class="list-unstyled small">
-                    <li><i class="fas fa-check text-success me-2"></i> Unlimited high-resolution downloads</li>
-                    <li><i class="fas fa-check text-success me-2"></i> No watermarks on purchased downloads</li>
-                    <li><i class="fas fa-check text-success me-2"></i> Commercial usage license</li>
-                    <li><i class="fas fa-check text-success me-2"></i> Priority support</li>
-                    <li><i class="fas fa-check text-success me-2"></i> Access to exclusive photos</li>
-                </ul>
-            </div>
-            
-            <div class="text-center mt-4">
-                <button class="btn btn-outline-secondary" id="cancelPurchase">
-                    <i class="fas fa-times me-2"></i>Maybe Later
-                </button>
-            </div>
-        </div>
-    `;
-
+                modal.innerHTML = `
+                    <div class="download-modal-content" data-aos="zoom-in">
+                        <button class="close-lightbox" id="closePaymentModal" style="position: absolute; top: 10px; right: 10px;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        
+                        <h4 class="mb-3">Unlock Unlimited Downloads</h4>
+                        <p class="mb-4">You've used all 3 free downloads for this year. Purchase unlimited access for $30.00</p>
+                        
+                        <div style="background: var(--background-color); padding: 1.5rem; border-radius: var(--border-radius); margin: 1.5rem 0;">
+                            <h2 class="text-primary">$30.00</h2>
+                            <p class="mb-0">One-time payment for unlimited downloads</p>
+                            <small class="text-muted">Valid for 1 year from purchase</small>
+                        </div>
+                        
+                        <div class="payment-options">
+                            <div class="payment-method mb-3">
+                                <button class="btn btn-primary btn-lg w-100 mb-2" id="payWithStripe">
+                                    <i class="fas fa-credit-card me-2"></i>Pay with Card
+                                </button>
+                                <p class="small text-muted mb-0">Secure payment via Stripe</p>
+                            </div>
+                            
+                            <div class="payment-method mb-3">
+                                <div id="paypal-button-container"></div>
+                                <p class="small text-muted mb-0">Secure payment via PayPal</p>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-features mt-4">
+                            <h6 class="mb-2">What you get:</h6>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-check text-success me-2"></i> Unlimited high-resolution downloads for 1 year</li>
+                                <li><i class="fas fa-check text-success me-2"></i> No watermarks on purchased downloads</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Commercial usage license included</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Priority email support</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Access to exclusive member-only photos</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button class="btn btn-outline-secondary" id="cancelPurchase">
+                                <i class="fas fa-times me-2"></i>Maybe Later
+                            </button>
+                        </div>
+                        
+                        <p class="small text-muted mt-3 text-center">
+                            <i class="fas fa-lock me-1"></i> Secure payment • 30-day money-back guarantee
+                        </p>
+                    </div>
+                `;
+                
                 document.body.appendChild(modal);
                 document.body.style.overflow = 'hidden';
-
+                
                 // Initialize payment buttons
                 this.initializePaymentButtons(modal, image);
-
+                
                 // Close button event
                 modal.querySelector('#closePaymentModal').addEventListener('click', () => {
                     this.closePaymentModal(modal);
                 });
-
+                
                 // Cancel button event
                 modal.querySelector('#cancelPurchase').addEventListener('click', () => {
                     this.closePaymentModal(modal);
                 });
-
+                
                 // Close on background click
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) {
                         this.closePaymentModal(modal);
                     }
                 });
-
+                
                 // Close on escape key
                 const handleEscape = (e) => {
                     if (e.key === 'Escape') {
@@ -4041,18 +3160,7 @@
                 document.addEventListener('keydown', handleEscape);
                 modal._escapeHandler = handleEscape;
             }
-
-            closePaymentModal(modal) {
-                if (modal._escapeHandler) {
-                    document.removeEventListener('keydown', modal._escapeHandler);
-                }
-                if (modal.parentNode) {
-                    document.body.removeChild(modal);
-                }
-                document.body.style.overflow = 'auto';
-                this.isPurchaseModalShown = false;
-            }
-
+            
             initializePaymentButtons(modal, image) {
                 // Stripe button
                 const stripeButton = modal.querySelector('#payWithStripe');
@@ -4060,29 +3168,33 @@
                     try {
                         stripeButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
                         stripeButton.disabled = true;
-
-                        // Replace line 3890 with:
-                        const response = await fetch('https://photo-backend-ten.vercel.app/api/create-checkout-session', {
+                        
+                        const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/create-checkout-session`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
-                                items: [{ name: 'Unlimited Downloads', price: 30.00 }],
+                                items: [{ 
+                                    name: 'Unlimited Downloads - 1 Year', 
+                                    description: 'Unlimited high-resolution photo downloads',
+                                    price: 30.00,
+                                    quantity: 1 
+                                }],
+                                userId: this.userIdentifier,
                                 imageId: image.src,
-                                userId: this.getUserId()
+                                successUrl: window.location.href + '?payment=success',
+                                cancelUrl: window.location.href + '?payment=cancel'
                             })
                         });
-
-                        if (!response.ok) {
-                            throw new Error('Failed to create checkout session');
-                        }
-
+                        
+                        if (!response.ok) throw new Error('Failed to create checkout session');
+                        
                         const session = await response.json();
-
+                        
                         // Redirect to Stripe Checkout
                         const result = await stripe.redirectToCheckout({
                             sessionId: session.id
                         });
-
+                        
                         if (result.error) {
                             alert(result.error.message);
                             stripeButton.innerHTML = '<i class="fas fa-credit-card me-2"></i>Pay with Card';
@@ -4095,30 +3207,27 @@
                         stripeButton.disabled = false;
                     }
                 });
-
+                
                 // PayPal button
                 this.initializePayPalButton(modal, image);
             }
-
-
+            
             initializePayPalButton(modal, image) {
                 const paypalContainer = modal.querySelector('#paypal-button-container');
                 paypalContainer.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div><p>Loading PayPal...</p></div>';
-
-                // Check if PayPal SDK is loaded
+                
                 if (!window.paypal) {
                     console.error('PayPal SDK not loaded');
                     paypalContainer.innerHTML = `
-            <div class="alert alert-warning">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                PayPal not loaded. Please refresh or use Stripe.
-            </div>
-        `;
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            PayPal not loaded. Please refresh or use Stripe.
+                        </div>
+                    `;
                     return;
                 }
-
+                
                 try {
-                    // Use a simpler, more reliable approach
                     paypal.Buttons({
                         style: {
                             layout: 'vertical',
@@ -4126,74 +3235,53 @@
                             shape: 'rect',
                             label: 'paypal'
                         },
-
+                        
                         createOrder: async (data, actions) => {
                             try {
-                                console.log('Creating PayPal order...');
-
                                 const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/create-paypal-order`, {
                                     method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    }
+                                    headers: { 'Content-Type': 'application/json' }
                                 });
-
+                                
                                 if (!response.ok) {
                                     const errorText = await response.text();
                                     throw new Error(`Server error: ${response.status} - ${errorText}`);
                                 }
-
+                                
                                 const orderData = await response.json();
-                                console.log('Order created:', orderData);
-
-                                if (!orderData.id) {
-                                    throw new Error('No order ID returned');
-                                }
-
                                 return orderData.id;
-
+                                
                             } catch (error) {
                                 console.error('Create order error:', error);
-
-                                // Show user-friendly error
                                 paypalContainer.innerHTML = `
-                        <div class="alert alert-danger">
-                            <i class="fas fa-times-circle me-2"></i>
-                            Failed to create order: ${error.message}
-                            <button class="btn btn-sm btn-primary mt-2 w-100" onclick="location.reload()">
-                                Retry
-                            </button>
-                        </div>
-                    `;
-
+                                    <div class="alert alert-danger">
+                                        <i class="fas fa-times-circle me-2"></i>
+                                        Failed to create order: ${error.message}
+                                        <button class="btn btn-sm btn-primary mt-2 w-100" onclick="location.reload()">
+                                            Retry
+                                        </button>
+                                    </div>
+                                `;
                                 throw error;
                             }
                         },
-
+                        
                         onApprove: async (data, actions) => {
                             try {
-                                console.log('Approving order:', data.orderID);
-
                                 const response = await fetch(`${APP_CONFIG.API_BASE_URL}/api/capture-paypal-order`, {
                                     method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
+                                    headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ orderID: data.orderID })
                                 });
-
+                                
                                 if (!response.ok) {
                                     throw new Error(`Capture failed: ${response.status}`);
                                 }
-
+                                
                                 const result = await response.json();
-                                console.log('Capture result:', result);
-
+                                
                                 if (result.success) {
-                                    // Success! Unlock downloads
                                     this.unlockUnlimitedDownloads();
-
-                                    // Close modal
                                     if (modal.parentNode) {
                                         document.body.removeChild(modal);
                                     }
@@ -4201,54 +3289,65 @@
                                 }
                             } catch (error) {
                                 console.error('Approve error:', error);
-                                this.showErrorMessage(`Payment failed: ${error.message}`);
+                                alert(`Payment failed: ${error.message}`);
                             }
                         },
-
+                        
                         onError: (err) => {
                             console.error('PayPal button error:', err);
                             paypalContainer.innerHTML = `
-                    <div class="alert alert-danger">
-                        <i class="fas fa-times-circle me-2"></i>
-                        PayPal error: ${err.message || 'Unknown error'}
-                        <button class="btn btn-sm btn-primary mt-2 w-100" onclick="this.parentElement.innerHTML=''; initializePayPalButton()">
-                            Try Again
-                        </button>
-                    </div>
-                `;
+                                <div class="alert alert-danger">
+                                    <i class="fas fa-times-circle me-2"></i>
+                                    PayPal error: ${err.message || 'Unknown error'}
+                                    <button class="btn btn-sm btn-primary mt-2 w-100" onclick="location.reload()">
+                                        Try Again
+                                    </button>
+                                </div>
+                            `;
                         }
-
+                        
                     }).render('#paypal-button-container');
-
+                    
                 } catch (error) {
                     console.error('PayPal button creation failed:', error);
                     paypalContainer.innerHTML = `
-            <div class="alert alert-danger">
-                <i class="fas fa-times-circle me-2"></i>
-                Could not create PayPal button: ${error.message}
-            </div>
-        `;
+                        <div class="alert alert-danger">
+                            <i class="fas fa-times-circle me-2"></i>
+                            Could not create PayPal button: ${error.message}
+                        </div>
+                    `;
                 }
             }
-
-
-
+            
+            unlockUnlimitedDownloads() {
+                localStorage.setItem('unlimited_unlocked', 'true');
+                localStorage.setItem('unlocked_date', Date.now());
+                localStorage.setItem('unlocked_expiry', Date.now() + (365 * 24 * 60 * 60 * 1000)); // 1 year
+                
+                // Update UI
+                this.updateDownloadCounterUI();
+                
+                // Show success message
+                this.showPaymentSuccess('Unlimited downloads activated! You now have unlimited access for 1 year.');
+            }
+            
             showPaymentSuccess(message) {
                 const toast = document.createElement('div');
                 toast.className = 'download-toast';
+                toast.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
                 toast.innerHTML = `
-        <div style="background: #28a745; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-            <i class="fas fa-check"></i>
-        </div>
-        <div>
-            <div class="fw-bold">Payment Successful!</div>
-            <div class="small">${message}</div>
-        </div>
-    `;
-
+                    <div style="background: white; color: #28a745; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold">Payment Successful!</div>
+                        <div class="small" style="color: white;">${message}</div>
+                    </div>
+                `;
+                
                 document.body.appendChild(toast);
                 setTimeout(() => toast.classList.add('show'), 10);
-
+                
                 setTimeout(() => {
                     toast.classList.remove('show');
                     setTimeout(() => {
@@ -4258,21 +3357,26 @@
                     }, 300);
                 }, 5000);
             }
-
-            getUserId() {
-                let userId = localStorage.getItem('photoUserId');
-                if (!userId) {
-                    userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                    localStorage.setItem('photoUserId', userId);
+            
+            closePaymentModal(modal) {
+                if (modal._escapeHandler) {
+                    document.removeEventListener('keydown', modal._escapeHandler);
                 }
-                return userId;
+                if (modal.parentNode) {
+                    document.body.removeChild(modal);
+                }
+                document.body.style.overflow = 'auto';
+                this.isPurchaseModalShown = false;
             }
-
-
+            
+            showImageInfo(image) {
+                alert(`Image Details:\n\nTitle: ${image.title}\nLocation: ${image.location}\nCategory: ${categoryInfo[image.category]?.name || image.category}\nPhotographer: ${image.photographer || 'Ermias Gaga'}\nTags: ${image.tags.join(', ')}`);
+            }
+            
             shareImage(image) {
                 const url = window.location.href.split('#')[0];
                 const text = `Check out this amazing photo by Ermias Gaga: ${image.title}`;
-
+                
                 if (navigator.share) {
                     navigator.share({
                         title: image.title,
@@ -4281,15 +3385,11 @@
                     });
                 } else {
                     navigator.clipboard.writeText(`${text}\n${url}`)
-                        .then(() => {
-                            alert('Link copied to clipboard!');
-                        })
-                        .catch(() => {
-                            prompt('Copy this link:', url);
-                        });
+                        .then(() => alert('Link copied to clipboard!'))
+                        .catch(() => prompt('Copy this link:', url));
                 }
             }
-
+            
             addToRecentlyViewed(image) {
                 this.recentlyViewed = this.recentlyViewed.filter(img => img.src !== image.src);
                 this.recentlyViewed.unshift(image);
@@ -4298,133 +3398,151 @@
                 }
                 this.saveState();
             }
-
-            updateBreadcrumb() {
-                const breadcrumbList = document.getElementById('breadcrumbList');
-                if (!breadcrumbList) return;
-
-                const currentPage = this.getCurrentPageName();
-
-                let breadcrumbHTML = `
-                    <li class="breadcrumb-item">
-                        <a href="#home">Home</a>
-                        <span class="breadcrumb-separator">/</span>
-                    </li>
-                `;
-
-                if (currentPage === 'Gallery') {
-                    breadcrumbHTML += `
-                        <li class="breadcrumb-item">
-                            <a href="#gallery">Gallery</a>
-                            <span class="breadcrumb-separator">/</span>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <span class="breadcrumb-current">
-                                ${this.currentCategory === 'all' ? 'All Photos' :
-                            this.currentCategory === 'favorites' ? 'Favorites' :
-                                categoryInfo[this.currentCategory]?.name || this.currentCategory}
-                            </span>
-                        </li>
-                    `;
-                } else {
-                    breadcrumbHTML += `
-                        <li class="breadcrumb-item">
-                            <span class="breadcrumb-current">${currentPage}</span>
-                        </li>
-                    `;
-                }
-
-                breadcrumbList.innerHTML = breadcrumbHTML;
-            }
-
-            getCurrentPageName() {
-                const hash = window.location.hash;
-                if (hash.includes('gallery') || hash.includes('categories')) return 'Gallery';
-                if (hash.includes('journey')) return 'Journey';
-                if (hash.includes('about')) return 'About';
-                if (hash.includes('contact')) return 'Contact';
-                return 'Home';
-            }
-
+            
             updateScrollProgress() {
                 const scrollProgress = document.getElementById('scrollProgress');
                 const scrollPercentage = document.getElementById('scrollPercentage');
-
+                
                 if (!scrollProgress || !scrollPercentage) return;
-
+                
                 const scrollTop = window.pageYOffset;
                 const docHeight = document.documentElement.scrollHeight - window.innerHeight;
                 const scrollPercent = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
-
+                
                 scrollProgress.style.width = `${scrollPercent}%`;
                 scrollPercentage.textContent = `${Math.round(scrollPercent)}%`;
             }
-
+            
             loadMore() {
                 this.currentPage++;
                 this.renderGallery();
-
-                // Smooth scroll to show new images
+                
                 const galleryTop = this.galleryElement.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({
                     top: galleryTop - 100,
                     behavior: 'smooth'
                 });
             }
-
+            
             showLoading() {
                 this.loadingSpinner.style.display = 'block';
                 this.isLoading = true;
             }
-
+            
             hideLoading() {
                 this.loadingSpinner.style.display = 'none';
                 this.isLoading = false;
             }
+            
+            saveState() {
+                const state = {
+                    currentCategory: this.currentCategory,
+                    currentPage: this.currentPage,
+                    favorites: Array.from(this.favorites),
+                    viewMode: this.viewMode,
+                    sortMethod: this.sortMethod,
+                    recentlyViewed: this.recentlyViewed.slice(-10),
+                    timestamp: Date.now()
+                };
+                localStorage.setItem('photoGalleryState', JSON.stringify(state));
+            }
+            
+            loadState() {
+                try {
+                    const savedState = JSON.parse(localStorage.getItem('photoGalleryState'));
+                    if (savedState) {
+                        this.currentCategory = savedState.currentCategory || 'all';
+                        this.currentPage = savedState.currentPage || 1;
+                        this.favorites = new Set(savedState.favorites || []);
+                        this.viewMode = savedState.viewMode || 'grid';
+                        this.sortMethod = savedState.sortMethod || 'default';
+                        this.recentlyViewed = savedState.recentlyViewed || [];
+                        this.restoreUIState();
+                    }
+                } catch (e) {
+                    console.log('No saved state found');
+                }
+            }
+            
+            restoreUIState() {
+                this.categoryButtons.forEach(btn => {
+                    if (btn.dataset.category === this.currentCategory) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                this.updateFavoriteCounter();
+            }
         }
-
-        // Initialize Enhanced Gallery
-        document.addEventListener('DOMContentLoaded', function () {
+        
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize gallery
             const gallery = new EnhancedPhotoGallery();
-
-            // Initialize other interactive elements
+            
+            // Check for payment success
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('payment') === 'success') {
+                gallery.showPaymentSuccess('Thank you for your purchase! Unlimited downloads are now active.');
+            }
+            
+            // Initialize chatbot
             initChatbot();
+            
+            // Initialize back to top
             initBackToTop();
-            initKeyboardShortcuts(gallery);
-            initScrollTracking(gallery);
+            
+            // Initialize contact form
             initContactForm();
-
-            // Update breadcrumb on hash change
-            window.addEventListener('hashchange', () => {
-                gallery.updateBreadcrumb();
-            });
-
-            // Save scroll position before unload
-            window.addEventListener('beforeunload', () => {
-                localStorage.setItem('scrollPosition', window.pageYOffset);
-                gallery.saveState();
-            });
-
-            // Initialize scroll tracking
-            window.addEventListener('scroll', () => {
-                gallery.updateScrollProgress();
-                updateBackToTop();
-            });
-
+            
+            // Update copyright year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+                const currentTheme = localStorage.getItem('theme');
+                
+                const applyTheme = (isDark) => {
+                    if (isDark) {
+                        document.body.classList.add('dark-mode');
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                    }
+                };
+                
+                if (currentTheme === 'dark') {
+                    applyTheme(true);
+                } else if (currentTheme === 'light') {
+                    applyTheme(false);
+                } else if (prefersDarkScheme.matches) {
+                    applyTheme(true);
+                    localStorage.setItem('theme', 'dark');
+                }
+                
+                themeToggle.addEventListener('click', function() {
+                    const isDarkMode = !document.body.classList.contains('dark-mode');
+                    applyTheme(isDarkMode);
+                    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                });
+            }
+            
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+                anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-
+                    
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         targetElement.scrollIntoView({
                             behavior: 'smooth',
                             block: 'start'
                         });
-
+                        
                         // Close mobile menu if open
                         const navbarCollapse = document.querySelector('.navbar-collapse.show');
                         if (navbarCollapse) {
@@ -4433,18 +3551,23 @@
                     }
                 });
             });
+            
+            // Scroll tracking
+            window.addEventListener('scroll', () => {
+                updateBackToTop();
+            });
         });
-
+        
+        // Chatbot functionality
         function initChatbot() {
             const chatToggle = document.getElementById('photoChatbotToggle');
             const chatContainer = document.getElementById('photoChatbotContainer');
             const chatBody = document.getElementById('photoChatbotBody');
             const chatInput = document.getElementById('photoChatInput');
             const quickQuestions = document.querySelectorAll('.quick-question');
-
+            
             if (!chatToggle || !chatContainer) return;
-
-            // Chatbot knowledge base
+            
             const photoChatbotKnowledge = {
                 'nature': {
                     keywords: ['nature', 'landscape', 'wildlife', 'forest', 'mountains'],
@@ -4463,10 +3586,10 @@
                     response: `💡 Photography Tips\n\nLandscape Photography:\n- Golden Hour: 1 hour after sunrise / before sunset\n- Use tripod for sharp images\n- Shoot in RAW for better editing\n\n*More specific questions? Just ask!*`
                 }
             };
-
+            
             function getResponse(question) {
                 const lowerQ = question.toLowerCase().trim();
-
+                
                 for (const [category, data] of Object.entries(photoChatbotKnowledge)) {
                     for (const keyword of data.keywords) {
                         if (lowerQ.includes(keyword)) {
@@ -4474,10 +3597,10 @@
                         }
                     }
                 }
-
+                
                 return `📸 I'm not sure about "${question}". Try asking about:\n- Available photo categories\n- Print purchasing information\n- Workshop schedules\n- Photography tips`;
             }
-
+            
             function addMessage(text, sender) {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `chat-message ${sender}-message`;
@@ -4485,19 +3608,19 @@
                 chatBody.appendChild(messageDiv);
                 chatBody.scrollTop = chatBody.scrollHeight;
             }
-
+            
             function sendMessage() {
                 const message = chatInput.value.trim();
                 if (message) {
                     addMessage(message, 'user');
                     chatInput.value = '';
-
+                    
                     // Show typing indicator
                     const typingDiv = document.createElement('div');
                     typingDiv.className = 'chat-message bot-message';
                     typingDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
                     chatBody.appendChild(typingDiv);
-
+                    
                     setTimeout(() => {
                         typingDiv.remove();
                         const response = getResponse(message);
@@ -4505,17 +3628,17 @@
                     }, 1000 + Math.random() * 1000);
                 }
             }
-
+            
             // Event listeners
             chatToggle.addEventListener('click', () => {
                 chatContainer.classList.toggle('active');
             });
-
+            
             document.getElementById('photoChatSend').addEventListener('click', sendMessage);
             chatInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') sendMessage();
             });
-
+            
             quickQuestions.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const question = btn.getAttribute('data-question');
@@ -4526,14 +3649,14 @@
                     }, 500);
                 });
             });
-
+            
             // Close chatbot when clicking outside
             document.addEventListener('click', (e) => {
                 if (!chatContainer.contains(e.target) && !chatToggle.contains(e.target)) {
                     chatContainer.classList.remove('active');
                 }
             });
-
+            
             // Auto-open chatbot after 5 seconds
             setTimeout(() => {
                 if (!chatContainer.classList.contains('active')) {
@@ -4541,11 +3664,12 @@
                 }
             }, 5000);
         }
-
+        
+        // Back to top functionality
         function initBackToTop() {
             const backToTop = document.getElementById('backToTop');
             if (!backToTop) return;
-
+            
             backToTop.addEventListener('click', (e) => {
                 e.preventDefault();
                 window.scrollTo({
@@ -4554,110 +3678,42 @@
                 });
             });
         }
-
+        
         function updateBackToTop() {
             const backToTop = document.getElementById('backToTop');
             if (!backToTop) return;
-
+            
             if (window.pageYOffset > 300) {
                 backToTop.classList.add('visible');
             } else {
                 backToTop.classList.remove('visible');
             }
         }
-
-        function initKeyboardShortcuts(gallery) {
-            document.addEventListener('keydown', (e) => {
-                // Alt + key shortcuts
-                if (e.altKey) {
-                    switch (e.key.toLowerCase()) {
-                        case 'g':
-                            e.preventDefault();
-                            document.querySelector('[href="#gallery"]').click();
-                            break;
-                        case 'n':
-                            e.preventDefault();
-                            document.querySelector('[data-category="nature"]').click();
-                            break;
-                        case 'l':
-                            e.preventDefault();
-                            document.querySelector('[data-category="landscape"]').click();
-                            break;
-                        case 'u':
-                            e.preventDefault();
-                            document.querySelector('[data-category="urban"]').click();
-                            break;
-                        case 'w':
-                            e.preventDefault();
-                            document.querySelector('[data-category="water"]').click();
-                            break;
-                        case 't':
-                            e.preventDefault();
-                            document.querySelector('[data-category="travel"]').click();
-                            break;
-                        case 'f':
-                            e.preventDefault();
-                            const searchInput = document.getElementById('photoSearch');
-                            if (searchInput) searchInput.focus();
-                            break;
-                        case 'h':
-                            e.preventDefault();
-                            document.querySelector('[href="#home"]').click();
-                            break;
-                    }
-                }
-
-                // Escape key closes modals
-                if (e.key === 'Escape') {
-                    const modals = document.querySelectorAll('.lightbox-modal, .chatbot-container.active');
-                    modals.forEach(modal => {
-                        if (modal.classList.contains('lightbox-modal')) {
-                            modal.querySelector('.close-lightbox')?.click();
-                        } else if (modal.classList.contains('chatbot-container')) {
-                            modal.classList.remove('active');
-                        }
-                    });
-                }
-            });
-        }
-
-        function initScrollTracking(gallery) {
-            let scrollTimeout;
-            window.addEventListener('scroll', () => {
-                if (gallery && gallery.updateScrollProgress) {
-                    gallery.updateScrollProgress();
-                }
-
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    localStorage.setItem('scrollPosition', window.pageYOffset);
-                }, 100);
-            });
-        }
-
+        
+        // Contact form functionality
         function initContactForm() {
             const contactForm = document.getElementById('photoContactForm');
             const responseDiv = document.getElementById('photoFormResponse');
-
+            
             if (!contactForm || !responseDiv) return;
-
-            contactForm.addEventListener('submit', async function (e) {
+            
+            contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
-
+                
                 const submitBtn = this.querySelector('button[type="submit"]');
                 const originalText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
                 submitBtn.disabled = true;
-
+                
                 try {
                     const formData = new FormData(this);
-
+                    
                     const response = await fetch(this.action, {
                         method: 'POST',
                         body: formData,
                         headers: { 'Accept': 'application/json' }
                     });
-
+                    
                     if (response.ok) {
                         responseDiv.innerHTML = `
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -4684,31 +3740,16 @@
                 }
             });
         }
-
-        // Add typing indicator styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .typing-indicator {
-                display: flex;
-                gap: 4px;
-                padding: 10px;
-            }
-            .typing-indicator span {
-                width: 8px;
-                height: 8px;
-                background: var(--primary-color);
-                border-radius: 50%;
-                animation: typing 1.4s infinite;
-            }
-            .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-            .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-            @keyframes typing {
-                0%, 100% { opacity: 0.4; transform: scale(1); }
-                50% { opacity: 1; transform: scale(1.2); }
-            }
-        `;
-
-
+        
+        // Category information
+        const categoryInfo = {
+            'nature': { name: 'Nature', icon: 'leaf', count: 121, description: 'Natural wonders and flora' },
+            'landscape': { name: 'Landscape', icon: 'mountain', count: 116, description: 'Scenic views and horizons' },
+            'travel': { name: 'Travel', icon: 'globe-americas', count: 83, description: 'Journeys and destinations' },
+            'urban': { name: 'Urban', icon: 'city', count: 145, description: 'Cityscapes and architecture' },
+            'water': { name: 'Water', icon: 'water', count: 211, description: 'Oceans, lakes, and rivers' },
+            'wildlife': { name: 'Wildlife', icon: 'paw', count: 46, description: 'Animals in their habitat' }
+        };
 
         // ALL IMAGE DATA from your screenshots - KEEPING ALL YOUR PHOTOS
         const allImages = [
