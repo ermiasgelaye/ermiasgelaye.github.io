@@ -29,8 +29,9 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <!-- Add Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
-   
-    <script src="https://www.paypal.com/sdk/js?client-id=AQ_jpAzGqFSS9drvNKT3bVLm8jDFL_wK9TqyE8vcVWLyNtbV3s3OFnw8AGWT49JkkOus6PKlHBxn1pIh&currency=USD&disable-funding=card"></script>
+
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AQ_jpAzGqFSS9drvNKT3bVLm8jDFL_wK9TqyE8vcVWLyNtbV3s3OFnw8AGWT49JkkOus6PKlHBxn1pIh&currency=USD&disable-funding=card"></script>
     <style>
         :root {
             --primary-color: #007BFF;
@@ -2819,7 +2820,8 @@
                 this.currentCountElement = document.getElementById('currentCount');
                 this.totalCountElement = document.getElementById('totalCount');
                 this.currentCategoryElement = document.getElementById('currentCategory');
-
+   
+                this.unlimitedUnlocked = localStorage.getItem('unlimited_unlocked') === 'true';
                 this.loadState();
                 this.init();
                 this.loadDownloadState();
@@ -3627,12 +3629,19 @@
                             </p>
                         </div>
                     </div>
-                    <div class="mt-3 d-flex justify-content-between">
+<div class="mt-3 d-flex justify-content-between">
     <button class="btn btn-sm btn-outline-primary download-btn" data-src="${image.src}"
-            ${this.downloadsRemaining <= 0 ? 'disabled' : ''}>
+            ${this.downloadsRemaining <= 0 ? 'style="display:none"' : ''}>
         <i class="fas fa-download me-1"></i>
-        ${this.downloadsRemaining <= 0 ? 'Download Limit Reached' : `Download (${this.downloadsRemaining} left)`}
+        ${localStorage.getItem('unlimited_unlocked') === 'true' ? 'Download' : `Download (${this.downloadsRemaining} left)`}
     </button>
+    
+    ${this.downloadsRemaining <= 0 && localStorage.getItem('unlimited_unlocked') !== 'true' ? `
+        <button class="btn btn-sm btn-success unlock-btn" data-src="${image.src}">
+            <i class="fas fa-unlock me-1"></i>Unlock Downloads
+        </button>
+    ` : ''}
+    
     <button class="btn btn-sm btn-outline-secondary share-btn" data-src="${image.src}">
         <i class="fas fa-share-alt me-1"></i>Share
     </button>
@@ -3641,12 +3650,6 @@
         <i class="fas fa-heart me-1"></i>
         ${this.favorites.has(image.src) ? 'Remove Favorite' : 'Add Favorite'}
     </button>
-    
-    ${this.downloadsRemaining <= 0 ? `
-        <button class="btn btn-sm btn-success purchase-btn" data-src="${image.src}">
-            <i class="fas fa-unlock me-1"></i>Unlock Downloads
-        </button>
-    ` : ''}
 </div>
                 </div>
                 
@@ -3684,6 +3687,16 @@
 
                 downloadBtn.addEventListener('click', () => this.downloadImage(image));
                 shareBtn.addEventListener('click', () => this.shareImage(image));
+
+                if (this.downloadsRemaining <= 0 && localStorage.getItem('unlimited_unlocked') !== 'true') {
+                    const unlockBtn = modal.querySelector('.unlock-btn');
+                    if (unlockBtn) {
+                        unlockBtn.addEventListener('click', () => {
+                            this.closeLightbox(modal);
+                            setTimeout(() => this.showPurchaseModal(image), 300);
+                        });
+                    }
+                }
                 favoriteBtn.addEventListener('click', () => {
                     this.toggleFavorite(image.src, favoriteBtn);
                     favoriteBtn.innerHTML = this.favorites.has(image.src)
@@ -3726,6 +3739,12 @@
             }
 
             downloadImage(image) {
+                // Check if unlimited downloads are unlocked
+                if (localStorage.getItem('unlimited_unlocked') === 'true') {
+                    this.directDownload(image);
+                    return;
+                }
+
                 // Check if image was already downloaded
                 if (this.downloadedImages.has(image.src)) {
                     this.directDownload(image);
@@ -4172,29 +4191,14 @@
 
                                 if (result.success) {
                                     // Success! Unlock downloads
-                                    this.downloadsRemaining = Infinity;
-                                    localStorage.setItem('unlimited_unlocked', 'true');
-                                    this.saveDownloadState();
-
-                                    // Show success message
-                                    this.showSuccessMessage('Payment successful! Unlimited downloads unlocked.');
+                                    this.unlockUnlimitedDownloads();
 
                                     // Close modal
                                     if (modal.parentNode) {
                                         document.body.removeChild(modal);
                                     }
                                     this.isPurchaseModalShown = false;
-
-                                    // Refresh UI
-                                    setTimeout(() => {
-                                        const event = new CustomEvent('downloads-unlocked');
-                                        window.dispatchEvent(event);
-                                    }, 500);
-
-                                } else {
-                                    throw new Error('Payment was not successful');
                                 }
-
                             } catch (error) {
                                 console.error('Approve error:', error);
                                 this.showErrorMessage(`Payment failed: ${error.message}`);
