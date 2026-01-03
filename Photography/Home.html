@@ -2181,6 +2181,7 @@
             }
         }
 
+
         /* Early Purchase Button in Gallery */
         .purchase-early-btn {
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
@@ -2197,6 +2198,64 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 10px rgba(40, 167, 69, 0.3);
         }
+/* Image Protection Styles */
+.image-protection-shield {
+    position: relative;
+    display: inline-block;
+}
+
+.protected-img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
+/* Add blur overlay */
+.image-protection-shield::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.02);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Watermark pattern */
+.image-protection-shield::after {
+    content: '© ARC-NATURE PHOTOGRAPHY';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.15);
+    font-weight: bold;
+    white-space: nowrap;
+    z-index: 1;
+    pointer-events: none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Prevent image dragging */
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    -user-drag: none;
+}
+
+        
     </style>
 </head>
 
@@ -6439,7 +6498,438 @@ ARC-NATURE PHOTOGRAPHY
 
 
         document.head.appendChild(style);
+// ==================== IMAGE PROTECTION SYSTEM ====================
 
+class ImageProtectionSystem {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.addWatermarks();
+        this.disableRightClick();
+        this.disableDragAndDrop();
+        this.preventDevTools();
+        this.addCopyrightWarning();
+        this.setupProtectionWrappers();
+    }
+
+    // 1. Right-click disablement
+    disableRightClick() {
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.tagName === 'IMG' || 
+                e.target.classList.contains('gallery-item') ||
+                e.target.closest('.gallery-item')) {
+                e.preventDefault();
+                this.showProtectionMessage();
+            }
+        });
+    }
+
+    showProtectionMessage() {
+        const message = document.createElement('div');
+        message.innerHTML = 'Image downloading is disabled to protect photographer copyright.';
+        message.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            z-index: 99999;
+            font-size: 14px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeInOut 2s ease;
+        `;
+        
+        document.body.appendChild(message);
+        
+        setTimeout(() => {
+            message.style.opacity = '0';
+            message.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                if (message.parentNode) {
+                    document.body.removeChild(message);
+                }
+            }, 500);
+        }, 2000);
+    }
+
+    // 2. Disable drag-and-drop
+    disableDragAndDrop() {
+        document.addEventListener('dragstart', (e) => {
+            if (e.target.tagName === 'IMG' || 
+                e.target.classList.contains('gallery-item') ||
+                e.target.closest('.gallery-item')) {
+                e.preventDefault();
+            }
+        });
+        
+        // Also prevent dropping
+        document.addEventListener('drop', (e) => {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+    }
+
+    // 3. Add watermarks dynamically
+    addWatermarks() {
+        // This will be applied via CSS class to gallery images
+        const style = document.createElement('style');
+        style.textContent = `
+            .gallery-item img.watermarked {
+                position: relative;
+            }
+            
+            .gallery-item img.watermarked::after {
+                content: '© ARC-NATURE PHOTOGRAPHY';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(-45deg);
+                font-size: 2rem;
+                color: rgba(255, 255, 255, 0.25);
+                pointer-events: none;
+                z-index: 10;
+                white-space: nowrap;
+                font-weight: 700;
+                font-family: 'Inter', sans-serif;
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+                opacity: 0.7;
+            }
+            
+            .lightbox-image-container::after {
+                content: '© ARC-NATURE PHOTOGRAPHY';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(-45deg);
+                font-size: 3rem;
+                color: rgba(255, 255, 255, 0.15);
+                pointer-events: none;
+                z-index: 10;
+                white-space: nowrap;
+                font-weight: 700;
+                font-family: 'Inter', sans-serif;
+                opacity: 0.5;
+            }
+            
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+                10% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                90% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Apply watermark class to all gallery images
+        setTimeout(() => {
+            document.querySelectorAll('.gallery-item img').forEach(img => {
+                img.classList.add('watermarked');
+            });
+        }, 1000);
+    }
+
+    // 4. Prevent browser developer tools inspection
+    preventDevTools() {
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+S
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                (e.ctrlKey && e.key === 'U') ||
+                (e.ctrlKey && e.key === 'S') ||
+                (e.key === 'PrintScreen')
+            ) {
+                e.preventDefault();
+                this.showProtectionMessage();
+                return false;
+            }
+        });
+        
+        // Prevent right-click menu entirely on images
+        document.addEventListener('contextmenu', (e) => {
+            const target = e.target;
+            if (target.tagName === 'IMG' || 
+                target.classList.contains('lightbox-image') ||
+                target.closest('.gallery-item')) {
+                e.preventDefault();
+                this.showProtectionMessage();
+            }
+        }, true);
+    }
+
+    // 5. Setup protection wrappers
+    setupProtectionWrappers() {
+        // This will wrap gallery images with protection layers
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length) {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1 && node.classList && 
+                            (node.classList.contains('gallery-item') || node.querySelector('.gallery-item'))) {
+                            this.wrapGalleryItem(node);
+                        }
+                    });
+                }
+            });
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        
+        // Wrap existing gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            this.wrapGalleryItem(item);
+        });
+    }
+
+    wrapGalleryItem(item) {
+        if (item.classList.contains('protected-wrapper')) return;
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'image-protection-wrapper protected-wrapper';
+        wrapper.style.cssText = `
+            position: relative;
+            overflow: hidden;
+            display: block;
+            width: 100%;
+            height: 100%;
+        `;
+        
+        const shield = document.createElement('div');
+        shield.className = 'image-shield';
+        shield.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 20;
+            cursor: not-allowed;
+        `;
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'image-overlay';
+        overlay.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 100%);
+            z-index: 15;
+            pointer-events: none;
+        `;
+        
+        // Clone and wrap the image
+        const originalImg = item.querySelector('img');
+        if (originalImg) {
+            const protectedImg = originalImg.cloneNode(true);
+            protectedImg.classList.add('protected-image');
+            protectedImg.style.cssText = `
+                position: relative;
+                z-index: 10;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            `;
+            
+            originalImg.parentNode.replaceChild(protectedImg, originalImg);
+            wrapper.appendChild(shield);
+            wrapper.appendChild(overlay);
+            wrapper.appendChild(protectedImg);
+            item.appendChild(wrapper);
+        }
+    }
+
+    // 6. Add copyright warning
+    addCopyrightWarning() {
+        // Remove any existing warning
+        const existingWarning = document.querySelector('.copyright-warning');
+        if (existingWarning) existingWarning.remove();
+        
+        const warning = document.createElement('div');
+        warning.className = 'copyright-warning';
+        warning.innerHTML = '<i class="fas fa-copyright"></i> All images are copyrighted. Unauthorized downloading is prohibited.';
+        warning.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 9998;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        `;
+        
+        document.body.appendChild(warning);
+    }
+
+    // 7. Enhanced protection methods
+    setupEnhancedProtection() {
+        // Monitor for screenshot attempts
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                console.log('Warning: User may be capturing screen content');
+            }
+        });
+        
+        // Prevent image capture via canvas
+        Object.defineProperty(HTMLImageElement.prototype, 'src', {
+            set: function(value) {
+                const original = this.getAttribute('data-original-src') || value;
+                this.setAttribute('data-original-src', original);
+                this.setAttribute('src', original);
+            },
+            get: function() {
+                return this.getAttribute('src');
+            }
+        });
+    }
+
+    // 8. Initialize all protection
+    setupAllProtection() {
+        // Add CSS for protection
+        const protectionCSS = `
+            /* Prevent text selection on images */
+            img {
+                user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+            }
+            
+            /* Disable image dragging */
+            img {
+                -webkit-user-drag: none;
+                -khtml-user-drag: none;
+                -moz-user-drag: none;
+                -o-user-drag: none;
+                user-drag: none;
+            }
+            
+            /* Protection wrapper styles */
+            .image-protection-wrapper {
+                position: relative;
+                overflow: hidden;
+                display: block;
+            }
+            
+            .image-shield {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: transparent;
+                z-index: 20;
+                cursor: not-allowed;
+            }
+            
+            .image-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 100%);
+                z-index: 15;
+                pointer-events: none;
+            }
+            
+            .protected-image {
+                position: relative;
+                z-index: 10;
+            }
+            
+            /* Watermark for gallery images */
+            .gallery-item {
+                position: relative;
+            }
+            
+            .gallery-item::before {
+                content: '© ARC-NATURE';
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                color: rgba(255,255,255,0.6);
+                font-size: 10px;
+                font-weight: 500;
+                z-index: 5;
+                background: rgba(0,0,0,0.3);
+                padding: 2px 6px;
+                border-radius: 3px;
+                pointer-events: none;
+            }
+        `;
+        
+        const style = document.createElement('style');
+        style.textContent = protectionCSS;
+        document.head.appendChild(style);
+    }
+}
+
+// Initialize protection when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Wait a bit for gallery to load
+    setTimeout(() => {
+        const protectionSystem = new ImageProtectionSystem();
+        protectionSystem.setupAllProtection();
+        protectionSystem.setupEnhancedProtection();
+        
+        // Make it globally available for debugging
+        window.imageProtection = protectionSystem;
+    }, 2000);
+});
+
+// Also initialize when gallery is ready
+if (typeof gallery !== 'undefined') {
+    gallery.initPromise.then(() => {
+        setTimeout(() => {
+            if (!window.imageProtection) {
+                window.imageProtection = new ImageProtectionSystem();
+            }
+        }, 1000);
+    });
+}
+
+// Add protection to dynamically loaded images
+const originalGalleryRender = EnhancedPhotoGallery.prototype.renderGallery;
+EnhancedPhotoGallery.prototype.renderGallery = function() {
+    const result = originalGalleryRender.apply(this, arguments);
+    
+    // Apply protection to new images
+    setTimeout(() => {
+        if (window.imageProtection) {
+            window.imageProtection.setupProtectionWrappers();
+            window.imageProtection.addWatermarks();
+        }
+    }, 500);
+    
+    return result;
+};
 
 
     </script>

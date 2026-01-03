@@ -1,0 +1,13 @@
+# Prevent hotlinking
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?yourdomain\.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ - [F]
+
+# Prevent directory listing
+Options -Indexes
+
+# Add copyright header to images
+<FilesMatch "\.(jpg|jpeg|png|gif)$">
+    Header set X-Copyright "© ARC-NATURE PHOTOGRAPHY - All rights reserved"
+</FilesMatch>
