@@ -2198,64 +2198,63 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 10px rgba(40, 167, 69, 0.3);
         }
-/* Image Protection Styles */
-.image-protection-shield {
-    position: relative;
-    display: inline-block;
-}
 
-.protected-img {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    pointer-events: none;
-    -webkit-touch-callout: none;
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-}
+        /* Image Protection Styles */
+        .image-protection-shield {
+            position: relative;
+            display: inline-block;
+        }
 
-/* Add blur overlay */
-.image-protection-shield::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.02);
-    z-index: 2;
-    pointer-events: none;
-}
+        .protected-img {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+        }
 
-/* Watermark pattern */
-.image-protection-shield::after {
-    content: '© ARC-NATURE PHOTOGRAPHY';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-45deg);
-    font-size: 2.5rem;
-    color: rgba(255, 255, 255, 0.15);
-    font-weight: bold;
-    white-space: nowrap;
-    z-index: 1;
-    pointer-events: none;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
+        /* Add blur overlay */
+        .image-protection-shield::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.02);
+            z-index: 2;
+            pointer-events: none;
+        }
 
-/* Prevent image dragging */
-img {
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    -user-drag: none;
-}
+        /* Watermark pattern */
+        .image-protection-shield::after {
+            content: '© ARC-NATURE PHOTOGRAPHY';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.15);
+            font-weight: bold;
+            white-space: nowrap;
+            z-index: 1;
+            pointer-events: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
 
-        
+        /* Prevent image dragging */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            -user-drag: none;
+        }
     </style>
 </head>
 
@@ -2355,7 +2354,7 @@ img {
         <div class="category-nav" data-aos="fade-down">
             <div class="d-flex flex-wrap justify-content-center">
                 <button class="category-btn active" data-category="all">
-                    <i class="fas fa-th-large me-2"></i>All Photos (722)
+                    <i class="fas fa-th-large me-2"></i>All Photos (907)
                 </button>
                 <button class="category-btn" data-category="nature">
                     <i class="fas fa-leaf me-2"></i>Nature (121)
@@ -2367,13 +2366,13 @@ img {
                     <i class="fas fa-globe-americas me-2"></i>Travel (83)
                 </button>
                 <button class="category-btn" data-category="urban">
-                    <i class="fas fa-city me-2"></i>Urban (145)
+                    <i class="fas fa-city me-2"></i>Urban (220)
                 </button>
                 <button class="category-btn" data-category="water">
-                    <i class="fas fa-water me-2"></i>Water (211)
+                    <i class="fas fa-water me-2"></i>Water (297)
                 </button>
                 <button class="category-btn" data-category="wildlife">
-                    <i class="fas fa-paw me-2"></i>Wildlife (46)
+                    <i class="fas fa-paw me-2"></i>Wildlife (70)
                 </button>
             </div>
         </div>
@@ -2384,7 +2383,7 @@ img {
         <div class="container">
             <div class="section-title" data-aos="fade-up">
                 <h2 class="mb-3">Photo Gallery</h2>
-                <p class="text-muted">722 stunning photographs across 6 categories</p>
+                <p class="text-muted">907 stunning photographs across 6 categories</p>
             </div>
 
             <div class="category-stats" id="categoryStats" data-aos="fade-up">
@@ -5688,9 +5687,9 @@ ARC-NATURE PHOTOGRAPHY
             'nature': { name: 'Nature', icon: 'leaf', count: 121, description: 'Natural wonders and flora' },
             'landscape': { name: 'Landscape', icon: 'mountain', count: 116, description: 'Scenic views and horizons' },
             'travel': { name: 'Travel', icon: 'globe-americas', count: 83, description: 'Journeys and destinations' },
-            'urban': { name: 'Urban', icon: 'city', count: 145, description: 'Cityscapes and architecture' },
-            'water': { name: 'Water', icon: 'water', count: 211, description: 'Oceans, lakes, and rivers' },
-            'wildlife': { name: 'Wildlife', icon: 'paw', count: 46, description: 'Animals in their habitat' }
+            'urban': { name: 'Urban', icon: 'city', count: 220, description: 'Cityscapes and architecture' },
+            'water': { name: 'Water', icon: 'water', count: 297, description: 'Oceans, lakes, and rivers' },
+            'wildlife': { name: 'Wildlife', icon: 'paw', count: 70, description: 'Animals in their habitat' }
         };
 
         // ALL IMAGE DATA from your screenshots - KEEPING ALL YOUR PHOTOS
@@ -6225,6 +6224,81 @@ ARC-NATURE PHOTOGRAPHY
             { src: 'images/urban/urban143.jpeg', category: 'urban', title: 'Dean Lane Historic Truss Bridge', location: 'Ontario, Canada', tags: ['truss bridge', 'steel bridge', 'rural', 'heritage', 'wet road'] },
             { src: 'images/urban/urban144.jpg', category: 'urban', title: 'Montreal Casino Complex on Water', location: 'Montreal, Quebec, Canada', tags: ['casino', 'contemporary architecture', 'waterfront', 'entertainment', 'modern'] },
             { src: 'images/urban/urban145.jpeg', category: 'urban', title: 'Highway Traffic at Dusk', location: 'Ontario, Canada', tags: ['highway', 'traffic', 'evening commute', 'street lights', 'urban mobility'] },
+            { src: 'images/urban/urban146.jpeg', category: 'urban', title: 'Château Frontenac from Dufferin Terrace with Tourists', photographer: 'Ermias Gaga', location: 'Quebec City, Quebec, Canada', tags: ['chateau frontenac', 'quebec city', 'castle hotel', 'chateau style', 'landmark', 'tourists', 'historic'] },
+            { src: 'images/urban/urban147.jpeg', category: 'urban', title: 'Terry Fox Bronze Statue in Downtown Ottawa Plaza', photographer: 'Ermias Gaga', location: 'Ottawa, Ontario, Canada', tags: ['terry fox', 'bronze statue', 'ottawa', 'downtown', 'public art', 'monument', 'runner'] },
+            { src: 'images/urban/urban148.jpg', category: 'urban', title: 'St. Peter\'s Basilica Facade with Corinthian Columns and Saints', photographer: 'Ermias Gaga', location: 'Vatican City', tags: ['st peters basilica', 'vatican', 'baroque', 'facade', 'corinthian columns', 'saints', 'rome', 'catholic'] },
+            { src: 'images/urban/urban149.jpg', category: 'urban', title: 'St. Peter\'s Basilica Nave Ceiling with Gilded Coffered Vaulting', photographer: 'Ermias Gaga', location: 'Vatican City', tags: ['st peters basilica', 'vatican', 'interior', 'nave', 'coffered ceiling', 'gilded', 'baroque', 'architecture'] },
+            { src: 'images/urban/urban150.jpg', category: 'urban', title: 'Painted Dome Interior with Frescoes in St. Peter\'s Basilica', photographer: 'Ermias Gaga', location: 'Vatican City', tags: ['st peters basilica', 'vatican', 'dome', 'fresco', 'interior', 'baroque', 'gilded', 'religious art'] },
+            { src: 'images/urban/urban151.jpg', category: 'urban', title: 'Michelangelo\'s Dome Interior Looking Up from St. Peter\'s Basilica', photographer: 'Ermias Gaga', location: 'Vatican City', tags: ['st peters basilica', 'vatican', 'michelangelo', 'dome', 'oculus', 'mosaic', 'interior', 'looking up'] },
+            { src: 'images/urban/urban152.jpg', category: 'urban', title: 'Aerial View of St. Peter\'s Square and Rome from the Dome', photographer: 'Ermias Gaga', location: 'Vatican City', tags: ['st peters square', 'vatican', 'rome', 'aerial', 'piazza', 'bernini colonnade', 'obelisk', 'cityscape'] },
+            { src: 'images/urban/urban153.jpg', category: 'urban', title: 'St. Peter\'s Basilica Facade Steps with Crowd at Ground Level', photographer: 'Ermias Gaga', location: 'Vatican City', tags: ['st peters basilica', 'vatican', 'facade', 'steps', 'tourists', 'baroque', 'columns', 'rome'] },
+            { src: 'images/urban/urban154.jpg', category: 'urban', title: 'Coffered Dome Interior with Oculus at St. Peter\'s Basilica', photographer: 'Ermias Gaga', location: 'Vatican City', tags: ['st peters basilica', 'vatican', 'dome', 'oculus', 'coffered', 'gilded', 'interior', 'looking up'] },
+            { src: 'images/urban/urban155.jpg', category: 'urban', title: 'Grand Canal with Scalzi Bridge and Santa Chiara Hotel at Venice Station', photographer: 'Ermias Gaga', location: 'Venice, Italy', tags: ['venice', 'grand canal', 'scalzi bridge', 'santa chiara', 'canal', 'boats', 'waterway', 'italy'] },
+            { src: 'images/urban/urban156.jpg', category: 'urban', title: 'Ponte della Costituzione Arch over Grand Canal with Mooring Posts', photographer: 'Ermias Gaga', location: 'Venice, Italy', tags: ['venice', 'ponte della costituzione', 'grand canal', 'arch bridge', 'mooring posts', 'gondola', 'waterway', 'italy'] },
+            { src: 'images/urban/urban157.jpg', category: 'urban', title: 'Narrow Venetian Canal with Brick Bridge at Fondamenta del Magazen', photographer: 'Ermias Gaga', location: 'Venice, Italy', tags: ['venice', 'canal', 'narrow canal', 'brick bridge', 'fondamenta', 'colorful buildings', 'italy'] },
+            { src: 'images/urban/urban158.jpg', category: 'urban', title: 'Side-by-Side Wooden and Stone Arch Bridges over Green Canal', photographer: 'Ermias Gaga', location: 'Venice, Italy', tags: ['venice', 'canal', 'arch bridge', 'wooden bridge', 'stone bridge', 'turquoise water', 'italy'] },
+            { src: 'images/urban/urban159.jpg', category: 'urban', title: 'Rialto Bridge Arch and Balustrade from Below on Grand Canal', photographer: 'Ermias Gaga', location: 'Venice, Italy', tags: ['venice', 'rialto bridge', 'grand canal', 'arch', 'balustrade', 'landmark', 'italy'] },
+            { src: 'images/urban/urban160.jpg', category: 'urban', title: 'Basilica di San Marco Facade with Mosaics and Bronze Horses', photographer: 'Ermias Gaga', location: 'Venice, Italy', tags: ['venice', 'san marco', 'basilica', 'byzantine', 'mosaics', 'bronze horses', 'piazza san marco', 'italy'] },
+            { src: 'images/urban/urban161.jpeg', category: 'urban', title: 'Turtle Island Indigenous Sculpture with Eagle in Front of Lord Elgin Hotel', photographer: 'Ermias Gaga', location: 'Ottawa, Ontario, Canada', tags: ['ottawa', 'lord elgin hotel', 'indigenous sculpture', 'turtle island', 'eagle', 'buffalo', 'public art', 'elgin street'] },
+            { src: 'images/urban/urban162.JPG', category: 'urban', title: 'Multi-Level Interior of Toronto Reference Library with Spiral Staircase', photographer: 'Ermias Gaga', location: 'Toronto, Ontario, Canada', tags: ['toronto', 'toronto reference library', 'interior', 'multi-level', 'spiral staircase', 'bookshelves', 'brutalist', 'library'] },
+            { src: 'images/urban/urban163.JPG', category: 'urban', title: 'Bronze Elephant and Calves Sculpture in Downtown Toronto Plaza', photographer: 'Ermias Gaga', location: 'Toronto, Ontario, Canada', tags: ['toronto', 'bronze sculpture', 'elephant', 'calves', 'public art', 'financial district', 'plaza', 'downtown'] },
+            { src: 'images/urban/urban164.jpeg', category: 'urban', title: 'Graffiti-Marked Concrete Drainage Tunnel Interior', photographer: 'Ermias Gaga', location: 'British Columbia, Canada', tags: ['tunnel', 'drainage', 'concrete', 'graffiti', 'urban infrastructure', 'culvert', 'moss', 'underground'] },
+            { src: 'images/urban/urban165.JPG', category: 'urban', title: 'Horseshoe Falls and Skylon Tower Aerial View from Hotel Window', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['niagara falls', 'horseshoe falls', 'skylon tower', 'aerial view', 'mist', 'ontario', 'tourist district', 'landmark'] },
+            { src: 'images/urban/urban166.jpeg', category: 'urban', title: 'Gothic Church Steeple Framed Between Brutalist Office Towers', photographer: 'Ermias Gaga', location: 'Ottawa, Ontario, Canada', tags: ['ottawa', 'church steeple', 'gothic', 'brutalist', 'office towers', 'architectural contrast', 'overcast', 'downtown'] },
+            { src: 'images/urban/urban167.jpeg', category: 'urban', title: 'Giant Canadian Nickel Landmark Sculpture Against Blue Sky', photographer: 'Ermias Gaga', location: 'Sudbury, Ontario, Canada', tags: ['sudbury', 'giant nickel', 'landmark', 'roadside attraction', 'coin', 'sculpture', 'ontario', 'blue sky'] },
+            { src: 'images/urban/urban168.jpeg', category: 'urban', title: 'Big Nickel Reverse Side on Precambrian Rock at Dynamic Earth', photographer: 'Ermias Gaga', location: 'Sudbury, Ontario, Canada', tags: ['sudbury', 'big nickel', 'reverse', 'maple leaf', 'precambrian rock', 'landmark', 'roadside attraction', 'dynamic earth'] },
+            { src: 'images/urban/urban169.jpeg', category: 'urban', title: 'Big Nickel 1751-1951 Canada Five Cents Face Against Stormy Sky', photographer: 'Ermias Gaga', location: 'Sudbury, Ontario, Canada', tags: ['sudbury', 'big nickel', 'canada', 'five cents', 'landmark', 'stormy sky', 'dynamic earth', 'nickel mining'] },
+            { src: 'images/urban/urban170.jpeg', category: 'urban', title: 'Cathedral of the Immaculate Conception Twin Towers and Rose Window', photographer: 'Ermias Gaga', location: 'Guelph, Ontario, Canada', tags: ['guelph', 'cathedral', 'immaculate conception', 'gothic revival', 'twin towers', 'rose window', 'limestone', 'ontario'] },
+            { src: 'images/urban/urban171.jpeg', category: 'urban', title: 'Cathedral of the Immaculate Conception Facade and Grand Staircase', photographer: 'Ermias Gaga', location: 'Guelph, Ontario, Canada', tags: ['guelph', 'cathedral', 'immaculate conception', 'gothic revival', 'staircase', 'limestone', 'overcast', 'ontario'] },
+            { src: 'images/urban/urban172.jpeg', category: 'urban', title: 'Pair of Baby Blue 1960s Studebaker Larks at Classic Car Show', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'studebaker', 'lark', '1960s', 'car show', 'baby blue', 'vintage', 'ontario'] },
+            { src: 'images/urban/urban173.jpeg', category: 'urban', title: 'Pink 1956 Ford Fairlane Wagon and Teal 1961 Chevrolet at Car Show', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'ford fairlane', 'station wagon', '1956', 'chevrolet', '1960s', 'car show', 'vintage', 'ontario'] },
+            { src: 'images/urban/urban174.jpeg', category: 'urban', title: 'Teal 1960 Chevrolet Impala Flanked by Vintage Station Wagon and Lincoln', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'chevrolet impala', '1960', 'car show', 'vintage', 'teal', 'station wagon', 'ontario'] },
+            { src: 'images/urban/urban175.jpeg', category: 'urban', title: 'Vintage Mercury COE Bus and Ford Truck at Classic Vehicle Show', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic vehicle', 'mercury', 'COE bus', 'ford truck', 'vintage', 'car show', '1950s', 'ontario'] },
+            { src: 'images/urban/urban176.jpeg', category: 'urban', title: 'Brown Studebaker Lark and Rusty Blue Pickup on Flatbed Trailer', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'studebaker lark', 'vintage', 'car show', 'flatbed trailer', 'pickup truck', 'ontario', '1960s'] },
+            { src: 'images/urban/urban177.jpeg', category: 'urban', title: 'Blue 1948 Ford F1 Pickup with Maine Plate at Vintage Car Show', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'ford f1', '1948', 'pickup truck', 'blue', 'maine plate', 'car show', 'vintage'] },
+            { src: 'images/urban/urban178.jpeg', category: 'urban', title: 'Cream and Green 1958 Ford Fairlane Station Wagon at Car Show', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'ford fairlane', 'station wagon', '1958', 'cream', 'car show', 'vintage', 'ontario'] },
+            { src: 'images/urban/urban179.jpeg', category: 'urban', title: 'Copper 1957 Chevrolet Wagon and Dark Green 1950s Sedan at Car Show', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'chevrolet', '1957', 'station wagon', 'car show', 'vintage', 'ontario', '1950s'] },
+            { src: 'images/urban/urban180.jpeg', category: 'urban', title: 'Teal 1952 Hudson Hornet Front Grille at Vintage Car Show', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'hudson hornet', '1952', 'teal', 'grille', 'car show', 'vintage', 'ontario'] },
+            { src: 'images/urban/urban181.jpeg', category: 'urban', title: 'Pink 1960 Oldsmobile with Town Hall Clock Tower in Background', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'oldsmobile', '1960', 'pink', 'town hall', 'clock tower', 'car show', 'ontario'] },
+            { src: 'images/urban/urban182.jpeg', category: 'urban', title: 'Black 1951 Ford Convertible with White Soft Top at Car Show', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'ford', '1951', 'convertible', 'black', 'soft top', 'car show', 'vintage'] },
+            { src: 'images/urban/urban183.jpeg', category: 'urban', title: 'Black 1957 Ford Custom at Vintage Car Show', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['classic car', 'ford', '1957', 'black', 'whitewall tires', 'car show', 'vintage', 'ontario'] },
+            { src: 'images/urban/urban184.jpeg', category: 'urban', title: 'Rusty Mooring Bollards on Harbour Pier at Dusk', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['harbour', 'pier', 'bollards', 'rust', 'dusk', 'lake', 'industrial', 'waterfront'] },
+            { src: 'images/urban/urban185.jpeg', category: 'urban', title: 'Fiery Urban Sunset with Construction Cranes Silhouetted on Skyline', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['sunset', 'urban', 'cranes', 'silhouette', 'construction', 'orange sky', 'skyline', 'ontario'] },
+            { src: 'images/urban/urban186.jpeg', category: 'urban', title: 'Fairmont Empress Hotel Side Wing Illuminated at Night with Fairy Lights', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'empress hotel', 'fairmont', 'night', 'fairy lights', 'chateau style', 'historic', 'inner harbour'] },
+            { src: 'images/urban/urban187.jpeg', category: 'urban', title: 'Fairmont Empress Hotel Night Reflection in Inner Harbour', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'empress hotel', 'fairmont', 'inner harbour', 'night', 'reflection', 'boats', 'landmark'] },
+            { src: 'images/urban/urban188.jpeg', category: 'urban', title: 'British Columbia Legislature Illuminated with Christmas Lights at Night', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'parliament', 'night', 'christmas lights', 'dome', 'neoclassical', 'landmark'] },
+            { src: 'images/urban/urban189.jpeg', category: 'urban', title: 'Fairmont Empress Hotel Entrance at Night with Moon Above', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'empress hotel', 'fairmont', 'night', 'moon', 'chateau style', 'inner harbour', 'landmark'] },
+            { src: 'images/urban/urban190.jpeg', category: 'urban', title: 'Johnson Street Bridge White Arch Truss Close-Up over Victoria Harbour', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'johnson street bridge', 'arch bridge', 'truss', 'inner harbour', 'modern', 'white', 'pedestrian bridge'] },
+            { src: 'images/urban/urban191.jpeg', category: 'urban', title: 'Johnson Street Bridge Full Span Reflected in Calm Inner Harbour', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'johnson street bridge', 'reflection', 'inner harbour', 'modern bridge', 'blue sky', 'waterfront'] },
+            { src: 'images/urban/urban192.jpeg', category: 'urban', title: 'BC Legislature Copper Dome and Romanesque Facade in Daylight', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'parliament', 'copper dome', 'romanesque', 'blue sky', 'landmark', 'francis rattenbury'] },
+            { src: 'images/urban/urban193.jpeg', category: 'urban', title: 'BC Legislature Rotunda Oval Opening with Gilded Balustrade Below', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'interior', 'rotunda', 'oval opening', 'gilded', 'balustrade', 'looking up'] },
+            { src: 'images/urban/urban194.jpeg', category: 'urban', title: 'BC Legislature Rotunda Dome with Teal Sky and Historical Murals', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'rotunda', 'dome', 'murals', 'teal', 'gilded', 'interior', 'looking up'] },
+            { src: 'images/urban/urban195.jpeg', category: 'urban', title: 'BC Legislature Golden Jubilee Stained Glass Window with Provincial Coat of Arms', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'stained glass', 'golden jubilee', 'coat of arms', 'queen elizabeth', 'provincial symbols', 'interior'] },
+            { src: 'images/urban/urban196.jpeg', category: 'urban', title: 'Queen Victoria Diamond Jubilee Stained Glass Window 1837-1897', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'stained glass', 'diamond jubilee', 'queen victoria', 'splendor sine occasu', 'historic', 'interior'] },
+            { src: 'images/urban/urban197.jpeg', category: 'urban', title: 'BC Legislature Octagonal Dome Interior with Murals and Gilded Trim', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'dome', 'octagonal', 'murals', 'gilded', 'interior', 'looking up', 'splendor sine occasu'] },
+            { src: 'images/urban/urban198.jpeg', category: 'urban', title: 'BC Legislature Grand Rotunda with Murals Dome and Canadian Flag', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'rotunda', 'murals', 'dome', 'canadian flag', 'bc flag', 'interior', 'splendor sine occasu'] },
+            { src: 'images/urban/urban199.jpeg', category: 'urban', title: 'BC Legislative Assembly Chamber Ceiling with Stained Glass Domes', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'legislative chamber', 'ceiling', 'stained glass', 'globe lights', 'marble columns', 'interior'] },
+            { src: 'images/urban/urban200.jpeg', category: 'urban', title: 'BC Legislative Assembly Chamber Floor with Red Carpet and Marble Columns', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'legislative chamber', 'chamber floor', 'red carpet', 'marble columns', 'MLAs desks', 'interior'] },
+            { src: 'images/urban/urban201.jpeg', category: 'urban', title: 'BC Legislature Main Entrance Steps and Romanesque Arch at Dusk', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'entrance', 'steps', 'romanesque arch', 'dusk', 'stone', 'landmark'] },
+            { src: 'images/urban/urban202.jpeg', category: 'urban', title: 'BC Legislature Copper Domes and East Wing at Twilight', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'bc legislature', 'copper domes', 'east wing', 'twilight', 'blue hour', 'stone', 'landmark'] },
+            { src: 'images/urban/urban203.jpeg', category: 'urban', title: 'White Arched Garden Gate Through Tall Hedge at Hatley Park', photographer: 'Ermias Gaga', location: 'Colwood, British Columbia, Canada', tags: ['hatley park', 'colwood', 'garden gate', 'hedge', 'arch', 'formal garden', 'victoria', 'historic estate'] },
+            { src: 'images/urban/urban204.jpeg', category: 'urban', title: 'Hatley Castle Garden Courtyard Door with Ivy and Stone Urns', photographer: 'Ermias Gaga', location: 'Colwood, British Columbia, Canada', tags: ['hatley park', 'colwood', 'castle', 'courtyard', 'ivy', 'stone urns', 'garden', 'heritage'] },
+            { src: 'images/urban/urban205.jpeg', category: 'urban', title: 'Hatley Castle Stone Facade with Battlements and Formal Garden', photographer: 'Ermias Gaga', location: 'Colwood, British Columbia, Canada', tags: ['hatley castle', 'colwood', 'castle', 'battlements', 'formal garden', 'stone', 'canadian flag', 'heritage'] },
+            { src: 'images/urban/urban206.jpeg', category: 'urban', title: 'Kinsol Trestle Wooden Boardwalk Leading into Conifer Forest', photographer: 'Ermias Gaga', location: 'Shawnigan Lake, British Columbia, Canada', tags: ['kinsol trestle', 'shawnigan lake', 'boardwalk', 'wooden bridge', 'conifer forest', 'trans canada trail', 'vancouver island'] },
+            { src: 'images/urban/urban207.jpeg', category: 'urban', title: 'Kinsol Trestle Side View Through Forest at Ground Level', photographer: 'Ermias Gaga', location: 'Shawnigan Lake, British Columbia, Canada', tags: ['kinsol trestle', 'shawnigan lake', 'trestle bridge', 'wooden', 'heritage', 'forest', 'vancouver island', 'historic railway'] },
+            { src: 'images/urban/urban208.jpeg', category: 'urban', title: 'Kinsol Trestle Wide Curved View from Hillside Approach', photographer: 'Ermias Gaga', location: 'Shawnigan Lake, British Columbia, Canada', tags: ['kinsol trestle', 'shawnigan lake', 'trestle bridge', 'wooden', 'curved', 'hillside', 'blue sky', 'vancouver island'] },
+            { src: 'images/urban/urban209.jpeg', category: 'urban', title: 'Kinsol Trestle Base Timber Framing from Below at River Level', photographer: 'Ermias Gaga', location: 'Shawnigan Lake, British Columbia, Canada', tags: ['kinsol trestle', 'shawnigan lake', 'trestle bridge', 'timber framing', 'below', 'river', 'heritage', 'vancouver island'] },
+            { src: 'images/urban/urban210.jpeg', category: 'urban', title: 'Kinsol Trestle Dark Silhouette Against Blue Dusk Sky', photographer: 'Ermias Gaga', location: 'Shawnigan Lake, British Columbia, Canada', tags: ['kinsol trestle', 'shawnigan lake', 'trestle bridge', 'silhouette', 'dusk', 'dramatic', 'wooden', 'vancouver island'] },
+            { src: 'images/urban/urban211.jpeg', category: 'urban', title: 'Kinsol Trestle Deck View Looking Along Full Span at Dusk', photographer: 'Ermias Gaga', location: 'Shawnigan Lake, British Columbia, Canada', tags: ['kinsol trestle', 'shawnigan lake', 'trestle bridge', 'deck view', 'full span', 'dusk', 'forest', 'vancouver island'] },
+            { src: 'images/urban/urban212.jpeg', category: 'urban', title: 'Kinsol Trestle Aerial View Along Curved Span from Deck Edge', photographer: 'Ermias Gaga', location: 'Shawnigan Lake, British Columbia, Canada', tags: ['kinsol trestle', 'shawnigan lake', 'trestle bridge', 'aerial view', 'curved span', 'deck edge', 'forest', 'vancouver island'] },
+            { src: 'images/urban/urban213.jpeg', category: 'urban', title: 'Dark Steel Rail Bridge over Creek in Misty Winter Forest', photographer: 'Ermias Gaga', location: 'Vancouver Island, British Columbia, Canada', tags: ['rail bridge', 'steel', 'creek', 'misty', 'winter', 'forest', 'overcast', 'vancouver island'] },
+            { src: 'images/urban/urban214.jpeg', category: 'urban', title: 'Malahat SkyWalk Spiral Observation Tower Looking Up', photographer: 'Ermias Gaga', location: 'Malahat, British Columbia, Canada', tags: ['malahat skywalk', 'observation tower', 'spiral', 'wooden', 'steel', 'attraction', 'vancouver island', 'overcast'] },
+            { src: 'images/urban/urban215.jpeg', category: 'urban', title: 'Inukshuk Stone Sculpture with Seagull on English Bay Vancouver', photographer: 'Ermias Gaga', location: 'Vancouver, British Columbia, Canada', tags: ['vancouver', 'english bay', 'inukshuk', 'stone sculpture', 'seagull', 'indigenous', 'landmark', 'overcast'] },
+            { src: 'images/urban/urban216.jpeg', category: 'urban', title: 'Colourful Geometric Quilt Mural on High-Rise Building at Beach Avenue', photographer: 'Ermias Gaga', location: 'Vancouver, British Columbia, Canada', tags: ['vancouver', 'beach avenue', 'mural', 'street art', 'geometric', 'colourful', 'high-rise', 'west end'] },
+            { src: 'images/urban/urban217.jpeg', category: 'urban', title: 'Coal Harbour Marina with Downtown Vancouver Skyline Under Overcast Sky', photographer: 'Ermias Gaga', location: 'Vancouver, British Columbia, Canada', tags: ['vancouver', 'coal harbour', 'marina', 'skyline', 'boats', 'overcast', 'downtown', 'waterfront'] },
+            { src: 'images/urban/urban218.jpeg', category: 'urban', title: 'City Grid Night Lights from Airplane Window with Full Moon', photographer: 'Ermias Gaga', location: 'Canada', tags: ['aerial', 'city lights', 'night', 'airplane window', 'full moon', 'urban grid', 'flight', 'abstract'] },
+            { src: 'images/urban/urban219.jpeg', category: 'urban', title: 'Urban Night Grid from Cruising Altitude with Amber Moon on Horizon', photographer: 'Ermias Gaga', location: 'Canada', tags: ['aerial', 'city lights', 'night', 'airplane window', 'moon', 'urban grid', 'cruising altitude', 'flight'] },
+            { src: 'images/urban/urban220.jpeg', category: 'urban', title: 'City Lights Grid at Night from Descending Aircraft with Moon', photographer: 'Ermias Gaga', location: 'Canada', tags: ['aerial', 'city lights', 'night', 'airplane window', 'moon', 'descent', 'urban grid', 'flight'] },
 
             // Water Images (201)
             { src: 'images/water/water1.jpeg', category: 'water', title: 'Red Sandstone Cliffs and Ocean Waves', location: 'Prince Edward Island, Canada', tags: ['cliffs', 'red sandstone', 'ocean', 'coastal erosion', 'maritime'] },
@@ -6438,6 +6512,92 @@ ARC-NATURE PHOTOGRAPHY
             { src: 'images/water/water209.jpeg', category: 'water', title: 'Sunset with Gentle Waves', location: 'Manitoulin Island, Ontario, Canada', tags: ['georgian bay', 'sunset', 'gentle waves', 'sandy beach', 'golden hour'] },
             { src: 'images/water/water210.jpeg', category: 'water', title: 'Urban Waterfall Through Trees', location: 'Ontario, Canada', tags: ['urban waterfall', 'framed by leaves', 'concrete structure', 'autumn colors', 'city nature'] },
             { src: 'images/water/water211.jpeg', category: 'water', title: 'Geese at Sunset with Old Pilings', location: 'Burlington, Ontario, Canada', tags: ['canada geese', 'wooden pilings', 'sunset silhouette', 'peaceful scene', 'lake ontario'] },
+            { src: 'images/water/water212.jpeg', category: 'water', title: 'Montmorency Falls from Upper Viewpoint', photographer: 'Ermias Gaga', location: 'Québec City, Québec, Canada', tags: ['montmorency falls', 'waterfall', 'viewpoint', 'mist', 'boardwalk', 'quebec'] },
+            { src: 'images/water/water213.jpeg', category: 'water', title: 'Montmorency Falls with Suspension Bridge', photographer: 'Ermias Gaga', location: 'Québec City, Québec, Canada', tags: ['montmorency falls', 'waterfall', 'suspension bridge', 'mist', 'cliff', 'quebec'] },
+            { src: 'images/water/water214.jpeg', category: 'water', title: 'Toronto Skyline Sunset over Lake Ontario', photographer: 'Ermias Gaga', location: 'Burlington, Ontario, Canada', tags: ['toronto skyline', 'sunset', 'lake ontario', 'golden hour', 'city silhouette', 'waterfront'] },
+            { src: 'images/water/water215.jpeg', category: 'water', title: 'Niagara Gorge Island Aerial View', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['niagara gorge', 'whirlpool', 'island', 'turquoise water', 'aerial view', 'niagara river'] },
+            { src: 'images/water/water216.jpeg', category: 'water', title: 'Frozen Breakwater on Lake Ontario in Winter', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['lake ontario', 'winter', 'ice', 'frozen breakwater', 'grey sky', 'dramatic'] },
+            { src: 'images/water/water217.jpeg', category: 'water', title: 'Marina at Blue Hour with Light Reflections', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['marina', 'blue hour', 'reflections', 'boats', 'dusk', 'calm water'] },
+            { src: 'images/water/water218.jpeg', category: 'water', title: 'Montmorency Falls with Visitors on Boardwalk', photographer: 'Ermias Gaga', location: 'Québec City, Québec, Canada', tags: ['montmorency falls', 'waterfall', 'boardwalk', 'visitors', 'mist', 'quebec'] },
+            { src: 'images/water/water219.jpeg', category: 'water', title: 'Toronto Skyline Sunset from Rocky Shore', photographer: 'Ermias Gaga', location: 'Burlington, Ontario, Canada', tags: ['toronto skyline', 'sunset', 'lake ontario', 'rocky shore', 'golden hour', 'silhouette'] },
+            { src: 'images/water/water220.JPG', category: 'water', title: 'American Falls with Hornblower Tour Boats', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['american falls', 'niagara falls', 'hornblower', 'tour boats', 'mist', 'waterfall'] },
+            { src: 'images/water/water221.JPG', category: 'water', title: 'American Falls Wide View with Tour Boat', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['american falls', 'niagara falls', 'wide view', 'tour boat', 'mist', 'waterfall'] },
+            { src: 'images/water/water222.jpg', category: 'water', title: 'American Falls Through Summer Foliage', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['american falls', 'niagara falls', 'summer', 'trees', 'mist', 'waterfall'] },
+            { src: 'images/water/water223.jpeg', category: 'water', title: 'Montmorency Falls with Zipline and Suspension Bridge', photographer: 'Ermias Gaga', location: 'Québec City, Québec, Canada', tags: ['montmorency falls', 'waterfall', 'zipline', 'suspension bridge', 'mist', 'quebec'] },
+            { src: 'images/water/water224.jpeg', category: 'water', title: 'Park Pond with Swan in Early Autumn', photographer: 'Ermias Gaga', location: 'Burlington, Ontario, Canada', tags: ['park pond', 'swan', 'autumn', 'reflections', 'ducks', 'peaceful'] },
+            { src: 'images/water/water225.jpeg', category: 'water', title: 'Anglers at Sunset on Autumn River', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['river', 'fishing', 'autumn', 'sunset', 'calm water', 'golden hour'] },
+            { src: 'images/water/water226.jpeg', category: 'water', title: 'Frozen Waterfall on Rock Face in Winter', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['frozen waterfall', 'ice', 'rock face', 'winter', 'icicles', 'dramatic'] },
+            { src: 'images/water/water227.jpeg', category: 'water', title: 'Harbour Pier with Toronto Skyline at Dusk', photographer: 'Ermias Gaga', location: 'Toronto, Ontario, Canada', tags: ['harbour pier', 'toronto skyline', 'dusk', 'lake ontario', 'sunset clouds', 'waterfront'] },
+            { src: 'images/water/water228.jpeg', category: 'water', title: 'Harbour Pier at Sunset with Sun Reflection', photographer: 'Ermias Gaga', location: 'Toronto, Ontario, Canada', tags: ['harbour pier', 'sunset', 'lake ontario', 'sun reflection', 'waterfront', 'golden hour'] },
+            { src: 'images/water/water229.jpeg', category: 'water', title: 'Winter Waterway with Bare Trees and Footbridge', photographer: 'Ermias Gaga', location: 'Burlington, Ontario, Canada', tags: ['winter', 'waterway', 'bare trees', 'reflections', 'grey sky', 'footbridge'] },
+            { src: 'images/water/water230.jpeg', category: 'water', title: 'Arched Footbridge over Winter Inlet', photographer: 'Ermias Gaga', location: 'Burlington, Ontario, Canada', tags: ['footbridge', 'arch bridge', 'winter', 'inlet', 'bare trees', 'calm water'] },
+            { src: 'images/water/water231.jpeg', category: 'water', title: 'Snowy Forest Trail in Winter', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['winter trail', 'snow', 'forest', 'bare trees', 'blue sky', 'peaceful'] },
+            { src: 'images/water/water232.jpeg', category: 'water', title: 'Frozen Rocky Shoreline in Winter Sun', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['lake ontario', 'winter', 'frozen shore', 'snow', 'sun glare', 'icy beach'] },
+            { src: 'images/water/water233.jpeg', category: 'water', title: 'Icy Shoreline with Power Lines and Calm Lake', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['lake ontario', 'winter', 'icy shoreline', 'power lines', 'sun reflection', 'hamilton'] },
+            { src: 'images/water/water234.jpeg', category: 'water', title: 'Icy Shoreline with Mist and Industrial Skyline', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['lake ontario', 'winter', 'icy shoreline', 'mist', 'power lines', 'hamilton'] },
+            { src: 'images/water/water235.jpeg', category: 'water', title: 'Bulbous Icicles Hanging over Dark Water', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['icicles', 'ice formation', 'winter', 'macro', 'lake ontario', 'abstract'] },
+            { src: 'images/water/water236.jpeg', category: 'water', title: 'Icicle Curtain over Frozen Lake Surface', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['icicles', 'ice formation', 'winter', 'macro', 'lake ontario', 'abstract'] },
+            { src: 'images/water/water237.jpeg', category: 'water', title: 'Ice Stalactites Touching Frozen Water', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['icicles', 'ice stalactites', 'winter', 'macro', 'lake ontario', 'abstract'] },
+            { src: 'images/water/water238.jpeg', category: 'water', title: 'Ice-encrusted Boulder with Icicles', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['ice formation', 'boulder', 'icicles', 'winter', 'lake ontario', 'abstract'] },
+            { src: 'images/water/water239.jpeg', category: 'water', title: 'Rounded Ice Formation with Icicle Fringe', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['ice formation', 'icicles', 'winter', 'reflection', 'lake ontario', 'abstract'] },
+            { src: 'images/water/water240.jpeg', category: 'water', title: 'Winter Sun over Misty Frozen Lake', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['lake ontario', 'winter', 'sun', 'mist', 'frozen lake', 'minimalist'] },
+            { src: 'images/water/water241.jpeg', category: 'water', title: 'Icy Shoreline with Power Lines at Winter Sunrise', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['lake ontario', 'winter', 'icy shoreline', 'power lines', 'sunrise', 'hamilton'] },
+            { src: 'images/water/water242.jpeg', category: 'water', title: 'Ice-coated Breakwater with Icicles at Dawn', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['lake ontario', 'winter', 'breakwater', 'icicles', 'ice formation', 'dawn'] },
+            { src: 'images/water/water243.jpeg', category: 'water', title: 'Wave-sculpted Ice Formation on Snowy Shore', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['lake ontario', 'winter', 'ice formation', 'snow', 'abstract', 'sculptural ice'] },
+            { src: 'images/water/water244.JPG', category: 'water', title: 'Winter Harbour with Ice Floes at Dusk', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['hamilton harbour', 'winter', 'ice floes', 'dusk', 'harbour', 'industrial'] },
+            { src: 'images/water/water245.jpeg', category: 'water', title: 'Niagara Gorge in Winter with Rainbow Bridge', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['niagara falls', 'winter', 'rainbow bridge', 'frozen gorge', 'snow', 'panoramic'] },
+            { src: 'images/water/water246.jpeg', category: 'water', title: 'Partially Frozen American Falls in Winter', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['american falls', 'niagara falls', 'winter', 'frozen', 'ice mounds', 'mist'] },
+            { src: 'images/water/water247.jpeg', category: 'water', title: 'Niagara River Ice Bridge and Horseshoe Falls in Winter', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['niagara falls', 'horseshoe falls', 'winter', 'ice bridge', 'mist', 'panoramic'] },
+            { src: 'images/water/water248.jpeg', category: 'water', title: 'Horseshoe Falls Winter Panorama with Ice Field', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['horseshoe falls', 'niagara falls', 'winter', 'ice field', 'mist', 'panoramic'] },
+            { src: 'images/water/water249.jpeg', category: 'water', title: 'Horseshoe Falls with Snow-covered Foreground', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['horseshoe falls', 'niagara falls', 'winter', 'mist', 'snow', 'dramatic'] },
+            { src: 'images/water/water250.jpeg', category: 'water', title: 'Snow-laden Vegetation at Horseshoe Falls Brink', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['horseshoe falls', 'niagara falls', 'winter', 'snow-covered vegetation', 'brink', 'mist'] },
+            { src: 'images/water/water251.jpeg', category: 'water', title: 'Horseshoe Falls Winter Close-up with Frozen Shrubs', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['horseshoe falls', 'niagara falls', 'winter', 'frozen shrubs', 'mist', 'close-up'] },
+            { src: 'images/water/water252.jpeg', category: 'water', title: 'Horseshoe Falls Engulfed in Winter Mist', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['horseshoe falls', 'niagara falls', 'winter', 'mist', 'snow', 'ethereal'] },
+            { src: 'images/water/water253.jpeg', category: 'water', title: 'Horseshoe Falls Winter View with Snow and Mist', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['horseshoe falls', 'niagara falls', 'winter', 'mist', 'snow-covered shrubs', 'dramatic'] },
+            { src: 'images/water/water254.jpeg', category: 'water', title: 'Horseshoe Falls Brink in Winter Green Water', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['horseshoe falls', 'niagara falls', 'winter', 'green water', 'brink', 'ice edge'] },
+            { src: 'images/water/water255.JPG', category: 'water', title: 'Niagara Falls Winter Base with Massive Ice Formation', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['niagara falls', 'winter', 'ice formation', 'base of falls', 'mist', 'frozen cliff'] },
+            { src: 'images/water/water256.jpeg', category: 'water', title: 'Niagara Falls Ice Wall and Giant Icicles Up Close', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['niagara falls', 'winter', 'ice wall', 'icicles', 'frozen', 'close-up'] },
+            { src: 'images/water/water257.jpeg', category: 'water', title: 'Niagara Falls Winter Ice Curtain Along Rock Face', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['niagara falls', 'winter', 'ice curtain', 'rock face', 'icicles', 'snow'] },
+            { src: 'images/water/water258.JPG', category: 'water', title: 'Niagara Horseshoe Falls Winter Panorama from Base', photographer: 'Ermias Gaga', location: 'Niagara Falls, Ontario, Canada', tags: ['horseshoe falls', 'niagara falls', 'winter', 'panorama', 'ice bridge', 'mist'] },
+            { src: 'images/water/water259.jpeg', category: 'water', title: 'Snow-Covered Beach at Dusk on Lake Ontario Shore', photographer: 'Ermias Gaga', location: 'Lake Ontario, Ontario, Canada', tags: ['lake ontario', 'winter', 'snow', 'beach', 'dusk', 'bare trees', 'stone wall'] },
+            { src: 'images/water/water260.jpeg', category: 'water', title: 'Trumpeter Swans and Ducks at Icy Winter Marina', photographer: 'Ermias Gaga', location: 'Lake Ontario, Ontario, Canada', tags: ['trumpeter swans', 'ducks', 'canada geese', 'winter', 'marina', 'lake ontario', 'wildlife', 'tagged birds'] },
+            { src: 'images/water/water261.jpeg', category: 'water', title: 'Frozen River Gorge Viewed from Above in Winter Forest', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['frozen river', 'gorge', 'winter', 'aerial view', 'forest', 'canyon', 'snow'] },
+            { src: 'images/water/water262.jpeg', category: 'water', title: 'Snow-Capped Rock Arch Formation in Lake Ontario', photographer: 'Ermias Gaga', location: 'Lake Ontario, Ontario, Canada', tags: ['rock arch', 'lake ontario', 'winter', 'snow', 'limestone', 'shoreline', 'overcast'] },
+            { src: 'images/water/water263.jpeg', category: 'water', title: 'Snow-Topped Limestone Rock Arch Close-Up in Lake', photographer: 'Ermias Gaga', location: 'Lake Ontario, Ontario, Canada', tags: ['rock arch', 'lake ontario', 'winter', 'snow', 'limestone', 'close-up', 'erosion'] },
+            { src: 'images/water/water264.jpeg', category: 'water', title: 'Sunset Over Strait of Georgia from White Rock Pier', photographer: 'Ermias Gaga', location: 'White Rock, British Columbia, Canada', tags: ['white rock pier', 'sunset', 'strait of georgia', 'british columbia', 'golden hour', 'harbour'] },
+            { src: 'images/water/water265.jpeg', category: 'water', title: 'Silhouettes Walking White Rock Pier at Sunset', photographer: 'Ermias Gaga', location: 'White Rock, British Columbia, Canada', tags: ['white rock pier', 'sunset', 'silhouettes', 'strait of georgia', 'british columbia', 'golden hour', 'pier walk'] },
+            { src: 'images/water/water266.jpeg', category: 'water', title: 'White Rock Pier Leading into Golden Sunset', photographer: 'Ermias Gaga', location: 'White Rock, British Columbia, Canada', tags: ['white rock pier', 'sunset', 'strait of georgia', 'british columbia', 'golden hour', 'vanishing point'] },
+            { src: 'images/water/water267.jpeg', category: 'water', title: 'Lighthouse at Pier End with Sunset Silhouettes', photographer: 'Ermias Gaga', location: 'White Rock, British Columbia, Canada', tags: ['white rock pier', 'lighthouse', 'sunset', 'silhouettes', 'strait of georgia', 'british columbia'] },
+            { src: 'images/water/water268.jpeg', category: 'water', title: 'White Rock Pier Afterglow Silhouette at Dusk', photographer: 'Ermias Gaga', location: 'White Rock, British Columbia, Canada', tags: ['white rock pier', 'afterglow', 'dusk', 'silhouette', 'strait of georgia', 'british columbia'] },
+            { src: 'images/water/water269.jpeg', category: 'water', title: 'Pier Base Rocky Shore at Sunset with Orange Sky', photographer: 'Ermias Gaga', location: 'White Rock, British Columbia, Canada', tags: ['white rock', 'rocky shore', 'sunset', 'orange sky', 'low tide', 'strait of georgia'] },
+            { src: 'images/water/water270.jpeg', category: 'water', title: 'Rocky Tidal Flat at Sunset with Distant Harbour Lights', photographer: 'Ermias Gaga', location: 'White Rock, British Columbia, Canada', tags: ['white rock', 'tidal flat', 'sunset', 'rocks', 'harbour lights', 'strait of georgia'] },
+            { src: 'images/water/water271.jpeg', category: 'water', title: 'Lone Boulder Silhouetted on Calm Evening Water', photographer: 'Ermias Gaga', location: 'White Rock, British Columbia, Canada', tags: ['white rock', 'boulder', 'silhouette', 'calm water', 'evening', 'minimalist'] },
+            { src: 'images/water/water272.jpeg', category: 'water', title: 'Rocky Coastline at Sunset with Snow-Capped Olympic Mountains', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'rocky coastline', 'sunset', 'olympic mountains', 'strait of juan de fuca', 'pink sky'] },
+            { src: 'images/water/water273.jpeg', category: 'water', title: 'Driftwood Shore at Sunset Overlooking Strait of Georgia', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'driftwood', 'sunset', 'rocky shore', 'strait of georgia', 'orange glow'] },
+            { src: 'images/water/water274.jpeg', category: 'water', title: 'Rocky Breakwater at Sunset with Gulf Islands in Distance', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'breakwater', 'sunset', 'gulf islands', 'orange sky', 'rocky shore'] },
+            { src: 'images/water/water275.jpeg', category: 'water', title: 'Seaside Park Sunset Silhouette with Arbutus Trees', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'park', 'sunset', 'arbutus trees', 'silhouette', 'strait of georgia', 'mount baker'] },
+            { src: 'images/water/water276.jpeg', category: 'water', title: 'Fiery Sunset Over Gulf Islands with Contrail', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'sunset', 'gulf islands', 'contrail', 'fiery sky', 'strait of georgia', 'reflection'] },
+            { src: 'images/water/water277.JPG', category: 'water', title: 'Fiery Sunset Reflection Over Gulf Islands with Driftwood', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'sunset', 'gulf islands', 'driftwood', 'reflection', 'contrail', 'strait of georgia'] },
+            { src: 'images/water/water278.jpeg', category: 'water', title: 'Coastal Village Overlook at Golden Hour with Olympic Mountains', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'coastal village', 'golden hour', 'olympic mountains', 'rocky shore', 'overlook'] },
+            { src: 'images/water/water279.jpeg', category: 'water', title: 'Sunset Over Strait with Tree Silhouette and Island', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'sunset', 'tree silhouette', 'strait of georgia', 'island', 'orange sky', 'contrail'] },
+            { src: 'images/water/water280.jpeg', category: 'water', title: 'Rocky Tidal Shore at Dawn with Distant Coastline', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'rocky shore', 'tidal', 'dawn', 'golden light', 'driftwood', 'strait of juan de fuca'] },
+            { src: 'images/water/water281.jpeg', category: 'water', title: 'Grassy Cliffside at Sunset with Rocky Shoreline', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['victoria', 'cliffside', 'sunset', 'rocky shore', 'golden hour', 'calm water', 'strait'] },
+            { src: 'images/water/water282.jpeg', category: 'water', title: 'Fountain Pond with Tree Reflections at Beacon Hill Park', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['beacon hill park', 'victoria', 'pond', 'fountain', 'reflection', 'trees', 'park'] },
+            { src: 'images/water/water283.jpeg', category: 'water', title: 'Beacon Hill Park Duck Pond with Fountain and Cedar', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['beacon hill park', 'victoria', 'duck pond', 'fountain', 'cedar tree', 'reflection', 'ducks'] },
+            { src: 'images/water/water284.jpeg', category: 'water', title: 'Secluded Forest Cove with Docked Boats on Gulf Island', photographer: 'Ermias Gaga', location: 'Gulf Islands, British Columbia, Canada', tags: ['gulf islands', 'british columbia', 'cove', 'boats', 'dock', 'forest', 'blue sky'] },
+            { src: 'images/water/water285.jpeg', category: 'water', title: 'Forested Sea Stack on Rugged West Coast Beach', photographer: 'Ermias Gaga', location: 'Vancouver Island, British Columbia, Canada', tags: ['vancouver island', 'sea stack', 'west coast', 'overcast', 'rocky beach', 'temperate rainforest', 'dramatic'] },
+            { src: 'images/water/water286.jpeg', category: 'water', title: 'Dark Layered Rock Shelves and Tidal Pools at Low Tide', photographer: 'Ermias Gaga', location: 'Vancouver Island, British Columbia, Canada', tags: ['vancouver island', 'tidal pools', 'rock shelves', 'low tide', 'west coast', 'overcast', 'geology'] },
+            { src: 'images/water/water287.jpeg', category: 'water', title: 'Moody Overcast Waves on Exposed West Coast Headland', photographer: 'Ermias Gaga', location: 'Vancouver Island, British Columbia, Canada', tags: ['vancouver island', 'west coast', 'headland', 'waves', 'overcast', 'moody', 'dark rocks'] },
+            { src: 'images/water/water288.jpeg', category: 'water', title: 'Emerald Cove with Twisted Snags on West Coast Headland', photographer: 'Ermias Gaga', location: 'Vancouver Island, British Columbia, Canada', tags: ['vancouver island', 'cove', 'west coast', 'snags', 'temperate rainforest', 'overcast', 'teal water', 'rocky shore'] },
+            { src: 'images/water/water289.jpeg', category: 'water', title: 'Lichen-Covered Rock Outcrop on Stormy Strait Shoreline', photographer: 'Ermias Gaga', location: 'Vancouver Island, British Columbia, Canada', tags: ['vancouver island', 'rock outcrop', 'lichen', 'stormy', 'overcast', 'strait', 'waves', 'west coast'] },
+            { src: 'images/water/water290.jpeg', category: 'water', title: 'Jagged Black Rock Face with Tidal Pool and Breaking Waves', photographer: 'Ermias Gaga', location: 'Vancouver Island, British Columbia, Canada', tags: ['vancouver island', 'black rock', 'tidal pool', 'waves', 'west coast', 'overcast', 'dramatic', 'layered rock'] },
+            { src: 'images/water/water291.jpeg', category: 'water', title: 'Algae-Covered Tidal Shelf with Rock Pool at Low Tide', photographer: 'Ermias Gaga', location: 'Vancouver Island, British Columbia, Canada', tags: ['vancouver island', 'tidal shelf', 'algae', 'rock pool', 'low tide', 'west coast', 'geology', 'green'] },
+            { src: 'images/water/water292.jpeg', category: 'water', title: 'Aerial View of Forested Inlet with Cloud Reflections', photographer: 'Ermias Gaga', location: 'Gulf Islands, British Columbia, Canada', tags: ['gulf islands', 'inlet', 'forested hills', 'cloud reflection', 'overcast', 'elevated view', 'calm water'] },
+            { src: 'images/water/water293.jpeg', category: 'water', title: 'Summit Railing Hub with Forested Inlet Below', photographer: 'Ermias Gaga', location: 'Gulf Islands, British Columbia, Canada', tags: ['gulf islands', 'summit', 'railing', 'metal', 'inlet', 'forested hills', 'viewpoint', 'abstract'] },
+            { src: 'images/water/water294.jpeg', category: 'water', title: 'Cloud-Reflected Lake Surrounded by Conifer-Covered Hills', photographer: 'Ermias Gaga', location: 'Gulf Islands, British Columbia, Canada', tags: ['gulf islands', 'lake', 'conifers', 'cloud reflection', 'overcast', 'elevated view', 'still water', 'hills'] },
+            { src: 'images/water/water295.JPG', category: 'water', title: 'Moody Inlet with Forested Peninsula Under Storm Clouds', photographer: 'Ermias Gaga', location: 'Gulf Islands, British Columbia, Canada', tags: ['gulf islands', 'inlet', 'peninsula', 'storm clouds', 'overcast', 'forested', 'moody', 'reflection'] },
+            { src: 'images/water/water296.JPG', category: 'water', title: 'Forested Island Headland Curving into Calm Channel', photographer: 'Ermias Gaga', location: 'Gulf Islands, British Columbia, Canada', tags: ['gulf islands', 'island', 'headland', 'channel', 'calm water', 'overcast', 'forested', 'cloud reflection'] },
+            { src: 'images/water/water297.jpeg', category: 'water', title: 'Girl in a Wetsuit Bronze Sculpture on Mossy Rock in English Bay', photographer: 'Ermias Gaga', location: 'Vancouver, British Columbia, Canada', tags: ['vancouver', 'english bay', 'sculpture', 'bronze', 'girl in wetsuit', 'seagull', 'harbour', 'foggy', 'north shore'] },
 
 
             // Wildlife Images (40)
@@ -6486,43 +6646,67 @@ ARC-NATURE PHOTOGRAPHY
             { src: 'images/wildlife/wildlife43.jpeg', category: 'wildlife', title: 'Red Fox Taxidermy Display', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['red fox', 'taxidermy', 'museum display', 'autumn leaves', 'educational exhibit', 'wildlife'] },
             { src: 'images/wildlife/wildlife44.jpg', category: 'wildlife', title: 'Canada Goose Sculpture at Smoky Sunrise', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['canada goose', 'sculpture', 'silhouette', 'smoky sunrise', 'public art', 'monument'] },
             { src: 'images/wildlife/wildlife45.jpg', category: 'wildlife', title: 'Snapping Turtle Crossing Road', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['snapping turtle', 'common snapping turtle', 'road crossing', 'reptile', 'large turtle', 'wildlife'] },
-            { src: 'images/wildlife/wildlife46.jpeg', category: 'wildlife', title: 'Painted Lady Butterfly on Pink Flowers', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['painted lady', 'butterfly', 'pink flowers', 'pollinator', 'garden', 'summer'] }
+            { src: 'images/wildlife/wildlife46.jpeg', category: 'wildlife', title: 'Painted Lady Butterfly on Pink Flowers', photographer: 'Ermias Gaga', location: 'Ontario, Canada', tags: ['painted lady', 'butterfly', 'pink flowers', 'pollinator', 'garden', 'summer'] },
+            { src: 'images/wildlife/wildlife47.jpeg', category: 'wildlife', title: 'Driftwood Eagle Sculpture with Forest View', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['eagle', 'driftwood sculpture', 'public art', 'bald eagle', 'forest', 'overlook'] },
+            { src: 'images/wildlife/wildlife48.jpeg', category: 'wildlife', title: 'African Grey Parrot in Palm Fronds', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['african grey parrot', 'parrot', 'grey', 'tropical bird', 'aviary', 'wildlife'] },
+            { src: 'images/wildlife/wildlife49.jpeg', category: 'wildlife', title: 'Tiger Longwing Butterfly on Palm Leaf', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['tiger longwing', 'butterfly', 'orange', 'black', 'tropical', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife50.jpeg', category: 'wildlife', title: 'Green-winged Macaw on Branch', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['green-winged macaw', 'macaw', 'red', 'teal', 'parrot', 'aviary'] },
+            { src: 'images/wildlife/wildlife51.jpeg', category: 'wildlife', title: 'Paper Kite Butterfly Wings Open on Leaves', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['paper kite', 'rice paper butterfly', 'white', 'black', 'tropical butterfly', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife52.jpeg', category: 'wildlife', title: 'American Flamingo Standing Tall', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['flamingo', 'american flamingo', 'pink', 'tropical bird', 'aviary', 'wildlife'] },
+            { src: 'images/wildlife/wildlife53.jpeg', category: 'wildlife', title: 'Blue-and-Yellow Macaw at Feeding Station', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['blue-and-yellow macaw', 'macaw', 'blue', 'yellow', 'parrot', 'aviary'] },
+            { src: 'images/wildlife/wildlife54.jpeg', category: 'wildlife', title: 'Pink-spotted Cattleheart Butterfly on Leaf', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['cattleheart butterfly', 'black', 'pink', 'tropical butterfly', 'butterfly house', 'wildlife'] },
+            { src: 'images/wildlife/wildlife55.jpeg', category: 'wildlife', title: 'Green Iguana in Tropical Foliage', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['green iguana', 'iguana', 'reptile', 'tropical', 'aviary', 'wildlife'] },
+            { src: 'images/wildlife/wildlife56.jpeg', category: 'wildlife', title: 'Scarlet Mormon Butterfly Wings Open', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['scarlet mormon', 'butterfly', 'black', 'red', 'tropical butterfly', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife57.jpeg', category: 'wildlife', title: 'Blue Morpho Butterfly Underwing Eyespots', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['blue morpho', 'morpho butterfly', 'eyespots', 'underwing', 'tropical butterfly', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife58.jpeg', category: 'wildlife', title: 'Rudyard Flasher Butterfly on Wall', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['flasher butterfly', 'black', 'orange', 'blue iridescent', 'tropical butterfly', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife59.jpeg', category: 'wildlife', title: 'Blue Morpho Butterfly Wings Open on Leaves', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['blue morpho', 'morpho butterfly', 'iridescent blue', 'tropical butterfly', 'butterfly house', 'wings open'] },
+            { src: 'images/wildlife/wildlife60.jpeg', category: 'wildlife', title: 'Paper Kite Butterfly on Pale Leaf', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['paper kite', 'rice paper butterfly', 'white', 'black', 'tropical butterfly', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife61.jpeg', category: 'wildlife', title: 'Great Eggfly Butterfly on Green Leaf', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['great eggfly', 'eggfly butterfly', 'brown', 'white patches', 'tropical butterfly', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife62.jpeg', category: 'wildlife', title: 'Great Mormon Butterfly on Mesh Screen', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['great mormon', 'swallowtail', 'black', 'brown', 'red spots', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife63.jpeg', category: 'wildlife', title: 'Blue Diadem Butterfly on Leaf', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['blue diadem', 'hypolimnas', 'black', 'blue', 'white', 'tropical butterfly', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife64.jpeg', category: 'wildlife', title: 'Malachite Butterfly Feeding on Citrus Fruit', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['malachite butterfly', 'siproeta stelenes', 'green', 'black', 'feeding', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife65.jpeg', category: 'wildlife', title: 'Owl Butterfly Resting on Rock', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['owl butterfly', 'caligo', 'eyespot', 'camouflage', 'tropical butterfly', 'butterfly house'] },
+            { src: 'images/wildlife/wildlife66.jpeg', category: 'wildlife', title: 'Leafcutter Ants Carrying Foliage', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['leafcutter ants', 'atta', 'colony', 'insects', 'tropical', 'butterfly house exhibit'] },
+            { src: 'images/wildlife/wildlife67.jpeg', category: 'wildlife', title: 'American Robin in Pine Tree', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['american robin', 'robin', 'songbird', 'pine tree', 'perched', 'wildlife'] },
+            { src: 'images/wildlife/wildlife68.jpeg', category: 'wildlife', title: 'Indian Peafowl Walking in Park', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['peacock', 'indian peafowl', 'train feathers', 'eye spots', 'park', 'wildlife'] },
+            { src: 'images/wildlife/wildlife69.jpeg', category: 'wildlife', title: 'Great Blue Heron on Rocky Shoreline', photographer: 'Ermias Gaga', location: 'Victoria, British Columbia, Canada', tags: ['great blue heron', 'heron', 'shoreline', 'rocky coast', 'fishing', 'waterbird'] },
+            { src: 'images/wildlife/wildlife70.jpeg', category: 'wildlife', title: 'Male Northern Cardinal in Winter Thicket', photographer: 'Ermias Gaga', location: 'Hamilton, Ontario, Canada', tags: ['northern cardinal', 'cardinal', 'red bird', 'male', 'winter', 'bare branches'] }
         ];
 
 
         document.head.appendChild(style);
-// ==================== IMAGE PROTECTION SYSTEM ====================
+        // ==================== IMAGE PROTECTION SYSTEM ====================
 
-class ImageProtectionSystem {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        this.addWatermarks();
-        this.disableRightClick();
-        this.disableDragAndDrop();
-        this.preventDevTools();
-        this.addCopyrightWarning();
-        this.setupProtectionWrappers();
-    }
-
-    // 1. Right-click disablement
-    disableRightClick() {
-        document.addEventListener('contextmenu', (e) => {
-            if (e.target.tagName === 'IMG' || 
-                e.target.classList.contains('gallery-item') ||
-                e.target.closest('.gallery-item')) {
-                e.preventDefault();
-                this.showProtectionMessage();
+        class ImageProtectionSystem {
+            constructor() {
+                this.init();
             }
-        });
-    }
 
-    showProtectionMessage() {
-        const message = document.createElement('div');
-        message.innerHTML = 'Image downloading is disabled to protect photographer copyright.';
-        message.style.cssText = `
+            init() {
+                this.addWatermarks();
+                this.disableRightClick();
+                this.disableDragAndDrop();
+                this.preventDevTools();
+                this.addCopyrightWarning();
+                this.setupProtectionWrappers();
+            }
+
+            // 1. Right-click disablement
+            disableRightClick() {
+                document.addEventListener('contextmenu', (e) => {
+                    if (e.target.tagName === 'IMG' ||
+                        e.target.classList.contains('gallery-item') ||
+                        e.target.closest('.gallery-item')) {
+                        e.preventDefault();
+                        this.showProtectionMessage();
+                    }
+                });
+            }
+
+            showProtectionMessage() {
+                const message = document.createElement('div');
+                message.innerHTML = 'Image downloading is disabled to protect photographer copyright.';
+                message.style.cssText = `
             position: fixed;
             top: 50%;
             left: 50%;
@@ -6539,43 +6723,43 @@ class ImageProtectionSystem {
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             animation: fadeInOut 2s ease;
         `;
-        
-        document.body.appendChild(message);
-        
-        setTimeout(() => {
-            message.style.opacity = '0';
-            message.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => {
-                if (message.parentNode) {
-                    document.body.removeChild(message);
-                }
-            }, 500);
-        }, 2000);
-    }
 
-    // 2. Disable drag-and-drop
-    disableDragAndDrop() {
-        document.addEventListener('dragstart', (e) => {
-            if (e.target.tagName === 'IMG' || 
-                e.target.classList.contains('gallery-item') ||
-                e.target.closest('.gallery-item')) {
-                e.preventDefault();
-            }
-        });
-        
-        // Also prevent dropping
-        document.addEventListener('drop', (e) => {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-            }
-        });
-    }
+                document.body.appendChild(message);
 
-    // 3. Add watermarks dynamically
-    addWatermarks() {
-        // This will be applied via CSS class to gallery images
-        const style = document.createElement('style');
-        style.textContent = `
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    message.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => {
+                        if (message.parentNode) {
+                            document.body.removeChild(message);
+                        }
+                    }, 500);
+                }, 2000);
+            }
+
+            // 2. Disable drag-and-drop
+            disableDragAndDrop() {
+                document.addEventListener('dragstart', (e) => {
+                    if (e.target.tagName === 'IMG' ||
+                        e.target.classList.contains('gallery-item') ||
+                        e.target.closest('.gallery-item')) {
+                        e.preventDefault();
+                    }
+                });
+
+                // Also prevent dropping
+                document.addEventListener('drop', (e) => {
+                    if (e.target.tagName === 'IMG') {
+                        e.preventDefault();
+                    }
+                });
+            }
+
+            // 3. Add watermarks dynamically
+            addWatermarks() {
+                // This will be applied via CSS class to gallery images
+                const style = document.createElement('style');
+                style.textContent = `
             .gallery-item img.watermarked {
                 position: relative;
             }
@@ -6620,90 +6804,90 @@ class ImageProtectionSystem {
                 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
             }
         `;
-        document.head.appendChild(style);
-        
-        // Apply watermark class to all gallery images
-        setTimeout(() => {
-            document.querySelectorAll('.gallery-item img').forEach(img => {
-                img.classList.add('watermarked');
-            });
-        }, 1000);
-    }
+                document.head.appendChild(style);
 
-    // 4. Prevent browser developer tools inspection
-    preventDevTools() {
-        // Disable keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+S
-            if (
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
-                (e.ctrlKey && e.key === 'U') ||
-                (e.ctrlKey && e.key === 'S') ||
-                (e.key === 'PrintScreen')
-            ) {
-                e.preventDefault();
-                this.showProtectionMessage();
-                return false;
+                // Apply watermark class to all gallery images
+                setTimeout(() => {
+                    document.querySelectorAll('.gallery-item img').forEach(img => {
+                        img.classList.add('watermarked');
+                    });
+                }, 1000);
             }
-        });
-        
-        // Prevent right-click menu entirely on images
-        document.addEventListener('contextmenu', (e) => {
-            const target = e.target;
-            if (target.tagName === 'IMG' || 
-                target.classList.contains('lightbox-image') ||
-                target.closest('.gallery-item')) {
-                e.preventDefault();
-                this.showProtectionMessage();
-            }
-        }, true);
-    }
 
-    // 5. Setup protection wrappers
-    setupProtectionWrappers() {
-        // This will wrap gallery images with protection layers
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.addedNodes.length) {
-                    mutation.addedNodes.forEach((node) => {
-                        if (node.nodeType === 1 && node.classList && 
-                            (node.classList.contains('gallery-item') || node.querySelector('.gallery-item'))) {
-                            this.wrapGalleryItem(node);
+            // 4. Prevent browser developer tools inspection
+            preventDevTools() {
+                // Disable keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+S
+                    if (
+                        e.key === 'F12' ||
+                        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                        (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                        (e.ctrlKey && e.key === 'U') ||
+                        (e.ctrlKey && e.key === 'S') ||
+                        (e.key === 'PrintScreen')
+                    ) {
+                        e.preventDefault();
+                        this.showProtectionMessage();
+                        return false;
+                    }
+                });
+
+                // Prevent right-click menu entirely on images
+                document.addEventListener('contextmenu', (e) => {
+                    const target = e.target;
+                    if (target.tagName === 'IMG' ||
+                        target.classList.contains('lightbox-image') ||
+                        target.closest('.gallery-item')) {
+                        e.preventDefault();
+                        this.showProtectionMessage();
+                    }
+                }, true);
+            }
+
+            // 5. Setup protection wrappers
+            setupProtectionWrappers() {
+                // This will wrap gallery images with protection layers
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.addedNodes.length) {
+                            mutation.addedNodes.forEach((node) => {
+                                if (node.nodeType === 1 && node.classList &&
+                                    (node.classList.contains('gallery-item') || node.querySelector('.gallery-item'))) {
+                                    this.wrapGalleryItem(node);
+                                }
+                            });
                         }
                     });
-                }
-            });
-        });
-        
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-        
-        // Wrap existing gallery items
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            this.wrapGalleryItem(item);
-        });
-    }
+                });
 
-    wrapGalleryItem(item) {
-        if (item.classList.contains('protected-wrapper')) return;
-        
-        const wrapper = document.createElement('div');
-        wrapper.className = 'image-protection-wrapper protected-wrapper';
-        wrapper.style.cssText = `
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+
+                // Wrap existing gallery items
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    this.wrapGalleryItem(item);
+                });
+            }
+
+            wrapGalleryItem(item) {
+                if (item.classList.contains('protected-wrapper')) return;
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'image-protection-wrapper protected-wrapper';
+                wrapper.style.cssText = `
             position: relative;
             overflow: hidden;
             display: block;
             width: 100%;
             height: 100%;
         `;
-        
-        const shield = document.createElement('div');
-        shield.className = 'image-shield';
-        shield.style.cssText = `
+
+                const shield = document.createElement('div');
+                shield.className = 'image-shield';
+                shield.style.cssText = `
             position: absolute;
             top: 0;
             left: 0;
@@ -6713,10 +6897,10 @@ class ImageProtectionSystem {
             z-index: 20;
             cursor: not-allowed;
         `;
-        
-        const overlay = document.createElement('div');
-        overlay.className = 'image-overlay';
-        overlay.style.cssText = `
+
+                const overlay = document.createElement('div');
+                overlay.className = 'image-overlay';
+                overlay.style.cssText = `
             position: absolute;
             top: 0;
             left: 0;
@@ -6726,38 +6910,38 @@ class ImageProtectionSystem {
             z-index: 15;
             pointer-events: none;
         `;
-        
-        // Clone and wrap the image
-        const originalImg = item.querySelector('img');
-        if (originalImg) {
-            const protectedImg = originalImg.cloneNode(true);
-            protectedImg.classList.add('protected-image');
-            protectedImg.style.cssText = `
+
+                // Clone and wrap the image
+                const originalImg = item.querySelector('img');
+                if (originalImg) {
+                    const protectedImg = originalImg.cloneNode(true);
+                    protectedImg.classList.add('protected-image');
+                    protectedImg.style.cssText = `
                 position: relative;
                 z-index: 10;
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
             `;
-            
-            originalImg.parentNode.replaceChild(protectedImg, originalImg);
-            wrapper.appendChild(shield);
-            wrapper.appendChild(overlay);
-            wrapper.appendChild(protectedImg);
-            item.appendChild(wrapper);
-        }
-    }
 
-    // 6. Add copyright warning
-    addCopyrightWarning() {
-        // Remove any existing warning
-        const existingWarning = document.querySelector('.copyright-warning');
-        if (existingWarning) existingWarning.remove();
-        
-        const warning = document.createElement('div');
-        warning.className = 'copyright-warning';
-        warning.innerHTML = '<i class="fas fa-copyright"></i> All images are copyrighted. Unauthorized downloading is prohibited.';
-        warning.style.cssText = `
+                    originalImg.parentNode.replaceChild(protectedImg, originalImg);
+                    wrapper.appendChild(shield);
+                    wrapper.appendChild(overlay);
+                    wrapper.appendChild(protectedImg);
+                    item.appendChild(wrapper);
+                }
+            }
+
+            // 6. Add copyright warning
+            addCopyrightWarning() {
+                // Remove any existing warning
+                const existingWarning = document.querySelector('.copyright-warning');
+                if (existingWarning) existingWarning.remove();
+
+                const warning = document.createElement('div');
+                warning.className = 'copyright-warning';
+                warning.innerHTML = '<i class="fas fa-copyright"></i> All images are copyrighted. Unauthorized downloading is prohibited.';
+                warning.style.cssText = `
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -6776,36 +6960,36 @@ class ImageProtectionSystem {
             align-items: center;
             gap: 8px;
         `;
-        
-        document.body.appendChild(warning);
-    }
 
-    // 7. Enhanced protection methods
-    setupEnhancedProtection() {
-        // Monitor for screenshot attempts
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                console.log('Warning: User may be capturing screen content');
+                document.body.appendChild(warning);
             }
-        });
-        
-        // Prevent image capture via canvas
-        Object.defineProperty(HTMLImageElement.prototype, 'src', {
-            set: function(value) {
-                const original = this.getAttribute('data-original-src') || value;
-                this.setAttribute('data-original-src', original);
-                this.setAttribute('src', original);
-            },
-            get: function() {
-                return this.getAttribute('src');
-            }
-        });
-    }
 
-    // 8. Initialize all protection
-    setupAllProtection() {
-        // Add CSS for protection
-        const protectionCSS = `
+            // 7. Enhanced protection methods
+            setupEnhancedProtection() {
+                // Monitor for screenshot attempts
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        console.log('Warning: User may be capturing screen content');
+                    }
+                });
+
+                // Prevent image capture via canvas
+                Object.defineProperty(HTMLImageElement.prototype, 'src', {
+                    set: function (value) {
+                        const original = this.getAttribute('data-original-src') || value;
+                        this.setAttribute('data-original-src', original);
+                        this.setAttribute('src', original);
+                    },
+                    get: function () {
+                        return this.getAttribute('src');
+                    }
+                });
+            }
+
+            // 8. Initialize all protection
+            setupAllProtection() {
+                // Add CSS for protection
+                const protectionCSS = `
             /* Prevent text selection on images */
             img {
                 user-select: none;
@@ -6877,52 +7061,52 @@ class ImageProtectionSystem {
                 pointer-events: none;
             }
         `;
-        
-        const style = document.createElement('style');
-        style.textContent = protectionCSS;
-        document.head.appendChild(style);
-    }
-}
 
-// Initialize protection when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Wait a bit for gallery to load
-    setTimeout(() => {
-        const protectionSystem = new ImageProtectionSystem();
-        protectionSystem.setupAllProtection();
-        protectionSystem.setupEnhancedProtection();
-        
-        // Make it globally available for debugging
-        window.imageProtection = protectionSystem;
-    }, 2000);
-});
-
-// Also initialize when gallery is ready
-if (typeof gallery !== 'undefined') {
-    gallery.initPromise.then(() => {
-        setTimeout(() => {
-            if (!window.imageProtection) {
-                window.imageProtection = new ImageProtectionSystem();
+                const style = document.createElement('style');
+                style.textContent = protectionCSS;
+                document.head.appendChild(style);
             }
-        }, 1000);
-    });
-}
-
-// Add protection to dynamically loaded images
-const originalGalleryRender = EnhancedPhotoGallery.prototype.renderGallery;
-EnhancedPhotoGallery.prototype.renderGallery = function() {
-    const result = originalGalleryRender.apply(this, arguments);
-    
-    // Apply protection to new images
-    setTimeout(() => {
-        if (window.imageProtection) {
-            window.imageProtection.setupProtectionWrappers();
-            window.imageProtection.addWatermarks();
         }
-    }, 500);
-    
-    return result;
-};
+
+        // Initialize protection when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Wait a bit for gallery to load
+            setTimeout(() => {
+                const protectionSystem = new ImageProtectionSystem();
+                protectionSystem.setupAllProtection();
+                protectionSystem.setupEnhancedProtection();
+
+                // Make it globally available for debugging
+                window.imageProtection = protectionSystem;
+            }, 2000);
+        });
+
+        // Also initialize when gallery is ready
+        if (typeof gallery !== 'undefined') {
+            gallery.initPromise.then(() => {
+                setTimeout(() => {
+                    if (!window.imageProtection) {
+                        window.imageProtection = new ImageProtectionSystem();
+                    }
+                }, 1000);
+            });
+        }
+
+        // Add protection to dynamically loaded images
+        const originalGalleryRender = EnhancedPhotoGallery.prototype.renderGallery;
+        EnhancedPhotoGallery.prototype.renderGallery = function () {
+            const result = originalGalleryRender.apply(this, arguments);
+
+            // Apply protection to new images
+            setTimeout(() => {
+                if (window.imageProtection) {
+                    window.imageProtection.setupProtectionWrappers();
+                    window.imageProtection.addWatermarks();
+                }
+            }, 500);
+
+            return result;
+        };
 
 
     </script>
