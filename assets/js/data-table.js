@@ -128,7 +128,7 @@ const DataTable = (() => {
             state.page = Math.min(state.page, pages);
             const start = (state.page - 1) * state.size;
             const view = rows.slice(start, start + state.size);
-            tbody.innerHTML = view.length ? view.map((r) => `<tr>${cols.map((c) => `<td class="${c.type === 'number' || c.type === 'date' ? 'num' : ''}">${esc(c.format ? c.format(r[c.key], r) : r[c.key] ?? '—')}</td>`).join('')}</tr>`).join('')
+            tbody.innerHTML = view.length ? view.map((r) => `<tr>${cols.map((c) => `<td class="${c.type === 'number' || c.type === 'date' ? 'num' : ''}">${esc(c.format ? c.format(r[c.key], r) : r[c.key] ?? 'n/a')}</td>`).join('')}</tr>`).join('')
                 : `<tr><td colspan="${cols.length}" class="dt-empty">No rows match your search.</td></tr>`;
             status.textContent = rows.length ? `Showing ${start + 1}–${start + view.length} of ${rows.length.toLocaleString()}${rows.length !== data.length ? ` (filtered from ${data.length.toLocaleString()})` : ''}` : 'No matching rows';
             const btn = (p, label, aria, disabled, current) => `<button type="button" class="dt-page${current ? ' current' : ''}" data-page="${p}" aria-label="${aria}"${disabled ? ' disabled' : ''}${current ? ' aria-current="page"' : ''}>${label}</button>`;

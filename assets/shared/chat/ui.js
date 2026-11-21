@@ -103,7 +103,7 @@ ARC.chat = (() => {
     }
 
     function welcome() {
-        const text = SITE.welcome || `Hi! 👋 I'm the **ARC-NATURE photo assistant**.\n\nAsk me about the photos in this portfolio, downloads and prints, or anything photography — settings, composition, gear and editing. I'll tell you if I'm not sure about something.`;
+        const text = SITE.welcome || `Hi! 👋 I'm the **ARC-NATURE photo assistant**.\n\nAsk me about the photos in this portfolio, downloads and prints, or anything photography: settings, composition, gear and editing. I'll tell you if I'm not sure about something.`;
         const m = { role: 'bot', text, ts: Date.now(), source: 'assistant' };
         renderMessage(m);
         setSuggestions(STARTERS);
@@ -187,12 +187,12 @@ ARC.chat = (() => {
             }
             if (!reply) {
                 if (!local.text) reply = { text: E.unknownText(local.alternatives), source: 'kb', alternatives: local.alternatives, actions: local.alternatives?.length ? [] : [{ label: 'Open contact form', action: 'contact:other' }] };
-                else if (local.confidence === 'medium' && local.source === 'kb' && local.title) reply = { ...local, text: `Here's what I know about **${local.title}** — tell me if you meant something else.\n\n${local.text}` };
+                else if (local.confidence === 'medium' && local.source === 'kb' && local.title) reply = { ...local, text: `Here's what I know about **${local.title}**: tell me if you meant something else.\n\n${local.text}` };
                 else reply = local;
             }
         } catch (err) {
             console.error('Chat error:', err);
-            reply = { text: 'Sorry — something went wrong while answering. Please try rephrasing your question.', source: 'system', error: true };
+            reply = { text: 'Sorry, something went wrong while answering. Please try rephrasing your question.', source: 'system', error: true };
         }
 
         // Short, natural delay so the typing indicator doesn't flash.

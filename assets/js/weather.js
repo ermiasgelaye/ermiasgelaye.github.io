@@ -155,7 +155,7 @@ const Weather = (() => {
         if (!box) return;
         const explain = {
             temp: (s) => `Temperature falls with distance from the equator in both hemispheres. On ${data.date.toLocaleDateString('en-CA', { month: 'long', day: 'numeric', timeZone: 'UTC' })} (northern summer), each degree of latitude north lowers max temperature by about ${Math.abs(s.north.slope).toFixed(2)} °F.`,
-            humidity: (s) => `Latitude explains almost none of the variation in humidity (R² ≤ ${Math.max(s.north.r2, s.south.r2).toFixed(2)}) — local factors such as proximity to water dominate.`,
+            humidity: (s) => `Latitude explains almost none of the variation in humidity (R² ≤ ${Math.max(s.north.r2, s.south.r2).toFixed(2)}), local factors such as proximity to water dominate.`,
             cloudiness: (s) => `Practically no relationship (R² ≤ ${Math.max(s.north.r2, s.south.r2).toFixed(2)}): cloud cover varies widely at every latitude and clusters at reported values such as 0%, 20%, 75% and 92%.`,
             wind: () => 'No significant relationship in either hemisphere: most cities report light winds whatever their latitude.'
         };

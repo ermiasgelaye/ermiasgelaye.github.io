@@ -85,7 +85,7 @@ ARC.gallery = (() => {
             <picture>
                 <source type="image/webp" srcset="${escapeHtml(p.thumbSmWebp)} 480w, ${escapeHtml(p.thumbWebp)} 800w"
                         sizes="(max-width: 575.98px) 50vw, (max-width: 991.98px) 45vw, 300px">
-                <img class="thumb" src="${escapeHtml(p.thumb)}" alt="${escapeHtml(p.title)} — ${escapeHtml(p.location)}"
+                <img class="thumb" src="${escapeHtml(p.thumb)}" alt="${escapeHtml(p.title)}: ${escapeHtml(p.location)}"
                      srcset="${escapeHtml(p.thumbSm)} 480w, ${escapeHtml(p.thumb)} 800w"
                      sizes="(max-width: 575.98px) 50vw, (max-width: 991.98px) 45vw, 300px"
                      loading="${eager ? 'eager' : 'lazy'}" fetchpriority="${eager ? 'high' : 'low'}" decoding="async" width="800" height="600" draggable="false">
@@ -198,7 +198,7 @@ ARC.gallery = (() => {
         url.search = '';
         url.hash = '';
         url.searchParams.set('photo', p.src.split('/').pop());
-        const data = { title: p.title, text: `${p.title} — photo by ${p.photographer}`, url: url.toString() };
+        const data = { title: p.title, text: `${p.title}, photo by ${p.photographer}`, url: url.toString() };
         try {
             if (navigator.share) { await navigator.share(data); return; }
             await navigator.clipboard.writeText(data.url);
@@ -220,7 +220,7 @@ ARC.gallery = (() => {
         const lb = el.lb;
         const img = lb.querySelector('.lb-img');
         el.stage.classList.remove('zoomed');
-        img.alt = `${p.title} — ${p.location}`;
+        img.alt = `${p.title}: ${p.location}`;
         delete img.dataset.full;
         img.src = p.thumb; // instant preview (800px — already sharp on phones)
         if (needsFull()) loadFull(p);

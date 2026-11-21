@@ -314,7 +314,7 @@
                 const t300 = 300 / (f * crop);
                 return {
                     text: `For **${f}mm** on **${cname}** (equivalent ${Math.round(f * crop)}mm):\n\n` +
-                        `- **500 rule:** about **${fmtTime(t500)}** — fine for small web images.\n` +
+                        `- **500 rule:** about **${fmtTime(t500)}**: fine for small web images.\n` +
                         `- **Stricter “300 rule”** (better for modern high-resolution sensors or large prints): about **${fmtTime(t300)}**.\n\n` +
                         `Both are rules of thumb. The more precise **NPF rule** also factors in aperture and pixel pitch, and usually gives a shorter time than the 500 rule. Zoom in on a test frame and shorten the exposure if stars look like short dashes.`,
                     related: ['astro-milkyway', 'astro-settings']
@@ -401,7 +401,7 @@
                 const w = Math.sqrt(px * 1.5), h = w / 1.5; // 3:2 sensor
                 const at = (ppi) => `${(w / ppi).toFixed(1)} × ${(h / ppi).toFixed(1)} in (${(w / ppi * 2.54).toFixed(0)} × ${(h / ppi * 2.54).toFixed(0)} cm)`;
                 return {
-                    text: `A **${mp[1]} MP** 3:2 image is about **${Math.round(w)} × ${Math.round(h)} px**.\n\n- **300 PPI** (close-viewing, gallery quality): ${at(300)}\n- **200 PPI** (very good for most wall prints): ${at(200)}\n- **150 PPI** (large prints viewed from a distance): ${at(150)}\n\nViewing distance matters more than raw PPI — large canvases are rarely viewed up close.`,
+                    text: `A **${mp[1]} MP** 3:2 image is about **${Math.round(w)} × ${Math.round(h)} px**.\n\n- **300 PPI** (close-viewing, gallery quality): ${at(300)}\n- **200 PPI** (very good for most wall prints): ${at(200)}\n- **150 PPI** (large prints viewed from a distance): ${at(150)}\n\nViewing distance matters more than raw PPI: large canvases are rarely viewed up close.`,
                     related: ['print-resolution']
                 };
             }
@@ -470,7 +470,7 @@
 
         if (/\bhow many\b.*\b(photos?|pictures?|images?)\b|\b(size of|total)\b.*\b(gallery|portfolio|collection)\b|\bcategories\b.*\b(are there|available|do you have)\b|\bwhat categories\b/.test(s)) {
             const c = P.counts();
-            const lines = Object.entries(P.categories).map(([k, v]) => `- **${v.name}** — ${c[k] || 0} photos (${v.description.toLowerCase()})`).join('\n');
+            const lines = Object.entries(P.categories).map(([k, v]) => `- **${v.name}**: ${c[k] || 0} photos (${v.description.toLowerCase()})`).join('\n');
             return {
                 text: `The portfolio currently has **${c.all.toLocaleString()} photographs** in ${Object.keys(P.categories).length} categories:\n\n${lines}\n\nMost were taken across Canada (Ontario, British Columbia, Québec, Alberta, the Maritimes), plus a few from Italy, Vatican City and Dubai.`,
                 actions: Object.keys(P.categories).slice(0, 6).map((k) => ({ label: P.categories[k].name, action: `gallery:category:${k}` })),
@@ -481,7 +481,7 @@
         if (/\b(where|which (places|locations|countries|provinces)|what (places|locations|countries))\b.*\b(taken|shot|photograph|travell?ed|travel|been|visit(ed)?|photos?)\b|\b(travel )?map\b/.test(s)) {
             const locs = P.topLocations(12);
             return {
-                text: `Photos in the portfolio come from **${P.locationCount()} distinct places**. The most featured:\n\n${locs.map(([l, n]) => `- ${l} — ${n}`).join('\n')}\n\nThe **travel map** shows them all — or ask me for something specific, like “show me photos of Niagara Falls”.`,
+                text: `Photos in the portfolio come from **${P.locationCount()} distinct places**. The most featured:\n\n${locs.map(([l, n]) => `- ${l}: ${n}`).join('\n')}\n\nThe **travel map** shows them all, or ask me for something specific, like “show me photos of Niagara Falls”.`,
                 actions: [{ label: 'Open the travel map', action: 'scroll:#travel-map' }],
                 id: 'portfolio-locations'
             };
@@ -500,7 +500,7 @@
         if (catKey && (!subject || subject === catKey || subject === P.categories[catKey].name.toLowerCase())) {
             const n = P.counts()[catKey] || 0;
             return {
-                text: `There are **${n} ${P.categories[catKey].name.toLowerCase()} photos** — ${P.categories[catKey].description.toLowerCase()}. I can open that category in the gallery for you.`,
+                text: `There are **${n} ${P.categories[catKey].name.toLowerCase()} photos**: ${P.categories[catKey].description.toLowerCase()}. I can open that category in the gallery for you.`,
                 actions: [{ label: `Show ${P.categories[catKey].name}`, action: `gallery:category:${catKey}` }],
                 id: 'portfolio-category'
             };
@@ -513,7 +513,7 @@
                 id: 'portfolio-search-empty'
             };
         }
-        const sample = results.slice(0, 5).map((p) => `- ${p.title} — _${p.location}_`).join('\n');
+        const sample = results.slice(0, 5).map((p) => `- ${p.title}: _${p.location}_`).join('\n');
         return {
             text: `I found **${results.length} photo${results.length === 1 ? '' : 's'}** matching **“${subject}”**, for example:\n\n${sample}`,
             actions: [{ label: `Show all ${results.length} in gallery`, action: `gallery:search:${subject}` }, { label: 'Open first photo', action: `gallery:open:${results[0].src}` }],
@@ -526,25 +526,25 @@
     // Sites can override the greeting and help text via ARC.config.ASSISTANT = { greeting, helpText }.
     const assistantCfg = () => (ARC.config && ARC.config.ASSISTANT) || {};
     const SMALLTALK = [
-        { re: /^(hi|hello|hey|hiya|howdy|good (morning|afternoon|evening)|greetings|yo)\b[!. ]*$/, text: () => assistantCfg().greeting || `Hello! 👋 I'm the ARC-NATURE photo assistant. Ask me about the portfolio, prints and downloads, or any photography question — camera settings, composition, lenses, editing and more.`, suggest: true },
+        { re: /^(hi|hello|hey|hiya|howdy|good (morning|afternoon|evening)|greetings|yo)\b[!. ]*$/, text: () => assistantCfg().greeting || `Hello! 👋 I'm the ARC-NATURE photo assistant. Ask me about the portfolio, prints and downloads, or any photography question: camera settings, composition, lenses, editing and more.`, suggest: true },
         { re: /\b(thanks|thank you|thx|cheers|appreciate it|much appreciated)\b/, text: () => `You're welcome! Anything else you'd like to know?` },
-        { re: /^(bye|goodbye|see you|see ya|later|good night)\b/, text: () => `Thanks for visiting ARC-NATURE PHOTOGRAPHY — happy shooting! 📷` },
-        { re: /\b(how are you|how's it going|how are things)\b/, text: () => `I'm doing well, thanks for asking! What can I help you with — the gallery or a photography question?` },
+        { re: /^(bye|goodbye|see you|see ya|later|good night)\b/, text: () => `Thanks for visiting ARC-NATURE PHOTOGRAPHY, happy shooting! 📷` },
+        { re: /\b(how are you|how's it going|how are things)\b/, text: () => `I'm doing well, thanks for asking! What can I help you with: the gallery or a photography question?` },
         { re: /\b(who|what) are you\b|\bare you (a |an )?(bot|ai|human|real)\b|\bwhat can you do\b|\bhelp me\b$|^help$|\bwhat do you know\b/, text: () => helpText(), suggest: true },
-        { re: /\b(you'?re|you are) (great|awesome|helpful|amazing|cool)\b|\bgood bot\b/, text: () => `That's kind of you — thank you! 😊` },
+        { re: /\b(you'?re|you are) (great|awesome|helpful|amazing|cool)\b|\bgood bot\b/, text: () => `That's kind of you, thank you! 😊` },
         { re: /\b(joke|make me laugh)\b/, text: () => `Why did the photographer break up with the camera? It kept trying to **focus** on everything else. 📸` }
     ];
 
     const helpText = () => (assistantCfg().helpText ? assistantCfg().helpText(ARC.KB.length) : defaultHelp());
     const defaultHelp = () => `I'm a photography assistant with a curated knowledge base (${ARC.KB.length}+ topics)${ARC.config?.CHAT_API_URL ? ' and an AI model for open-ended questions' : ''}. I can help with:\n\n` +
-        `- **This portfolio** — find photos (“show me waterfalls in Ontario”), categories, locations\n` +
-        `- **Downloads, licensing & prints** — free downloads, unlimited access, contact\n` +
-        `- **Camera basics** — exposure, aperture, shutter speed, ISO, focus, white balance\n` +
-        `- **Techniques** — landscapes, long exposure, astro, wildlife, macro, portraits, street…\n` +
-        `- **Gear** — choosing a camera, lenses, tripods, filters\n` +
-        `- **Editing** — Lightroom workflow, colour, noise, sharpening, exporting & printing\n` +
-        `- **Calculators** — 500 rule, hyperfocal distance, ND filter times, print size, unit conversions\n\n` +
-        `Ask follow-ups like “tell me more” or “what about at night?” — I remember the conversation. If I don't know something reliably, I'll say so.`;
+        `- **This portfolio**: find photos (“show me waterfalls in Ontario”), categories, locations\n` +
+        `- **Downloads, licensing & prints**: free downloads, unlimited access, contact\n` +
+        `- **Camera basics**: exposure, aperture, shutter speed, ISO, focus, white balance\n` +
+        `- **Techniques**: landscapes, long exposure, astro, wildlife, macro, portraits, street…\n` +
+        `- **Gear**: choosing a camera, lenses, tripods, filters\n` +
+        `- **Editing**: Lightroom workflow, colour, noise, sharpening, exporting & printing\n` +
+        `- **Calculators**: 500 rule, hyperfocal distance, ND filter times, print size, unit conversions\n\n` +
+        `Ask follow-ups like “tell me more” or “what about at night?”: I remember the conversation. If I don't know something reliably, I'll say so.`;
 
     const FOLLOWUP_MORE = /^(tell me more( about (it|that|this))?|more( info| information| details)?|go on|continue|elaborate|explain( more| further| that| it)?|can you explain( that| more)?|details?|and|keep going|expand( on that)?|more please|why|how so|in more detail|anything else|what else)[\s?.!]*$/;
     const FOLLOWUP_CTX = /^(what about|how about|and (for|with|if|at|in|on)|what if|in that case|for (a |an )?|with (a |an )?|at night|in winter|in the rain|on (a |my )?(phone|iphone)|same for|is (it|that|this)|does (it|that|this)|which (one|lens|camera|setting)|why (is|does|do) (it|that|this)|should i|can i)\b/;
@@ -589,7 +589,7 @@
 
         // 2. "Tell me more" style follow-ups
         if (FOLLOWUP_MORE.test(s) && s.split(/\s+/).length <= 6) {
-            if (!last) return { text: `Happy to go deeper — which topic? For example “tell me more about long exposure”.`, confidence: 'low', source: 'assistant', suggest: true };
+            if (!last) return { text: `Happy to go deeper, which topic? For example “tell me more about long exposure”.`, confidence: 'low', source: 'assistant', suggest: true };
             if (last.more && !session.moreShown.has(last.id)) {
                 session.moreShown.add(last.id);
                 const r = asResult(last, { confidence: 'high' });

@@ -14,14 +14,14 @@ ARC.config = {
         subjectPattern: /\b(he|his|him|ermias|gaga)\b/,
         subjectTopics: ['about', 'project'],
         unknownTail: `\n\nI can help with Ermias's background, skills, projects and experience, or data science questions. For anything else about working with him, the **contact form** reaches him directly.`,
-        welcome: `Hi! 👋 I'm Ermias's **portfolio assistant**.\n\nAsk me about his background, skills, projects, experience or education — or a data science question (machine learning, statistics, SQL, visualization, careers). If I'm not sure about something, I'll say so.`,
+        welcome: `Hi! 👋 I'm Ermias's **portfolio assistant**.\n\nAsk me about his background, skills, projects, experience or education, or a data science question (machine learning, statistics, SQL, visualization, careers). If I'm not sure about something, I'll say so.`,
         greeting: `Hello! 👋 Ask me about Ermias's experience, skills and projects, or any data science question.`,
         starters: ["Tell me about Ermias", 'What are his technical skills?', 'Show me his projects', 'Explain overfitting', 'How do I contact him?', 'Download his CV'],
         helpText: (n) => `I'm the portfolio assistant for Ermias Gelaye Gaga, with a curated knowledge base (${n}+ topics). I can help with:\n\n` +
-            `- **About Ermias** — background, experience, education, skills, projects, contact and CV\n` +
-            `- **Data science** — machine learning, model evaluation, statistics, A/B testing, SQL, Python, visualization, EDA\n` +
-            `- **Careers** — getting started, building a portfolio, interview preparation\n` +
-            `- **Calculators** — arithmetic and unit conversions\n\n` +
+            `- **About Ermias**: background, experience, education, skills, projects, contact and CV\n` +
+            `- **Data science**: machine learning, model evaluation, statistics, A/B testing, SQL, Python, visualization, EDA\n` +
+            `- **Careers**: getting started, building a portfolio, interview preparation\n` +
+            `- **Calculators**: arithmetic and unit conversions\n\n` +
             `Ask follow-ups like “tell me more”. If I don't know something reliably, I'll say so rather than guess.`
     }
 };
@@ -192,7 +192,7 @@ ARC.contact = {
             try {
                 const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
                 if (!res.ok) throw new Error(String(res.status));
-                out.innerHTML = '<div class="alert ok" role="status"><i class="fas fa-check-circle" aria-hidden="true"></i> Thanks — your message was sent. Ermias usually replies within 24 hours.</div>';
+                out.innerHTML = '<div class="alert ok" role="status"><i class="fas fa-check-circle" aria-hidden="true"></i> Thanks, your message was sent. Ermias usually replies within 24 hours.</div>';
                 form.reset();
             } catch {
                 const m = ARC.util.escapeHtml(ARC.config.CONTACT_EMAIL);

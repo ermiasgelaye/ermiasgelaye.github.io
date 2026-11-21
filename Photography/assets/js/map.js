@@ -64,7 +64,7 @@ ARC.travelMap = (() => {
         box.innerHTML = `
             <h3>${escapeHtml(pl.name)}</h3>
             <p class="map-popup-meta">${escapeHtml(pl.region === pl.country ? pl.country : `${pl.region}, ${pl.country}`)} · <strong>${pl.photos.length}</strong> photo${pl.photos.length === 1 ? '' : 's'}</p>
-            ${pl.precision === 'area' ? '<p class="map-popup-note"><i class="fas fa-circle-info" aria-hidden="true"></i> General area — these photos are labelled with the region only.</p>' : ''}
+            ${pl.precision === 'area' ? '<p class="map-popup-note"><i class="fas fa-circle-info" aria-hidden="true"></i> General area: these photos are labelled with the region only.</p>' : ''}
             <div class="map-popup-thumbs">${sample.map((p) => `<button type="button" data-open="${escapeHtml(p.src)}" title="${escapeHtml(p.title)}"><img src="${escapeHtml(p.thumb)}" alt="${escapeHtml(p.title)}" loading="lazy" width="80" height="60"></button>`).join('')}</div>
             <button type="button" class="btn-brand btn-sm-pill" data-show><i class="fas fa-images" aria-hidden="true"></i> Show ${pl.photos.length === 1 ? 'photo' : `all ${pl.photos.length}`} in gallery</button>`;
         box.querySelector('[data-show]').addEventListener('click', () => { map.closePopup(); ARC.gallery.showPlace({ name: pl.name, locations: pl.match }); });
@@ -100,7 +100,7 @@ ARC.travelMap = (() => {
             light: ['World_Light_Gray_Base', 'World_Light_Gray_Reference'],
             dark: ['World_Dark_Gray_Base', 'World_Dark_Gray_Reference']
         };
-        const ATTRIBUTION = 'Tiles &copy; <a href="https://www.esri.com/" target="_blank" rel="noopener">Esri</a> — Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, and the GIS user community';
+        const ATTRIBUTION = 'Tiles &copy; <a href="https://www.esri.com/" target="_blank" rel="noopener">Esri</a>: Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, and the GIS user community';
         const themeNow = () => (document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
         const makeTiles = () => {
             const [base, labels] = TILES[themeNow()];
@@ -137,7 +137,7 @@ ARC.travelMap = (() => {
                 warned = true;
                 const note = document.createElement('div');
                 note.className = 'map-tile-warning';
-                note.innerHTML = '<i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Map background couldn\'t load (offline or blocked network). Markers still work — or use “Browse by place” below.';
+                note.innerHTML = '<i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Map background couldn\'t load (offline or blocked network). Markers still work, or use “Browse by place” below.';
                 holder.appendChild(note);
             }
         }

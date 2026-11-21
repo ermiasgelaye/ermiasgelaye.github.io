@@ -58,7 +58,7 @@
         if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
             window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => { /* optional */ }));
         }
-        window.addEventListener('offline', () => ARC.toast("You're offline — photos you've already viewed are still available.", { icon: 'fa-wifi', timeout: 5000 }));
+        window.addEventListener('offline', () => ARC.toast("You're offline: photos you've already viewed are still available.", { icon: 'fa-wifi', timeout: 5000 }));
         window.addEventListener('online', () => ARC.toast('Back online.', { type: 'success', icon: 'fa-wifi' }));
     }
 

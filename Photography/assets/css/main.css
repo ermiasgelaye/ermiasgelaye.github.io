@@ -580,8 +580,9 @@ button, a, .chip { touch-action: manipulation; }
     .hero-stats strong { font-size: 1.35rem; }
     .section-head { margin-bottom: 1.5rem; }
     .toolbar { top: calc(var(--nav-h) + 4px); padding: .6rem; gap: .5rem; border-radius: 12px; }
-    .toolbar-row { flex-wrap: nowrap; gap: .5rem; }
-    .search-box { flex: 1 1 auto; min-width: 0; }
+    .toolbar-row { flex-wrap: wrap; gap: .5rem; }
+    .search-box { flex: 1 1 calc(100% - 50px); min-width: 0; }
+    .toolbar-row .sort-select { flex: 1 1 0; min-width: 0; max-width: none; }
     .search-box input { font-size: 16px; } /* prevents iOS zoom-on-focus */
     .surprise .label { display: none; }
     .surprise { width: 42px; height: 42px; padding: 0; }

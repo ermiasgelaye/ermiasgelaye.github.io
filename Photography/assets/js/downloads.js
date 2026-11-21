@@ -316,7 +316,7 @@ ARC.downloads = (() => {
         if (reg.unlimited) return downloadUnlimited(photo, true);
 
         await saveWatermarked(photo);
-        ARC.toast(again ? 'Downloaded again (no extra download used).' : `Download complete — ${state.remaining} free download${state.remaining === 1 ? '' : 's'} left this year.`, { type: 'success', icon: 'fa-download' });
+        ARC.toast(again ? 'Downloaded again (no extra download used).' : `Download complete, ${state.remaining} free download${state.remaining === 1 ? '' : 's'} left this year.`, { type: 'success', icon: 'fa-download' });
     }
 
     async function registerDownload(photo, again) {
@@ -362,7 +362,7 @@ ARC.downloads = (() => {
         state.downloaded.add(photo.src);
         saveLocal();
         saveOriginal(photo);
-        ARC.toast(`Full-resolution download started — no watermark, commercial licence${count ? ` (download #${count})` : ''}.`, { type: 'success', icon: 'fa-crown', timeout: 4500 });
+        ARC.toast(`Full-resolution download started, no watermark, commercial licence${count ? ` (download #${count})` : ''}.`, { type: 'success', icon: 'fa-crown', timeout: 4500 });
     }
 
     const fileName = (photo, suffix = '') => `${photo.title.replace(/[^\w\-]+/g, '_').replace(/_+/g, '_')}${suffix}.jpg`;
@@ -456,7 +456,7 @@ ARC.downloads = (() => {
                     <div id="paypal-button-container" aria-label="PayPal checkout"></div>
                 </div>
                 ${reason === 'early' && photo && state.remaining > 0 ? `<div class="modal-actions"><button type="button" class="btn-outline" data-free><i class="fas fa-download" aria-hidden="true"></i> Use a free download instead (${state.remaining} left)</button></div>` : ''}
-                <p class="note"><i class="fas fa-lock" aria-hidden="true"></i> Secure checkout by Stripe or PayPal · 30-day money-back guarantee · Access is tied to this browser/device — keep your activation code.</p>`
+                <p class="note"><i class="fas fa-lock" aria-hidden="true"></i> Secure checkout by Stripe or PayPal · 30-day money-back guarantee · Access is tied to this browser/device: keep your activation code.</p>`
         });
 
         const card = m.el;
@@ -526,7 +526,7 @@ ARC.downloads = (() => {
                     modalRef.close();
                     await activate({ paymentId: data.orderID, method: 'paypal', email, paymentConfirmed: true });
                 } catch {
-                    showErr('PayPal approved the payment, but we could not confirm it. You have not been charged twice — please contact support with your PayPal receipt.');
+                    showErr('PayPal approved the payment, but we could not confirm it. You have not been charged twice: please contact support with your PayPal receipt.');
                 }
             },
             onError: () => showErr('PayPal reported an error. Please try again or pay by card.')
@@ -564,17 +564,17 @@ ARC.downloads = (() => {
     }
 
     function showActivated(email) {
-        const exp = state.expiry ? new Date(state.expiry).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : '—';
+        const exp = state.expiry ? new Date(state.expiry).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : 'n/a';
         const m = ARC.modal.open({
             label: 'Unlimited access activated',
             html: `<h2><i class="fas fa-crown" style="color:var(--warning)" aria-hidden="true"></i> Unlimited access activated</h2>
                 <p>Thank you for supporting my photography!</p>
                 <div class="price-box" style="text-align:left">
-                    <div><strong>Activation code:</strong> <code>${escapeHtml(state.activationCode || '—')}</code></div>
+                    <div><strong>Activation code:</strong> <code>${escapeHtml(state.activationCode || 'n/a')}</code></div>
                     <div><strong>Valid until:</strong> ${escapeHtml(exp)}</div>
                     ${email ? `<div><strong>Receipt email:</strong> ${escapeHtml(email)}</div>` : ''}
                 </div>
-                <div class="inline-alert info">Access is tied to this browser/device. Save your activation code — you'll need it to move access to another device.</div>
+                <div class="inline-alert info">Access is tied to this browser/device. Save your activation code: you'll need it to move access to another device.</div>
                 <div class="modal-actions"><button type="button" class="btn-brand" data-go><i class="fas fa-images" aria-hidden="true"></i> Start downloading</button></div>`
         });
         m.el.querySelector('[data-go]').addEventListener('click', () => { m.close(); document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' }); });
