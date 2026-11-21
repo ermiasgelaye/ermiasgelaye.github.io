@@ -51,6 +51,7 @@
         downloadStatusUI();
         ARC.backToTop();
         ARC.reveal();
+        ARC.lazyBackgrounds();
         ARC.protect();
     }
 

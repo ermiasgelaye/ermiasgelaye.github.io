@@ -203,10 +203,15 @@ textarea.form-control { resize: vertical; min-height: 140px; }
     background-size: cover; background-position: center;
 }
 .hero::before, .band::before { content: ''; position: absolute; inset: 0; background: var(--hero-shade); z-index: -1; }
-.hero { min-height: 100svh; padding: calc(var(--nav-h) + 3rem) 0 4rem; display: flex; align-items: center; background-image: url('../../images/background1.jpeg'); }
-.band { padding: 6rem 0; }
-.band--tagline { background-image: url('../../images/background2.jpeg'); }
-.band--journey { background-image: url('../../images/background3.jpeg'); }
+.hero { min-height: 100svh; padding: calc(var(--nav-h) + 3rem) 0 4rem; display: flex; align-items: center; background-color: #1d2a3a; background-image: url('../../images/background1.jpeg'); }
+.band { padding: 6rem 0; background-color: #1d2a3a; }
+.band--tagline.bg-in { background-image: url('../../images/background2.jpeg'); }
+.band--journey.bg-in { background-image: url('../../images/background3.jpeg'); }
+@media (max-width: 767.98px) {
+    .hero { background-image: url('../../images/optimized/bg1-720.jpg'); }
+    .band--tagline.bg-in { background-image: url('../../images/optimized/bg2-720.jpg'); }
+    .band--journey.bg-in { background-image: url('../../images/optimized/bg3-720.jpg'); }
+}
 @media (min-width: 1024px) and (hover: hover) { .hero, .band { background-attachment: fixed; } }
 
 .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3.5rem; align-items: center; }
@@ -276,6 +281,7 @@ textarea.form-control { resize: vertical; min-height: 140px; }
 .chip:hover { border-color: var(--brand); color: var(--brand); }
 .chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
 .chip .count { font-size: .78rem; opacity: .75; font-variant-numeric: tabular-nums; }
+.chip[aria-pressed="true"] .count { opacity: 1; }
 
 .gallery-status { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; color: var(--ink-3); font-size: .95rem; margin-bottom: 1rem; }
 .gallery-status strong { color: var(--brand); }

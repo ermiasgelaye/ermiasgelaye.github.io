@@ -38,9 +38,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://photo-backend-ten.vercel.app" crossorigin>
-    <link rel="preload" as="image" href="images/background1.jpeg" fetchpriority="high">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="preload" as="image" href="images/optimized/bg1-720.jpg" media="(max-width: 767.98px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images/background1.jpeg" media="(min-width: 768px)" fetchpriority="high">
+    <!-- Fonts & icons load without blocking the first paint -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     <link rel="stylesheet" href="assets/css/main.css">
 
     <script type="application/ld+json">
@@ -92,7 +98,7 @@
         <!-- ============ Hero ============ -->
         <section id="home" class="hero" aria-labelledby="heroTitle">
             <div class="container hero-grid">
-                <div class="glass reveal">
+                <div class="glass">
                     <p class="eyebrow">Photography by Ermias Gaga</p>
                     <h1 id="heroTitle">Discover the World Through the Lens</h1>
                     <p>Collecting moments, not things. A travel journal of nature's marvels and architectural wonders —
@@ -107,8 +113,8 @@
                         <div><strong data-stat="locations">60+</strong><span>places</span></div>
                     </div>
                 </div>
-                <figure class="hero-figure reveal">
-                    <img src="images/background1.jpeg" alt="Mountain landscape at golden hour" width="1024" height="768" fetchpriority="high" decoding="async">
+                <figure class="hero-figure">
+                    <img src="images/background1.jpeg" srcset="images/optimized/bg1-720.jpg 720w, images/background1.jpeg 1024w" sizes="(min-width: 992px) 560px, 100vw" alt="Whistler alpine lake under a blue summer sky" width="1024" height="768" fetchpriority="high" decoding="async">
                 </figure>
             </div>
         </section>
