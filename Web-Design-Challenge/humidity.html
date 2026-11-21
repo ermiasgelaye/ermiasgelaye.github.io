@@ -1,136 +1,73 @@
 <!DOCTYPE html>
-<html lang="en-us">
-
+<html lang="en" data-theme="light">
 <head>
-  ​
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  ​
-  <title>Latitude vs Humidity</title>
-  <meta name="description" content="Scatter plot of city latitude vs. humidity, with analysis — part of a weather data visualization project.">
-  <link rel="icon" type="image/png" href="../Images/optimized/favicon-64.png">
-  ​
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <link rel="stylesheet" type="text/css" href="style.css">
-  ​
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Latitude vs. Humidity | Weather Analysis | Ermias Gelaye Gaga</title>
+    <meta name="description" content="Scatter plot of city latitude vs. humidity for 500+ cities. Part of Ermias Gelaye Gaga's weather data visualization project.">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/png" href="../Images/optimized/favicon-64.png">
+    <script>(function(){try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="../assets/css/site.css">
+    <link rel="stylesheet" href="../assets/css/project.css">
 </head>
-
 <body>
-  <!-- Start of navbar -->
-  <div class="navigation">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="index.html">Lattitude</a>
-      <button class="navbar-toggler border" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      ​
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink"
-              role="button" aria-haspopup="true" aria-expanded="false">Plots</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="temp.html">Max Temperature</a>
-              <a class="dropdown-item" href="humidity.html">Humidity</a>
-              <a class="dropdown-item" href="cloudiness.html">Cloudiness</a>
-              <a class="dropdown-item" href="wind.html">Wind Speed</a>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-nav">
+        <nav class="container nav-inner" aria-label="Main">
+            <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"><i class="fas fa-earth-americas"></i></span><span>Weather Analysis</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Overview</a></li>
+                <li><a href="temp.html">Max temperature</a></li>
+                <li><a href="humidity.html" aria-current="page" class="active">Humidity</a></li>
+                <li><a href="cloudiness.html">Cloudiness</a></li>
+                <li><a href="wind.html">Wind speed</a></li>
+                <li><a href="comparison.html">Comparison</a></li>
+                <li><a href="data.html">Data</a></li>
+                <li><a href="../index.html#projects"><i class="fas fa-arrow-left" aria-hidden="true"></i> Portfolio</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button type="button" class="icon-btn" id="themeToggle" aria-label="Toggle dark mode"><i class="fas fa-circle-half-stroke" aria-hidden="true"></i></button>
+                <button type="button" class="icon-btn nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="comparison.html">Comparison</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="data.html">Data</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../index.html">My Page</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-
-  <!-- End of navbar -->
-
-  <!-- Start of container -->
-  <div class="container">
-    <section class="row">
-      <div class="col-lg-7 col-md-12">
-        <div class="description-content">
-          <h1 class="description-header">Humidity</h1>
-          <hr>
-          <img src="Resources/assets/images/Fig2.png" alt="Latitude vs. Humidity">
-          <p>Even though the corelation between latitude and humidity is weak, the humidity tends to decrease in some
-            area, such as from -20&deg to 0&deg latitude and from 40&deg to 60&deg latitude.</p>
+        </nav>
+    </header>
+    <main id="main" class="project-page">
+        <div class="container">
+            <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Portfolio</a> <span aria-hidden="true">/</span> <a href="index.html">Weather Analysis</a> <span aria-hidden="true">/</span> <span aria-current="page">Humidity</span></nav>
+            <h1>Latitude vs. Humidity</h1>
+            <div class="chart-layout">
+                <figure class="card chart-figure">
+                    <a href="Resources/assets/images/Fig2.png" target="_blank" rel="noopener" title="Open full size"><img src="Resources/assets/images/Fig2.png" alt="Scatter plot: Latitude vs. Humidity" decoding="async"></a>
+                    <figcaption><i class="fas fa-up-right-and-down-left-from-center" aria-hidden="true"></i> Select the chart to open it full size.</figcaption>
+                </figure>
+                <div class="chart-text">
+                    <div class="card analysis">
+                        <h2>Analysis</h2>
+                        <p>The correlation between latitude and humidity is weak, though humidity tends to dip in some bands — for example between −20° and 0° latitude and between 40° and 60° latitude.</p>
+                    </div>
+                    <div class="card takeaway"><i class="fas fa-lightbulb" aria-hidden="true"></i><div><strong>Key takeaway</strong><p>Humidity is only weakly related to latitude.</p></div></div>
+                    <div class="pager">
+                        <a class="btn btn-outline btn-sm" href="temp.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Max temperature</a>
+                        <a class="btn btn-outline btn-sm" href="cloudiness.html">Cloudiness <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+            <section class="more-charts" aria-labelledby="moreTitle">
+                <h2 id="moreTitle">All visualizations</h2>
+                <div class="thumbs">
+                    <a class="card thumb" href="temp.html"><img src="Resources/assets/images/Fig1.png" alt="" loading="lazy"><span>Max temperature</span></a>
+                    <a class="card thumb current" href="humidity.html" aria-current="page"><img src="Resources/assets/images/Fig2.png" alt="" loading="lazy"><span>Humidity</span></a>
+                    <a class="card thumb" href="cloudiness.html"><img src="Resources/assets/images/Fig3.png" alt="" loading="lazy"><span>Cloudiness</span></a>
+                    <a class="card thumb" href="wind.html"><img src="Resources/assets/images/Fig4.png" alt="" loading="lazy"><span>Wind speed</span></a>
+                </div>
+            </section>
         </div>
-      </div>
-      <div class="col-lg-5 col-md-12">
-        ​
-        <!-- Start of Visualizations imageNav Area -->
-        <section id="imageNav-area">
-          <div class="imageNav-content">
-            <h2 class="imageNav-header">Visualizations</h2>
-            <hr />
-            <div class="container">
-              <div class="row">
-                <div class="col-6">
-                  <a href="temp.html">
-                    <img src="Resources/assets/images/Fig1.png" alt="Latitude vs. Max Temperature" ,
-                      title="Latitude vs. Max Temperature" class="imageNav-photo">
-                  </a>
-                </div>
-                <div class="col-6">
-                  <a href="humidity.html">
-                    <img src="Resources/assets/images/Fig2.png" alt="Latitude vs. Humidity" ,
-                      title="Latitude vs. Humidity" class="imageNav-photo">
-                  </a>
-                </div>
-                <div class="col-6">
-                  ​ <a href="cloudiness.html">
-                    <img src="Resources/assets/images/Fig3.png" alt="Latitude vs. Cloudiness" ,
-                      title="Latitude vs. Cloudiness" , class="imageNav-photo">
-                  </a>
-                </div>
-                <div class="col-6">
-                  <a href="wind.html">
-                    <img src="Resources/assets/images/Fig4.png" alt="Latitude vs. Wind Speed" ,
-                      title="Latitude vs. Wind Speed" , class="imageNav-photo">
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- End of the Visualizations imageNav Area -->
-        ​
-      </div>
-    </section>
-  </div>
-  <!-- End of container -->
-  ​
-  <!-- Start of footer -->
-  <footer>
-    <div class="footer">&copy; Copyright Ermias Gaga 2020</div>
-  </footer>
-  <!-- End of footer -->
-  ​
-
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+    </main>
+    <footer class="site-footer"><div class="container footer-inner"><p>&copy; 2020–<span id="year"></span> Ermias Gelaye Gaga · <a href="https://github.com/ermiasgelaye/python-api-challenge" target="_blank" rel="noopener">Source code</a></p><a href="../index.html#projects" class="btn btn-outline btn-sm"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to portfolio</a></div></footer>
+    <script src="../assets/js/project.js" defer></script>
 </body>
-​
-
 </html>
