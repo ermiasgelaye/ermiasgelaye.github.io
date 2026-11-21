@@ -273,6 +273,7 @@ textarea.form-control { resize: vertical; min-height: 140px; }
 .sort-select { flex: 0 0 auto; width: auto; padding: .6rem 2.2rem .6rem 1rem; border-radius: 999px; font-size: .9rem; }
 .chips { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
 .chips::-webkit-scrollbar { display: none; }
+.chips-wrap { flex-wrap: wrap; overflow: visible; margin: 1rem 0 .25rem; }
 .chip {
     flex: 0 0 auto; display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap;
     padding: .5rem 1rem; border-radius: 999px; border: 1px solid var(--border); background: var(--bg);
