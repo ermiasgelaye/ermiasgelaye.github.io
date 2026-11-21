@@ -446,10 +446,11 @@
             };
         }
 
-        if (/\b(where|which (places|locations|countries|provinces)|what (places|locations|countries))\b.*\b(taken|shot|photograph|travel|been|visit|photos?)\b/.test(s)) {
+        if (/\b(where|which (places|locations|countries|provinces)|what (places|locations|countries))\b.*\b(taken|shot|photograph|travell?ed|travel|been|visit(ed)?|photos?)\b|\b(travel )?map\b/.test(s)) {
             const locs = P.topLocations(12);
             return {
-                text: `Photos in the portfolio come from **${P.locationCount()} distinct places**. The most featured:\n\n${locs.map(([l, n]) => `- ${l} — ${n}`).join('\n')}\n\nAsk me for something specific, like “show me photos of Niagara Falls”.`,
+                text: `Photos in the portfolio come from **${P.locationCount()} distinct places**. The most featured:\n\n${locs.map(([l, n]) => `- ${l} — ${n}`).join('\n')}\n\nThe **travel map** shows them all — or ask me for something specific, like “show me photos of Niagara Falls”.`,
+                actions: [{ label: 'Open the travel map', action: 'scroll:#travel-map' }],
                 id: 'portfolio-locations'
             };
         }

@@ -76,6 +76,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#journey">Journey</a></li>
+                <li><a href="#travel-map">Map</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="https://ermiasgelaye.github.io" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Main Portfolio</a></li>
@@ -186,6 +187,30 @@
                     <a href="#gallery" class="btn-brand"><i class="fas fa-images" aria-hidden="true"></i> Discover More Pictures</a>
                     <button type="button" class="btn-ghost" data-open-chat><i class="fas fa-camera-retro" aria-hidden="true"></i> Ask the Photo Assistant</button>
                 </div>
+            </div>
+        </section>
+
+        <!-- ============ Travel map ============ -->
+        <section id="travel-map" class="section" aria-labelledby="mapTitle">
+            <div class="container">
+                <div class="section-head reveal">
+                    <h2 id="mapTitle">Where I've Travelled</h2>
+                    <p>Every place in the portfolio. Bigger circles mean more photos — select one to see them.</p>
+                </div>
+                <div class="map-stats reveal" id="mapStats" aria-label="Travel statistics"></div>
+                <div class="map-card reveal">
+                    <div class="map-toolbar" role="group" aria-label="Map view">
+                        <button type="button" class="chip" data-map-view="canada" aria-pressed="true"><i class="fas fa-leaf" aria-hidden="true"></i> Canada &amp; USA</button>
+                        <button type="button" class="chip" data-map-view="europe" aria-pressed="false"><i class="fas fa-landmark" aria-hidden="true"></i> Europe &amp; Middle East</button>
+                        <button type="button" class="chip" data-map-view="all" aria-pressed="false"><i class="fas fa-earth-americas" aria-hidden="true"></i> Everywhere</button>
+                        <span class="map-legend" aria-hidden="true"><span class="dot solid"></span>Specific place <span class="dot dashed"></span>General area</span>
+                    </div>
+                    <div class="travel-map" id="travelMap" role="region" aria-label="Interactive map of photo locations">
+                        <div class="map-fallback"><i class="fas fa-map-location-dot" aria-hidden="true"></i><p>Loading map…</p></div>
+                    </div>
+                </div>
+                <h3 class="place-list-title">Browse by place</h3>
+                <div class="place-list" id="placeList" aria-label="Places — select to show photos"></div>
             </div>
         </section>
 
@@ -357,8 +382,10 @@
     <!-- ============ Scripts (order matters; all deferred) ============ -->
     <script src="assets/js/core.js" defer></script>
     <script src="assets/js/data/photos.js" defer></script>
+    <script src="assets/js/data/places.js" defer></script>
     <script src="assets/js/downloads.js" defer></script>
     <script src="assets/js/gallery.js" defer></script>
+    <script src="assets/js/map.js" defer></script>
     <script src="assets/js/chat/knowledge/site.js" defer></script>
     <script src="assets/js/chat/knowledge/fundamentals.js" defer></script>
     <script src="assets/js/chat/knowledge/composition-light.js" defer></script>

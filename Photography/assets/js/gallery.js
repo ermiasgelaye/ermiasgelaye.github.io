@@ -21,6 +21,7 @@ ARC.gallery = (() => {
         category: 'all',
         query: '',
         sort: 'default',
+        place: null, // { name, locations: Set } when filtering from the travel map
         favorites: new Set(store.getJSON('photoFavorites', null) || store.getJSON('photoGalleryState', {})?.favorites || []),
         list: [],
         shown: 0,
@@ -38,6 +39,7 @@ ARC.gallery = (() => {
         let list = photos.filter((p) => {
             if (state.category === 'favorites') { if (!state.favorites.has(p.src)) return false; }
             else if (state.category !== 'all' && p.category !== state.category) return false;
+            if (state.place && !state.place.locations.has(p.location)) return false;
             return words.every((w) => p.haystack.includes(w));
         });
         switch (state.sort) {
@@ -95,7 +97,7 @@ ARC.gallery = (() => {
                 <i class="fas ${state.category === 'favorites' ? 'fa-heart' : 'fa-image'}" aria-hidden="true"></i>
                 <h3>${state.category === 'favorites' ? 'No favourites yet' : 'No photos found'}</h3>
                 <p>${state.category === 'favorites' ? 'Tap the heart on any photo to save it here.' : 'Try another category or search term.'}</p>
-                ${state.query || state.category !== 'all' ? '<button type="button" class="btn-outline" data-reset><i class="fas fa-rotate-left" aria-hidden="true"></i> Show all photos</button>' : ''}
+                ${state.query || state.category !== 'all' || state.place ? '<button type="button" class="btn-outline" data-reset><i class="fas fa-rotate-left" aria-hidden="true"></i> Show all photos</button>' : ''}
             </div>`;
             el.grid.querySelector('[data-reset]')?.addEventListener('click', () => set({ category: 'all', query: '' }));
         } else {
@@ -113,7 +115,8 @@ ARC.gallery = (() => {
 
     function updateStatus() {
         const label = state.category === 'all' ? 'all categories' : state.category === 'favorites' ? 'your favourites' : CATEGORY_INFO[state.category]?.name || state.category;
-        el.status.innerHTML = `<span>Showing <strong>${state.shown}</strong> of <strong>${state.list.length}</strong> photos in ${escapeHtml(label)}${state.query ? ` matching “${escapeHtml(state.query)}”` : ''}</span>`;
+        el.status.innerHTML = `<span>Showing <strong>${state.shown}</strong> of <strong>${state.list.length}</strong> photos ${state.place ? `taken at <strong>${escapeHtml(state.place.name)}</strong>` : `in ${escapeHtml(label)}`}${state.query ? ` matching “${escapeHtml(state.query)}”` : ''}</span>${state.place ? '<button type="button" class="btn-outline btn-sm-pill" data-clear-place><i class="fas fa-times" aria-hidden="true"></i> Clear place</button>' : ''}`;
+        el.status.querySelector('[data-clear-place]')?.addEventListener('click', () => set({ place: null }));
         el.chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.category === state.category)));
         const favCount = state.favorites.size;
         el.favChipCount && (el.favChipCount.textContent = favCount);
@@ -133,7 +136,10 @@ ARC.gallery = (() => {
     }
 
     /** Public: change filters. */
-    function set({ category, query, sort, scroll = false } = {}) {
+    function set({ category, query, sort, place, scroll = false } = {}) {
+        // A place filter stays only while explicitly passed; changing category/search clears it.
+        if (place !== undefined) state.place = place ? { name: place.name, locations: new Set(place.locations) } : null;
+        else if (category !== undefined || query !== undefined) state.place = null;
         if (category !== undefined) state.category = (category === 'favorites' || category === 'all' || CATEGORY_INFO[category]) ? category : 'all';
         if (query !== undefined) { state.query = String(query).trim(); el.search.value = state.query; }
         if (sort !== undefined) { state.sort = sort; el.sort.value = sort; }
@@ -375,6 +381,8 @@ ARC.gallery = (() => {
 
     return {
         init, set, searchPhotos,
+        /** Filter the grid to one travel-map place and scroll to it. */
+        showPlace: (place) => set({ category: 'all', query: '', place, scroll: true }),
         all: () => photos,
         counts,
         openBySrc: (src) => {

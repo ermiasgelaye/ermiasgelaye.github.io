@@ -539,3 +539,50 @@ textarea.form-control { resize: vertical; min-height: 140px; }
 @media print {
     .site-nav, .dock, .chat-panel, .download-status, .toolbar { display: none !important; }
 }
+
+/* ---------- 16. Travel map ---------- */
+.map-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+.map-stats > div { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; }
+.map-stats strong { display: block; font-family: var(--font-head); font-size: 1.7rem; color: var(--brand); line-height: 1.1; }
+.map-stats span { font-size: .85rem; color: var(--ink-3); }
+.map-card { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); background: var(--surface-2); }
+.map-toolbar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; padding: .75rem; border-bottom: 1px solid var(--border); }
+.map-legend { margin-left: auto; display: flex; align-items: center; gap: .4rem; font-size: .8rem; color: var(--ink-3); }
+.map-legend .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-left: .5rem; }
+.map-legend .dot.solid { background: #0a6cff; border: 1.5px solid #fff; box-shadow: 0 0 0 1px #0a6cff; }
+.map-legend .dot.dashed { background: rgba(10, 108, 255, .18); border: 2px dashed #0a6cff; }
+.travel-map { height: clamp(380px, 62vh, 600px); background: var(--surface); position: relative; z-index: 0; }
+.map-fallback { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; color: var(--ink-3); text-align: center; padding: 1rem; }
+.map-fallback i { font-size: 2rem; opacity: .6; }
+.place-list-title { font-size: 1.05rem; margin: 2rem 0 .75rem; }
+.place-list { display: flex; flex-wrap: wrap; gap: .5rem; max-height: 220px; overflow-y: auto; padding: 2px; }
+
+/* Leaflet theming */
+.travel-map.leaflet-container { font-family: var(--font-body); background: var(--surface); }
+.travel-map .leaflet-popup-content-wrapper, .travel-map .leaflet-popup-tip { background: var(--surface-2); color: var(--ink); box-shadow: var(--shadow-lg); }
+.travel-map .leaflet-popup-content { margin: 14px 16px; }
+.travel-map a.leaflet-popup-close-button { color: var(--ink-3); }
+.leaflet-tooltip { font-family: var(--font-body); font-weight: 600; font-size: .8rem; }
+.map-popup h3 { color: var(--ink); font-size: 1rem; margin: 0 0 .2rem; padding-right: 1rem; }
+.map-popup-meta { margin: 0 0 .5rem !important; font-size: .82rem; color: var(--ink-3); }
+.map-popup-note { margin: 0 0 .5rem !important; font-size: .78rem; color: var(--ink-2); background: var(--brand-soft); padding: .35rem .5rem; border-radius: 6px; }
+.map-popup-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: .65rem; }
+.map-popup-thumbs button { border: 0; padding: 0; border-radius: 6px; overflow: hidden; cursor: zoom-in; aspect-ratio: 4 / 3; background: var(--surface); }
+.map-popup-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s; }
+.map-popup-thumbs button:hover img { transform: scale(1.08); }
+.map-popup .btn-brand { width: 100%; color: #fff; }
+.map-marker { cursor: pointer; transition: fill-opacity .2s; }
+.map-marker:hover { fill-opacity: .95; }
+.map-tile-warning { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); z-index: 500; max-width: calc(100% - 80px);
+    background: var(--surface-2); color: var(--ink); border: 1px solid var(--border); border-radius: 10px; padding: .5rem .8rem; font-size: .85rem; box-shadow: var(--shadow); }
+.map-tile-warning i { color: var(--warning); margin-right: .35rem; }
+:root[data-theme="dark"] .leaflet-control-zoom a,
+:root[data-theme="dark"] .leaflet-control-attribution { background: var(--surface-2); color: var(--ink-2); border-color: var(--border); }
+:root[data-theme="dark"] .leaflet-control-attribution a { color: var(--brand); }
+@media (max-width: 767.98px) {
+    .map-stats { grid-template-columns: repeat(2, 1fr); }
+    .map-toolbar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+    .map-toolbar::-webkit-scrollbar { display: none; }
+    .map-legend { display: none; }
+    .travel-map { height: 420px; }
+}

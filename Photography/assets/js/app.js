@@ -44,6 +44,7 @@
         ARC.nav.init();
         ARC.downloads.init();
         ARC.gallery.init();
+        ARC.travelMap.init();
         ARC.contact.init();
         ARC.chat.init();
         document.querySelectorAll('[data-open-chat]').forEach((b) => b.addEventListener('click', () => ARC.chat.open()));
