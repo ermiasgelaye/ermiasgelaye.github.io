@@ -30,5 +30,7 @@ Photography/server/       optional server-side AI proxy for the assistants (keys
 - **Career facts:** edit `index.html` and keep `assets/js/knowledge/career.js` in sync — the assistant only states what's written there.
 - **Assistant knowledge:** add entries to any `knowledge/*.js` file (format documented in `Photography/server/chat-api/README.md`).
 - **New photos:** see the header of `Photography/assets/js/data/photos.js`; map locations live in `places.js`.
+- **Project datasets:** the CSVs in `*/Resources/` are the source of truth. After editing one, run
+  `python3 tools/embed_data.py` to refresh the embedded `*.data.js` copies (they let the pages work when opened from disk).
 
 No build step — plain HTML, CSS and JavaScript served by GitHub Pages.
