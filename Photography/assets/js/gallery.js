@@ -14,6 +14,7 @@ ARC.gallery = (() => {
         id: i,
         photographer: p.photographer || PHOTOG,
         thumb: p.src.replace(/^images\/([^/]+)\/(.+)\.[^.]+$/, 'images/thumbs/$1/$2.jpg'),
+        thumbSm: p.src.replace(/^images\/([^/]+)\/(.+)\.[^.]+$/, 'images/thumbs-sm/$1/$2.jpg'),
         haystack: [p.title, p.location, p.category, CATEGORY_INFO[p.category]?.name, ...(p.tags || [])].join(' ').toLowerCase()
     }));
     const bySrc = new Map(photos.map((p) => [p.src, p]));
@@ -65,7 +66,9 @@ ARC.gallery = (() => {
         item.dataset.src = p.src;
         item.innerHTML = `
             <img class="thumb" src="${escapeHtml(p.thumb)}" alt="${escapeHtml(p.title)} — ${escapeHtml(p.location)}"
-                 loading="lazy" decoding="async" width="800" height="600" draggable="false">
+                 srcset="${escapeHtml(p.thumbSm)} 480w, ${escapeHtml(p.thumb)} 800w"
+                 sizes="(max-width: 575.98px) 50vw, (max-width: 991.98px) 45vw, 300px"
+                 loading="lazy" fetchpriority="low" decoding="async" width="800" height="600" draggable="false">
             <button type="button" class="gallery-open" aria-label="Open ${escapeHtml(p.title)}"></button>
             <div class="gallery-caption">
                 <h3>${escapeHtml(p.title)}</h3>
@@ -78,7 +81,7 @@ ARC.gallery = (() => {
         const img = item.querySelector('img');
         img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
         img.addEventListener('error', function onErr() {
-            if (img.dataset.fallback !== '1') { img.dataset.fallback = '1'; img.src = p.src; return; } // thumb missing → original
+            if (img.dataset.fallback !== '1') { img.dataset.fallback = '1'; img.removeAttribute('srcset'); img.src = p.src; return; } // thumb missing → original
             img.removeEventListener('error', onErr);
             img.insertAdjacentHTML('afterend', `<div class="image-fallback" aria-hidden="true"><i class="fas fa-${cat.icon}"></i></div>`);
             img.remove();

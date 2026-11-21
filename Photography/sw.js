@@ -75,7 +75,7 @@ self.addEventListener('fetch', (event) => {
     if (url.origin !== self.location.origin) return;
 
     // Thumbnails & small optimised images: cache-first
-    if (/\/images\/(thumbs|optimized)\//.test(url.pathname)) {
+    if (/\/images\/(thumbs|thumbs-sm|optimized)\//.test(url.pathname)) {
         event.respondWith((async () => {
             const cache = await caches.open(IMAGES);
             const hit = await cache.match(req);
