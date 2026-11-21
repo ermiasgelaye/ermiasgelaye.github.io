@@ -5,7 +5,7 @@ const Pharma = (() => {
     let cache = null;
     async function load() {
         if (cache) return cache;
-        const rows = DataTable.parseCSV(await (await fetch('Resources/mouse_metadata.csv')).text())
+        const rows = DataTable.parseCSV(await DataTable.getCSVText('Resources/mouse_metadata.csv'))
             .map((r) => ({ id: r['Mouse ID'], regimen: r['Drug Regimen'], sex: r.Sex, age: +r.Age_months, weight: +r['Weight (g)'] }));
         const by = {};
         rows.forEach((r) => { (by[r.regimen] ||= []).push(r); });

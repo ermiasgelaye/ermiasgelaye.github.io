@@ -52,7 +52,7 @@ const Weather = (() => {
     let cache = null;
     async function load() {
         if (cache) return cache;
-        const text = await (await fetch('Resources/cities.csv')).text();
+        const text = await DataTable.getCSVText('Resources/cities.csv');
         const rows = DataTable.parseCSV(text).map((r) => ({
             city: r.City, country: r.Country, lat: +r.Lat, lng: +r.Lng, date: +r.Date,
             temp: +r['Max Temp'], humidity: +r.Humidity, cloudiness: +r.Cloudiness, wind: +r['Wind Speed']

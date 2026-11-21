@@ -34,6 +34,15 @@ const DataTable = (() => {
         return body.map((r) => Object.fromEntries(head.map((h, i) => [h.trim(), r[i]])));
     }
 
+    /** CSV text for a path: embedded copy (Resources/*.data.js) if present, else fetch. */
+    async function getCSVText(path) {
+        const name = String(path).split('/').pop();
+        if (window.ARC_DATA && typeof window.ARC_DATA[name] === 'string') return window.ARC_DATA[name];
+        const res = await fetch(path);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.text();
+    }
+
     const toCSV = (cols, rows) => [cols.map((c) => c.label).join(','), ...rows.map((r) => cols.map((c) => {
         const v = String(r[c.key] ?? '');
         return /[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
@@ -53,7 +62,7 @@ const DataTable = (() => {
 
         let data;
         try {
-            data = opts.rows || parseCSV(await (await fetch(opts.csv)).text());
+            data = opts.rows || parseCSV(await getCSVText(opts.csv));
         } catch {
             root.innerHTML = `<div class="alert err">The data couldn't be loaded. ${opts.csv ? `<a href="${esc(opts.csv)}">Download the CSV</a> instead.` : ''}</div>`;
             return null;
@@ -157,5 +166,5 @@ const DataTable = (() => {
         return { data, filtered, parseCSV };
     }
 
-    return { mount, parseCSV };
+    return { mount, parseCSV, getCSVText };
 })();

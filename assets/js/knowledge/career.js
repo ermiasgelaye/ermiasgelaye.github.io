@@ -4,7 +4,7 @@
 (function (root) {
     const ARC = root.ARC || (root.ARC = {});
     ARC.KB = ARC.KB || [];
-    const CV = 'https://drive.google.com/uc?export=download&id=1c_OG7eygSeQCWAYgU_MucNsN9_LZTUtd';
+    const CV = 'https://drive.google.com/file/d/1XVWFF_t5IVVkVQ-8G8oZ58p-ulXrZjPb/view';
 
     ARC.KB.push(
         {
@@ -30,7 +30,7 @@
             k: ['education', 'degree', 'degrees', 'master', 'university', 'study', 'qualification', 'eastern university', 'trento', 'hawassa', 'bootcamp'],
             a: `- **Master of Science in Data Science** — Eastern University, St. Davids, Pennsylvania (2024–2025): machine learning, advanced analytics in Python, R and SQL, database management, visualization and statistical modelling.\n- **Data Analytics & Visualization bootcamp** — University of Toronto School of Continuing Studies (2019–2020): a 24-week intensive program.\n- **Master of Science in Cognitive Science**, Cognitive Neuroscience stream — CIMeC, University of Trento, Rovereto, Italy (2015–2017): research-focused.\n- **Bachelor of Arts in Psychology** — Hawassa University, Ethiopia (2008–2011).`,
             related: ['me-about', 'me-skills'],
-            actions: [{ label: 'See education', action: 'scroll:#education' }]
+            actions: [{ label: 'See education', action: 'scroll:#education' }, { label: 'Cognitive Science program (Trento)', action: 'link:https://corsi.unitn.it/en/cognitive-science/program/overview' }]
         },
         {
             id: 'me-skills', topic: 'about', title: 'Technical skills',
@@ -100,7 +100,7 @@
             id: 'me-cv', topic: 'about', title: 'CV / résumé',
             q: ['download his cv', 'can i see his resume', 'where is the resume'],
             k: ['resume', 'cv', 'download'],
-            a: `You can download Ermias's CV (PDF via Google Drive) with the button below or the **Download CV** button at the top of the page.`,
+            a: `You can view or download Ermias's CV (on Google Drive) with the button below or the **Download CV** button at the top of the page.`,
             related: ['me-experience', 'me-contact'],
             actions: [{ label: 'Download CV', action: `link:${CV}` }]
         },
