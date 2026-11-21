@@ -232,18 +232,18 @@
 
                 <div class="projects">
                     <article class="card project reveal" data-tags="viz web">
-                        <div class="project-media"><img src="Images/optimized/map1-800.jpg" alt="Map dashboard of Google health search trends across US states" width="800" height="369" loading="lazy" decoding="async"><span class="ribbon">Full-stack dashboard</span></div>
+                        <div class="project-media"><img src="Images/optimized/map1-800.jpg" alt="Map dashboard of Google health search trends across US states" width="800" height="369" loading="lazy" decoding="async"><span class="ribbon">Data analysis · interactive map</span></div>
                         <div class="project-body">
                             <h3>Google Health Search Trends</h3>
                             <p class="project-sub">Interactive dashboard development</p>
-                            <p>An interactive dashboard exploring two decades of US online search trends for common health issues, compared with actual occurrence data from the CDC.</p>
+                            <p>Where Americans search Google for nine health conditions across 210 metro areas (2004–2017), which health worries travel together, and how CDC death rates changed over the same period.</p>
                             <ul class="features">
-                                <li>Collected and cleaned data from Google Trends, Kaggle and the CDC</li>
-                                <li>Built a PostgreSQL database and Flask API backend</li>
-                                <li>Interactive visualizations with D3.js and Plotly</li>
-                                <li>15% more efficient identification of health-concern patterns</li>
+                                <li>Cleaned and modelled Google Trends and CDC data in PostgreSQL; now a static site</li>
+                                <li>Audited the data: fixed 18 wrong state assignments, 23 mis-geocoded metros and a CDC typo</li>
+                                <li>Interactive state map, correlation heatmap and CDC trends with Chart.js</li>
+                                <li>Found diabetes and heart-health interest peaks in the South, matching disease burden</li>
                             </ul>
-                            <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Flask</span><span class="tag">D3.js</span></div>
+                            <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Pandas</span><span class="tag">Chart.js</span></div>
                             <div class="project-links">
                                 <a class="btn btn-primary btn-sm" href="https://ermiasgelaye.github.io/Google-Health-Search-Project/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Live demo</a>
                                 <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/Google-Health-Search-Project" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> Code</a>
@@ -256,14 +256,14 @@
                         <div class="project-body">
                             <h3>Mental Health Risk Indicators</h3>
                             <p class="project-sub">Population-level analytics · machine learning · Tableau</p>
-                            <p>Population-level analysis of mental-health and socio-economic indicators related to suicide mortality across countries, to support prevention planning and public-health insight.</p>
+                            <p>Who seeks mental-health treatment in a survey of 1,258 tech workers, and how suicide rates across 183 countries relate to socio-economic indicators — to support prevention-focused insight.</p>
                             <ul class="features">
-                                <li>Integrated 100,000+ aggregated records from WHO and World Bank data</li>
-                                <li>Regression and tree-based models for indicator-importance analysis</li>
-                                <li>Interactive Tableau dashboards of regional variation</li>
-                                <li>Summarised risk and protective indicators for evidence-informed prevention</li>
+                                <li>Combined the OSMI workplace survey with World Bank development indicators</li>
+                                <li>Regression and classification models (SVM, random forest) with an honest test-set evaluation</li>
+                                <li>Found family history and work interference are the strongest correlates of treatment</li>
+                                <li>Interactive charts and Tableau dashboards of national variation</li>
                             </ul>
-                            <div class="tags"><span class="tag">Python</span><span class="tag">Machine learning</span><span class="tag">Tableau</span><span class="tag">Flask</span></div>
+                            <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Tableau</span><span class="tag">Chart.js</span></div>
                             <div class="project-links">
                                 <a class="btn btn-primary btn-sm" href="https://ermiasgelaye.github.io/Mental-Health-Predictor/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Live demo</a>
                                 <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/Mental-Health-Predictor" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> Code</a>
