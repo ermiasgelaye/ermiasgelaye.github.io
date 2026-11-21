@@ -53,6 +53,13 @@
         ARC.reveal();
         ARC.lazyBackgrounds();
         ARC.protect();
+
+        // Offline support (service workers can't run on file:// pages)
+        if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+            window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => { /* optional */ }));
+        }
+        window.addEventListener('offline', () => ARC.toast("You're offline — photos you've already viewed are still available.", { icon: 'fa-wifi', timeout: 5000 }));
+        window.addEventListener('online', () => ARC.toast('Back online.', { type: 'success', icon: 'fa-wifi' }));
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);

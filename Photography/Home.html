@@ -21,7 +21,11 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="icon" type="image/png" href="images/optimized/favicon-64.png">
-    <link rel="apple-touch-icon" href="images/optimized/logo-256.png">
+    <link rel="apple-touch-icon" href="images/optimized/apple-touch-180.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ARC-NATURE">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Apply saved / system theme before first paint (prevents a white flash in dark mode) -->
     <script>
@@ -136,6 +140,7 @@
                 <div class="section-head reveal">
                     <h2 id="galleryTitle">Photo Gallery</h2>
                     <p><span data-stat="photos">1,051</span> photographs across <span data-stat="categories">6</span> categories</p>
+                    <button type="button" class="potd" id="photoOfDay" hidden></button>
                 </div>
 
                 <div class="toolbar" role="search">
@@ -147,6 +152,7 @@
                             <button type="button" class="search-clear" id="searchClear" aria-label="Clear search" hidden><i class="fas fa-times" aria-hidden="true"></i></button>
                         </div>
                         <label for="sortSelect" class="visually-hidden">Sort photos</label>
+                        <button type="button" class="btn-outline btn-sm-pill surprise" id="surpriseBtn" title="Open a random photo"><i class="fas fa-shuffle" aria-hidden="true"></i><span class="label"> Surprise me</span></button>
                         <select id="sortSelect" class="form-select sort-select">
                             <option value="default">Curated order</option>
                             <option value="newest">Newest first</option>
@@ -346,7 +352,12 @@
                     <button type="button" class="btn-outline" data-lb="purchase"><i class="fas fa-crown" aria-hidden="true"></i> Unlimited full-resolution access</button>
                     <button type="button" class="btn-outline" data-lb="favorite" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i> Add to favourites</button>
                     <button type="button" class="btn-outline" data-lb="share"><i class="fas fa-share-nodes" aria-hidden="true"></i> Share</button>
+                    <div class="lb-row">
+                        <button type="button" class="btn-outline" data-lb="play" aria-pressed="false"><i class="fas fa-play" aria-hidden="true"></i> Slideshow</button>
+                        <button type="button" class="btn-outline" data-lb="zoom" aria-pressed="false" title="Zoom (or double-tap the photo)"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Zoom</button>
+                    </div>
                 </div>
+                <p class="lb-hint">Tip: double-tap to zoom · swipe to browse · swipe down to close</p>
                 <p class="lb-counter"></p>
             </div>
         </div>

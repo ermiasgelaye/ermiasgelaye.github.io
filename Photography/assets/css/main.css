@@ -592,3 +592,61 @@ textarea.form-control { resize: vertical; min-height: 140px; }
     .map-legend { display: none; }
     .travel-map { height: 420px; }
 }
+
+/* ---------- 17. Viewer extras, photo of the day, mobile polish ---------- */
+.lb-row { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+.lb-row [aria-pressed="true"] { background: var(--brand); color: #fff; border-color: var(--brand); }
+.lb-hint { display: none; font-size: .78rem; color: var(--ink-3); margin: .75rem 0 0; }
+@media (hover: none) { .lb-hint { display: block; } }
+.lightbox-stage.zoomed { display: block; overflow: auto; cursor: zoom-out; -webkit-overflow-scrolling: touch; }
+.lightbox-stage.zoomed .lb-img { width: auto; height: auto; max-width: none; max-height: none; cursor: zoom-out; }
+.lightbox-stage.zoomed .lb-nav, .lightbox-stage.zoomed .wm { display: none; }
+.lightbox-stage .lb-img { cursor: zoom-in; touch-action: pan-y pinch-zoom; }
+
+.potd {
+    display: inline-flex; align-items: center; gap: .85rem; margin-top: 1.25rem; padding: .5rem 1rem .5rem .5rem;
+    border-radius: 14px; border: 1px solid var(--border); background: var(--surface-2); color: var(--ink);
+    text-align: left; cursor: pointer; box-shadow: var(--shadow-sm); max-width: 100%;
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s;
+}
+.potd:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--brand); }
+.potd[hidden] { display: none; }
+.potd img { width: 72px; height: 54px; object-fit: cover; border-radius: 8px; flex: 0 0 auto; }
+.potd span { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+.potd small { color: var(--brand); font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; }
+.potd strong { font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.potd em { font-style: normal; font-size: .8rem; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.potd > .fa-chevron-right { color: var(--ink-3); }
+.surprise { flex: 0 0 auto; }
+
+/* Touch & safe areas (iPhone home bar / notch) */
+html { -webkit-tap-highlight-color: transparent; }
+button, a, .chip { touch-action: manipulation; }
+.dock { right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); }
+.download-status { left: max(20px, env(safe-area-inset-left)); bottom: max(20px, env(safe-area-inset-bottom)); }
+.site-nav { padding-top: env(safe-area-inset-top); height: calc(var(--nav-h) + env(safe-area-inset-top)); }
+.chat-form { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+
+@media (max-width: 767.98px) {
+    :root { --nav-h: 64px; }
+    .section { padding: 3.5rem 0; }
+    .band { padding: 4rem 0; }
+    .hero { min-height: auto; padding: calc(var(--nav-h) + 1.5rem) 0 2.5rem; }
+    .hero-figure { display: none; } /* same photo is already the backdrop on phones */
+    .eyebrow { letter-spacing: .12em; font-size: .72rem; }
+    .hero p, .band p { font-size: 1rem; }
+    .hero-actions > * { flex: 1 1 100%; }
+    .hero-stats { gap: 1.25rem; justify-content: space-between; }
+    .hero-stats strong { font-size: 1.35rem; }
+    .section-head { margin-bottom: 1.5rem; }
+    .toolbar { top: calc(var(--nav-h) + 4px); padding: .6rem; gap: .5rem; border-radius: 12px; }
+    .toolbar-row { flex-wrap: nowrap; gap: .5rem; }
+    .search-box { flex: 1 1 auto; min-width: 0; }
+    .search-box input { font-size: 16px; } /* prevents iOS zoom-on-focus */
+    .surprise .label { display: none; }
+    .surprise { width: 42px; height: 42px; padding: 0; }
+    .sort-select { max-width: 132px; font-size: .85rem; padding: .55rem 2rem .55rem .8rem; background-position: right .7rem center; }
+    .chat-form textarea, .form-control, .form-select { font-size: 16px; }
+    .potd { width: 100%; }
+    .modal-card { padding: 1.5rem 1.25rem; border-radius: 18px; }
+}

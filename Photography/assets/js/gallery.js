@@ -6,6 +6,7 @@
 ARC.gallery = (() => {
     const { escapeHtml, store, debounce } = ARC.util;
     const PAGE = 24;
+    const MAX_AUTO_LOADS = 3;
     const PHOTOG = ARC.config.PHOTOGRAPHER;
 
     const photos = PHOTOS.map((p, i) => ({
@@ -89,6 +90,7 @@ ARC.gallery = (() => {
         if (reset) {
             compute();
             state.shown = 0;
+            state.autoLoads = 0;
             el.grid.innerHTML = '';
             el.grid.setAttribute('aria-busy', 'true');
         }
@@ -189,13 +191,11 @@ ARC.gallery = (() => {
         const p = state.list[index];
         const lb = el.lb;
         const img = lb.querySelector('.lb-img');
-        img.classList.add('is-loading');
+        el.stage.classList.remove('zoomed');
         img.alt = `${p.title} — ${p.location}`;
-        img.src = p.thumb; // instant preview
-        const full = new Image();
-        full.onload = () => { if (state.list[state.lbIndex] === p) { img.src = p.src; img.classList.remove('is-loading'); } };
-        full.onerror = () => img.classList.remove('is-loading');
-        full.src = p.src;
+        delete img.dataset.full;
+        img.src = p.thumb; // instant preview (800px — already sharp on phones)
+        if (needsFull()) loadFull(p);
 
         const cat = CATEGORY_INFO[p.category] || { name: p.category, icon: 'image' };
         lb.querySelector('.lb-title').textContent = p.title;
@@ -222,8 +222,63 @@ ARC.gallery = (() => {
         history.replaceState(history.state, '', u);
     }
 
+    // Phones (≲1000 device pixels wide) see no difference between the 800px thumbnail and a
+    // multi-megabyte original, so originals load only on larger screens or when zooming.
+    const needsFull = () => window.innerWidth * (window.devicePixelRatio || 1) > 1000;
+    function loadFull(p) {
+        const img = el.lb.querySelector('.lb-img');
+        if (img.dataset.full === p.src) return;
+        img.classList.add('is-loading');
+        const full = new Image();
+        full.onload = () => {
+            if (state.list[state.lbIndex] !== p) return;
+            img.src = p.src; img.dataset.full = p.src; img.classList.remove('is-loading');
+        };
+        full.onerror = () => img.classList.remove('is-loading');
+        full.src = p.src;
+    }
+    function toggleZoom(clientX, clientY) {
+        const p = state.list[state.lbIndex];
+        if (!p) return;
+        const st = el.stage;
+        const on = !st.classList.contains('zoomed');
+        stopSlideshow();
+        st.classList.toggle('zoomed', on);
+        if (on) {
+            loadFull(p);
+            // centre the zoom on the tapped point
+            requestAnimationFrame(() => {
+                const img = st.querySelector('.lb-img');
+                const r = st.getBoundingClientRect();
+                const fx = clientX ? (clientX - r.left) / r.width : 0.5, fy = clientY ? (clientY - r.top) / r.height : 0.5;
+                st.scrollLeft = Math.max(0, img.scrollWidth * fx - r.width / 2);
+                st.scrollTop = Math.max(0, img.scrollHeight * fy - r.height / 2);
+            });
+        }
+        el.lb.querySelector('[data-lb="zoom"]')?.setAttribute('aria-pressed', String(on));
+    }
+
+    let slideTimer = null;
+    function setPlayButton(on) {
+        const b = el.lb.querySelector('[data-lb="play"]');
+        if (!b) return;
+        b.setAttribute('aria-pressed', String(on));
+        b.innerHTML = on ? '<i class="fas fa-pause" aria-hidden="true"></i> Pause slideshow' : '<i class="fas fa-play" aria-hidden="true"></i> Slideshow';
+    }
+    function startSlideshow() {
+        stopSlideshow();
+        el.stage.classList.remove('zoomed');
+        slideTimer = setInterval(() => step(1, true), 4500);
+        setPlayButton(true);
+    }
+    function stopSlideshow() {
+        if (slideTimer) { clearInterval(slideTimer); slideTimer = null; }
+        setPlayButton(false);
+    }
+
     function closeLightbox() {
         if (el.lb.hidden) return;
+        stopSlideshow();
         el.lb.hidden = true;
         state.lbIndex = -1;
         if (!document.querySelector('.modal-backdrop-x')) document.body.classList.remove('modal-open-lock');
@@ -233,8 +288,9 @@ ARC.gallery = (() => {
         lbReturnFocus?.focus?.();
     }
 
-    const step = (d) => {
+    const step = (d, fromSlideshow = false) => {
         if (state.lbIndex < 0 || !state.list.length) return;
+        if (!fromSlideshow) stopSlideshow();
         const n = (state.lbIndex + d + state.list.length) % state.list.length;
         // make sure the grid contains the photo we navigate to
         while (n >= state.shown && state.shown < state.list.length) render({ reset: false });
@@ -272,13 +328,16 @@ ARC.gallery = (() => {
             if (act === 'favorite') toggleFavorite(p.src);
             if (act === 'share') share(p);
             if (act === 'download') ARC.downloads.download(p);
-            if (act === 'purchase') ARC.downloads.openPurchase({ reason: 'early', photo: p });
+            if (act === 'purchase') { stopSlideshow(); ARC.downloads.openPurchase({ reason: 'early', photo: p }); }
+            if (act === 'play') (slideTimer ? stopSlideshow() : startSlideshow());
+            if (act === 'zoom') toggleZoom();
         });
         document.addEventListener('keydown', (e) => {
             if (lb.hidden || document.querySelector('.modal-backdrop-x')) return;
             if (e.key === 'Escape') closeLightbox();
             else if (e.key === 'ArrowLeft') step(-1);
             else if (e.key === 'ArrowRight') step(1);
+            else if (e.key === ' ' && e.target.tagName !== 'BUTTON') { e.preventDefault(); slideTimer ? stopSlideshow() : startSlideshow(); }
             else if (e.key === 'Tab') {
                 const f = [...lb.querySelectorAll('button:not([hidden]), a[href]')].filter((n) => n.offsetParent !== null);
                 if (!f.length) return;
@@ -286,14 +345,45 @@ ARC.gallery = (() => {
                 else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
             }
         });
-        const stage = lb.querySelector('.lightbox-stage');
-        stage.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+        const stage = el.stage;
+        let touchY = null, lastTap = 0;
+        stage.addEventListener('touchstart', (e) => {
+            if (e.touches.length !== 1) { touchX = null; return; }
+            touchX = e.touches[0].clientX; touchY = e.touches[0].clientY;
+        }, { passive: true });
         stage.addEventListener('touchend', (e) => {
-            if (touchX === null) return;
-            const dx = e.changedTouches[0].clientX - touchX;
+            if (touchX === null || e.target.closest('button')) return;
+            const t = e.changedTouches[0];
+            const dx = t.clientX - touchX, dy = t.clientY - touchY;
             touchX = null;
-            if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+            // double-tap → zoom
+            if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
+                const now = Date.now();
+                if (now - lastTap < 300) { e.preventDefault(); toggleZoom(t.clientX, t.clientY); lastTap = 0; } else lastTap = now;
+                return;
+            }
+            if (stage.classList.contains('zoomed')) return; // panning a zoomed photo
+            if (dy > 90 && Math.abs(dx) < 70) closeLightbox();          // swipe down to close
+            else if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
         });
+        stage.querySelector('.lb-img').addEventListener('dblclick', (e) => toggleZoom(e.clientX, e.clientY));
+    }
+
+    /* ---------- Photo of the day (same photo for everyone on a given date) ---------- */
+    function photoOfTheDay() {
+        const box = document.getElementById('photoOfDay');
+        if (!box) return;
+        const d = new Date();
+        const key = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+        let h = 2166136261;
+        for (const c of key) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); }
+        const p = photos[Math.abs(h) % photos.length];
+        box.innerHTML = `<img src="${escapeHtml(p.thumb)}" alt="" width="96" height="72" loading="lazy" decoding="async">
+            <span><small><i class="fas fa-star" aria-hidden="true"></i> Photo of the day</small><strong>${escapeHtml(p.title)}</strong><em>${escapeHtml(p.location)}</em></span>
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>`;
+        box.setAttribute('aria-label', `Photo of the day: ${p.title}, ${p.location}`);
+        box.hidden = false;
+        box.addEventListener('click', () => ARC.gallery.openBySrc(p.src));
     }
 
     /* ---------- Init ---------- */
@@ -314,7 +404,8 @@ ARC.gallery = (() => {
             chips: [...document.querySelectorAll('.chip[data-category]')],
             favChipCount: document.querySelector('.chip[data-category="favorites"] .count'),
             favFab: document.getElementById('favoriteCounter'),
-            lb: document.getElementById('lightbox')
+            lb: document.getElementById('lightbox'),
+            stage: document.querySelector('#lightbox .lightbox-stage')
         };
         if (!el.grid) return;
 
@@ -336,6 +427,22 @@ ARC.gallery = (() => {
 
         el.chips.forEach((chip) => chip.addEventListener('click', () => set({ category: chip.dataset.category })));
         el.more.addEventListener('click', () => render({ reset: false }));
+        // Keep loading as the visitor scrolls — but only a few batches per filter, then the
+        // button takes over, so the sections below the gallery (map, about, contact) stay reachable.
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver((entries) => {
+                if (!entries.some((en) => en.isIntersecting) || el.more.hidden || state.autoLoads >= MAX_AUTO_LOADS) return;
+                state.autoLoads += 1;
+                render({ reset: false });
+            }, { rootMargin: '400px 0px' }).observe(el.more);
+        }
+        document.getElementById('surpriseBtn')?.addEventListener('click', () => {
+            if (!state.list.length) return;
+            const idx = Math.floor(Math.random() * state.list.length);
+            while (idx >= state.shown) render({ reset: false });
+            openLightbox(idx);
+        });
+        photoOfTheDay();
         el.search.addEventListener('input', debounce(() => set({ query: el.search.value }), 220));
         el.search.addEventListener('keydown', (e) => { if (e.key === 'Escape' && el.search.value) { e.stopPropagation(); set({ query: '' }); } });
         el.clear.addEventListener('click', () => { set({ query: '' }); el.search.focus(); });
