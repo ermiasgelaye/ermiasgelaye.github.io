@@ -6,7 +6,7 @@
  *   - Fonts/icons/map library from CDNs: stale-while-revalidate.
  *   - Never cached: full-size originals, payments, downloads API, contact form, AI chat, map tiles.
  * Bump VERSION when changing this file's caching rules. */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CORE = `arc-core-${VERSION}`;
 const IMAGES = `arc-img-${VERSION}`;
 const CDN = `arc-cdn-${VERSION}`;

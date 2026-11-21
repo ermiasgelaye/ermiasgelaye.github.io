@@ -1,6 +1,7 @@
 /* ARC-NATURE PHOTOGRAPHY — gallery grid, filtering, search, favourites, lightbox.
  * Data: PHOTOS and CATEGORY_INFO from data/photos.js.
- * Grid uses 800px thumbnails (images/thumbs/…); the lightbox loads the original. */
+ * Grid uses 480/800px thumbnails (WebP with JPEG fallback); the lightbox shows the 800px thumbnail
+ * instantly and swaps in the original only on large screens or when zooming. */
 'use strict';
 
 ARC.gallery = (() => {
@@ -9,22 +10,34 @@ ARC.gallery = (() => {
     const MAX_AUTO_LOADS = 3;
     const PHOTOG = ARC.config.PHOTOGRAPHER;
 
-    const photos = PHOTOS.map((p, i) => ({
-        ...p,
-        id: i,
-        photographer: p.photographer || PHOTOG,
-        thumb: p.src.replace(/^images\/([^/]+)\/(.+)\.[^.]+$/, 'images/thumbs/$1/$2.jpg'),
-        thumbSm: p.src.replace(/^images\/([^/]+)\/(.+)\.[^.]+$/, 'images/thumbs-sm/$1/$2.jpg'),
-        haystack: [p.title, p.location, p.category, CATEGORY_INFO[p.category]?.name, ...(p.tags || [])].join(' ').toLowerCase()
-    }));
+    const ALIASES = typeof PHOTO_ALIASES === 'object' ? PHOTO_ALIASES : {};
+    const thumbPath = (src, dir, ext) => src.replace(/^images\/([^/]+)\/(.+)\.[^.]+$/, `images/${dir}/$1/$2.${ext}`);
+    const photos = PHOTOS.map((p, i) => {
+        const cats = [p.category, ...(p.also || [])];
+        return {
+            ...p,
+            id: i,
+            cats,
+            photographer: p.photographer || PHOTOG,
+            thumb: thumbPath(p.src, 'thumbs', 'jpg'),
+            thumbSm: thumbPath(p.src, 'thumbs-sm', 'jpg'),
+            thumbWebp: thumbPath(p.src, 'thumbs', 'webp'),
+            thumbSmWebp: thumbPath(p.src, 'thumbs-sm', 'webp'),
+            haystack: [p.title, p.location, p.region, p.country, p.date, p.data, ...cats.map((c) => `${c} ${CATEGORY_INFO[c]?.name || ''}`), ...(p.tags || [])]
+                .filter(Boolean).join(' ').toLowerCase()
+        };
+    });
     const bySrc = new Map(photos.map((p) => [p.src, p]));
+    const resolveSrc = (src) => (bySrc.has(src) ? src : ALIASES[src] || src);
+    const fmtDate = (d) => { if (!d) return ''; const [y, m] = d.split('-'); return new Date(+y, +m - 1, 1).toLocaleDateString(undefined, { month: 'long', year: 'numeric' }); };
 
     const state = {
         category: 'all',
         query: '',
         sort: 'default',
         place: null, // { name, locations: Set } when filtering from the travel map
-        favorites: new Set(store.getJSON('photoFavorites', null) || store.getJSON('photoGalleryState', {})?.favorites || []),
+        where: '', // 'country:Canada' | 'region:Ontario' from the place filter
+        favorites: new Set((store.getJSON('photoFavorites', null) || store.getJSON('photoGalleryState', {})?.favorites || []).map(resolveSrc)),
         list: [],
         shown: 0,
         lbIndex: -1
@@ -40,14 +53,18 @@ ARC.gallery = (() => {
         const words = tokens(state.query);
         let list = photos.filter((p) => {
             if (state.category === 'favorites') { if (!state.favorites.has(p.src)) return false; }
-            else if (state.category !== 'all' && p.category !== state.category) return false;
+            else if (state.category !== 'all' && !p.cats.includes(state.category)) return false;
             if (state.place && !state.place.locations.has(p.location)) return false;
+            if (state.where) {
+                const [kind, val] = state.where.split(':');
+                if ((kind === 'country' ? p.country : p.region) !== val) return false;
+            }
             return words.every((w) => p.haystack.includes(w));
         });
         switch (state.sort) {
             case 'title': list = [...list].sort((a, b) => a.title.localeCompare(b.title)); break;
             case 'location': list = [...list].sort((a, b) => a.location.localeCompare(b.location) || a.title.localeCompare(b.title)); break;
-            case 'newest': list = [...list].reverse(); break;
+            case 'newest': list = [...list].sort((a, b) => (b.date || '').localeCompare(a.date || '') || b.id - a.id); break;
             case 'random':
                 if (!shuffleOrder) { shuffleOrder = photos.map((p) => p.id); for (let i = shuffleOrder.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [shuffleOrder[i], shuffleOrder[j]] = [shuffleOrder[j], shuffleOrder[i]]; } }
                 { const rank = new Map(shuffleOrder.map((id, i) => [id, i])); list = [...list].sort((a, b) => rank.get(a.id) - rank.get(b.id)); }
@@ -58,17 +75,21 @@ ARC.gallery = (() => {
     }
 
     /* ---------- Rendering ---------- */
-    function card(p) {
+    function card(p, eager = false) {
         const cat = CATEGORY_INFO[p.category] || { name: p.category, icon: 'image' };
         const fav = state.favorites.has(p.src);
         const item = document.createElement('article');
         item.className = 'gallery-item';
         item.dataset.src = p.src;
         item.innerHTML = `
-            <img class="thumb" src="${escapeHtml(p.thumb)}" alt="${escapeHtml(p.title)} — ${escapeHtml(p.location)}"
-                 srcset="${escapeHtml(p.thumbSm)} 480w, ${escapeHtml(p.thumb)} 800w"
-                 sizes="(max-width: 575.98px) 50vw, (max-width: 991.98px) 45vw, 300px"
-                 loading="lazy" fetchpriority="low" decoding="async" width="800" height="600" draggable="false">
+            <picture>
+                <source type="image/webp" srcset="${escapeHtml(p.thumbSmWebp)} 480w, ${escapeHtml(p.thumbWebp)} 800w"
+                        sizes="(max-width: 575.98px) 50vw, (max-width: 991.98px) 45vw, 300px">
+                <img class="thumb" src="${escapeHtml(p.thumb)}" alt="${escapeHtml(p.title)} — ${escapeHtml(p.location)}"
+                     srcset="${escapeHtml(p.thumbSm)} 480w, ${escapeHtml(p.thumb)} 800w"
+                     sizes="(max-width: 575.98px) 50vw, (max-width: 991.98px) 45vw, 300px"
+                     loading="${eager ? 'eager' : 'lazy'}" fetchpriority="${eager ? 'high' : 'low'}" decoding="async" width="800" height="600" draggable="false">
+            </picture>
             <button type="button" class="gallery-open" aria-label="Open ${escapeHtml(p.title)}"></button>
             <div class="gallery-caption">
                 <h3>${escapeHtml(p.title)}</h3>
@@ -81,10 +102,11 @@ ARC.gallery = (() => {
         const img = item.querySelector('img');
         img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
         img.addEventListener('error', function onErr() {
-            if (img.dataset.fallback !== '1') { img.dataset.fallback = '1'; img.removeAttribute('srcset'); img.src = p.src; return; } // thumb missing → original
+            if (img.dataset.fallback !== '1') { img.dataset.fallback = '1'; img.parentElement.querySelector('source')?.remove(); img.removeAttribute('srcset'); img.src = p.src; return; } // thumb missing → original
             img.removeEventListener('error', onErr);
-            img.insertAdjacentHTML('afterend', `<div class="image-fallback" aria-hidden="true"><i class="fas fa-${cat.icon}"></i></div>`);
-            img.remove();
+            const pic = img.closest('picture') || img;
+            pic.insertAdjacentHTML('afterend', `<div class="image-fallback" aria-hidden="true"><i class="fas fa-${cat.icon}"></i></div>`);
+            pic.remove();
         });
         return item;
     }
@@ -102,13 +124,13 @@ ARC.gallery = (() => {
                 <i class="fas ${state.category === 'favorites' ? 'fa-heart' : 'fa-image'}" aria-hidden="true"></i>
                 <h3>${state.category === 'favorites' ? 'No favourites yet' : 'No photos found'}</h3>
                 <p>${state.category === 'favorites' ? 'Tap the heart on any photo to save it here.' : 'Try another category or search term.'}</p>
-                ${state.query || state.category !== 'all' || state.place ? '<button type="button" class="btn-outline" data-reset><i class="fas fa-rotate-left" aria-hidden="true"></i> Show all photos</button>' : ''}
+                ${state.query || state.category !== 'all' || state.place || state.where ? '<button type="button" class="btn-outline" data-reset><i class="fas fa-rotate-left" aria-hidden="true"></i> Show all photos</button>' : ''}
             </div>`;
-            el.grid.querySelector('[data-reset]')?.addEventListener('click', () => set({ category: 'all', query: '' }));
+            el.grid.querySelector('[data-reset]')?.addEventListener('click', () => set({ category: 'all', query: '', where: '' }));
         } else {
             const frag = document.createDocumentFragment();
             const next = state.list.slice(state.shown, state.shown + PAGE);
-            next.forEach((p) => frag.appendChild(card(p)));
+            next.forEach((p, k) => frag.appendChild(card(p, state.shown === 0 && k < 6)));
             el.grid.appendChild(frag);
             state.shown += next.length;
         }
@@ -120,7 +142,8 @@ ARC.gallery = (() => {
 
     function updateStatus() {
         const label = state.category === 'all' ? 'all categories' : state.category === 'favorites' ? 'your favourites' : CATEGORY_INFO[state.category]?.name || state.category;
-        el.status.innerHTML = `<span>Showing <strong>${state.shown}</strong> of <strong>${state.list.length}</strong> photos ${state.place ? `taken at <strong>${escapeHtml(state.place.name)}</strong>` : `in ${escapeHtml(label)}`}${state.query ? ` matching “${escapeHtml(state.query)}”` : ''}</span>${state.place ? '<button type="button" class="btn-outline btn-sm-pill" data-clear-place><i class="fas fa-times" aria-hidden="true"></i> Clear place</button>' : ''}`;
+        const whereLabel = state.where ? state.where.split(':')[1] : '';
+        el.status.innerHTML = `<span>Showing <strong>${state.shown}</strong> of <strong>${state.list.length}</strong> photos ${state.place ? `taken at <strong>${escapeHtml(state.place.name)}</strong>` : `in ${escapeHtml(label)}`}${whereLabel ? ` from <strong>${escapeHtml(whereLabel)}</strong>` : ''}${state.query ? ` matching “${escapeHtml(state.query)}”` : ''}</span>${state.place ? '<button type="button" class="btn-outline btn-sm-pill" data-clear-place><i class="fas fa-times" aria-hidden="true"></i> Clear place</button>' : ''}`;
         el.status.querySelector('[data-clear-place]')?.addEventListener('click', () => set({ place: null }));
         el.chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.category === state.category)));
         const favCount = state.favorites.size;
@@ -136,18 +159,20 @@ ARC.gallery = (() => {
         const p = new URLSearchParams(location.search);
         state.category !== 'all' ? p.set('category', state.category) : p.delete('category');
         state.query ? p.set('q', state.query) : p.delete('q');
+        state.where ? p.set('where', state.where) : p.delete('where');
         const qs = p.toString();
         history.replaceState(history.state, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
     }
 
     /** Public: change filters. */
-    function set({ category, query, sort, place, scroll = false } = {}) {
+    function set({ category, query, sort, place, where, scroll = false } = {}) {
         // A place filter stays only while explicitly passed; changing category/search clears it.
         if (place !== undefined) state.place = place ? { name: place.name, locations: new Set(place.locations) } : null;
         else if (category !== undefined || query !== undefined) state.place = null;
         if (category !== undefined) state.category = (category === 'favorites' || category === 'all' || CATEGORY_INFO[category]) ? category : 'all';
         if (query !== undefined) { state.query = String(query).trim(); el.search.value = state.query; }
         if (sort !== undefined) { state.sort = sort; el.sort.value = sort; }
+        if (where !== undefined) { state.where = where; if (el.where) el.where.value = where; }
         render();
         syncURL();
         if (scroll) document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' });
@@ -205,7 +230,9 @@ ARC.gallery = (() => {
         lb.querySelector('.lb-meta').innerHTML = `
             <li><i class="fas fa-location-dot" aria-hidden="true"></i><span>${escapeHtml(p.location)}</span></li>
             <li><i class="fas fa-${cat.icon}" aria-hidden="true"></i><span>${escapeHtml(cat.name)}</span></li>
-            <li><i class="fas fa-camera" aria-hidden="true"></i><span>${escapeHtml(p.photographer)}</span></li>`;
+            ${p.date ? `<li><i class="fas fa-calendar" aria-hidden="true"></i><span>${escapeHtml(fmtDate(p.date))}</span></li>` : ''}
+            <li><i class="fas fa-camera" aria-hidden="true"></i><span>${escapeHtml(p.photographer)}</span></li>
+            ${p.data ? `<li><i class="fas fa-database" aria-hidden="true"></i><span>${escapeHtml(p.data)}</span></li>` : ''}`;
         lb.querySelector('.lb-tags').innerHTML = (p.tags || []).map((t) => `<button type="button" class="tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</button>`).join('');
         lb.querySelector('.lb-counter').textContent = `${index + 1} / ${state.list.length}`;
         lb.querySelector('.wm').textContent = `© ${p.photographer}`;
@@ -392,11 +419,48 @@ ARC.gallery = (() => {
     /* ---------- Init ---------- */
     function counts() {
         const c = { all: photos.length };
-        photos.forEach((p) => { c[p.category] = (c[p.category] || 0) + 1; });
+        photos.forEach((p) => p.cats.forEach((k) => { c[k] = (c[k] || 0) + 1; }));
         return c;
     }
 
+    /** Category chips are generated from CATEGORY_INFO (inserted before the Favourites chip). */
+    function buildChips() {
+        const box = document.getElementById('categories');
+        const fav = box?.querySelector('[data-category="favorites"]');
+        if (!box || !fav) return;
+        box.querySelectorAll('.chip[data-category]:not([data-category="all"]):not([data-category="favorites"])').forEach((c) => c.remove());
+        Object.entries(CATEGORY_INFO).forEach(([key, info]) => {
+            const b = document.createElement('button');
+            b.type = 'button'; b.className = 'chip'; b.dataset.category = key; b.title = info.description || '';
+            b.setAttribute('aria-pressed', 'false');
+            b.innerHTML = `<i class="fas fa-${info.icon}" aria-hidden="true"></i> ${escapeHtml(info.name)} <span class="count"></span>`;
+            box.insertBefore(b, fav);
+        });
+    }
+
+    /** Country → region filter, with counts. */
+    function buildWhere() {
+        const sel = document.getElementById('placeFilter');
+        if (!sel) return null;
+        const byCountry = new Map();
+        photos.forEach((p) => {
+            const c = p.country || 'Other';
+            if (!byCountry.has(c)) byCountry.set(c, { n: 0, regions: new Map() });
+            const e = byCountry.get(c); e.n += 1;
+            if (p.region) e.regions.set(p.region, (e.regions.get(p.region) || 0) + 1);
+        });
+        const opts = ['<option value="">All places</option>'];
+        [...byCountry.entries()].sort((a, b) => b[1].n - a[1].n).forEach(([c, e]) => {
+            if (c === 'Other') return;
+            opts.push(`<optgroup label="${escapeHtml(c)}"><option value="country:${escapeHtml(c)}">All of ${escapeHtml(c)} (${e.n})</option>` +
+                [...e.regions.entries()].sort((a, b) => b[1] - a[1]).map(([r, n]) => `<option value="region:${escapeHtml(r)}">${escapeHtml(r)} (${n})</option>`).join('') + '</optgroup>');
+        });
+        sel.innerHTML = opts.join('');
+        return sel;
+    }
+
     function init() {
+        buildChips();
         el = {
             grid: document.getElementById('photoGallery'),
             more: document.getElementById('loadMore'),
@@ -408,7 +472,8 @@ ARC.gallery = (() => {
             favChipCount: document.querySelector('.chip[data-category="favorites"] .count'),
             favFab: document.getElementById('favoriteCounter'),
             lb: document.getElementById('lightbox'),
-            stage: document.querySelector('#lightbox .lightbox-stage')
+            stage: document.querySelector('#lightbox .lightbox-stage'),
+            where: buildWhere()
         };
         if (!el.grid) return;
 
@@ -417,13 +482,19 @@ ARC.gallery = (() => {
         el.chips.forEach((chip) => { const n = chip.querySelector('.count'); if (n && c[chip.dataset.category] !== undefined) n.textContent = c[chip.dataset.category]; });
         document.querySelectorAll('[data-stat="photos"]').forEach((n) => { n.textContent = photos.length.toLocaleString(); });
         document.querySelectorAll('[data-stat="categories"]').forEach((n) => { n.textContent = Object.keys(CATEGORY_INFO).length; });
-        document.querySelectorAll('[data-stat="locations"]').forEach((n) => { n.textContent = new Set(photos.map((p) => p.location.split(',')[0].trim())).size; });
+        document.querySelectorAll('[data-stat="locations"]').forEach((n) => { n.textContent = new Set(photos.map((p) => p.location)).size; });
 
         // Restore from URL (shareable filters) or last session
         const qp = new URLSearchParams(location.search);
         state.category = qp.get('category') || 'all';
         if (state.category !== 'all' && state.category !== 'favorites' && !CATEGORY_INFO[state.category]) state.category = 'all';
         state.query = qp.get('q') || '';
+        state.where = qp.get('where') || '';
+        if (el.where) {
+            el.where.value = state.where;
+            if (el.where.value !== state.where) state.where = '';
+            el.where.addEventListener('change', () => set({ where: el.where.value }));
+        }
         state.sort = store.get('photoSort', 'default');
         el.search.value = state.query;
         el.sort.value = state.sort;
@@ -483,7 +554,8 @@ ARC.gallery = (() => {
         // Deep link: ?photo=water212.jpeg
         const deep = qp.get('photo');
         if (deep) {
-            const idx = state.list.findIndex((p) => p.src.endsWith(`/${deep}`));
+            const target = resolveSrc(Object.keys(ALIASES).find((s) => s.endsWith(`/${deep}`)) || '');
+            const idx = state.list.findIndex((p) => p.src.endsWith(`/${deep}`) || p.src === target);
             if (idx >= 0) {
                 while (idx >= state.shown) render({ reset: false });
                 openLightbox(idx);
@@ -505,7 +577,8 @@ ARC.gallery = (() => {
         all: () => photos,
         counts,
         openBySrc: (src) => {
-            set({ category: 'all', query: '' });
+            src = resolveSrc(src);
+            set({ category: 'all', query: '', where: '' });
             const idx = state.list.findIndex((p) => p.src === src);
             if (idx >= 0) { while (idx >= state.shown) render({ reset: false }); openLightbox(idx); }
         },

@@ -141,7 +141,7 @@
             <div class="container">
                 <div class="section-head reveal">
                     <h2 id="galleryTitle">Photo Gallery</h2>
-                    <p><span data-stat="photos">1,051</span> photographs across <span data-stat="categories">6</span> categories</p>
+                    <p><span data-stat="photos">1,261</span> photographs across <span data-stat="categories">11</span> categories</p>
                     <button type="button" class="potd" id="photoOfDay" hidden></button>
                 </div>
 
@@ -150,11 +150,13 @@
                         <div class="search-box">
                             <i class="fas fa-search" aria-hidden="true"></i>
                             <label for="photoSearch" class="visually-hidden">Search photos</label>
-                            <input type="search" id="photoSearch" placeholder="Search by place, subject or tag   e.g. Niagara, winter, bridge" autocomplete="off" enterkeyhint="search">
+                            <input type="search" id="photoSearch" placeholder="Search title, subject, tag, place or country — e.g. Niagara, lighthouse, Italy" autocomplete="off" enterkeyhint="search">
                             <button type="button" class="search-clear" id="searchClear" aria-label="Clear search" hidden><i class="fas fa-times" aria-hidden="true"></i></button>
                         </div>
                         <label for="sortSelect" class="visually-hidden">Sort photos</label>
                         <button type="button" class="btn-outline btn-sm-pill surprise" id="surpriseBtn" title="Open a random photo"><i class="fas fa-shuffle" aria-hidden="true"></i><span class="label"> Surprise me</span></button>
+                        <label for="placeFilter" class="visually-hidden">Filter by country or region</label>
+                        <select id="placeFilter" class="form-select sort-select place-select"><option value="">All places</option></select>
                         <select id="sortSelect" class="form-select sort-select">
                             <option value="default">Curated order</option>
                             <option value="newest">Newest first</option>
@@ -165,12 +167,6 @@
                     </div>
                     <div class="chips" id="categories" role="group" aria-label="Filter by category">
                         <button type="button" class="chip" data-category="all" aria-pressed="true"><i class="fas fa-border-all" aria-hidden="true"></i> All <span class="count"></span></button>
-                        <button type="button" class="chip" data-category="nature" aria-pressed="false"><i class="fas fa-leaf" aria-hidden="true"></i> Nature <span class="count"></span></button>
-                        <button type="button" class="chip" data-category="landscape" aria-pressed="false"><i class="fas fa-mountain" aria-hidden="true"></i> Landscape <span class="count"></span></button>
-                        <button type="button" class="chip" data-category="travel" aria-pressed="false"><i class="fas fa-globe-americas" aria-hidden="true"></i> Travel <span class="count"></span></button>
-                        <button type="button" class="chip" data-category="urban" aria-pressed="false"><i class="fas fa-city" aria-hidden="true"></i> Urban <span class="count"></span></button>
-                        <button type="button" class="chip" data-category="water" aria-pressed="false"><i class="fas fa-water" aria-hidden="true"></i> Water <span class="count"></span></button>
-                        <button type="button" class="chip" data-category="wildlife" aria-pressed="false"><i class="fas fa-paw" aria-hidden="true"></i> Wildlife <span class="count"></span></button>
                         <button type="button" class="chip" data-category="favorites" aria-pressed="false"><i class="fas fa-heart" aria-hidden="true"></i> Favourites <span class="count">0</span></button>
                     </div>
                 </div>
