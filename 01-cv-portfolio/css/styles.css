@@ -1840,7 +1840,7 @@ body.dark-mode .social-link {
 }
 
 .social-link:nth-child(3):hover {
-    background: linear-gradient(45deg, #E4405F, #FD1D1D);
+    background: linear-gradient(45deg, #0a6cff, #1e40af);
 }
 
 .social-link:nth-child(4):hover {
@@ -1848,7 +1848,7 @@ body.dark-mode .social-link {
 }
 
 .social-link:nth-child(5):hover {
-    background: linear-gradient(45deg, #00ab6c, #00ab6c);
+    background: linear-gradient(45deg, #0a6cff, #1e40af);
 }
 
 /* Contact Info Cards */

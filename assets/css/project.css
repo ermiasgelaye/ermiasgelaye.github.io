@@ -49,7 +49,7 @@
 .stat-card { padding: 1.1rem 1.25rem; }
 .stat-card h3 { font-size: 1rem; display: flex; justify-content: space-between; gap: .5rem; align-items: baseline; }
 .strength { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .2rem .55rem; border-radius: 999px; white-space: nowrap; }
-.strength.strong { background: rgba(22, 163, 74, .14); color: var(--success); }
+.strength.strong { background: rgba(10, 108, 255, .14); color: var(--success); }
 .strength.moderate { background: rgba(245, 158, 11, .16); color: #b45309; }
 .strength.weak, .strength.none { background: var(--surface); color: var(--ink-3); }
 :root[data-theme="dark"] .strength.moderate { color: #fbbf24; }

@@ -52,7 +52,7 @@ const Pharma = (() => {
 
             charts.push(new Chart(document.getElementById('weightChart'), {
                 type: 'bar',
-                data: { labels: d.summary.map((s) => s.regimen), datasets: [{ label: 'Mean weight (g)', data: d.summary.map((s) => +s.weight.toFixed(1)), backgroundColor: d.summary.map((s) => hl(s, '#16a34a', 'rgba(10,108,255,.55)')), borderRadius: 6 }] },
+                data: { labels: d.summary.map((s) => s.regimen), datasets: [{ label: 'Mean weight (g)', data: d.summary.map((s) => +s.weight.toFixed(1)), backgroundColor: d.summary.map((s) => hl(s, '#1e3a8a', 'rgba(10,108,255,.45)')), borderRadius: 6 }] },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (x) => `${x.raw} g mean baseline weight (n=${d.summary[x.dataIndex].n})` } } }, scales: axes('Mean weight (g)') }
             }));
             charts.push(new Chart(document.getElementById('countChart'), {
