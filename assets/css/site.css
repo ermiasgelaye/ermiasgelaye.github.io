@@ -8,7 +8,7 @@
     --brand: #0a6cff;
     --brand-strong: #0052cc;
     --brand-soft: rgba(10, 108, 255, 0.10);
-    --accent: #7c3aed;
+    --accent: #0f766e;
     --ink: #0f172a;
     --ink-2: #334155;
     --ink-3: #64748b;
@@ -20,9 +20,9 @@
     --danger: #dc2626;
     --warning: #f59e0b;
     --on-brand: #fff;
-    --gradient: linear-gradient(135deg, #0a6cff 0%, #7c3aed 100%);
+    --gradient: linear-gradient(135deg, #0a6cff 0%, #0f766e 100%);
     --hero-bg: radial-gradient(1200px 600px at 10% -10%, rgba(10, 108, 255, .14), transparent 60%),
-               radial-gradient(900px 500px at 100% 0%, rgba(124, 58, 237, .12), transparent 60%);
+               radial-gradient(900px 500px at 100% 0%, rgba(15, 118, 110, .10), transparent 60%);
     --radius-sm: 8px;
     --radius: 14px;
     --radius-lg: 22px;
@@ -39,7 +39,7 @@
     --brand: #5b9dff;
     --brand-strong: #8ab8ff;
     --brand-soft: rgba(91, 157, 255, .14);
-    --accent: #a78bfa;
+    --accent: #2dd4bf;
     --ink: #e5e7eb;
     --ink-2: #cbd5e1;
     --ink-3: #94a3b8;
@@ -47,9 +47,9 @@
     --surface: #111827;
     --surface-2: #151d2e;
     --border: #263147;
-    --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    --gradient: linear-gradient(135deg, #3b82f6 0%, #14b8a6 100%);
     --hero-bg: radial-gradient(1200px 600px at 10% -10%, rgba(59, 130, 246, .18), transparent 60%),
-               radial-gradient(900px 500px at 100% 0%, rgba(139, 92, 246, .16), transparent 60%);
+               radial-gradient(900px 500px at 100% 0%, rgba(20, 184, 166, .12), transparent 60%);
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
     --shadow: 0 10px 30px rgba(0, 0, 0, .35);
     --shadow-lg: 0 24px 48px rgba(0, 0, 0, .55);

@@ -86,9 +86,9 @@ const Weather = (() => {
         const sn = data.stats[k].north, ss = data.stats[k].south;
         const ds = [];
         if (showNorth) ds.push({ type: 'scatter', label: 'Northern hemisphere', data: N.map((r) => ({ x: r.lat, y: r[k], row: r })), backgroundColor: 'rgba(10,108,255,.55)', borderColor: 'rgba(10,108,255,.9)', pointRadius: compact ? 2 : 3.2, pointHoverRadius: 6 });
-        if (showSouth) ds.push({ type: 'scatter', label: 'Southern hemisphere', data: S.map((r) => ({ x: r.lat, y: r[k], row: r })), backgroundColor: 'rgba(124,58,237,.55)', borderColor: 'rgba(124,58,237,.9)', pointRadius: compact ? 2 : 3.2, pointHoverRadius: 6 });
+        if (showSouth) ds.push({ type: 'scatter', label: 'Southern hemisphere', data: S.map((r) => ({ x: r.lat, y: r[k], row: r })), backgroundColor: 'rgba(234,88,12,.55)', borderColor: 'rgba(234,88,12,.9)', pointRadius: compact ? 2 : 3.2, pointHoverRadius: 6 });
         if (showNorth) ds.push({ type: 'line', label: `North fit (R² ${sn.r2.toFixed(2)})`, data: line(sn, 0, 80), borderColor: '#0a6cff', borderWidth: 2.5, pointRadius: 0, borderDash: sn.p < 0.05 ? [] : [6, 6] });
-        if (showSouth) ds.push({ type: 'line', label: `South fit (R² ${ss.r2.toFixed(2)})`, data: line(ss, -60, 0), borderColor: '#7c3aed', borderWidth: 2.5, pointRadius: 0, borderDash: ss.p < 0.05 ? [] : [6, 6] });
+        if (showSouth) ds.push({ type: 'line', label: `South fit (R² ${ss.r2.toFixed(2)})`, data: line(ss, -60, 0), borderColor: '#ea580c', borderWidth: 2.5, pointRadius: 0, borderDash: ss.p < 0.05 ? [] : [6, 6] });
         return {
             data: { datasets: ds },
             options: {

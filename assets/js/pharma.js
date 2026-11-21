@@ -58,7 +58,7 @@ const Pharma = (() => {
             charts.push(new Chart(document.getElementById('countChart'), {
                 type: 'bar',
                 data: { labels: d.summary.map((s) => s.regimen), datasets: [
-                    { label: 'Female', data: d.summary.map((s) => s.female), backgroundColor: 'rgba(124,58,237,.7)', borderRadius: 4 },
+                    { label: 'Female', data: d.summary.map((s) => s.female), backgroundColor: 'rgba(234,88,12,.7)', borderRadius: 4 },
                     { label: 'Male', data: d.summary.map((s) => s.n - s.female), backgroundColor: 'rgba(10,108,255,.7)', borderRadius: 4 }] },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: c.ink2, usePointStyle: true } } }, scales: { ...axes('Mice'), x: { ...axes().x, stacked: true }, y: { ...axes('Mice').y, stacked: true } } }
             }));
