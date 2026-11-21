@@ -54,7 +54,7 @@
             k: ['google health', 'health search', 'google trends', 'cdc', 'flask', 'postgresql', 'd3', 'dashboard'],
             a: `**Google Health Search Trends Analysis** — an interactive dashboard exploring online search trends for common health issues in the US over two decades, compared with actual occurrence data from the CDC.\n\n- Collected and cleaned data from Google Trends, Kaggle and the CDC\n- Built a **PostgreSQL** database and **Flask API** backend\n- Interactive visualizations with **D3.js** and **Plotly**\n- Resulted in 15% more efficient identification of health-concern patterns`,
             related: ['me-projects', 'ds-sql', 'ds-dataviz'],
-            actions: [{ label: 'Live demo', action: 'link:https://google-health-search.onrender.com/' }, { label: 'Code', action: 'link:https://github.com/ermiasgelaye/Google-Health-Search-Project' }]
+            actions: [{ label: 'Live demo', action: 'link:https://ermiasgelaye.github.io/Google-Health-Search-Project/' }, { label: 'Code', action: 'link:https://github.com/ermiasgelaye/Google-Health-Search-Project' }]
         },
         {
             id: 'p-mental', topic: 'project', title: 'Mental Health Risk Indicators project',
@@ -62,7 +62,7 @@
             k: ['mental health', 'suicide', 'who', 'world bank', 'tableau', 'risk indicators', 'machine learning project'],
             a: `**Mental Health Risk Indicators Analysis** — population-level analytics of mental-health and socio-economic indicators related to suicide mortality across countries, to support prevention planning.\n\n- Integrated **100,000+ aggregated records** from WHO and World Bank data\n- **Regression and tree-based models** to analyse indicator importance\n- Interactive **Tableau** dashboards showing regional variation\n- Summarised risk and protective indicators for evidence-informed prevention\n\nBuilt with Python, machine learning, Tableau and Flask.`,
             related: ['ds-tree-models', 'ds-dataviz', 'me-projects'],
-            actions: [{ label: 'Live demo', action: 'link:https://mindyourhealth.onrender.com' }, { label: 'Code', action: 'link:https://github.com/ermiasgelaye/Mental-Health-Predictor' }]
+            actions: [{ label: 'Live demo', action: 'link:https://ermiasgelaye.github.io/Mental-Health-Predictor/' }, { label: 'Code', action: 'link:https://github.com/ermiasgelaye/Mental-Health-Predictor' }]
         },
         {
             id: 'p-weather', topic: 'project', title: 'Global Weather Analysis project',
