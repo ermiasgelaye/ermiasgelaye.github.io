@@ -114,3 +114,7 @@
     .dt-toolbar, .dt-footer .dt-pager, .dt-export, .site-footer, .chat-panel, .dock { display: none !important; }
     .dt-scroll { max-height: none; overflow: visible; border: 0; }
 }
+/* Keep the identifying first column visible while the table scrolls sideways */
+.dt th:first-child, .dt td:first-child { position: sticky; left: 0; z-index: 1; background: var(--surface-2); box-shadow: 1px 0 0 var(--border); }
+.dt thead th:first-child { z-index: 2; background: var(--surface); }
+.dt tbody tr:hover td:first-child { background: color-mix(in srgb, var(--brand) 10%, var(--surface-2)); }

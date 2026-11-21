@@ -23,7 +23,7 @@
         { id: 'ph-best', topic: 'project', title: 'Which treatment worked best?',
           q: ['which drug was most effective', 'best treatment', 'capomulin vs ramicane', 'final tumour volume'],
           k: ['best', 'effective', 'efficacy', 'final tumour volume', 'box plot', 'capomulin', 'ramicane'],
-          a: `Comparing final tumour volume across Capomulin, Ramicane, Infubinol and Ceftamin (box plot), **Capomulin and Ramicane** had the smallest tumours at the end of the study — medians around 37–38 mm³ versus about 60 mm³ for Infubinol and Ceftamin. Infubinol shows one low outlier.\n\nThis is a descriptive comparison; see the baseline-weight caveat before treating it as purely a drug effect.`,
+          a: `Comparing final tumour volume across Capomulin, Ramicane, Infubinol and Ceftamin (box plot), **Capomulin and Ramicane** had the smallest tumours at the end of the study — medians about 36–38 mm³ versus about 60 mm³ for Infubinol and Ceftamin. Infubinol shows one low outlier.\n\nThis is a descriptive comparison; see the baseline-weight caveat before treating it as purely a drug effect.`,
           related: ['ph-confounder', 'ph-weight'] },
         { id: 'ph-weight', topic: 'project', title: 'Weight vs. tumour volume (regression)',
           q: ['how does weight affect tumour volume', 'what is the r squared', 'regression result'],
