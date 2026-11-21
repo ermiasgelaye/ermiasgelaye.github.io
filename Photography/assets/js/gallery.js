@@ -429,12 +429,21 @@ ARC.gallery = (() => {
         el.more.addEventListener('click', () => render({ reset: false }));
         // Keep loading as the visitor scrolls — but only a few batches per filter, then the
         // button takes over, so the sections below the gallery (map, about, contact) stay reachable.
+        // Only when the visitor *pauses* at the end of the grid (button visible ~0.7 s): scrolling
+        // or jumping past it (e.g. the "Map" link) must not shift the page under them.
         if ('IntersectionObserver' in window) {
+            let dwell = null;
             new IntersectionObserver((entries) => {
-                if (!entries.some((en) => en.isIntersecting) || el.more.hidden || state.autoLoads >= MAX_AUTO_LOADS) return;
-                state.autoLoads += 1;
-                render({ reset: false });
-            }, { rootMargin: '400px 0px' }).observe(el.more);
+                const visible = entries.some((en) => en.isIntersecting);
+                clearTimeout(dwell);
+                if (!visible || el.more.hidden || state.autoLoads >= MAX_AUTO_LOADS) return;
+                dwell = setTimeout(() => {
+                    const r = el.more.getBoundingClientRect();
+                    if (el.more.hidden || r.top > innerHeight || r.bottom < 0) return;
+                    state.autoLoads += 1;
+                    render({ reset: false });
+                }, 700);
+            }, { threshold: 0.5 }).observe(el.more);
         }
         document.getElementById('surpriseBtn')?.addEventListener('click', () => {
             if (!state.list.length) return;
