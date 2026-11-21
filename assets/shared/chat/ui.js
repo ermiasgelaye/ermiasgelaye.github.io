@@ -7,10 +7,11 @@
 ARC.chat = (() => {
     const { escapeHtml, store } = ARC.util;
     const E = ARC.chatEngine;
-    const HISTORY_KEY = 'arcChatHistory_v2';
+    const HISTORY_KEY = (ARC.config && ARC.config.ASSISTANT && ARC.config.ASSISTANT.historyKey) || 'arcChatHistory_v2';
     const MAX_HISTORY = 80;
 
-    const STARTERS = [
+    const SITE = (ARC.config && ARC.config.ASSISTANT) || {};
+    const DEFAULT_STARTERS = [
         'Show me photos of Niagara Falls',
         'Explain the exposure triangle',
         'How do I photograph waterfalls?',
@@ -18,6 +19,8 @@ ARC.chat = (() => {
         'Best settings for the Milky Way',
         'Can I buy a print?'
     ];
+
+    const STARTERS = SITE.starters || DEFAULT_STARTERS;
 
     let el = {};
     let history = [];
@@ -100,7 +103,7 @@ ARC.chat = (() => {
     }
 
     function welcome() {
-        const text = `Hi! 👋 I'm the **ARC-NATURE photo assistant**.\n\nAsk me about the photos in this portfolio, downloads and prints, or anything photography — settings, composition, gear and editing. I'll tell you if I'm not sure about something.`;
+        const text = SITE.welcome || `Hi! 👋 I'm the **ARC-NATURE photo assistant**.\n\nAsk me about the photos in this portfolio, downloads and prints, or anything photography — settings, composition, gear and editing. I'll tell you if I'm not sure about something.`;
         const m = { role: 'bot', text, ts: Date.now(), source: 'assistant' };
         renderMessage(m);
         setSuggestions(STARTERS);
@@ -227,7 +230,8 @@ ARC.chat = (() => {
                 break;
             }
             case 'scroll': closeOnMobile(); document.querySelector(arg)?.scrollIntoView({ behavior: 'smooth' }); break;
-            case 'contact': closeOnMobile(); ARC.contact.prefill({ type: arg }); break;
+            case 'contact': closeOnMobile(); ARC.contact?.prefill({ type: arg }); break;
+            case 'link': window.open(arg, '_blank', 'noopener'); break;
             case 'purchase': ARC.downloads.openPurchase({ reason: 'general' }); break;
             default: break;
         }

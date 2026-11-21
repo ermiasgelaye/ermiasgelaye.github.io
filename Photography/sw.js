@@ -6,7 +6,7 @@
  *   - Fonts/icons/map library from CDNs: stale-while-revalidate.
  *   - Never cached: full-size originals, payments, downloads API, contact form, AI chat, map tiles.
  * Bump VERSION when changing this file's caching rules. */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CORE = `arc-core-${VERSION}`;
 const IMAGES = `arc-img-${VERSION}`;
 const CDN = `arc-cdn-${VERSION}`;
@@ -28,8 +28,9 @@ const PRECACHE = [
     './assets/js/chat/knowledge/techniques.js',
     './assets/js/chat/knowledge/gear-editing.js',
     './assets/js/chat/knowledge/general.js',
-    './assets/js/chat/engine.js',
-    './assets/js/chat/ui.js',
+    '../assets/shared/chat/engine.js',
+    '../assets/shared/chat/ui.js',
+    '../assets/shared/chat/chat.css',
     './assets/js/app.js',
     './images/optimized/logo-256.png',
     './images/optimized/favicon-64.png'

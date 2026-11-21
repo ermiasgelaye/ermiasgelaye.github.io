@@ -1,3 +1,6 @@
 .env
 .env.*
 .DS_Store
+
+# Editor local-history snapshots (VS Code "Local History" extension)
+.history/

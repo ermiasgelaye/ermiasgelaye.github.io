@@ -33,6 +33,11 @@
         'explain describe mean means meaning define definition tip tips advice idea ideas guide basics basic ' +
         'photo photos photograph photographs photography picture pictures pic pics image images shot shots take taking').split(/\s+/));
 
+    // Per-site tuning (ARC.config.ASSISTANT): words that are filler on one site can be meaningful on another,
+    // and questions about the site's subject ("is he good at…") should favour that subject's entries.
+    const SITE_CFG = (ARC.config && ARC.config.ASSISTANT) || {};
+    (SITE_CFG.keepWords || []).forEach((w) => STOP.delete(w));
+
     // Multi-word phrases and synonyms mapped to canonical terms (applied before tokenising).
     const PHRASES = [
         [/\bf[\s\-/]?stops?\b|\bf[\s\-]?numbers?\b|\bf\/\d+(\.\d+)?\b/g, ' aperture '],
@@ -114,6 +119,30 @@
         [/\bworkshops?\b|\bclasses\b|\blessons?\b|\bmentor(ing|ship)?\b|\btutoring\b/g, ' workshop '],
         [/\bcommissions?\b|\bhire (you|him)\b|\bbook (a )?(shoot|session)\b|\bphoto shoot\b/g, ' commission '],
         [/\bbutchart( gardens)?\b/g, ' butchart '],
+        // --- data science & career vocabulary ---
+        [/\bmachine[\s-]learning\b|\bml\b/g, ' machinelearning '],
+        [/\bdeep[\s-]learning\b|\bneural (net|network)s?\b/g, ' deeplearning '],
+        [/\bartificial intelligence\b|\bai\b/g, ' ai '],
+        [/\bnatural language processing\b|\bnlp\b/g, ' nlp '],
+        [/\bdata[\s-]vi[sz](uali[sz]ation)?\b|\bdataviz\b/g, ' dataviz '],
+        [/\bexploratory data analysis\b|\beda\b/g, ' eda '],
+        [/\bdata (wrangling|cleaning|munging|prep(aration)?)\b/g, ' datacleaning '],
+        [/\bfeature engineering\b/g, ' featureengineering '],
+        [/\bcross[\s-]?validation\b|\bk[\s-]?fold\b/g, ' crossvalidation '],
+        [/\bover[\s-]?fit(ting)?\b|\bunder[\s-]?fit(ting)?\b|\bbias[\s-]variance\b/g, ' overfitting '],
+        [/\bp[\s-]?values?\b/g, ' pvalue '],
+        [/\bhypothesis test(ing|s)?\b|\bt[\s-]?tests?\b|\bchi[\s-]square\b/g, ' hypothesistesting '],
+        [/\ba\/b test(ing|s)?\b|\bab test(ing|s)?\b|\bsplit test(ing)?\b/g, ' abtesting '],
+        [/\bconfusion matrix\b|\bprecision\b|\brecall\b|\bf1( score)?\b|\broc\b|\bauc\b/g, ' classificationmetrics '],
+        [/\brandom forests?\b|\bdecision trees?\b|\bgradient boost(ing)?\b|\bxgboost\b/g, ' treemodels '],
+        [/\blinear regression\b|\blogistic regression\b/g, ' regression '],
+        [/\bk[\s-]?means\b|\bclustering\b/g, ' clustering '],
+        [/\bprincipal component analysis\b|\bpca\b|\bdimensionality reduction\b/g, ' pca '],
+        [/\btime[\s-]series\b|\bforecast(ing)?\b/g, ' timeseries '],
+        [/\bwindow functions?\b/g, ' windowfunction sql '],
+        [/\bpower bi\b/g, ' powerbi '],
+        [/\bresumes?\b|\bcv\b|\bcurriculum vitae\b/g, ' resume '],
+        [/\bwork experience\b|\bjob history\b|\bemployment\b/g, ' experience '],
         [/\bniagara( falls)?\b/g, ' niagara '],
         [/\bbanff\b|\blake louise\b|\bjasper\b|\brockies\b|\brocky mountains\b/g, ' rockies '],
         [/\bprince edward island\b|\bpei\b/g, ' pei '],
@@ -220,9 +249,12 @@
 
     function rank(query, { boostTokens = [], limit = 5 } = {}) {
         const ix = getIndex();
-        const qTokens = expandTypos(tokenize(query));
+        const rawTokens = tokenize(query);
+        const qTokens = expandTypos(rawTokens);
         boostTokens.forEach((t) => qTokens.push([t, 0.35]));
         if (!qTokens.length) return [];
+        // Coverage is measured against *all* words in the question, including unknown ones.
+        const totalWeight = rawTokens.length + boostTokens.length * 0.35;
         const nq = ' ' + normalize(query) + ' ';
         const k1 = 1.2, b = 0.6;
         const results = [];
@@ -238,7 +270,7 @@
             }
             if (!score) continue;
             for (const p of d.phrases) if (nq.includes(` ${p} `)) score += p.includes(' ') ? 2.5 : 1.2;
-            const coverage = matched / qTokens.length;
+            const coverage = matched / Math.max(totalWeight, 1e-9);
             results.push({ entry: d.e, score: score * (0.55 + 0.45 * coverage), coverage, exact });
         }
         results.sort((a, b2) => b2.score - a.score);
@@ -491,8 +523,10 @@
 
     /* ==================== Small talk & meta ==================== */
 
+    // Sites can override the greeting and help text via ARC.config.ASSISTANT = { greeting, helpText }.
+    const assistantCfg = () => (ARC.config && ARC.config.ASSISTANT) || {};
     const SMALLTALK = [
-        { re: /^(hi|hello|hey|hiya|howdy|good (morning|afternoon|evening)|greetings|yo)\b[!. ]*$/, text: () => `Hello! 👋 I'm the ARC-NATURE photo assistant. Ask me about the portfolio, prints and downloads, or any photography question — camera settings, composition, lenses, editing and more.`, suggest: true },
+        { re: /^(hi|hello|hey|hiya|howdy|good (morning|afternoon|evening)|greetings|yo)\b[!. ]*$/, text: () => assistantCfg().greeting || `Hello! 👋 I'm the ARC-NATURE photo assistant. Ask me about the portfolio, prints and downloads, or any photography question — camera settings, composition, lenses, editing and more.`, suggest: true },
         { re: /\b(thanks|thank you|thx|cheers|appreciate it|much appreciated)\b/, text: () => `You're welcome! Anything else you'd like to know?` },
         { re: /^(bye|goodbye|see you|see ya|later|good night)\b/, text: () => `Thanks for visiting ARC-NATURE PHOTOGRAPHY — happy shooting! 📷` },
         { re: /\b(how are you|how's it going|how are things)\b/, text: () => `I'm doing well, thanks for asking! What can I help you with — the gallery or a photography question?` },
@@ -501,7 +535,8 @@
         { re: /\b(joke|make me laugh)\b/, text: () => `Why did the photographer break up with the camera? It kept trying to **focus** on everything else. 📸` }
     ];
 
-    const helpText = () => `I'm a photography assistant with a curated knowledge base (${ARC.KB.length}+ topics)${ARC.config?.CHAT_API_URL ? ' and an AI model for open-ended questions' : ''}. I can help with:\n\n` +
+    const helpText = () => (assistantCfg().helpText ? assistantCfg().helpText(ARC.KB.length) : defaultHelp());
+    const defaultHelp = () => `I'm a photography assistant with a curated knowledge base (${ARC.KB.length}+ topics)${ARC.config?.CHAT_API_URL ? ' and an AI model for open-ended questions' : ''}. I can help with:\n\n` +
         `- **This portfolio** — find photos (“show me waterfalls in Ontario”), categories, locations\n` +
         `- **Downloads, licensing & prints** — free downloads, unlimited access, contact\n` +
         `- **Camera basics** — exposure, aperture, shutter speed, ISO, focus, white balance\n` +
@@ -600,7 +635,18 @@
             }
         }
 
+        // Subject boost: e.g. "is HE good at python" → prefer facts about the person over the generic topic.
+        if (SITE_CFG.subjectPattern && SITE_CFG.subjectPattern.test(s) && results.length) {
+            const topics = new Set(SITE_CFG.subjectTopics || []);
+            results = results.map((r) => (topics.has(r.entry.topic) ? { ...r, score: r.score * 1.8 } : r)).sort((a, b) => b.score - a.score);
+        }
+
         const top = results[0];
+        if (top && top.coverage < 0.4) {
+            // Only a small part of the question matched (e.g. "world" in "who won the world cup"):
+            // suggestions would be unrelated, so offer none.
+            return { text: null, confidence: 'none', source: 'kb', alternatives: [] };
+        }
         if (!top || top.score < LOW) {
             return {
                 text: null, confidence: 'none', source: 'kb',
@@ -625,7 +671,7 @@
     function unknownText(alternatives = []) {
         const base = `I'm not confident I have a reliable answer to that, so I won't guess.`;
         const alt = alternatives.length ? `\n\nDid you mean one of these?` : '';
-        const tail = `\n\nFor questions about Ermias's work, prints or bookings, the **contact form** reaches him directly.`;
+        const tail = assistantCfg().unknownTail || `\n\nFor questions about Ermias's work, prints or bookings, the **contact form** reaches him directly.`;
         return base + alt + (alternatives.length ? '' : tail);
     }
 
