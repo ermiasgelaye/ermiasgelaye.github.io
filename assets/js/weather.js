@@ -150,18 +150,23 @@ const Weather = (() => {
         draw();
     }
 
+    const pEq = (p) => (p < 0.001 ? 'p < 0.001' : `p = ${p.toFixed(3)}`);
+    const pct = (r2) => `${Math.max(1, Math.round(r2 * 100))}%`;
+
     function renderStatCards(data) {
         const box = document.getElementById('statCards');
         if (!box) return;
         const explain = {
             temp: (s) => `Temperature falls with distance from the equator in both hemispheres. On ${data.date.toLocaleDateString('en-CA', { month: 'long', day: 'numeric', timeZone: 'UTC' })} (northern summer), each degree of latitude north lowers max temperature by about ${Math.abs(s.north.slope).toFixed(2)} °F.`,
-            humidity: (s) => `Latitude explains almost none of the variation in humidity (R² ≤ ${Math.max(s.north.r2, s.south.r2).toFixed(2)}), local factors such as proximity to water dominate.`,
-            cloudiness: (s) => `Practically no relationship (R² ≤ ${Math.max(s.north.r2, s.south.r2).toFixed(2)}): cloud cover varies widely at every latitude and clusters at reported values such as 0%, 20%, 75% and 92%.`,
+            humidity: (s) => `A weak link in the northern hemisphere (${pEq(s.north.p)}), none in the south. Latitude explains at most ${pct(Math.max(s.north.r2, s.south.r2))} of the variation in humidity; local factors such as proximity to water dominate.`,
+            cloudiness: (s) => `A weak link in the northern hemisphere (${pEq(s.north.p)}), none in the south. Latitude explains at most ${pct(Math.max(s.north.r2, s.south.r2))} of the variation: cloud cover varies widely at every latitude and clusters at reported values such as 0%, 20%, 75% and 92%.`,
             wind: () => 'No significant relationship in either hemisphere: most cities report light winds whatever their latitude.'
         };
         box.innerHTML = Object.entries(VARS).map(([k, v]) => {
             const s = data.stats[k];
-            const best = s.north.r2 >= s.south.r2 ? s.north : s.south;
+            // Rate the card by the strongest *significant* hemisphere, so it agrees with the table below
+            const sig = [s.north, s.south].filter((h) => h.p < 0.05);
+            const best = sig.length ? sig.reduce((a, b) => (b.r2 > a.r2 ? b : a)) : (s.north.r2 >= s.south.r2 ? s.north : s.south);
             const [cls, label] = strength(best.r2, best.p);
             return `<article class="card stat-card">
                 <h3><span><i class="fas fa-${v.icon}" aria-hidden="true"></i> ${v.label}</span><span class="strength ${cls}">${label}</span></h3>

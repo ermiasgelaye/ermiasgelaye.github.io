@@ -170,7 +170,7 @@
                 <div class="stats reveal" aria-label="At a glance">
                     <div class="card stat"><strong class="gradient-text" data-count="10" data-suffix="+">10+</strong><span>Years of experience</span></div>
                     <div class="card stat"><strong class="gradient-text" data-count="3">3</strong><span>Degrees</span></div>
-                    <div class="card stat"><strong class="gradient-text" data-count="30">30</strong><span>Projects completed</span></div>
+                    <div class="card stat"><strong class="gradient-text" data-count="20" data-suffix="+">20+</strong><span>Projects on GitHub</span></div>
                     <div class="card stat"><strong class="gradient-text" data-count="950" data-suffix="+">950+</strong><span>GitHub commits</span></div>
                 </div>
             </div>
@@ -271,14 +271,14 @@
                 <div class="filters" role="group" aria-label="Filter projects">
                     <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="count"></span></button>
                     <button type="button" class="chip" data-filter="ml" aria-pressed="false"><i class="fas fa-brain" aria-hidden="true"></i> Machine learning <span class="count"></span></button>
-                    <button type="button" class="chip" data-filter="viz" aria-pressed="false"><i class="fas fa-chart-line" aria-hidden="true"></i> Visualization <span class="count"></span></button>
+                    <button type="button" class="chip" data-filter="data" aria-pressed="false"><i class="fas fa-database" aria-hidden="true"></i> Data engineering <span class="count"></span></button>
                     <button type="button" class="chip" data-filter="stats" aria-pressed="false"><i class="fas fa-square-root-variable" aria-hidden="true"></i> Statistics <span class="count"></span></button>
                     <button type="button" class="chip" data-filter="web" aria-pressed="false"><i class="fas fa-globe" aria-hidden="true"></i> Web apps <span class="count"></span></button>
                 </div>
                 <p class="visually-hidden" id="projectStatus" aria-live="polite"></p>
 
                 <div class="projects">
-                    <article class="card project reveal" data-tags="viz web">
+                    <article class="card project reveal" data-tags="ml data web">
                         <div class="project-media"><picture><source srcset="Images/optimized/map1-800.webp" type="image/webp"><img src="Images/optimized/map1-800.jpg" alt="Map dashboard of Google health search trends across US states" width="800" height="558" loading="lazy" decoding="async"></picture><span class="ribbon">Data analysis · interactive map</span></div>
                         <div class="project-body">
                             <h3>Google Health Search Trends</h3>
@@ -287,7 +287,7 @@
                             <ul class="features">
                                 <li>Modeled Google Trends and CDC data in PostgreSQL, then rebuilt it as a serverless static site</li>
                                 <li>Audited the data: fixed 18 wrong state assignments, 23 mis-geocoded metros and a CDC typo</li>
-                                <li>Validated search interest against <a href="https://www.cdc.gov/brfss/" target="_blank" rel="noopener noreferrer">CDC BRFSS</a> survey data: states that search more about health report more illness (r = 0.52)</li>
+                                <li>Compared search interest with <a href="https://www.cdc.gov/brfss/" target="_blank" rel="noopener noreferrer">CDC BRFSS</a> survey data: state-level search interest tracked survey-reported illness (r = 0.52)</li>
                                 <li>Built an interactive US map, PCA and correlation views, and a plain-language assistant</li>
                             </ul>
                             <div class="tags"><span class="tag">Python</span> <span class="tag">SQL</span> <span class="tag">Pandas</span> <span class="tag">Chart.js</span></div>
@@ -298,17 +298,17 @@
                         </div>
                     </article>
 
-                    <article class="card project reveal" data-tags="ml viz web">
+                    <article class="card project reveal" data-tags="ml stats web">
                         <div class="project-media"><picture><source srcset="Images/optimized/mental_health-800.webp" type="image/webp"><img src="Images/optimized/mental_health-800.jpg" alt="Tableau dashboard of mental-health risk indicators by country" width="800" height="591" loading="lazy" decoding="async"></picture><span class="ribbon">Machine learning · Tableau</span></div>
                         <div class="project-body">
                             <h3>Mental Health Risk Indicators</h3>
                             <p class="project-sub">Population-level analytics · machine learning · Tableau</p>
-                            <p>Who seeks mental-health treatment among 1,258 surveyed tech workers, and how suicide rates in 185 countries changed from 2000 to 2021, to support prevention-focused insight.</p>
+                            <p>Who seeks mental-health treatment among 1,258 surveyed tech workers, and how suicide rates in 185 countries changed from 2000 to 2021. The goal is evidence that can inform suicide prevention.</p>
                             <ul class="features">
                                 <li>Combined the OSMI workplace survey with World Bank development indicators</li>
                                 <li>Fit logistic regression, region-adjusted and within-country models, and cross-validated ML</li>
                                 <li>Found family history is the strongest predictor of treatment (adjusted odds ratio 4.5)</li>
-                                <li>Showed suicide rates fell 27% worldwide from 2000 to 2021 (<a href="https://data.worldbank.org/indicator/SH.STA.SUIC.P5" target="_blank" rel="noopener noreferrer">World Bank / WHO data</a>)</li>
+                                <li>Showed suicide rates fell 27% across 185 countries from 2000 to 2021 (<a href="https://data.worldbank.org/indicator/SH.STA.SUIC.P5" target="_blank" rel="noopener noreferrer">World Bank / WHO data</a>)</li>
                                 <li>Published an interactive world map, Tableau dashboards and a plain-language assistant</li>
                             </ul>
                             <div class="tags"><span class="tag">Python</span> <span class="tag">scikit-learn</span> <span class="tag">Tableau</span> <span class="tag">Chart.js</span></div>
@@ -319,7 +319,7 @@
                         </div>
                     </article>
 
-                    <article class="card project reveal" data-tags="viz">
+                    <article class="card project reveal" data-tags="stats data">
                         <div class="project-media"><picture><source srcset="Images/optimized/Weather-800.webp" type="image/webp"><img src="Images/optimized/Weather-800.jpg" alt="Scatter plots of weather variables against latitude" width="800" height="446" loading="lazy" decoding="async"></picture><span class="ribbon">API · visualization</span></div>
                         <div class="project-body">
                             <h3>Global Weather Analysis</h3>
@@ -328,7 +328,7 @@
                             <ul class="features">
                                 <li>Collected live weather data from the <a href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">OpenWeatherMap API</a></li>
                                 <li>Fit per-hemisphere regressions of four weather variables against latitude</li>
-                                <li>Showed latitude predicts temperature (r = −0.73 north, +0.83 south) but not humidity, cloud or wind</li>
+                                <li>Showed latitude explains most of the variation in temperature (r = −0.73 north, +0.83 south) but under 2% for humidity, cloud cover or wind</li>
                                 <li>Charted the results with Matplotlib and Seaborn</li>
                             </ul>
                             <div class="tags"><span class="tag">Python</span> <span class="tag">API</span> <span class="tag">Matplotlib</span> <span class="tag">Seaborn</span></div>
@@ -339,7 +339,7 @@
                         </div>
                     </article>
 
-                    <article class="card project reveal" data-tags="stats viz">
+                    <article class="card project reveal" data-tags="stats">
                         <div class="project-media"><picture><source srcset="Images/optimized/visualize-800.webp" type="image/webp"><img src="Images/optimized/visualize-800.jpg" alt="Charts comparing drug regimens and tumor volume" width="800" height="442" loading="lazy" decoding="async"></picture><span class="ribbon">Statistics</span></div>
                         <div class="project-body">
                             <h3>Pharmaceutical Data Analysis</h3>
@@ -359,7 +359,7 @@
                         </div>
                     </article>
 
-                    <article class="card project reveal" data-tags="web viz">
+                    <article class="card project reveal" data-tags="web">
                         <div class="project-media"><picture><source srcset="Photography/images/thumbs/nature/nature165.webp" type="image/webp"><img src="Photography/images/thumbs/nature/nature165.jpg" alt="Sunken Garden at The Butchart Gardens, from the photography portfolio" width="800" height="600" loading="lazy" decoding="async"></picture><span class="ribbon">Web app · personal</span></div>
                         <div class="project-body">
                             <h3>ARC-NATURE Photography</h3>

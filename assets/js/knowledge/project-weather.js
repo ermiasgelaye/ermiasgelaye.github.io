@@ -28,7 +28,7 @@
         { id: 'w-cloud', topic: 'project', title: 'Latitude vs. cloudiness',
           q: ['does latitude affect cloudiness', 'cloud cover correlation', 'why are cloudiness values in lines'],
           k: ['cloudiness', 'clouds', 'cloud cover', 'overcast'],
-          a: `Practically no relationship (R² ≤ 0.02). Cloud cover varies widely at every latitude. The horizontal "lines" in the chart are because reported values cluster at a few numbers: 0% (126 cities), 75% (72), 20% (44) and 92% (42).`,
+          a: `Very weak: latitude explains under 2% of the variation (R² ≤ 0.02). The northern relationship is statistically significant (p ≈ 0.008) but tiny, and the southern one isn't (p ≈ 0.82); across all cities combined there is no relationship (p ≈ 0.83). Cloud cover varies widely at every latitude. The horizontal "lines" in the chart are because reported values cluster at a few numbers: 0% (126 cities), 75% (72), 20% (44) and 92% (42).`,
           related: ['w-humidity', 'w-wind'] },
         { id: 'w-wind', topic: 'project', title: 'Latitude vs. wind speed',
           q: ['does latitude affect wind speed', 'wind correlation', 'is it windier near the poles'],
