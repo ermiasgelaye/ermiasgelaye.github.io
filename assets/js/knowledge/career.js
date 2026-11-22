@@ -92,7 +92,7 @@
             id: 'me-contact', topic: 'about', title: 'Contact & social links',
             q: ['how do i contact him', 'what is his email', 'phone number', 'linkedin', 'can i hire him'],
             k: ['contact', 'email', 'phone', 'linkedin', 'github', 'reach', 'hire', 'message', 'social', 'medium'],
-            a: `- 📧 **Email:** ermiasgelaye@gmail.com (usually replies within 24 hours)\n- 📱 **Phone:** +1 (437) 228-0708\n- 📍 **Location:** Toronto, ON, Canada\n- 🔗 **LinkedIn:** linkedin.com/in/egaga\n- 💻 **GitHub:** github.com/ermiasgelaye\n- 📝 **Medium:** medium.com/@ermiasgelaye\n\nOr use the contact form on this page.`,
+            a: `- 📧 **Email:** ermiasgelaye@gmail.com (usually replies within 24 hours)\n- 📍 **Location:** Toronto, ON, Canada\n- 🔗 **LinkedIn:** linkedin.com/in/egaga\n- 💻 **GitHub:** github.com/ermiasgelaye\n- 📝 **Medium:** medium.com/@ermiasgelaye\n\nOr use the contact form on this page.`,
             related: ['me-cv'],
             actions: [{ label: 'Open contact form', action: 'contact:hire' }, { label: 'LinkedIn', action: 'link:https://www.linkedin.com/in/egaga/' }]
         },
