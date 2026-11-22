@@ -85,15 +85,28 @@ function initNav() {
     const nav = document.querySelector('.site-nav');
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
-    const setOpen = (open) => {
+    const isOpen = () => links.classList.contains('open');
+    const setOpen = (open, { focus = false } = {}) => {
         links.classList.toggle('open', open);
         toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         toggle.innerHTML = `<i class="fas ${open ? 'fa-times' : 'fa-bars'}" aria-hidden="true"></i>`;
+        // The links come before the toggle in the DOM, so move focus into the menu when it opens
+        // and back to the toggle when it closes from the keyboard.
+        if (focus) (open ? links.querySelector('a') : toggle)?.focus();
     };
-    toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!links.classList.contains('open')); });
+    toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!isOpen(), { focus: e.detail === 0 }); });
     links.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
-    document.addEventListener('click', (e) => { if (links.classList.contains('open') && !links.contains(e.target)) setOpen(false); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+    document.addEventListener('click', (e) => { if (isOpen() && !links.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', (e) => {
+        if (!isOpen()) return;
+        if (e.key === 'Escape') setOpen(false, { focus: true });
+        // Tabbing past the last link (or back before the first) closes the menu and returns to the toggle
+        const items = [...links.querySelectorAll('a')];
+        if (e.key === 'Tab' && ((!e.shiftKey && document.activeElement === items.at(-1)) || (e.shiftKey && document.activeElement === items[0]))) {
+            e.preventDefault(); setOpen(false, { focus: true });
+        }
+    });
 
     const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
     window.addEventListener('scroll', onScroll, { passive: true });
