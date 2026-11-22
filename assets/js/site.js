@@ -147,8 +147,6 @@ function initOnView() {
     };
     const show = (el) => {
         el.classList.add('in');
-        el.querySelectorAll('.ring .fill').forEach((c) => { c.style.strokeDashoffset = String(339.3 * (1 - (+c.dataset.value) / 100)); });
-        el.querySelectorAll('.bar span').forEach((b) => { b.style.width = `${b.dataset.value}%`; });
         el.querySelectorAll('[data-count]').forEach(animateCounter);
     };
     const els = document.querySelectorAll('.reveal');
