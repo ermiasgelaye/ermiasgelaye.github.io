@@ -8,11 +8,10 @@
     --brand: #0a6cff;
     --brand-strong: #0052cc;
     --brand-soft: rgba(10, 108, 255, 0.10);
-    --on-brand: #fff;
     --accent: #1e40af;
     --ink: #0f172a;
     --ink-2: #334155;
-    --ink-3: #64748b;
+    --ink-3: #5b6b80;
     --bg: #ffffff;
     --surface: #f5f7fb;
     --surface-2: #ffffff;
@@ -21,6 +20,7 @@
     --danger: #dc2626;
     --warning: #f59e0b;
     --on-brand: #fff;
+    --tag-ink: #0052cc;
     --gradient: linear-gradient(135deg, #0a6cff 0%, #1e40af 100%);
     --hero-bg: radial-gradient(1200px 600px at 10% -10%, rgba(10, 108, 255, .14), transparent 60%),
                radial-gradient(900px 500px at 100% 0%, rgba(30, 64, 175, .10), transparent 60%);
@@ -41,6 +41,7 @@
     --brand-strong: #8ab8ff;
     --brand-soft: rgba(91, 157, 255, .14);
     --on-brand: #0b1020;
+    --tag-ink: #5b9dff;
     --accent: #60a5fa;
     --success: #60a5fa;
     --ink: #e5e7eb;
@@ -72,20 +73,20 @@ button, input, select, textarea { font: inherit; }
 button, a { touch-action: manipulation; }
 :focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; border-radius: 6px; }
 .container { width: min(1180px, 100% - 32px); margin-inline: auto; }
-.skip-link { position: absolute; left: 12px; top: -60px; z-index: 3000; background: var(--brand); color: #fff; padding: .6rem 1rem; border-radius: var(--radius-sm); }
-.skip-link:focus { top: 12px; color: #fff; }
+.skip-link { position: absolute; left: 12px; top: -60px; z-index: 3000; background: var(--brand); color: var(--on-brand); padding: .6rem 1rem; border-radius: var(--radius-sm); }
+.skip-link:focus { top: 12px; color: var(--on-brand); }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- Buttons ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .8rem 1.4rem; border-radius: 999px; font-weight: 600; border: 2px solid transparent; cursor: pointer; line-height: 1.2; transition: transform .2s var(--ease), box-shadow .2s, background-color .2s, color .2s, border-color .2s; text-decoration: none !important; }
-.btn-primary { background: var(--brand); color: #fff; box-shadow: 0 8px 20px rgba(10, 108, 255, .25); }
-.btn-primary:hover { background: var(--brand-strong); color: #fff; transform: translateY(-2px); }
+.btn-primary { background: var(--brand); color: var(--on-brand); box-shadow: 0 8px 20px rgba(10, 108, 255, .25); }
+.btn-primary:hover { background: var(--brand-strong); color: var(--on-brand); transform: translateY(-2px); }
 .btn-outline { background: transparent; color: var(--ink); border-color: var(--border); }
 .btn-outline:hover { border-color: var(--brand); color: var(--brand); }
 .btn-sm { padding: .5rem 1rem; font-size: .9rem; }
 .btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 .icon-btn { width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border); background: var(--surface-2); color: var(--ink); cursor: pointer; transition: background-color .2s, color .2s; }
-.icon-btn:hover { background: var(--brand); border-color: var(--brand); color: #fff; text-decoration: none; }
+.icon-btn:hover { background: var(--brand); border-color: var(--brand); color: var(--on-brand); text-decoration: none; }
 
 /* ---------- Navigation ---------- */
 .site-nav { position: fixed; inset: 0 0 auto 0; z-index: 1000; height: calc(var(--nav-h) + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top);
@@ -187,7 +188,7 @@ button, a { touch-action: manipulation; }
 .proof a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
 .caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .tags { display: flex; flex-wrap: wrap; gap: .35rem; justify-content: center; }
-.tag { font-size: .75rem; font-weight: 600; padding: .2rem .6rem; border-radius: 999px; background: var(--brand-soft); color: var(--brand); }
+.tag { font-size: .75rem; font-weight: 600; padding: .2rem .6rem; border-radius: 999px; background: var(--brand-soft); color: var(--tag-ink); }
 .toolbox { margin-top: 2.5rem; padding: 1.5rem; }
 .toolbox h3 { font-size: 1.05rem; }
 .toolbox .tags { justify-content: flex-start; }
@@ -199,7 +200,7 @@ button, a { touch-action: manipulation; }
 .filters { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
 .chip { display: inline-flex; align-items: center; gap: .4rem; padding: .5rem 1rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--ink-2); font-weight: 500; font-size: .9rem; cursor: pointer; transition: all .2s; }
 .chip:hover { border-color: var(--brand); color: var(--brand); }
-.chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #fff; }
+.chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
 .chip .count { font-size: .75rem; opacity: .8; }
 .chip[aria-pressed="true"] .count { opacity: 1; }
 .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
@@ -287,3 +288,11 @@ textarea.input { min-height: 150px; resize: vertical; }
     .hero { padding-top: 1rem; }
     .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* Links inside running text are underlined so they don't rely on colour alone (WCAG 1.4.1) */
+.about-text a, .features a, .timeline a, .form-note a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+/* Contact form: spam honeypot (hidden from people, visible to bots) and privacy note */
+.hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-note { margin: .9rem 0 0; font-size: .82rem; color: var(--ink-3); }
+.form-note i { margin-right: .3rem; }

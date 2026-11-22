@@ -21,7 +21,7 @@
 .msg.bot { align-self: flex-start; }
 .bubble { padding: .7rem .95rem; border-radius: 16px; font-size: .93rem; line-height: 1.55; word-wrap: break-word; overflow-wrap: anywhere; }
 .msg.bot .bubble { background: var(--surface); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
-.msg.user .bubble { background: var(--brand); color: #fff; border-bottom-right-radius: 4px; }
+.msg.user .bubble { background: var(--brand); color: var(--on-brand, #fff); border-bottom-right-radius: 4px; }
 .msg.error .bubble { border-color: rgba(220, 53, 69, .45); background: rgba(220, 53, 69, .08); }
 .bubble p { margin: 0 0 .5rem; }
 .bubble p:last-child, .bubble ul:last-child, .bubble ol:last-child { margin-bottom: 0; }
@@ -34,7 +34,7 @@
 .msg-source { padding: 0 .4rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); }
 .msg-actions { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
 .msg-actions button { font-size: .8rem; padding: .35rem .75rem; border-radius: 999px; border: 1px solid var(--brand); background: transparent; color: var(--brand); cursor: pointer; }
-.msg-actions button:hover { background: var(--brand); color: #fff; }
+.msg-actions button:hover { background: var(--brand); color: var(--on-brand, #fff); }
 .typing { display: inline-flex; gap: 4px; padding: .8rem 1rem; }
 .typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); animation: blink 1.2s infinite; }
 .typing span:nth-child(2) { animation-delay: .15s; }
@@ -53,7 +53,7 @@
     border: 1px solid var(--border); background: var(--bg); color: var(--ink); font: inherit; font-size: .93rem; line-height: 1.4;
 }
 .chat-form textarea:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 4px var(--brand-soft); }
-.chat-form button { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--brand); color: #fff; cursor: pointer; flex: 0 0 auto; }
+.chat-form button { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--brand); color: var(--on-brand, #fff); cursor: pointer; flex: 0 0 auto; }
 .chat-form button:disabled { opacity: .5; cursor: not-allowed; }
 .chat-foot-note { font-size: .7rem; color: var(--ink-3); text-align: center; padding: 0 1rem .6rem; margin-top: -.4rem; }
 @media (max-width: 575.98px) {
