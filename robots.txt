@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /Photography/test-payment.html
+Disallow: /Photography/success.html
+
+Sitemap: https://ermiasgelaye.github.io/sitemap.xml

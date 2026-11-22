@@ -238,13 +238,23 @@ ARC.chat = (() => {
     }
 
     /* ---------- Open / close ---------- */
+    // On phones the panel covers the whole screen, so make it a modal dialog:
+    // the page behind becomes inert and can't be reached with Tab or a screen reader.
+    const FULLSCREEN = window.matchMedia('(max-width: 575.98px)');
+    const setModal = (on) => {
+        el.panel.setAttribute('role', 'dialog');
+        el.panel.setAttribute('aria-modal', String(on));
+        [...document.body.children].forEach((n) => { if (!n.contains(el.panel)) n.inert = on; });
+    };
     function open() {
         el.panel.hidden = false;
         el.toggle.setAttribute('aria-expanded', 'true');
+        setModal(FULLSCREEN.matches);
         scrollDown();
         setTimeout(() => el.input.focus(), 50);
     }
     function close() {
+        setModal(false);
         el.panel.hidden = true;
         el.toggle.setAttribute('aria-expanded', 'false');
         el.toggle.focus({ preventScroll: true });

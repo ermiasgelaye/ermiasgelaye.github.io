@@ -119,6 +119,7 @@ button, a { touch-action: manipulation; }
 .hero h1 { font-size: clamp(2.2rem, 5.2vw, 3.6rem); font-weight: 800; letter-spacing: -.02em; }
 .gradient-text { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero .role { font-size: clamp(1.1rem, 2.2vw, 1.4rem); color: var(--ink-2); font-weight: 500; margin-bottom: 1rem; min-height: 1.6em; }
+.hero .role .cursor.done { display: none; }
 .hero .role .cursor { display: inline-block; width: 2px; height: 1.1em; background: var(--brand); vertical-align: -.15em; margin-left: 2px; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 .hero .summary { font-size: 1.08rem; color: var(--ink-2); max-width: 60ch; }
@@ -185,7 +186,7 @@ button, a { touch-action: manipulation; }
 .lang-card .tags, .cap-card .tags { justify-content: flex-start; }
 .proof { margin-top: auto !important; padding-top: .35rem; display: flex; flex-wrap: wrap; gap: .25rem .6rem; font-size: .82rem !important; }
 .proof span { color: var(--ink-3); font-weight: 600; }
-.proof a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+.proof a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; display: inline-block; padding: .2rem 0; } /* ≥24px touch target */
 .caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .tags { display: flex; flex-wrap: wrap; gap: .35rem; justify-content: center; }
 .tag { font-size: .75rem; font-weight: 600; padding: .2rem .6rem; border-radius: 999px; background: var(--brand-soft); color: var(--tag-ink); }
@@ -294,5 +295,8 @@ textarea.input { min-height: 150px; resize: vertical; }
 
 /* Contact form: spam honeypot (hidden from people, visible to bots) and privacy note */
 .hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.side-note { color: var(--ink-2); }
+.projects-more { text-align: center; margin-top: 2rem; }
+.form-actions { margin-top: 1.25rem; }
 .form-note { margin: .9rem 0 0; font-size: .82rem; color: var(--ink-3); }
 .form-note i { margin-right: .3rem; }

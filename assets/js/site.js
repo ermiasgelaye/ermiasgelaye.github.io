@@ -135,11 +135,15 @@ function initRoles() {
     const roles = JSON.parse(el.dataset.roles || '[]');
     if (roles.length < 2) return;
     let r = 0, i = roles[0].length, dir = -1;
+    // Cycle through the roles once and stop on the first one (WCAG 2.2.2: no endless auto-updating text).
     const tick = () => {
         i += dir;
         el.textContent = roles[r].slice(0, i);
         if (dir < 0 && i === 0) { r = (r + 1) % roles.length; dir = 1; return setTimeout(tick, 300); }
-        if (dir > 0 && i === roles[r].length) { dir = -1; return setTimeout(tick, 2400); }
+        if (dir > 0 && i === roles[r].length) {
+            if (r === 0) { el.nextElementSibling?.classList.add('done'); return; }
+            dir = -1; return setTimeout(tick, 2400);
+        }
         return setTimeout(tick, dir < 0 ? 30 : 65);
     };
     setTimeout(tick, 2800);
@@ -151,6 +155,7 @@ function initOnView() {
         const target = parseInt(el.dataset.count, 10);
         const suffix = el.dataset.suffix || '';
         if (!Number.isFinite(target)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = target.toLocaleString() + suffix; return; }
         const start = performance.now(), dur = 1400;
         const step = (t) => {
             const p = Math.min(1, (t - start) / dur);

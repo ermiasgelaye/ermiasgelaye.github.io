@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page not found | Ermias Gelaye Gaga</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/png" href="/Images/optimized/favicon-64.png">
+    <script>
+        try {
+            var t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { /* storage blocked */ }
+    </script>
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <style>
+        .nf { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; text-align: center; padding: 2rem 1rem; }
+        .nf h1 { font-size: clamp(2rem, 6vw, 3rem); margin: .5rem 0 1rem; }
+        .nf p { color: var(--ink-2); max-width: 34rem; margin: 0 auto 1.75rem; }
+        .nf .code { font-family: var(--font-head); font-size: 1rem; letter-spacing: .2em; color: var(--ink-3); }
+        .nf .actions { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+    <main class="nf">
+        <div>
+            <p class="code">404</p>
+            <h1>This page doesn't exist</h1>
+            <p>The link may be out of date, or the page has moved. Try one of these instead.</p>
+            <div class="actions">
+                <a class="btn btn-primary" href="/">Portfolio home</a>
+                <a class="btn btn-outline" href="/#projects">Projects</a>
+                <a class="btn btn-outline" href="/Photography/Home.html">Photography</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

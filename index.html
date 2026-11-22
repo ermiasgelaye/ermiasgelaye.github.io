@@ -38,6 +38,7 @@
                 var t = localStorage.getItem('theme');
                 if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 document.documentElement.setAttribute('data-theme', t);
+                if (t === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0b1020');
             } catch (e) { /* storage blocked */ }
         })();
     </script>
@@ -90,7 +91,7 @@
     <!-- ============ Navigation ============ -->
     <header class="site-nav">
         <nav class="container nav-inner" aria-label="Main">
-            <a href="#top" class="brand" aria-label="Ermias Gelaye Gaga, home"><span class="brand-mark" aria-hidden="true">EG</span><span>Ermias Gaga</span></a>
+            <a href="#top" class="brand" aria-label="Ermias Gaga, home"><span class="brand-mark" aria-hidden="true">EG</span><span>Ermias Gaga</span></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -115,14 +116,14 @@
                 <div>
                     <p class="eyebrow"><i class="fas fa-location-dot" aria-hidden="true"></i> Toronto, Canada</p>
                     <h1 id="heroName">Hi, I'm <span class="gradient-text">Ermias Gelaye Gaga</span></h1>
-                    <p class="role"><span id="roleText" data-roles='["Data Scientist & Research Analyst","Turning messy data into clear decisions","Python · SQL · Machine Learning · Visualization"]'>Data Scientist &amp; Research Analyst</span><span class="cursor" aria-hidden="true"></span></p>
+                    <p class="role"><span class="visually-hidden">Data Scientist &amp; Research Analyst</span><span id="roleText" aria-hidden="true" data-roles='["Data Scientist & Research Analyst","Turning messy data into clear decisions","Python · SQL · Machine Learning · Visualization"]'>Data Scientist &amp; Research Analyst</span><span class="cursor" aria-hidden="true"></span></p>
                     <p class="summary">10+ years in research and analytics, from public-opinion monitoring to collective-bargaining analysis and AI-assisted document extraction.</p>
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary"><i class="fas fa-diagram-project" aria-hidden="true"></i> View projects</a>
                         <a href="https://drive.google.com/file/d/1XVWFF_t5IVVkVQ-8G8oZ58p-ulXrZjPb/view" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fas fa-download" aria-hidden="true"></i> Download CV</a>
                         <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a>
                     </div>
-                    <ul class="fact-chips" aria-label="Highlights">
+                    <ul class="fact-chips">
                         <li><i class="fas fa-graduation-cap" aria-hidden="true"></i> M.S. Data Science</li>
                         <li><i class="fas fa-brain" aria-hidden="true"></i> M.S. Cognitive Science</li>
                         <li><i class="fas fa-briefcase" aria-hidden="true"></i> Senior Analyst</li>
@@ -157,7 +158,7 @@
                     </div>
                     <div class="card side-card reveal">
                         <h3><i class="fas fa-camera-retro" aria-hidden="true"></i> Beyond data</h3>
-                        <p style="color:var(--ink-2)">Away from data, I photograph landscapes and travel across Canada and beyond.</p>
+                        <p class="side-note">Away from data, I photograph landscapes and travel across Canada and beyond.</p>
                         <div class="interest">
                             <img src="Images/optimized/photography-qr-168.png" alt="QR code linking to the photography portfolio" width="84" height="84" loading="lazy" decoding="async">
                             <div>
@@ -167,7 +168,7 @@
                     </div>
                 </div>
 
-                <div class="stats reveal" aria-label="At a glance">
+                <div class="stats reveal" role="group" aria-label="At a glance">
                     <div class="card stat"><strong class="gradient-text" data-count="10" data-suffix="+">10+</strong><span>Years of experience</span></div>
                     <div class="card stat"><strong class="gradient-text" data-count="3">3</strong><span>Degrees</span></div>
                     <div class="card stat"><strong class="gradient-text" data-count="20" data-suffix="+">20+</strong><span>Projects on GitHub</span></div>
@@ -220,19 +221,19 @@
                         <p class="proof"><span>See it in</span> <a href="https://github.com/ermiasgelaye/plotly-Challenge" target="_blank" rel="noopener noreferrer">Belly Button dashboard</a> <a href="https://github.com/ermiasgelaye/D3-challenge" target="_blank" rel="noopener noreferrer">D3 health risks</a> <a href="https://github.com/ermiasgelaye/Google-Health-Search-Project" target="_blank" rel="noopener noreferrer">Google Health map</a></p>
                     </article>
                     <article class="card cap-card">
-                        <h3><i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i> Exploratory analysis & statistics</h3>
+                        <h3><i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i> Exploratory analysis &amp; statistics</h3>
                         <p>Summary statistics, hypothesis tests, correlation and regression.</p>
                         <div class="tags"><span class="tag">Pandas</span> <span class="tag">SciPy</span> <span class="tag">t-tests</span> <span class="tag">Regression</span> <span class="tag">IQR outliers</span></div>
                         <p class="proof"><span>See it in</span> <a href="https://github.com/ermiasgelaye/Matplotlib-Challenge" target="_blank" rel="noopener noreferrer">Drug regimen study</a> <a href="https://github.com/ermiasgelaye/python-api-challenge" target="_blank" rel="noopener noreferrer">Weather vs. latitude</a> <a href="https://github.com/ermiasgelaye/sqlalchemy-challenge" target="_blank" rel="noopener noreferrer">Hawaii t-test</a></p>
                     </article>
                     <article class="card cap-card">
-                        <h3><i class="fas fa-broom" aria-hidden="true"></i> Data wrangling & ETL</h3>
+                        <h3><i class="fas fa-broom" aria-hidden="true"></i> Data wrangling &amp; ETL</h3>
                         <p>Cleaning, merging and auditing messy data from CSVs, APIs and the web.</p>
                         <div class="tags"><span class="tag">Pandas</span> <span class="tag">REST APIs</span> <span class="tag">Web scraping</span> <span class="tag">BeautifulSoup</span></div>
                         <p class="proof"><span>See it in</span> <a href="https://github.com/ermiasgelaye/ETL-Project" target="_blank" rel="noopener noreferrer">ETL pipeline</a> <a href="https://github.com/ermiasgelaye/Google-Health-Search-Project" target="_blank" rel="noopener noreferrer">Google Health data audit</a> <a href="https://github.com/ermiasgelaye/web-scraping-challenge" target="_blank" rel="noopener noreferrer">Mission to Mars</a></p>
                     </article>
                     <article class="card cap-card">
-                        <h3><i class="fas fa-brain" aria-hidden="true"></i> Modeling & machine learning</h3>
+                        <h3><i class="fas fa-brain" aria-hidden="true"></i> Modeling &amp; machine learning</h3>
                         <p>Classification, cross-validation and unsupervised structure.</p>
                         <div class="tags"><span class="tag">Scikit-learn</span> <span class="tag">Logistic regression</span> <span class="tag">Cross-validation</span> <span class="tag">PCA</span> <span class="tag">k-means</span></div>
                         <p class="proof"><span>See it in</span> <a href="https://github.com/ermiasgelaye/Mental-Health-Predictor" target="_blank" rel="noopener noreferrer">Mental Health</a> <a href="https://github.com/ermiasgelaye/Google-Health-Search-Project" target="_blank" rel="noopener noreferrer">Google Health PCA</a></p>
@@ -244,7 +245,7 @@
                         <p class="proof"><span>See it in</span> <a href="https://github.com/ermiasgelaye/sql-challenge" target="_blank" rel="noopener noreferrer">Employee DB</a> <a href="https://github.com/ermiasgelaye/ETL-Project" target="_blank" rel="noopener noreferrer">ETL pipeline</a> <a href="https://github.com/ermiasgelaye/web-scraping-challenge" target="_blank" rel="noopener noreferrer">Mission to Mars</a></p>
                     </article>
                     <article class="card cap-card">
-                        <h3><i class="fas fa-globe" aria-hidden="true"></i> Web apps & deployment</h3>
+                        <h3><i class="fas fa-globe" aria-hidden="true"></i> Web apps &amp; deployment</h3>
                         <p>APIs and data sites people can actually use.</p>
                         <div class="tags"><span class="tag">Flask</span> <span class="tag">JavaScript</span> <span class="tag">Express</span> <span class="tag">GitHub Pages</span> <span class="tag">Vercel</span></div>
                         <p class="proof"><span>See it in</span> <a href="https://github.com/ermiasgelaye/sqlalchemy-challenge" target="_blank" rel="noopener noreferrer">Hawaii climate API</a> <a href="https://github.com/ermiasgelaye/javascript-challenge" target="_blank" rel="noopener noreferrer">UFO sightings</a> <a href="https://github.com/ermiasgelaye/photo-backend" target="_blank" rel="noopener noreferrer">Photo backend</a></p>
@@ -292,8 +293,8 @@
                             </ul>
                             <div class="tags"><span class="tag">Python</span> <span class="tag">SQL</span> <span class="tag">Pandas</span> <span class="tag">Chart.js</span></div>
                             <div class="project-links">
-                                <a class="btn btn-primary btn-sm" href="https://ermiasgelaye.github.io/Google-Health-Search-Project/" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Live demo</a>
-                                <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/Google-Health-Search-Project" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Code</a>
+                                <a class="btn btn-primary btn-sm" href="https://ermiasgelaye.github.io/Google-Health-Search-Project/" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Live demo<span class="visually-hidden">: Google Health Search Trends</span></a>
+                                <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/Google-Health-Search-Project" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Code<span class="visually-hidden">: Google Health Search Trends on GitHub</span></a>
                             </div>
                         </div>
                     </article>
@@ -313,8 +314,8 @@
                             </ul>
                             <div class="tags"><span class="tag">Python</span> <span class="tag">scikit-learn</span> <span class="tag">Tableau</span> <span class="tag">Chart.js</span></div>
                             <div class="project-links">
-                                <a class="btn btn-primary btn-sm" href="https://ermiasgelaye.github.io/Mental-Health-Predictor/" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Live demo</a>
-                                <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/Mental-Health-Predictor" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Code</a>
+                                <a class="btn btn-primary btn-sm" href="https://ermiasgelaye.github.io/Mental-Health-Predictor/" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Live demo<span class="visually-hidden">: Mental Health Risk Indicators</span></a>
+                                <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/Mental-Health-Predictor" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Code<span class="visually-hidden">: Mental Health Risk Indicators on GitHub</span></a>
                             </div>
                         </div>
                     </article>
@@ -333,8 +334,8 @@
                             </ul>
                             <div class="tags"><span class="tag">Python</span> <span class="tag">API</span> <span class="tag">Matplotlib</span> <span class="tag">Seaborn</span></div>
                             <div class="project-links">
-                                <a class="btn btn-primary btn-sm" href="Web-Design-Challenge/index.html"><i class="fas fa-arrow-right" aria-hidden="true"></i> Live demo</a>
-                                <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/python-api-challenge" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Code</a>
+                                <a class="btn btn-primary btn-sm" href="Web-Design-Challenge/index.html"><i class="fas fa-arrow-right" aria-hidden="true"></i> Live demo<span class="visually-hidden">: Global Weather Analysis</span></a>
+                                <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/python-api-challenge" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Code<span class="visually-hidden">: Global Weather Analysis on GitHub</span></a>
                             </div>
                         </div>
                     </article>
@@ -353,8 +354,8 @@
                             </ul>
                             <div class="tags"><span class="tag">Python</span> <span class="tag">Pandas</span> <span class="tag">Matplotlib</span> <span class="tag">Statistics</span></div>
                             <div class="project-links">
-                                <a class="btn btn-primary btn-sm" href="Matplotlib-Challenge/index.html"><i class="fas fa-arrow-right" aria-hidden="true"></i> Live demo</a>
-                                <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/Matplotlib-Challenge" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Code</a>
+                                <a class="btn btn-primary btn-sm" href="Matplotlib-Challenge/index.html"><i class="fas fa-arrow-right" aria-hidden="true"></i> Live demo<span class="visually-hidden">: Pharmaceutical Data Analysis</span></a>
+                                <a class="btn btn-outline btn-sm" href="https://github.com/ermiasgelaye/Matplotlib-Challenge" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Code<span class="visually-hidden">: Pharmaceutical Data Analysis on GitHub</span></a>
                             </div>
                         </div>
                     </article>
@@ -378,7 +379,7 @@
                         </div>
                     </article>
                 </div>
-                <div style="text-align:center;margin-top:2rem">
+                <div class="projects-more">
                     <a href="https://github.com/ermiasgelaye" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> All projects on GitHub</a>
                 </div>
             </div>
@@ -477,12 +478,12 @@
                             <input type="hidden" name="_subject" value="New message from ermiasgelaye.github.io">
                             <div class="hp" aria-hidden="true"><label for="website">Leave this field empty</label><input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off"></div>
                             <div class="form-grid">
-                                <div><label for="name">Full name *</label><input class="input" id="name" name="name" autocomplete="name" maxlength="100" required></div>
+                                <div><label for="name">Full name *</label><input class="input" id="name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
                                 <div><label for="email">Email *</label><input class="input" id="email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
-                                <div class="full"><label for="subject">Subject *</label><input class="input" id="subject" name="subject" maxlength="150" required></div>
+                                <div class="full"><label for="subject">Subject *</label><input class="input" id="subject" name="subject" type="text" maxlength="150" required></div>
                                 <div class="full"><label for="message">Message *</label><textarea class="input" id="message" name="message" rows="6" minlength="10" maxlength="5000" required></textarea></div>
                             </div>
-                            <div style="margin-top:1.25rem"><button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane" aria-hidden="true"></i> Send message</button></div>
+                            <div class="form-actions"><button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane" aria-hidden="true"></i> Send message</button></div>
                             <div id="formResponse" aria-live="polite"></div>
                             <p class="form-note"><i class="fas fa-lock" aria-hidden="true"></i> Your details are used only to reply to your message and are never shared. Messages are delivered by <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Formspree</a>.</p>
                         </form>
@@ -527,7 +528,7 @@
             <button type="button" data-chat="close" aria-label="Close assistant" title="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
         </header>
         <div class="chat-log" id="chatLog" role="log" aria-live="polite" aria-relevant="additions"></div>
-        <div class="chat-suggest" id="chatSuggest" aria-label="Suggested questions"></div>
+        <div class="chat-suggest" id="chatSuggest" role="group" aria-label="Suggested questions"></div>
         <form class="chat-form" id="chatForm" autocomplete="off">
             <label for="chatInput" class="visually-hidden">Your question</label>
             <textarea id="chatInput" rows="1" maxlength="600" placeholder="Ask about Ermias or data science…" enterkeyhint="send"></textarea>
