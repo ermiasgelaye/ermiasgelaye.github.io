@@ -171,8 +171,8 @@ const Weather = (() => {
             return `<article class="card stat-card">
                 <h3><span><i class="fas fa-${v.icon}" aria-hidden="true"></i> ${v.label}</span><span class="strength ${cls}">${label}</span></h3>
                 <dl>
-                    <dt>R² north</dt><dd>${s.north.r2.toFixed(2)} <small>(p ${fmtP(s.north.p)})</small></dd>
-                    <dt>R² south</dt><dd>${s.south.r2.toFixed(2)} <small>(p ${fmtP(s.south.p)})</small></dd>
+                    <dt>R² north</dt><dd>${s.north.r2.toFixed(2)} <small>(${pEq(s.north.p)})</small></dd>
+                    <dt>R² south</dt><dd>${s.south.r2.toFixed(2)} <small>(${pEq(s.south.p)})</small></dd>
                 </dl>
                 <p>${explain[k](s)}</p>
             </article>`;
