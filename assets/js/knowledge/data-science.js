@@ -10,8 +10,8 @@
             id: 'ds-ml', topic: 'ml', level: 'beginner', title: 'What is machine learning?',
             q: ['what is machine learning', 'explain machine learning', 'ml basics', 'types of machine learning'],
             k: ['machinelearning', 'ai', 'supervised', 'unsupervised', 'reinforcement', 'algorithm', 'model'],
-            a: `**Machine learning** builds models that learn patterns from data to make predictions or decisions, instead of following hand-written rules.\n\n- **Supervised learning**: learn from labelled examples. *Classification* (spam or not) and *regression* (predict a price).\n- **Unsupervised learning**: find structure without labels: *clustering* (customer segments), *dimensionality reduction* (PCA).\n- **Reinforcement learning**: an agent learns by trial and reward (games, robotics).\n\nTypical workflow: define the problem → collect & clean data → explore (EDA) → engineer features → split train/validation/test → train → evaluate → deploy → monitor.`,
-            more: `Common starting algorithms: linear/logistic regression (simple, interpretable baselines), decision trees, random forests and gradient boosting (strong on tabular data), k-nearest neighbours, k-means clustering, and neural networks (images, text, audio). Always start with a simple baseline: it tells you whether a complex model is actually helping.`,
+            a: `**Machine learning** builds models that learn patterns from data to make predictions or decisions, instead of following hand-written rules.\n\n- **Supervised learning**: learn from labeled examples. *Classification* (spam or not) and *regression* (predict a price).\n- **Unsupervised learning**: find structure without labels: *clustering* (customer segments), *dimensionality reduction* (PCA).\n- **Reinforcement learning**: an agent learns by trial and reward (games, robotics).\n\nTypical workflow: define the problem → collect & clean data → explore (EDA) → engineer features → split train/validation/test → train → evaluate → deploy → monitor.`,
+            more: `Common starting algorithms: linear/logistic regression (simple, interpretable baselines), decision trees, random forests and gradient boosting (strong on tabular data), k-nearest neighbors, k-means clustering, and neural networks (images, text, audio). Always start with a simple baseline: it tells you whether a complex model is actually helping.`,
             related: ['ds-overfitting', 'ds-crossval', 'ds-metrics-class', 'ds-tree-models']
         },
         {
@@ -67,21 +67,21 @@
             id: 'ds-clustering', topic: 'ml', level: 'intermediate', title: 'Clustering (k-means & friends)',
             q: ['what is k means', 'how to choose number of clusters', 'customer segmentation'],
             k: ['clustering', 'kmeans', 'dbscan', 'hierarchical', 'segmentation', 'elbow', 'silhouette'],
-            a: `**k-means** groups points into *k* clusters by minimising distance to cluster centres. Scale features first; it assumes roughly round, similar-sized clusters.\n\nChoosing *k*: the **elbow method** (inertia vs k) and the **silhouette score**, plus whether the clusters make business sense.\n\nAlternatives: **DBSCAN** (arbitrary shapes, finds outliers), **hierarchical clustering** (dendrograms), **Gaussian mixtures** (soft assignments).`,
+            a: `**k-means** groups points into *k* clusters by minimizing distance to cluster centers. Scale features first; it assumes roughly round, similar-sized clusters.\n\nChoosing *k*: the **elbow method** (inertia vs k) and the **silhouette score**, plus whether the clusters make business sense.\n\nAlternatives: **DBSCAN** (arbitrary shapes, finds outliers), **hierarchical clustering** (dendrograms), **Gaussian mixtures** (soft assignments).`,
             related: ['ds-pca', 'ds-ml']
         },
         {
             id: 'ds-pca', topic: 'ml', level: 'advanced', title: 'PCA & dimensionality reduction',
             q: ['what is pca', 'when to use dimensionality reduction', 'tsne vs pca'],
             k: ['pca', 'principal components', 'tsne', 'umap', 'dimensions'],
-            a: `**PCA** finds new axes (principal components) that capture the most variance, letting you compress correlated features into fewer dimensions. Standardise features first, and check the explained-variance ratio to choose how many components to keep.\n\nUse it to reduce noise, speed up models, or visualise data in 2D. **t-SNE** and **UMAP** are better for visualising clusters but distances between clusters aren't meaningful.`,
+            a: `**PCA** finds new axes (principal components) that capture the most variance, letting you compress correlated features into fewer dimensions. Standardize features first, and check the explained-variance ratio to choose how many components to keep.\n\nUse it to reduce noise, speed up models, or visualize data in 2D. **t-SNE** and **UMAP** are better for visualizing clusters but distances between clusters aren't meaningful.`,
             related: ['ds-clustering', 'ds-feature-eng']
         },
         {
             id: 'ds-feature-eng', topic: 'ml', level: 'intermediate', title: 'Feature engineering',
             q: ['what is feature engineering', 'how to encode categorical variables', 'feature scaling'],
             k: ['featureengineering', 'features', 'encoding', 'one hot', 'scaling', 'normalization', 'standardization'],
-            a: `Turning raw data into informative inputs:\n- **Categorical:** one-hot encoding (few categories), target/ordinal encoding (many, beware leakage).\n- **Scaling:** standardise (z-scores) or min-max for distance-based models and neural nets; trees don't need it.\n- **Dates:** day of week, month, holidays, time since an event.\n- **Text:** TF-IDF, embeddings.\n- **Domain features:** ratios, aggregates, interactions.\n\nWrap preprocessing in a **pipeline** (e.g. scikit-learn \`Pipeline\`/\`ColumnTransformer\`) so the same steps apply in training and production.`,
+            a: `Turning raw data into informative inputs:\n- **Categorical:** one-hot encoding (few categories), target/ordinal encoding (many, beware leakage).\n- **Scaling:** standardize (z-scores) or min-max for distance-based models and neural nets; trees don't need it.\n- **Dates:** day of week, month, holidays, time since an event.\n- **Text:** TF-IDF, embeddings.\n- **Domain features:** ratios, aggregates, interactions.\n\nWrap preprocessing in a **pipeline** (e.g. scikit-learn \`Pipeline\`/\`ColumnTransformer\`) so the same steps apply in training and production.`,
             related: ['ds-missing', 'ds-split-leakage']
         },
         {
@@ -95,7 +95,7 @@
             id: 'ds-nlp', topic: 'ml', level: 'intermediate', title: 'Natural language processing (NLP)',
             q: ['what is nlp', 'sentiment analysis', 'how to analyze text data'],
             k: ['nlp', 'text', 'sentiment', 'tokenization', 'tfidf', 'embeddings', 'language model', 'llm'],
-            a: `NLP turns text into something models can use.\n\n- **Classic pipeline:** clean → tokenise → remove stop words / lemmatise → TF-IDF features → logistic regression or similar. Fast and surprisingly strong.\n- **Modern:** pretrained **embeddings** or **transformer** models fine-tuned for classification, extraction or summarisation.\n- **Tasks:** sentiment analysis, topic modelling, named-entity recognition, document classification and information extraction.\n\nErmias's work includes sentiment analysis of digital media (2011–2015) and using AI tools to extract data from documents in his current role.`,
+            a: `NLP turns text into something models can use.\n\n- **Classic pipeline:** clean → tokenise → remove stop words / lemmatise → TF-IDF features → logistic regression or similar. Fast and surprisingly strong.\n- **Modern:** pretrained **embeddings** or **transformer** models fine-tuned for classification, extraction or summarization.\n- **Tasks:** sentiment analysis, topic modeling, named-entity recognition, document classification and information extraction.\n\nErmias's work includes sentiment analysis of digital media (2011–2015) and using AI tools to extract data from documents in his current role.`,
             related: ['ds-deep-learning', 'me-experience']
         },
         {
@@ -132,21 +132,21 @@
             id: 'ds-abtest', topic: 'stats', level: 'intermediate', title: 'A/B testing',
             q: ['how to run an ab test', 'what is ab testing', 'sample size for ab test'],
             k: ['abtesting', 'experiment', 'control', 'treatment', 'sample size', 'power'],
-            a: `1. Define one **primary metric** and the minimum effect worth detecting.\n2. Compute the **sample size** (power analysis, typically 80% power, α = 0.05) *before* starting.\n3. **Randomly** assign users to control and variant.\n4. Run for the planned duration (cover weekly cycles); **don't stop early** when it looks significant ("peeking").\n5. Analyse with the planned test; check guardrail metrics and segments cautiously.\n\nWatch out for novelty effects, sample-ratio mismatch and running many metrics at once (multiple comparisons).`,
+            a: `1. Define one **primary metric** and the minimum effect worth detecting.\n2. Compute the **sample size** (power analysis, typically 80% power, α = 0.05) *before* starting.\n3. **Randomly** assign users to control and variant.\n4. Run for the planned duration (cover weekly cycles); **don't stop early** when it looks significant ("peeking").\n5. Analyze with the planned test; check guardrail metrics and segments cautiously.\n\nWatch out for novelty effects, sample-ratio mismatch and running many metrics at once (multiple comparisons).`,
             related: ['ds-hypothesis', 'ds-ci']
         },
         {
             id: 'ds-correlation', topic: 'stats', level: 'beginner', title: 'Correlation vs causation',
             q: ['correlation vs causation', 'does correlation imply causation', 'what is a confounder'],
             k: ['correlation', 'causation', 'confounder', 'causal', 'pearson', 'spearman'],
-            a: `**Correlation** measures how two variables move together (Pearson for linear, Spearman for ranked/monotonic relationships). It doesn't show **causation**: a third factor (**confounder**) can drive both, the direction can be reversed, or it can be coincidence.\n\nTo argue causation: randomised experiments (A/B tests), or careful causal methods on observational data (controls, difference-in-differences, regression discontinuity, instrumental variables).`,
+            a: `**Correlation** measures how two variables move together (Pearson for linear, Spearman for ranked/monotonic relationships). It doesn't show **causation**: a third factor (**confounder**) can drive both, the direction can be reversed, or it can be coincidence.\n\nTo argue causation: randomized experiments (A/B tests), or careful causal methods on observational data (controls, difference-in-differences, regression discontinuity, instrumental variables).`,
             related: ['ds-abtest', 'ds-hypothesis']
         },
         {
             id: 'ds-distributions', topic: 'stats', level: 'beginner', title: 'Descriptive statistics & distributions',
             q: ['mean vs median', 'what is standard deviation', 'normal distribution', 'how to handle outliers'],
             k: ['mean', 'median', 'mode', 'standard deviation', 'variance', 'normal distribution', 'outliers', 'skew', 'iqr'],
-            a: `- **Mean** is sensitive to outliers; **median** is robust, prefer it for skewed data like incomes.\n- **Standard deviation** measures spread; in a normal distribution ~68% of values fall within 1 SD and ~95% within 2 SD.\n- **Outliers:** detect with the IQR rule (below Q1 − 1.5·IQR or above Q3 + 1.5·IQR) or z-scores. Investigate before removing: they may be errors *or* the most important cases.\n- Visualise distributions with histograms and box plots before modelling.`,
+            a: `- **Mean** is sensitive to outliers; **median** is robust, prefer it for skewed data like incomes.\n- **Standard deviation** measures spread; in a normal distribution ~68% of values fall within 1 SD and ~95% within 2 SD.\n- **Outliers:** detect with the IQR rule (below Q1 − 1.5·IQR or above Q3 + 1.5·IQR) or z-scores. Investigate before removing: they may be errors *or* the most important cases.\n- Visualize distributions with histograms and box plots before modeling.`,
             related: ['ds-eda', 'ds-hypothesis']
         },
 
@@ -155,21 +155,21 @@
             id: 'ds-eda', topic: 'data', level: 'beginner', title: 'Exploratory data analysis (EDA)',
             q: ['how to do exploratory data analysis', 'eda steps', 'first steps with a new dataset'],
             k: ['eda', 'exploration', 'explore', 'profiling', 'summary statistics'],
-            a: `A practical EDA checklist:\n1. **Shape & types**: \`df.shape\`, \`df.info()\`, \`df.dtypes\`\n2. **Missing values & duplicates**\n3. **Summary stats**: \`df.describe()\`, value counts for categories\n4. **Distributions**: histograms, box plots, outliers\n5. **Relationships**: correlation matrix, scatter plots, group-bys against the target\n6. **Time patterns** if dates exist\n7. **Write down questions and hypotheses** for modelling or the next analysis\n\nEDA is where most insights, and data-quality problems, are found.`,
+            a: `A practical EDA checklist:\n1. **Shape & types**: \`df.shape\`, \`df.info()\`, \`df.dtypes\`\n2. **Missing values & duplicates**\n3. **Summary stats**: \`df.describe()\`, value counts for categories\n4. **Distributions**: histograms, box plots, outliers\n5. **Relationships**: correlation matrix, scatter plots, group-bys against the target\n6. **Time patterns** if dates exist\n7. **Write down questions and hypotheses** for modeling or the next analysis\n\nEDA is where most insights, and data-quality problems, are found.`,
             related: ['ds-missing', 'ds-dataviz', 'ds-python']
         },
         {
             id: 'ds-missing', topic: 'data', level: 'intermediate', title: 'Data cleaning & missing values',
             q: ['how to handle missing data', 'data cleaning steps', 'imputation methods'],
             k: ['datacleaning', 'missing', 'null', 'nan', 'imputation', 'duplicates', 'cleaning'],
-            a: `First ask **why** data is missing (random, or systematically linked to something?).\n\n- **Drop** rows/columns only when little is missing or the column isn't useful.\n- **Impute:** median/mode for simple cases; group-wise imputation; model-based (KNN, iterative) for richer patterns.\n- Add a **"was missing" indicator**: missingness itself can be predictive.\n- Fit imputers on training data only (avoid leakage).\n\nOther cleaning: fix types, standardise text/categories, deduplicate, validate ranges, and document every rule.`,
+            a: `First ask **why** data is missing (random, or systematically linked to something?).\n\n- **Drop** rows/columns only when little is missing or the column isn't useful.\n- **Impute:** median/mode for simple cases; group-wise imputation; model-based (KNN, iterative) for richer patterns.\n- Add a **"was missing" indicator**: missingness itself can be predictive.\n- Fit imputers on training data only (avoid leakage).\n\nOther cleaning: fix types, standardize text/categories, deduplicate, validate ranges, and document every rule.`,
             related: ['ds-eda', 'ds-split-leakage']
         },
         {
             id: 'ds-python', topic: 'tools', level: 'beginner', title: 'Python for data science',
             q: ['how to learn python for data science', 'pandas tips', 'which python libraries for data science'],
             k: ['python', 'pandas', 'numpy', 'scikit learn', 'jupyter', 'libraries', 'matplotlib', 'seaborn'],
-            a: `Core stack:\n- **Pandas**: tabular data (read, clean, group, join)\n- **NumPy**: fast numerical arrays\n- **Matplotlib / Seaborn / Plotly**: visualisation\n- **Scikit-learn**: classical ML, pipelines, model selection\n- **TensorFlow / PyTorch**: deep learning\n- **Jupyter**: interactive analysis\n\nPandas habits that pay off: use vectorised operations instead of loops, \`groupby().agg()\` for summaries, \`merge\` with \`validate=\` to catch bad joins, and method chaining for readable pipelines.`,
+            a: `Core stack:\n- **Pandas**: tabular data (read, clean, group, join)\n- **NumPy**: fast numerical arrays\n- **Matplotlib / Seaborn / Plotly**: visualization\n- **Scikit-learn**: classical ML, pipelines, model selection\n- **TensorFlow / PyTorch**: deep learning\n- **Jupyter**: interactive analysis\n\nPandas habits that pay off: use vectorised operations instead of loops, \`groupby().agg()\` for summaries, \`merge\` with \`validate=\` to catch bad joins, and method chaining for readable pipelines.`,
             related: ['ds-sql', 'ds-eda', 'me-skills']
         },
         {
@@ -183,7 +183,7 @@
             id: 'ds-dataviz', topic: 'tools', level: 'beginner', title: 'Data visualization best practices',
             q: ['data visualization best practices', 'which chart should i use', 'how to make a good dashboard'],
             k: ['dataviz', 'chart', 'graph', 'dashboard', 'plot', 'visual', 'storytelling'],
-            a: `- **Pick the chart for the question:** trend → line; compare categories → bar (sorted); distribution → histogram/box plot; relationship → scatter; part-to-whole → stacked bar (pies only for 2–3 parts).\n- **Start bar charts at zero**, label axes and units, and title charts with the *insight*, not just the variable names.\n- **Use colour purposefully**: highlight what matters, grey the rest; check colour-blind safety.\n- **Dashboards:** lead with the key metrics, allow drill-down, keep filters consistent and avoid clutter.\n\nTools Ermias uses: Matplotlib, Seaborn, Plotly, D3.js and Tableau.`,
+            a: `- **Pick the chart for the question:** trend → line; compare categories → bar (sorted); distribution → histogram/box plot; relationship → scatter; part-to-whole → stacked bar (pies only for 2–3 parts).\n- **Start bar charts at zero**, label axes and units, and title charts with the *insight*, not just the variable names.\n- **Use color purposefully**: highlight what matters, gray the rest; check color-blind safety.\n- **Dashboards:** lead with the key metrics, allow drill-down, keep filters consistent and avoid clutter.\n\nTools Ermias uses: Matplotlib, Seaborn, Plotly, D3.js and Tableau.`,
             related: ['ds-tableau', 'ds-eda', 'p-health']
         },
         {
@@ -206,7 +206,7 @@
             id: 'car-start', topic: 'career', level: 'beginner', title: 'Getting into data science',
             q: ['how do i become a data scientist', 'how to start a career in data science', 'data analyst vs data scientist', 'career advice in data science'],
             k: ['career', 'become', 'start', 'entry level', 'junior', 'transition', 'data analyst', 'data scientist'],
-            a: `A realistic path:\n1. **Foundations:** statistics, SQL, Python (or R), spreadsheets.\n2. **Analyst skills:** EDA, visualisation, dashboards (Tableau/Power BI), communicating findings.\n3. **ML basics:** regression, classification, evaluation, scikit-learn.\n4. **Projects:** 3–5 end-to-end projects on real, messy data, published on GitHub with a clear README.\n5. **Domain knowledge:** your previous field is an asset (Ermias went from psychology and cognitive neuroscience into data science).\n\n**Data analysts** focus on describing and explaining data; **data scientists** add modelling and experimentation; **ML engineers** focus on production systems.`,
+            a: `A realistic path:\n1. **Foundations:** statistics, SQL, Python (or R), spreadsheets.\n2. **Analyst skills:** EDA, visualization, dashboards (Tableau/Power BI), communicating findings.\n3. **ML basics:** regression, classification, evaluation, scikit-learn.\n4. **Projects:** 3–5 end-to-end projects on real, messy data, published on GitHub with a clear README.\n5. **Domain knowledge:** your previous field is an asset (Ermias went from psychology and cognitive neuroscience into data science).\n\n**Data analysts** focus on describing and explaining data; **data scientists** add modeling and experimentation; **ML engineers** focus on production systems.`,
             related: ['car-portfolio', 'car-interview', 'me-about']
         },
         {
@@ -220,7 +220,7 @@
             id: 'car-interview', topic: 'career', level: 'intermediate', title: 'Data science interview preparation',
             q: ['how to prepare for a data science interview', 'common data science interview questions', 'technical interview tips'],
             k: ['interview', 'questions', 'preparation', 'technical', 'behavioral', 'case study'],
-            a: `**Technical:** SQL (joins, window functions), statistics (p-values, confidence intervals, A/B tests), ML concepts (bias–variance, regularisation, metrics, leakage), Python/pandas exercises.\n\n**Case/product questions:** define metrics, design an experiment, size a problem, reason about trade-offs.\n\n**Projects:** be ready to walk through one project in depth, problem, data issues, choices, results and what you'd do differently.\n\n**Behavioural:** prepare STAR stories (Situation, Task, Action, Result) about challenges, collaboration and influencing decisions with data.`,
+            a: `**Technical:** SQL (joins, window functions), statistics (p-values, confidence intervals, A/B tests), ML concepts (bias–variance, regularisation, metrics, leakage), Python/pandas exercises.\n\n**Case/product questions:** define metrics, design an experiment, size a problem, reason about trade-offs.\n\n**Projects:** be ready to walk through one project in depth, problem, data issues, choices, results and what you'd do differently.\n\n**Behavioral:** prepare STAR stories (Situation, Task, Action, Result) about challenges, collaboration and influencing decisions with data.`,
             related: ['ds-sql', 'ds-abtest', 'ds-overfitting']
         },
         {

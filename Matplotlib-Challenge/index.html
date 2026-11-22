@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Pharmaceutical Data Analysis: SCC Drug Regimens | Ermias Gelaye Gaga</title>
-    <meta name="description" content="Analysis of an animal study of squamous cell carcinoma: 249 mice across 10 drug regimens. Capomulin and Ramicane showed the smallest final tumours; mouse weight strongly predicts tumour volume. By Ermias Gelaye Gaga.">
+    <meta name="description" content="Analysis of an animal study of squamous cell carcinoma: 249 mice across 10 drug regimens. Capomulin and Ramicane showed the smallest final tumors; mouse weight strongly predicts tumor volume. By Ermias Gelaye Gaga.">
     <meta name="author" content="Ermias Gelaye Gaga">
     <meta name="theme-color" content="#ffffff">
     <link rel="icon" type="image/png" href="../Images/optimized/favicon-64.png">
@@ -18,10 +18,10 @@
                 keepWords: ['photo', 'photos', 'picture', 'pictures', 'chart', 'charts'],
                 subjectPattern: /\b(this|the) (project|study|analysis|data|dataset|chart|figure)\b|\b(project|study|dataset)\b/,
                 subjectTopics: ['project'],
-                welcome: "Hi! \ud83d\udc4b I'm the **Pharmaceutical Analysis assistant**.\n\nAsk me which treatment worked best, how weight relates to tumour volume, how the study was designed, or what the caveats are.",
+                welcome: "Hi! \ud83d\udc4b I'm the **Pharmaceutical Analysis assistant**.\n\nAsk me which treatment worked best, how weight relates to tumor volume, how the study was designed, or what the caveats are.",
                 greeting: "Hello! \ud83d\udc4b Ask me about this pharmaceutical study: design, findings or caveats.",
-                starters: ["What was the main finding?", "Which treatments were compared?", "Is the comparison fair?", "How does weight affect tumour volume?", "What methods were used?"],
-                helpText: (n) => "I'm the assistant for this pharmaceutical project ({n}+ topics). Ask about:\n\n- **Findings**: best regimens, weight vs. tumour volume\n- **Study design**: 249 mice, 10 regimens\n- **Caveats**: baseline weight differences\n- **General data science** questions".replace('{n}', n),
+                starters: ["What was the main finding?", "Which treatments were compared?", "Is the comparison fair?", "How does weight affect tumor volume?", "What methods were used?"],
+                helpText: (n) => "I'm the assistant for this pharmaceutical project ({n}+ topics). Ask about:\n\n- **Findings**: best regimens, weight vs. tumor volume\n- **Study design**: 249 mice, 10 regimens\n- **Caveats**: baseline weight differences\n- **General data science** questions".replace('{n}', n),
                 unknownTail: "\n\nI can explain this project's data, methods and findings, or general data-science concepts. For anything else, Ermias's contact details are on the main portfolio page."
             }
         };
@@ -55,8 +55,8 @@
         <section class="p-hero">
             <div class="container">
                 <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Portfolio</a> <span aria-hidden="true">/</span> <span aria-current="page">Pharmaceutical Data Analysis</span></nav>
-                <h1>Which drug regimen <span class="gradient-text">shrinks tumours most?</span></h1>
-                <p class="lede">An animal study of squamous cell carcinoma (SCC): mice received one of ten drug regimens, including a placebo, and tumour volume was tracked over 45 days. Cleaned, analysed and visualised with Pandas and Matplotlib.</p>
+                <h1>Which drug regimen <span class="gradient-text">shrinks tumors most?</span></h1>
+                <p class="lede">An animal study of squamous cell carcinoma (SCC): mice received one of ten drug regimens, including a placebo, and tumor volume was tracked over 45 days. Cleaned, analyzed and visualized with Pandas and Matplotlib.</p>
                 <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Statistics</span><span class="tag">Regression</span></div>
                 <div class="hero-actions" style="margin:0">
                     <a href="#findings" class="btn btn-primary"><i class="fas fa-lightbulb" aria-hidden="true"></i> Key findings</a>
@@ -76,13 +76,13 @@
             <div class="container">
                 <div class="section-head reveal"><p class="kicker">Results</p><h2 id="findTitle">Key findings</h2></div>
                 <ul class="findings reveal">
-                    <li class="card"><i class="fas fa-trophy" aria-hidden="true"></i><p><strong>Capomulin and Ramicane</strong> had the smallest final tumour volumes of the four regimens compared: medians about 36–38 mm³, versus about 60 mm³ for Infubinol and Ceftamin. <a href="box_plot.html">See the box plot</a>.</p></li>
-                    <li class="card"><i class="fas fa-weight-scale" aria-hidden="true"></i><p>For mice on Capomulin, <strong>body weight strongly predicts average tumour volume</strong>: R² ≈ 0.70, about +0.95 mm³ per gram. <a href="linear_regression.html">See the regression</a>.</p></li>
-                    <li class="card"><i class="fas fa-list-ol" aria-hidden="true"></i><p>Capomulin has the most tumour measurements (230) and Propriva the fewest (about 160). Regimens with more measurements kept more mice in the study for longer. <a href="Pan_mice_per_treat.html">See the counts</a>.</p></li>
+                    <li class="card"><i class="fas fa-trophy" aria-hidden="true"></i><p><strong>Capomulin and Ramicane</strong> had the smallest final tumor volumes of the four regimens compared: medians about 36–38 mm³, versus about 60 mm³ for Infubinol and Ceftamin. <a href="box_plot.html">See the box plot</a>.</p></li>
+                    <li class="card"><i class="fas fa-weight-scale" aria-hidden="true"></i><p>For mice on Capomulin, <strong>body weight strongly predicts average tumor volume</strong>: R² ≈ 0.70, about +0.95 mm³ per gram. <a href="linear_regression.html">See the regression</a>.</p></li>
+                    <li class="card"><i class="fas fa-list-ol" aria-hidden="true"></i><p>Capomulin has the most tumor measurements (230) and Propriva the fewest (about 160). Regimens with more measurements kept more mice in the study for longer. <a href="Pan_mice_per_treat.html">See the counts</a>.</p></li>
                     <li class="card"><i class="fas fa-venus-mars" aria-hidden="true"></i><p>The population is <strong>balanced by sex</strong> (124 female, 125 male), so sex is unlikely to bias the comparison. <a href="pi_pandas.html">See the split</a>.</p></li>
                 </ul>
                 <div class="card callout reveal" style="margin-top:1.5rem">
-                    <strong><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Caveat. Baseline weight:</strong> mice on Capomulin and Ramicane were lighter at the start (<span data-kpi="lightWeight">≈20 g</span> on average vs. <span data-kpi="otherWeight">27–28 g</span> for every other regimen). Because weight is strongly linked to tumour volume, part of their advantage may reflect body weight rather than the drug alone. A fairer test would adjust for weight or compare change from baseline.
+                    <strong><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Caveat. Baseline weight:</strong> mice on Capomulin and Ramicane were lighter at the start (<span data-kpi="lightWeight">≈20 g</span> on average vs. <span data-kpi="otherWeight">27–28 g</span> for every other regimen). Because weight is strongly linked to tumor volume, part of their advantage may reflect body weight rather than the drug alone. A fairer test would adjust for weight or compare change from baseline.
                 </div>
             </div>
         </section>
@@ -104,8 +104,8 @@
                 <div class="section-head reveal"><p class="kicker">Original Matplotlib figures</p><h2 id="figTitle">Visualizations</h2></div>
                 <div class="figure-grid reveal">
                     <figure class="card"><a href="Pan_mice_per_treat.html"><img src="Resources/assets/images/Pan_mice_per_treat.png" alt="Original Matplotlib chart: Measurements per regimen" loading="lazy" decoding="async"></a><figcaption><span>Measurements per regimen</span><a href="Pan_mice_per_treat.html">Analysis <i class="fas fa-arrow-right" aria-hidden="true"></i></a></figcaption></figure>
-                    <figure class="card"><a href="box_plot.html"><img src="Resources/assets/images/box_plot.png" alt="Original Matplotlib chart: Final tumour volume" loading="lazy" decoding="async"></a><figcaption><span>Final tumour volume</span><a href="box_plot.html">Analysis <i class="fas fa-arrow-right" aria-hidden="true"></i></a></figcaption></figure>
-                    <figure class="card"><a href="linear_regression.html"><img src="Resources/assets/images/linear_regression.png" alt="Original Matplotlib chart: Weight vs. tumour volume" loading="lazy" decoding="async"></a><figcaption><span>Weight vs. tumour volume</span><a href="linear_regression.html">Analysis <i class="fas fa-arrow-right" aria-hidden="true"></i></a></figcaption></figure>
+                    <figure class="card"><a href="box_plot.html"><img src="Resources/assets/images/box_plot.png" alt="Original Matplotlib chart: Final tumor volume" loading="lazy" decoding="async"></a><figcaption><span>Final tumor volume</span><a href="box_plot.html">Analysis <i class="fas fa-arrow-right" aria-hidden="true"></i></a></figcaption></figure>
+                    <figure class="card"><a href="linear_regression.html"><img src="Resources/assets/images/linear_regression.png" alt="Original Matplotlib chart: Weight vs. tumor volume" loading="lazy" decoding="async"></a><figcaption><span>Weight vs. tumor volume</span><a href="linear_regression.html">Analysis <i class="fas fa-arrow-right" aria-hidden="true"></i></a></figcaption></figure>
                     <figure class="card"><a href="pi_pandas.html"><img src="Resources/assets/images/pi_pandas.png" alt="Original Matplotlib chart: Male vs. female" loading="lazy" decoding="async"></a><figcaption><span>Male vs. female</span><a href="pi_pandas.html">Analysis <i class="fas fa-arrow-right" aria-hidden="true"></i></a></figcaption></figure>
                 </div>
             </div>
@@ -116,9 +116,9 @@
                 <div class="section-head reveal"><p class="kicker">How it was done</p><h2 id="methodTitle">Methodology</h2></div>
                 <ol class="method-steps reveal">
                     <li class="card"><h3>Clean</h3><p>Combined the study data in Pandas and removed a mouse with duplicated timepoint records, leaving 248 mice for the treatment analysis.</p></li>
-                    <li class="card"><h3>Aggregate</h3><p>Summarised measurements by regimen and sex with Pandas <code>groupby</code> operations.</p></li>
-                    <li class="card"><h3>Visualise</h3><p>Bar, pie and box plots in Matplotlib; outliers beyond 1.5×IQR shown as points.</p></li>
-                    <li class="card"><h3>Model</h3><p>Linear regression of mouse weight on average tumour volume for Capomulin (R² ≈ 0.70).</p></li>
+                    <li class="card"><h3>Aggregate</h3><p>Summarized measurements by regimen and sex with Pandas <code>groupby</code> operations.</p></li>
+                    <li class="card"><h3>Visualize</h3><p>Bar, pie and box plots in Matplotlib; outliers beyond 1.5×IQR shown as points.</p></li>
+                    <li class="card"><h3>Model</h3><p>Linear regression of mouse weight on average tumor volume for Capomulin (R² ≈ 0.70).</p></li>
                 </ol>
             </div>
         </section>

@@ -1,4 +1,4 @@
-/* Ermias Gelaye Gaga — career site behaviour.
+/* Ermias Gelaye Gaga — career site behavior.
  * Also provides the small ARC.* helpers the shared chat assistant (/assets/shared/chat) expects. */
 'use strict';
 

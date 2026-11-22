@@ -43,7 +43,7 @@
         { id: 'w-method', topic: 'project', title: 'Methodology',
           q: ['how was the analysis done', 'what statistics were used', 'what is r squared here', 'what does p value mean here'],
           k: ['method', 'methodology', 'regression', 'statistics', 'r squared', 'pvalue', 'pearson'],
-          a: `1. **Collect** weather for a random sample of cities from the OpenWeatherMap API (Python, requests).\n2. **Clean** with Pandas: remove duplicates and impossible values.\n3. **Visualise** each variable against latitude with Matplotlib scatter plots.\n4. **Analyse** with linear regression per hemisphere: Pearson **r** (direction and strength), **R²** (share of variation explained) and a **p-value** testing whether the correlation differs from zero.\n\nThe statistics on this page are recalculated live in your browser from cities.csv.`,
+          a: `1. **Collect** weather for a random sample of cities from the OpenWeatherMap API (Python, requests).\n2. **Clean** with Pandas: remove duplicates and impossible values.\n3. **Visualize** each variable against latitude with Matplotlib scatter plots.\n4. **Analyze** with linear regression per hemisphere: Pearson **r** (direction and strength), **R²** (share of variation explained) and a **p-value** testing whether the correlation differs from zero.\n\nThe statistics on this page are recalculated live in your browser from cities.csv.`,
           related: ['w-hemisphere', 'w-dataset'] },
         { id: 'w-figures', topic: 'project', title: 'Original figures vs. the dataset',
           q: ['why do the figures say 01/05/17', 'are the figures from the same data', 'difference between charts and data'],
