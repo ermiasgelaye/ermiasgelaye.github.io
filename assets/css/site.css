@@ -108,7 +108,7 @@ button, a { touch-action: manipulation; }
     .nav-links { position: fixed; top: calc(var(--nav-h) + env(safe-area-inset-top)); left: 0; right: 0; flex-direction: column; padding: .75rem 1rem 1.25rem;
         background: var(--bg); border-bottom: 1px solid var(--border); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(-8px);
         transition: opacity .2s, transform .2s, visibility .2s; max-height: calc(100vh - var(--nav-h)); overflow-y: auto; }
-    .nav-links.open { opacity: 1; visibility: visible; transform: none; }
+    .nav-links.open { opacity: 1; visibility: visible; transform: none; transition: opacity .2s, transform .2s, visibility 0s; } /* visible immediately so keyboard focus can move in */
     .nav-links a { padding: .85rem 1rem; border-radius: var(--radius-sm); }
 }
 

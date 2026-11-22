@@ -93,7 +93,8 @@ function initNav() {
         toggle.innerHTML = `<i class="fas ${open ? 'fa-times' : 'fa-bars'}" aria-hidden="true"></i>`;
         // The links come before the toggle in the DOM, so move focus into the menu when it opens
         // and back to the toggle when it closes from the keyboard.
-        if (focus) (open ? links.querySelector('a') : toggle)?.focus();
+        // Wait a frame so the menu's visibility change has applied (hidden elements can't take focus).
+        if (focus) requestAnimationFrame(() => (open ? links.querySelector('a') : toggle)?.focus());
     };
     toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!isOpen(), { focus: e.detail === 0 }); });
     links.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
