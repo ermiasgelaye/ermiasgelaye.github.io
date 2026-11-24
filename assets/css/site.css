@@ -99,7 +99,7 @@ button, a { touch-action: manipulation; }
 .brand-mark { width: 36px; height: 36px; border-radius: 10px; background: var(--gradient); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: .9rem; letter-spacing: .02em; }
 .nav-links { display: flex; gap: .15rem; list-style: none; margin: 0; padding: 0; }
 .nav-links a { display: block; padding: .5rem .75rem; border-radius: 999px; color: var(--ink-2); font-weight: 500; font-size: .93rem; }
-.nav-links a:hover, .nav-links a.active { color: var(--brand); background: var(--brand-soft); text-decoration: none; }
+.nav-links a:hover, .nav-links a.active { color: var(--tag-ink); background: var(--brand-soft); text-decoration: none; }
 .nav-actions { display: flex; align-items: center; gap: .5rem; }
 .nav-toggle { display: none; }
 @media (max-width: 1023.98px) {

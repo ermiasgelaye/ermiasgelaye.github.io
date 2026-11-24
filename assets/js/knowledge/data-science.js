@@ -95,7 +95,7 @@
             id: 'ds-nlp', topic: 'ml', level: 'intermediate', title: 'Natural language processing (NLP)',
             q: ['what is nlp', 'sentiment analysis', 'how to analyze text data'],
             k: ['nlp', 'text', 'sentiment', 'tokenization', 'tfidf', 'embeddings', 'language model', 'llm'],
-            a: `NLP turns text into something models can use.\n\n- **Classic pipeline:** clean → tokenise → remove stop words / lemmatise → TF-IDF features → logistic regression or similar. Fast and surprisingly strong.\n- **Modern:** pretrained **embeddings** or **transformer** models fine-tuned for classification, extraction or summarization.\n- **Tasks:** sentiment analysis, topic modeling, named-entity recognition, document classification and information extraction.\n\nErmias's work includes sentiment analysis of digital media (2011–2015) and using AI tools to extract data from documents in his current role.`,
+            a: `NLP turns text into something models can use.\n\n- **Classic pipeline:** clean → tokenize → remove stop words / lemmatize → TF-IDF features → logistic regression or similar. Fast and surprisingly strong.\n- **Modern:** pretrained **embeddings** or **transformer** models fine-tuned for classification, extraction or summarization.\n- **Tasks:** sentiment analysis, topic modeling, named-entity recognition, document classification and information extraction.\n\nErmias's work includes sentiment analysis of digital media (2011–2015) and using AI tools to extract data from documents in his current role.`,
             related: ['ds-deep-learning', 'me-experience']
         },
         {

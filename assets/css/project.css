@@ -50,7 +50,7 @@
 .stat-card h3 { font-size: 1rem; display: flex; justify-content: space-between; gap: .5rem; align-items: baseline; }
 .strength { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .2rem .55rem; border-radius: 999px; white-space: nowrap; }
 .strength.strong { background: rgba(10, 108, 255, .14); color: var(--success); }
-.strength.moderate { background: rgba(245, 158, 11, .16); color: #b45309; }
+.strength.moderate { background: rgba(245, 158, 11, .16); color: #92400e; }
 .strength.weak, .strength.none { background: var(--surface); color: var(--ink-3); }
 :root[data-theme="dark"] .strength.moderate { color: #fbbf24; }
 .stat-card dl { display: grid; grid-template-columns: auto 1fr; gap: .25rem .75rem; margin: .5rem 0 0; font-size: .9rem; }
@@ -118,3 +118,8 @@
 .dt th:first-child, .dt td:first-child { position: sticky; left: 0; z-index: 1; background: var(--surface-2); box-shadow: 1px 0 0 var(--border); }
 .dt thead th:first-child { z-index: 2; background: var(--surface); }
 .dt tbody tr:hover td:first-child { background: color-mix(in srgb, var(--brand) 10%, var(--surface-2)); }
+
+/* Links inside running text are underlined so they don't rely on colour alone (WCAG 1.4.1) */
+main p a:not(.btn), main li a:not(.btn), main td a, main small a, .callout a, .section-head a, .chart-note a, figcaption a, .site-footer p a { color: var(--tag-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+/* Figures keep a white background in both themes, so their links use the light-theme link colour */
+.figure-grid figcaption a, .chart-figure figcaption a { color: #0052cc; }

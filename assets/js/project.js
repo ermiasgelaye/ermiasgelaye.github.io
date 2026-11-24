@@ -1,4 +1,4 @@
-/* Shared behaviour for project pages: theme toggle, mobile menu, footer year,
+/* Shared behavior for project pages: theme toggle, mobile menu, footer year,
  * plus the small ARC.* helpers the shared chat assistant needs (when a page includes it). */
 'use strict';
 
@@ -28,7 +28,7 @@ ARC.toast = ARC.toast || ((message, { type = 'info' } = {}) => {
     setTimeout(() => el.remove(), 3500);
 });
 
-/** Theme-aware colours for charts (read from CSS custom properties). */
+/** Theme-aware colors for charts (read from CSS custom properties). */
 ARC.themeColors = () => {
     const cs = getComputedStyle(document.documentElement);
     const v = (n) => cs.getPropertyValue(n).trim();
@@ -61,15 +61,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
     if (toggle && links) {
-        const setOpen = (open) => {
+        const isOpen = () => links.classList.contains('open');
+        const setOpen = (open, { focus = false } = {}) => {
             links.classList.toggle('open', open);
             toggle.setAttribute('aria-expanded', String(open));
+            toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
             toggle.innerHTML = `<i class="fas ${open ? 'fa-times' : 'fa-bars'}" aria-hidden="true"></i>`;
+            // Links come before the toggle in the DOM: move focus in on open, back to the toggle on close
+            if (focus) requestAnimationFrame(() => (open ? links.querySelector('a') : toggle)?.focus());
         };
-        toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!links.classList.contains('open')); });
-        document.addEventListener('click', (e) => { if (links.classList.contains('open') && !links.contains(e.target)) setOpen(false); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+        toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!isOpen(), { focus: e.detail === 0 }); });
+        links.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+        document.addEventListener('click', (e) => { if (isOpen() && !links.contains(e.target)) setOpen(false); });
+        document.addEventListener('keydown', (e) => {
+            if (!isOpen()) return;
+            if (e.key === 'Escape') setOpen(false, { focus: true });
+            const items = [...links.querySelectorAll('a')];
+            if (e.key === 'Tab' && ((!e.shiftKey && document.activeElement === items.at(-1)) || (e.shiftKey && document.activeElement === items[0]))) {
+                e.preventDefault(); setOpen(false, { focus: true });
+            }
+        });
     }
+
+    // Scrollable tables and code blocks must be reachable by keyboard (WCAG 2.1.1)
+    document.querySelectorAll('.table-wrap, .heat-wrap, pre.code').forEach((el) => {
+        if (el.hasAttribute('tabindex')) return;
+        el.tabIndex = 0;
+        el.setAttribute('role', 'region');
+        if (!el.hasAttribute('aria-label')) el.setAttribute('aria-label', el.matches('pre') ? 'Code example' : 'Scrollable table');
+    });
 
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
